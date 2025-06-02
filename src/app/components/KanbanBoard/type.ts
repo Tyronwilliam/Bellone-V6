@@ -51,4 +51,13 @@ export interface KanbanData {
   columns: Column[]
   tasks: Task[]
 }
+export interface TaskLabel {
+  task_id: string
+  label_id: string
+}
+export interface LabelInterface {
+  id: string
+  name: string
+  color?: string
+}
 export type ColumnType = Column

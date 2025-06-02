@@ -1,5 +1,8 @@
 'use client'
 
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Calendar } from '@/components/ui/calendar'
 import {
   Dialog,
   DialogContent,
@@ -9,11 +12,9 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Textarea } from '@/components/ui/textarea'
-import { Badge } from '@/components/ui/badge'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import {
   Select,
   SelectContent,
@@ -21,21 +22,21 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
+import { Textarea } from '@/components/ui/textarea'
+import mockData from '@/utils/mockData.json'
 import {
-  Clock,
-  DollarSign,
-  UserIcon,
   Building2,
+  CalendarIcon,
+  EuroIcon,
   Tag,
   Trash2,
-  CalendarIcon,
-  EuroIcon
+  UserIcon
 } from 'lucide-react'
-import { useState, useEffect, useRef } from 'react'
-import { Client, Task, User } from '../type'
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
-import { Calendar } from '@/components/ui/calendar'
+import { useEffect, useRef, useState } from 'react'
+import { Client, LabelInterface, Task, TaskLabel, User } from '../type'
 
+// const mockTaskLabel: TaskLabel[] = mockData.task_labels
+const mockLabel: LabelInterface[] = mockData.labels
 interface TaskDetailsModalProps {
   task: Task | null
   users: User[]
@@ -197,18 +198,23 @@ export function Etiquettes({ editedTask, removeTag, newTag, setNewTag, addTag }:
   return (
     <div className="space-y-2">
       <div className="flex flex-wrap gap-2 mb-2">
-        {editedTask.tags.map((tag: string) => (
-          <Badge
-            key={tag}
-            variant="secondary"
-            className="cursor-pointer text-sm rounded-none p-2 capitalize"
-          >
-            {tag}
-            <button onClick={() => removeTag(tag)} className="ml-1 hover:text-red-600">
-              x
-            </button>
-          </Badge>
-        ))}
+        {editedTask.tags.map((tag: string) => {
+          const label = mockLabel?.find((label) => label.id === tag)
+          if (!label) return null
+
+          return (
+            <Badge
+              key={label.name}
+              variant="secondary"
+              className="cursor-pointer text-sm rounded-none p-2 capitalize"
+            >
+              {label.name}
+              <button onClick={() => removeTag(tag)} className="ml-1 hover:text-red-600">
+                x
+              </button>
+            </Badge>
+          )
+        })}
 
         {/* Modale déclenchée par ce bouton */}
         <Dialog open={isOpen} onOpenChange={setIsOpen}>

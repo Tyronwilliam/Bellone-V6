@@ -87,7 +87,7 @@
       "dueDate": "",
       "assigneeId": "u2",
       "client_id": "c1",
-      "tags": [],
+      "tags": ["l1"],
       "order": 0
     },
     {

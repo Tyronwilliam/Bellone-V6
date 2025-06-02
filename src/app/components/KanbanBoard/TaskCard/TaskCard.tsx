@@ -5,8 +5,10 @@ import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Calendar, Clock, DollarSign } from 'lucide-react'
 import { Draggable } from '@hello-pangea/dnd'
-import { Client, Task, User } from '../type'
+import { Client, LabelInterface, Task, User } from '../type'
+import mockData from '@/utils/mockData.json'
 
+const mockLabel: LabelInterface[] = mockData.labels
 interface TaskCardProps {
   task: Task
   index: number
@@ -40,11 +42,16 @@ export function TaskCard({ task, index, assignee, client, onClick }: TaskCardPro
             {/* Tags */}
             {task.tags.length > 0 && (
               <div className="flex flex-wrap gap-1 mb-2">
-                {task.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary" className="text-xs">
-                    {tag}
-                  </Badge>
-                ))}
+                {task.tags.map((tag) => {
+                  const label = mockLabel?.find((label) => label.id === tag)
+                  console.log(label, tag)
+                  if (!label) return null
+                  return (
+                    <Badge key={label.name} variant="secondary" className="text-xs">
+                      {label.name}
+                    </Badge>
+                  )
+                })}
               </div>
             )}
 
