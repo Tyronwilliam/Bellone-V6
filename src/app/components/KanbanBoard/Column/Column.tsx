@@ -66,7 +66,7 @@ export function Column({
         <Card
           ref={provided.innerRef}
           {...provided.draggableProps}
-          className="w-80 flex-shrink-0 bg-muted/30"
+          className="w-80 flex-shrink-0 bg-muted/30 rounded-b-lg rounded-t-sm"
         >
           <CardHeader
             {...provided.dragHandleProps}

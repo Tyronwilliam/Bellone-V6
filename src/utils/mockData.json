@@ -84,9 +84,9 @@
       "title": "Créer la page d'accueil",
       "description": "Maquettage + intégration responsive",
       "price": 300,
-      "dueDate": "2025-01-05T00:00:00Z",
+      "dueDate": "",
       "assigneeId": "u2",
-      "client_id": "undefined",
+      "client_id": "c1",
       "tags": [],
       "order": 0
     },

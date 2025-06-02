@@ -9,7 +9,6 @@ import { Board, Client, ColumnType, KanbanData, Project, Task, User } from './ty
 import { Column } from './Column/Column'
 import { TaskDetailsModal } from './TaskDetailsModal/TaskDetailsModal'
 import mockData from '@/utils/mockData.json'
-import { useRouter } from 'next/router'
 import { useSearchParams } from 'next/navigation'
 
 const mockProjects: Project[] = mockData.projects
@@ -33,9 +32,10 @@ export function KanbanBoard() {
   const [selectedTask, setSelectedTask] = useState<Task | null>(null)
   const [isAddingColumn, setIsAddingColumn] = useState(false)
   const [newColumnName, setNewColumnName] = useState('')
+  // KEEEP FOR REAL TIME DATA
   const searchParams = useSearchParams()
-
   //   const boardId = searchParams.get('id')
+  // KEEEP FOR REAL TIME DATA
 
   const boardId = 'b1' // Pour cet exemple
   if (boardId === null) return
@@ -246,83 +246,84 @@ export function KanbanBoard() {
   }
 
   return (
-    <div className="h-full p-6">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold">Tableau Kanban</h1>
-        <p className="text-muted-foreground">Gérez vos tâches par colonnes</p>
-      </div>
-
-      <DragDropContext onDragEnd={onDragEnd}>
-        <div className="flex gap-4 overflow-x-auto pb-4">
-          <Droppable droppableId="board" type="column" direction="horizontal">
-            {(provided: any) => (
-              <div ref={provided.innerRef} {...provided.droppableProps} className="flex gap-4">
-                {columns.map((column, index) => (
-                  <Column
-                    key={column.id}
-                    column={column}
-                    tasks={getTasksForColumn(column.id)}
-                    users={data.users}
-                    clients={data.clients}
-                    index={index}
-                    onTaskClick={setSelectedTask}
-                    onAddTask={handleAddTask}
-                    onDeleteColumn={handleDeleteColumn}
-                    onRenameColumn={handleRenameColumn}
-                  />
-                ))}
-                {provided.placeholder}
-              </div>
-            )}
-          </Droppable>
-
-          {/* Ajouter une colonne */}
-          <div className="flex-shrink-0">
-            {isAddingColumn ? (
-              <div className="w-80 p-4 bg-muted/30 rounded-lg">
-                <Input
-                  placeholder="Nom de la colonne..."
-                  value={newColumnName}
-                  onChange={(e) => setNewColumnName(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') handleAddColumn()
-                    if (e.key === 'Escape') {
-                      setIsAddingColumn(false)
-                      setNewColumnName('')
-                    }
-                  }}
-                  autoFocus
-                />
-                <div className="flex gap-2 mt-2">
-                  <Button size="sm" onClick={handleAddColumn}>
-                    Ajouter
-                  </Button>
-                  <Button
-                    size="sm"
-                    variant="ghost"
-                    onClick={() => {
-                      setIsAddingColumn(false)
-                      setNewColumnName('')
-                    }}
-                  >
-                    Annuler
-                  </Button>
-                </div>
-              </div>
-            ) : (
-              <Button
-                variant="ghost"
-                className="w-80 h-12 border-2 border-dashed border-muted-foreground/25 hover:border-muted-foreground/50"
-                onClick={() => setIsAddingColumn(true)}
-              >
-                <Plus className="h-4 w-4 mr-2" />
-                Ajouter une colonne
-              </Button>
-            )}
-          </div>
+    <>
+      <div className="w-full h-full p-6">
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold">{mockProjects[0].name}</h1>
+          {/* <p className="text-muted-foreground">Gérez vos tâches</p> */}
         </div>
-      </DragDropContext>
 
+        <DragDropContext onDragEnd={onDragEnd}>
+          <div className="flex gap-4 overflow-x-auto pb-4">
+            <Droppable droppableId="board" type="column" direction="horizontal">
+              {(provided: any) => (
+                <div ref={provided.innerRef} {...provided.droppableProps} className="flex gap-4">
+                  {columns.map((column, index) => (
+                    <Column
+                      key={column.id}
+                      column={column}
+                      tasks={getTasksForColumn(column.id)}
+                      users={data.users}
+                      clients={data.clients}
+                      index={index}
+                      onTaskClick={setSelectedTask}
+                      onAddTask={handleAddTask}
+                      onDeleteColumn={handleDeleteColumn}
+                      onRenameColumn={handleRenameColumn}
+                    />
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+
+            {/* Ajouter une colonne */}
+            <div className="flex-shrink-0">
+              {isAddingColumn ? (
+                <div className="w-80 p-4 bg-muted/30 rounded-lg">
+                  <Input
+                    placeholder="Nom de la colonne..."
+                    value={newColumnName}
+                    onChange={(e) => setNewColumnName(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') handleAddColumn()
+                      if (e.key === 'Escape') {
+                        setIsAddingColumn(false)
+                        setNewColumnName('')
+                      }
+                    }}
+                    autoFocus
+                  />
+                  <div className="flex gap-2 mt-2">
+                    <Button size="sm" onClick={handleAddColumn}>
+                      Ajouter
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      onClick={() => {
+                        setIsAddingColumn(false)
+                        setNewColumnName('')
+                      }}
+                    >
+                      Annuler
+                    </Button>
+                  </div>
+                </div>
+              ) : (
+                <Button
+                  variant="ghost"
+                  className="w-80 h-12 border-2 border-dashed border-muted-foreground/25 hover:border-muted-foreground/50"
+                  onClick={() => setIsAddingColumn(true)}
+                >
+                  <Plus className="h-4 w-4 mr-2" />
+                  Ajouter une colonne
+                </Button>
+              )}
+            </div>
+          </div>
+        </DragDropContext>
+      </div>{' '}
       <TaskDetailsModal
         task={selectedTask}
         users={data.users}
@@ -332,6 +333,6 @@ export function KanbanBoard() {
         onSave={handleSaveTask}
         onDelete={handleDeleteTask}
       />
-    </div>
+    </>
   )
 }

@@ -1,6 +1,14 @@
 'use client'
 
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -13,9 +21,20 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { Calendar, Clock, DollarSign, UserIcon, Building2, Tag, Trash2 } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import {
+  Clock,
+  DollarSign,
+  UserIcon,
+  Building2,
+  Tag,
+  Trash2,
+  CalendarIcon,
+  EuroIcon
+} from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
 import { Client, Task, User } from '../type'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
+import { Calendar } from '@/components/ui/calendar'
 
 interface TaskDetailsModalProps {
   task: Task | null
@@ -36,6 +55,7 @@ export function TaskDetailsModal({
   onSave,
   onDelete
 }: TaskDetailsModalProps) {
+  const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [editedTask, setEditedTask] = useState<Task | null>(null)
   const [newTag, setNewTag] = useState('')
 
@@ -79,192 +99,314 @@ export function TaskDetailsModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="lg:min-w-[60%] max-h-[90vh] p-8">
         <DialogHeader>
-          <DialogTitle>Détails de la tâche</DialogTitle>
-        </DialogHeader>
-
-        <div className="space-y-6">
-          {/* Titre */}
-          <div className="space-y-2">
-            <Label htmlFor="title">Titre</Label>
-            <Input
+          <DialogTitle>
+            {/* Titre */}
+            <textarea
               id="title"
+              ref={textareaRef}
               value={editedTask.title}
-              onChange={(e) => setEditedTask({ ...editedTask, title: e.target.value })}
-            />
-          </div>
-
-          {/* Description */}
-          <div className="space-y-2">
-            <Label htmlFor="description">Description</Label>
-            <Textarea
-              id="description"
-              value={editedTask.description || ''}
-              onChange={(e) => setEditedTask({ ...editedTask, description: e.target.value })}
-              rows={4}
-            />
-          </div>
-
-          {/* Métadonnées */}
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="price">Prix (€)</Label>
-              <div className="relative">
-                <DollarSign className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="price"
-                  type="number"
-                  value={editedTask.price || ''}
-                  onChange={(e) =>
-                    setEditedTask({
-                      ...editedTask,
-                      price: e.target.value ? Number(e.target.value) : undefined
-                    })
-                  }
-                  className="pl-10"
-                />
-              </div>
-            </div>
-
-            {/* <div className="space-y-2">
-              <Label htmlFor="duration">Durée estimée</Label>
-              <div className="relative">
-                <Clock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="duration"
-                  value={editedTask.duration || ''}
-                  onChange={(e) => setEditedTask({ ...editedTask, duration: e.target.value })}
-                  placeholder="ex: 2h, 1j"
-                  className="pl-10"
-                />
-              </div>
-            </div> */}
-
-            <div className="space-y-2">
-              <Label htmlFor="dueDate">Date d'échéance</Label>
-              <div className="relative">
-                <Calendar className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  id="dueDate"
-                  type="date"
-                  value={editedTask.dueDate || ''}
-                  onChange={(e) => setEditedTask({ ...editedTask, dueDate: e.target.value })}
-                  className="pl-10"
-                />
-              </div>
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="assignee">Assigné à</Label>
-              <div className="relative">
-                <UserIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Select
-                  value={editedTask.assigneeId || 'none'}
-                  onValueChange={(value) =>
-                    setEditedTask({
-                      ...editedTask,
-                      assigneeId: value === 'none' ? undefined : value
-                    })
-                  }
-                >
-                  <SelectTrigger className="pl-10">
-                    <SelectValue placeholder="Sélectionner un utilisateur" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="none">Aucun</SelectItem>
-                    {users.map((user) => (
-                      <SelectItem key={user.id} value={user.id}>
-                        {user.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-          </div>
-
-          {/* Client */}
-          <div className="space-y-2">
-            <Label htmlFor="client">Client</Label>
-            <div className="relative">
-              <Building2 className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-              <Select
-                value={editedTask.client_id || 'none'}
-                onValueChange={(value) =>
-                  setEditedTask({ ...editedTask, client_id: value === 'none' ? undefined : value })
+              onChange={(e) => {
+                setEditedTask({ ...editedTask, title: e.target.value })
+                const textarea = textareaRef.current
+                if (textarea) {
+                  textarea.style.height = 'auto'
+                  textarea.style.height = textarea.scrollHeight + 'px'
                 }
-              >
-                <SelectTrigger className="pl-10">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="none">Aucun</SelectItem>
-                  {clients.map((client) => (
-                    <SelectItem key={client.id} value={client.id}>
-                      {client.name}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              }}
+              rows={1}
+              className="w-full h-auto resize-none overflow-hidden !text-2xl font-bold border-none shadow-none p-0 focus-visible:ring-0 focus-visible:outline-none leading-tight"
+              placeholder="Titre de la tâche"
+            />
+          </DialogTitle>{' '}
+          <DialogDescription className="sr-only">Modifier le nom de la task</DialogDescription>
+        </DialogHeader>
+        <section className="flex gap-4 w-full">
+          <div className="space-y-6 flex-1 min-w-[70%]">
+            {/* LABELS */}
+            <Etiquettes
+              editedTask={editedTask}
+              removeTag={removeTag}
+              newTag={newTag}
+              setNewTag={setNewTag}
+              addTag={addTag}
+            />
+            {/* Description */}
+            {/* Ajouter le MARKDOWN */}
+            <div className="space-y-2 flex-1">
+              <Label htmlFor="description">Description</Label>
+              <Textarea
+                id="description"
+                className="rezize-none min-h-[370px]"
+                value={editedTask.description || ''}
+                onChange={(e) => setEditedTask({ ...editedTask, description: e.target.value })}
+                // rows={4}
+              />
             </div>
           </div>
-
-          {/* Tags */}
-          <div className="space-y-2">
-            <Label>Étiquettes</Label>
-            <div className="flex flex-wrap gap-2 mb-2">
-              {editedTask.tags.map((tag) => (
-                <Badge key={tag} variant="secondary" className="cursor-pointer">
-                  {tag}
-                  <button onClick={() => removeTag(tag)} className="ml-1 hover:text-red-600">
-                    ×
-                  </button>
-                </Badge>
-              ))}
-            </div>
-            <div className="flex gap-2">
-              <div className="relative flex-1">
-                <Tag className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                <Input
-                  value={newTag}
-                  onChange={(e) => setNewTag(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                      e.preventDefault()
-                      addTag()
-                    }
-                  }}
-                  placeholder="Nouvelle étiquette"
-                  className="pl-10"
-                />
-              </div>
-              <Button onClick={addTag} variant="outline">
-                Ajouter
-              </Button>
-            </div>
-          </div>
-
-          {/* Actions */}
-          <div className="flex justify-between pt-4">
-            <Button
-              variant="destructive"
-              onClick={handleDelete}
-              className="flex items-center gap-2"
-            >
-              <Trash2 className="h-4 w-4" />
-              Supprimer
+          <aside className="flex-1 flex flex-col gap-4 items-end">
+            {/* Assignee Users to Task */}
+            <SelectUser editedTask={editedTask} setEditedTask={setEditedTask} users={users} />
+            {/* Date Due */}
+            <DateComponent editedTask={editedTask} setEditedTask={setEditedTask} />
+            {/* Client  */}
+            <ClientComponent
+              editedTask={editedTask}
+              setEditedTask={setEditedTask}
+              clients={clients}
+            />
+            <Price editedTask={editedTask} setEditedTask={setEditedTask} />
+          </aside>
+        </section>{' '}
+        {/* Actions */}
+        <div className="flex gap-4 justify-between pt-4">
+          <div className="flex gap-2">
+            <Button onClick={handleSave}>Sauvegarder</Button>
+            <Button variant="outline" onClick={onClose}>
+              Annuler
             </Button>
-
-            <div className="flex gap-2">
-              <Button variant="outline" onClick={onClose}>
-                Annuler
-              </Button>
-              <Button onClick={handleSave}>Sauvegarder</Button>
-            </div>
-          </div>
+          </div>{' '}
+          <Button variant="destructive" onClick={handleDelete} className="w-fit">
+            <Trash2 className="h-4 w-4" />
+            Supprimer
+          </Button>
         </div>
       </DialogContent>
     </Dialog>
+  )
+}
+type EtiquettesProps = {
+  editedTask: Task
+  removeTag: (tag: string) => void
+  newTag: string
+  setNewTag: React.Dispatch<React.SetStateAction<string>>
+  addTag: () => void
+}
+
+export function Etiquettes({ editedTask, removeTag, newTag, setNewTag, addTag }: EtiquettesProps) {
+  const [isOpen, setIsOpen] = useState(false)
+
+  const handleAdd = () => {
+    if (newTag.trim()) {
+      addTag()
+      setIsOpen(false)
+    }
+  }
+
+  return (
+    <div className="space-y-2">
+      <div className="flex flex-wrap gap-2 mb-2">
+        {editedTask.tags.map((tag: string) => (
+          <Badge
+            key={tag}
+            variant="secondary"
+            className="cursor-pointer text-sm rounded-none p-2 capitalize"
+          >
+            {tag}
+            <button onClick={() => removeTag(tag)} className="ml-1 hover:text-red-600">
+              x
+            </button>
+          </Badge>
+        ))}
+
+        {/* Modale déclenchée par ce bouton */}
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogTrigger asChild>
+            <Button
+              variant="outline"
+              className="w-fit h-full self-end rounded-none shadow-none"
+              onClick={() => setIsOpen(true)}
+            >
+              +
+            </Button>
+          </DialogTrigger>
+
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>Nouvelle étiquette</DialogTitle>
+              <DialogDescription className="sr-only">
+                Donnez un nom à la nouvelle étiquette à ajouter.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="relative mt-2">
+              <Tag className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+              <Input
+                value={newTag}
+                onChange={(e) => setNewTag(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    e.preventDefault()
+                    handleAdd()
+                  }
+                }}
+                placeholder="Nouvelle étiquette"
+                className="pl-10"
+              />
+            </div>
+            <DialogFooter className="mt-4">
+              <Button onClick={handleAdd} disabled={!newTag.trim()}>
+                Ajouter
+              </Button>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
+      </div>
+    </div>
+  )
+}
+
+type PriceProps = {
+  editedTask: Task
+  setEditedTask: (taks: Task) => void
+}
+const Price = ({ editedTask, setEditedTask }: PriceProps) => {
+  return (
+    <div className="space-y-2">
+      <Label className="w-fit text-right ml-auto" htmlFor="Price">
+        Prix (€)
+      </Label>
+      <div className="relative  w-40">
+        <EuroIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+        <Input
+          id="price"
+          type="number"
+          value={editedTask.price || ''}
+          onChange={(e) => {
+            const value = e.target.value
+            const numericValue = Number(value)
+
+            if (value === '' || (!isNaN(numericValue) && numericValue <= 99999)) {
+              setEditedTask({
+                ...editedTask,
+                price: value ? numericValue : undefined
+              })
+            }
+          }}
+          onWheel={(e) => e.currentTarget.blur()} // empêche la molette
+          onKeyDown={(e) => {
+            const invalidKeys = ['e', 'E', '+', '-', '.']
+            if (invalidKeys.includes(e.key)) {
+              e.preventDefault()
+            }
+          }}
+          className="pl-10"
+          min={0}
+          max={99999}
+          step={1}
+        />
+      </div>
+    </div>
+  )
+}
+const DateComponent = ({ editedTask, setEditedTask }: PriceProps) => {
+  const formatted = editedTask.dueDate
+    ? new Date(editedTask.dueDate).toLocaleDateString('fr-FR')
+    : ''
+
+  return (
+    <div className="space-y-2 flex flex-col w-40">
+      <Label className="w-fit text-right ml-auto text-sm">Date d’échéance</Label>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button variant="outline" className="w-full justify-start text-left pl-10">
+            <CalendarIcon className="mr-2 h-4 w-4 text-muted-foreground" />
+            {editedTask.dueDate ? (
+              // format(editedTask.dueDate, 'dd/MM/yyyy')
+              formatted
+            ) : (
+              <span className="text-muted-foreground">Date</span>
+            )}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="p-0" align="start">
+          <Calendar
+            mode="single"
+            // className="w-full"
+            selected={editedTask.dueDate ? new Date(editedTask.dueDate) : undefined}
+            onSelect={(selected) =>
+              setEditedTask({
+                ...editedTask,
+                dueDate: selected?.toISOString()
+              })
+            }
+            initialFocus
+          />
+        </PopoverContent>
+      </Popover>
+    </div>
+  )
+}
+
+type SelectUserProps = PriceProps & {
+  users: User[]
+}
+const SelectUser = ({ editedTask, setEditedTask, users }: SelectUserProps) => {
+  return (
+    <div className="space-y-2">
+      <Label className="w-fit text-right ml-auto text-sm" htmlFor="assignee">
+        Assigné à
+      </Label>
+      <div className="relative">
+        <UserIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+        <Select
+          value={editedTask.assigneeId || 'none'}
+          onValueChange={(value) =>
+            setEditedTask({
+              ...editedTask,
+              assigneeId: value === 'none' ? undefined : value
+            })
+          }
+        >
+          <SelectTrigger className="pl-10">
+            <SelectValue placeholder="Sélectionner un utilisateur" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="none">Aucun</SelectItem>
+            {users.map((user) => (
+              <SelectItem key={user.id} value={user.id}>
+                {user.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+    </div>
+  )
+}
+type ClientProps = PriceProps & {
+  clients: Client[]
+}
+const ClientComponent = ({ editedTask, setEditedTask, clients }: ClientProps) => {
+  return (
+    <div className="space-y-2">
+      <Label htmlFor="client" className="w-fit ml-auto text-right">
+        Client
+      </Label>
+      <div className="relative">
+        <Building2 className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+        <Select
+          value={editedTask.client_id || 'none'}
+          onValueChange={(value) =>
+            setEditedTask({
+              ...editedTask,
+              client_id: value === 'none' ? undefined : value
+            })
+          }
+        >
+          <SelectTrigger className="pl-10">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="none">Aucun</SelectItem>
+            {clients.map((client) => (
+              <SelectItem key={client.id} value={client.id}>
+                {client.name}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+    </div>
   )
 }

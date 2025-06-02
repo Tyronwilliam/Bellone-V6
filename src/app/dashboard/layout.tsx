@@ -3,7 +3,7 @@ import { AppSidebar } from '../components/AppSidebar/AppSidebar'
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-screen p-2">
+    <main className="flex w-full h-screen relative overflow-auto p-2">
       <SidebarProvider>
         <AppSidebar />
         <main className="flex-1">
@@ -11,6 +11,6 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
           {children}
         </main>
       </SidebarProvider>
-    </div>
+    </main>
   )
 }
