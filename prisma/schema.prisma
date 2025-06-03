@@ -1,0 +1,149 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/////////////////////////////
+// USERS
+/////////////////////////////
+model User {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  name       String
+  role       String
+  avatar     String?
+  created_at DateTime @default(now())
+
+  // Relations
+  createdBoards  Board[]         @relation("BoardsCreatedByUser")
+  assignedTasks  Task[]          @relation("TaskAssignee")
+  contactClients Client[]        @relation("ClientContact")
+  projectMembers ProjectMember[]
+}
+
+/////////////////////////////
+// CLIENTS
+/////////////////////////////
+model Client {
+  id         String @id @default(cuid())
+  company    String
+  name       String
+  contact_id String
+  contact    User   @relation("ClientContact", fields: [contact_id], references: [id])
+
+  // Relations
+  projects Project[]
+  Task     Task[]
+}
+
+/////////////////////////////
+// PROJECTS
+/////////////////////////////
+model Project {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  client_id   String
+  created_at  DateTime @default(now())
+
+  client  Client          @relation(fields: [client_id], references: [id])
+  members ProjectMember[]
+  boards  Board[]
+}
+
+/////////////////////////////
+// PROJECT MEMBERS
+/////////////////////////////
+model ProjectMember {
+  projectId String
+  user_id   String
+
+  project Project @relation(fields: [projectId], references: [id])
+  user    User    @relation(fields: [user_id], references: [id])
+
+  @@id([projectId, user_id])
+}
+
+/////////////////////////////
+// BOARDS
+/////////////////////////////
+model Board {
+  id            String @id @default(cuid())
+  name          String
+  projectId     String
+  created_by_id String
+
+  project   Project  @relation(fields: [projectId], references: [id])
+  createdBy User     @relation("BoardsCreatedByUser", fields: [created_by_id], references: [id])
+  columns   Column[]
+}
+
+/////////////////////////////
+// COLUMNS
+/////////////////////////////
+model Column {
+  id       String  @id @default(cuid())
+  name     String
+  order    Int
+  position Int
+  color    String?
+  boardId  String
+
+  board Board  @relation(fields: [boardId], references: [id])
+  tasks Task[]
+}
+
+/////////////////////////////
+// TASKS
+/////////////////////////////
+model Task {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  price       Float?
+  dueDate     DateTime?
+  order       Int
+  columnId    String
+  assigneeId  String?
+  client_id   String?
+
+  column   Column      @relation(fields: [columnId], references: [id])
+  assignee User?       @relation("TaskAssignee", fields: [assigneeId], references: [id])
+  client   Client?     @relation(fields: [client_id], references: [id])
+  tags     TaskLabel[]
+}
+
+/////////////////////////////
+// LABELS
+/////////////////////////////
+model Label {
+  id    String  @id @default(cuid())
+  name  String
+  color String?
+
+  tasks TaskLabel[]
+}
+
+/////////////////////////////
+// TASK_LABELS (pivot)
+/////////////////////////////
+model TaskLabel {
+  task_id  String
+  label_id String
+
+  task  Task  @relation(fields: [task_id], references: [id])
+  label Label @relation(fields: [label_id], references: [id])
+
+  @@id([task_id, label_id])
+}

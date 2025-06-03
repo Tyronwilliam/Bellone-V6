@@ -1,10 +1,15 @@
-import React from 'react'
-import ProjectsBoard from './components/ProjectBoard'
+// app/projects/page.tsx
+import { prisma } from '@/lib/prisma'
+import ProjectsBoard from './components/ProjectBoard/ProjectBoard'
 
-export default function ProjectsPage() {
-  return (
-    <main>
-      <ProjectsBoard />
-    </main>
-  )
+export const revalidate = 60
+
+export default async function ProjectsPage() {
+  const projects = await prisma.project.findMany({
+    include: {
+      client: true
+    }
+  })
+
+  return <ProjectsBoard projects={projects} />
 }

@@ -1,5 +1,5 @@
 'use client'
-import Button from '@/_components/generic/ButtonGeneric'
+import Button from '@/generic/ButtonGeneric'
 import Link from 'next/link'
 
 export default function Home() {
