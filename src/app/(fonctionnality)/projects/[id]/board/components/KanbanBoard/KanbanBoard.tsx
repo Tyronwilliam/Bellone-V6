@@ -76,8 +76,6 @@ const KanbanBoard = ({ initialData }: KanbanBoardProps) => {
         columns: [...prev.columns, res.column]
       }))
     }
-
-    console.log(res)
   }
 
   return (
