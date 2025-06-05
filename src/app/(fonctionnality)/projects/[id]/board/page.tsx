@@ -5,9 +5,9 @@ import { requireAuth } from 'auth-utils'
 export default async function BoardPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const session = await requireAuth()
-
+  const projectId = id
   try {
-    const board = await getKanbanData(id)
+    const board = await getKanbanData(projectId)
 
     if (board === null) {
       return (

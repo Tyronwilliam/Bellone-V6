@@ -39,7 +39,6 @@ type CreateProjectProps = {
 
 export default function CreateProject({ clients, closeAsModal }: CreateProjectProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const [isOpen1, setIsOpen1] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
   const toggle = () => setIsOpen(!isOpen)
@@ -59,18 +58,16 @@ export default function CreateProject({ clients, closeAsModal }: CreateProjectPr
   })
   async function onSubmit(data: ProjectFormValues) {
     setIsSubmitting(true)
-    console.log(' DATA ProjectFormValues : ', data)
     try {
       const result = await addProject(data as ProjectPost)
 
       if (result.success) {
         toast.success('Project créé avec succès')
-        console.log(result, 'addProject')
       } else {
-        toast.error(result.error || 'Erreur lors de la création du client')
+        toast.error(result.error || 'Erreur lors de la création du Project')
       }
     } catch (error) {
-      console.error('Erreur lors de la création du client:', error)
+      console.error('Erreur lors de la création du Project:', error)
       toast.error('Une erreur est survenue')
     } finally {
       setIsSubmitting(false)

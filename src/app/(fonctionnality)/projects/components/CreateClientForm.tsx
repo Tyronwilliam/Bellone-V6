@@ -43,7 +43,7 @@ const clientSchema = z
     website: z.string().url('URL invalide').optional().or(z.literal('')),
     address: z.string().optional(),
     city: z.string().optional(),
-    postalCode: z.string().optional(),
+    postalCode: z.string().regex(/^\d*$/, 'Uniquement des chiffres').optional(),
     country: z.string().optional(),
     currency: z.enum(['EUR', 'USD']),
     taxRate: z.number().min(0).max(100).optional(),
@@ -120,10 +120,10 @@ export function CreateClientForm({ projectId, onSuccess, onCancel }: CreateClien
 
       if (result.success) {
         toast.success('Client créé avec succès')
-        console.log(result, 'createClientWithOptionalUser')
         if (onSuccess && result.client) {
           onSuccess()
         } else {
+          // Rediriger vers une page projet avec les stats
           // router.push(projectId ? `/projects/${projectId}/clients` : '/clients')
         }
       } else {
@@ -143,6 +143,7 @@ export function CreateClientForm({ projectId, onSuccess, onCancel }: CreateClien
       description="Créez un nouveau client pour votre entreprise. Les clients peuvent être des particuliers ou des entreprises."
       className="w-full max-w-4xl mx-auto  mb-4"
     >
+      <Separator className="mb-6" />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 ">
           <div className="space-y-6">

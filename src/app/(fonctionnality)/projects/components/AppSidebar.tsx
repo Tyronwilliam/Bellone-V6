@@ -1,6 +1,15 @@
 'use client'
 
-import { Home, Settings, Users, CreditCard, Bell, MessageSquare, LogOut } from 'lucide-react'
+import {
+  Home,
+  Settings,
+  Users,
+  CreditCard,
+  Bell,
+  MessageSquare,
+  LogOut,
+  EuroIcon
+} from 'lucide-react'
 
 import {
   Sidebar,
@@ -23,6 +32,11 @@ const items = [
     title: 'Projects',
     url: '/projects',
     icon: Home
+  },
+  {
+    title: 'Facture',
+    url: '/facture',
+    icon: EuroIcon
   },
   {
     title: 'Messages',

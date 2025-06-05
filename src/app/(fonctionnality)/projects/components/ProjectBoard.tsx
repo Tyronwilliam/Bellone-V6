@@ -16,6 +16,7 @@ import { Client } from '@prisma/prisma'
 import { useEffect, useState } from 'react'
 import CreateProject from './CreateProject'
 import { Button } from '@/components/ui/button'
+import { CardCustom } from '@/components/custom/CardCustom'
 
 export type ProjectAndClient = Project & { client: Client }
 export type PartialClient = {
@@ -62,16 +63,19 @@ export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) 
           </div>
         </section>
       )}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <FileText className="h-5 w-5" />
-            Liste des Projets
-          </CardTitle>
-          <CardDescription>
-            {projects.length} projet{projects.length > 1 ? 's' : ''} au total
-          </CardDescription>
-        </CardHeader>
+      <CardCustom
+        header={
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="h-5 w-5" />
+              Liste des Projets
+            </CardTitle>
+            <CardDescription>
+              {projects.length} projet{projects.length > 1 ? 's' : ''} au total
+            </CardDescription>
+          </CardHeader>
+        }
+      >
         <CardContent>
           <div className="rounded-md border">
             <Table>
@@ -89,7 +93,7 @@ export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) 
                   <TableRow
                     key={project.id}
                     className="hover:bg-muted/50 cursor-pointer transition-colors"
-                    onClick={() => router.push(`/projects/${project.id}/board`)}
+                    onClick={() => router.push(`/projects/${project.id}`)}
                   >
                     <TableCell className="font-mono text-sm">{index + 1}</TableCell>
                     <TableCell className="font-medium">{project.name}</TableCell>
@@ -124,11 +128,11 @@ export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) 
             </Table>
           </div>
         </CardContent>
-      </Card>
+      </CardCustom>
 
       {/* Statistiques rapides */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-        <Card>
+        <CardCustom>
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -138,9 +142,9 @@ export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) 
               <FileText className="h-8 w-8 text-muted-foreground" />
             </div>
           </CardContent>
-        </Card>
+        </CardCustom>
 
-        <Card>
+        <CardCustom>
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -152,9 +156,9 @@ export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) 
               <Building2 className="h-8 w-8 text-muted-foreground" />
             </div>
           </CardContent>
-        </Card>
+        </CardCustom>
 
-        <Card>
+        <CardCustom>
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -170,7 +174,7 @@ export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) 
               <CalendarDays className="h-8 w-8 text-muted-foreground" />
             </div>
           </CardContent>
-        </Card>
+        </CardCustom>
       </div>
     </div>
   )
