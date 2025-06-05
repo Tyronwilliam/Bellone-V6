@@ -5,9 +5,11 @@
     - Ajouter logique Schema Prisma
     - Ajouter Role sur le tableau de tout les projets 
 
-- Ajouter un bouton pour creer un projet meme lorsqu'il y a des projets
+- Ajouter un bouton pour creer un projet meme lorsqu'il y a des projets OK
+- Modifier logique ajout de task suite au changement de BDD
 
-
+Testing : 
+- Créer Test pour Create Project Page
 Reminder Security Request :
 
 - Request in action.ts & API Folder secured by server and const session = await requireAuth(req)

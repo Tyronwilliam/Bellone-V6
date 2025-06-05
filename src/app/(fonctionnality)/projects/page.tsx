@@ -2,7 +2,7 @@
 import { prisma } from '@/lib/prisma'
 import { requireAuth } from 'auth-utils'
 import { getAllClientsCreatedByUser } from './action'
-import CreateProject from './components/CreateProject'
+import { CreateProject } from './components/CreateProject'
 import ProjectsBoard from './components/ProjectBoard'
 
 export const revalidate = 60
@@ -29,7 +29,7 @@ export default async function ProjectsPage() {
   })
   const { clients } = await getAllClientsCreatedByUser()
 
-  if (projects.length === 0 && clients) return <CreateProject clients={clients}  />
+  if (projects.length === 0 && clients) return <CreateProject clients={clients} />
 
   return <ProjectsBoard projects={projects} clients={clients} />
 }

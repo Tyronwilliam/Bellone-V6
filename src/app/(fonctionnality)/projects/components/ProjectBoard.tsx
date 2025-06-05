@@ -1,6 +1,7 @@
 'use client'
+import { CardCustom } from '@/components/custom/CardCustom'
 import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Table,
   TableBody,
@@ -9,14 +10,11 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
+import { Client, Project } from '@prisma/prisma'
 import { Building2, CalendarDays, FileText } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { Project } from '@prisma/prisma'
-import { Client } from '@prisma/prisma'
 import { useEffect, useState } from 'react'
-import CreateProject from './CreateProject'
-import { Button } from '@/components/ui/button'
-import { CardCustom } from '@/components/custom/CardCustom'
+import { ModalCreateProject } from './CreateProject'
 
 export type ProjectAndClient = Project & { client: Client }
 export type PartialClient = {
@@ -41,6 +39,7 @@ export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) 
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
 
+  const toggle: () => void = () => setIsOpen(!isOpen)
   useEffect(() => {
     console.log(projects, 'PROJECTS')
   }, [])
@@ -49,20 +48,9 @@ export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) 
       <div className="mb-8 flex flex-col space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">Projets</h1>
         <p className="text-muted-foreground mt-2">Gérez et consultez tous vos projets en cours</p>
-        {!isOpen && (
-          <Button type="button" className="w-fit" onClick={() => setIsOpen(true)}>
-            Créer un nouveau projet
-          </Button>
-        )}{' '}
+        <ModalCreateProject isOpen={isOpen} toggle={toggle} clients={clients} />
       </div>
-
-      {isOpen && (
-        <section className="absolute w-full h-full left-1/2 -translate-x-1/2 bg-accent-background z-50">
-          <div>
-            <CreateProject clients={clients} closeAsModal={() => setIsOpen(false)} />
-          </div>
-        </section>
-      )}
+      {/* ICI */}
       <CardCustom
         header={
           <CardHeader>

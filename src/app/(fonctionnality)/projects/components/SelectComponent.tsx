@@ -1,9 +1,6 @@
-import * as React from 'react'
 
 import {
-  Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -17,7 +14,6 @@ import {
   SelectValue
 } from '@/components/ui/select'
 
-import { Client } from '@prisma/prisma'
 
 import { Control } from 'react-hook-form'
 import { PartialClient } from './ProjectBoard'

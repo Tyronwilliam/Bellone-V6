@@ -1,5 +1,6 @@
 'use server'
 
+import { cleanFalsyFields } from '@/app/utils/request'
 import { prisma } from '@/lib/prisma'
 import { createProjectWithBoard } from '@/lib/project/queries'
 import { ClientType } from '@prisma/prisma'
@@ -35,7 +36,6 @@ export async function addProject(data: ProjectPost) {
       client_id: data.clientId,
       hiddenForClient: data.hiddenForClient
     })
-    console.log(newProject, 'ADD PROJECT ACTION')
     //Refresh the page to see change page Project is partial cache
     revalidatePath('/projects')
 
@@ -131,7 +131,7 @@ export async function createClientWithOptionalUser(input: NewClientInput) {
         where: {
           id: existingClient.id
         },
-        data: clientData
+        data: cleanFalsyFields(clientData)
       })
     } else {
       client = await prisma.client.create({

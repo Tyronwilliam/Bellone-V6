@@ -1,8 +1,7 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useRouter } from 'next/navigation'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import * as z from 'zod'
@@ -37,8 +36,7 @@ const clientSchema = z
       .max(14, 'Veuillez entrer un numéro siret valide')
       .optional(),
     vatNumber: z
-      .string()
-      .regex(/^[A-Z0-9]{8,20}$/, 'Format TVA invalide')
+      .union([z.literal(''), z.string().regex(/^[A-Z0-9]{8,20}$/, 'Format TVA invalide')])
       .optional(),
     website: z.string().url('URL invalide').optional().or(z.literal('')),
     address: z.string().optional(),
@@ -54,7 +52,7 @@ const clientSchema = z
   .superRefine((data, ctx) => {
     const { vatNumber, country } = data
 
-    if (vatNumber) {
+    if (vatNumber !== undefined && vatNumber !== '') {
       if (country === 'FR' && !/^FR[A-Z0-9]{2}\d{9}$/.test(vatNumber)) {
         ctx.addIssue({
           path: ['vatNumber'],
@@ -83,7 +81,6 @@ interface CreateClientFormProps {
 
 export function CreateClientForm({ projectId, onSuccess, onCancel }: CreateClientFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const router = useRouter()
 
   const form = useForm<ClientFormValues>({
     resolver: zodResolver(clientSchema),
@@ -108,7 +105,7 @@ export function CreateClientForm({ projectId, onSuccess, onCancel }: CreateClien
       projectId: projectId
     }
   })
-
+  const { errors, isDirty } = form.formState
   // Récupérer le type de client pour afficher/masquer certains champs
   const clientType = form.watch('type')
   const isCompany = clientType === ClientType.COMPANY
@@ -122,9 +119,6 @@ export function CreateClientForm({ projectId, onSuccess, onCancel }: CreateClien
         toast.success('Client créé avec succès')
         if (onSuccess && result.client) {
           onSuccess()
-        } else {
-          // Rediriger vers une page projet avec les stats
-          // router.push(projectId ? `/projects/${projectId}/clients` : '/clients')
         }
       } else {
         toast.error(result.error || 'Erreur lors de la création du client')
@@ -144,6 +138,9 @@ export function CreateClientForm({ projectId, onSuccess, onCancel }: CreateClien
       className="w-full max-w-4xl mx-auto  mb-4"
     >
       <Separator className="mb-6" />
+      {Object.keys(errors).length > 0 && isDirty && (
+        <p className="text-destructive text-sm text-center">Formulaire non valide</p>
+      )}
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 ">
           <div className="space-y-6">

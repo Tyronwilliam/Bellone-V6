@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input'
 import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
@@ -23,6 +24,14 @@ import { addProject, ProjectPost } from '../action'
 import { CreateClientForm } from './CreateClientForm'
 import { PartialClient } from './ProjectBoard'
 import { SelectComponent } from './SelectComponent'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog'
 
 const createProjectSchema = z.object({
   name: z.string().min(2, 'Nom requis'),
@@ -37,9 +46,10 @@ type CreateProjectProps = {
   closeAsModal?: () => void
 }
 
-export default function CreateProject({ clients, closeAsModal }: CreateProjectProps) {
+export function CreateProject({ clients, closeAsModal }: CreateProjectProps) {
   const [isOpen, setIsOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter()
 
   const toggle = () => setIsOpen(!isOpen)
   const close = () => {
@@ -63,6 +73,7 @@ export default function CreateProject({ clients, closeAsModal }: CreateProjectPr
 
       if (result.success) {
         toast.success('Project créé avec succès')
+        if (result.newProject) router.push(`/projects/${result.newProject.id}`)
       } else {
         toast.error(result.error || 'Erreur lors de la création du Project')
       }
@@ -78,6 +89,7 @@ export default function CreateProject({ clients, closeAsModal }: CreateProjectPr
       <Form {...form}>
         <form id="project-form" onSubmit={form.handleSubmit(onSubmit)} className="mb-4">
           <div className="grid grid-cols-1 gap-4 ">
+            {/* Nom */}
             <FormField
               control={form.control}
               name="name"
@@ -91,6 +103,7 @@ export default function CreateProject({ clients, closeAsModal }: CreateProjectPr
                 </FormItem>
               )}
             />
+            {/* Description */}
             <FormField
               control={form.control}
               name="description"
@@ -109,7 +122,7 @@ export default function CreateProject({ clients, closeAsModal }: CreateProjectPr
                 </FormItem>
               )}
             />
-            {/* */}
+            {/* Select Client*/}
             {clients && clients?.length > 0 && (
               <div className="max-w-[250px]">
                 <SelectComponent
@@ -132,8 +145,7 @@ export default function CreateProject({ clients, closeAsModal }: CreateProjectPr
                   Ajouter un client
                 </Button>
               </div>
-            )}{' '}
-            {/*  */}
+            )}
             <FormField
               control={form.control}
               name="hiddenForClient"
@@ -168,5 +180,29 @@ export default function CreateProject({ clients, closeAsModal }: CreateProjectPr
         </Button>
       </CardFooter>
     </CardCustom>
+  )
+}
+type ModalCreateProjectProps = {
+  isOpen: boolean
+  toggle: () => void
+  clients?: PartialClient[]
+}
+export const ModalCreateProject = ({ isOpen, toggle, clients }: ModalCreateProjectProps) => {
+  return (
+    <Dialog open={isOpen}>
+      <DialogTrigger asChild>
+        <Button type="button" className="w-fit" onClick={toggle}>
+          Créer un nouveau projet
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="w-full h-full md:min-w-3xl md:max-h-[80%] md:w-[512px] !overflow-y-scroll">
+        <DialogHeader className="sr-only">
+          <DialogTitle className="sr-only ">Créer un projet</DialogTitle>
+          <DialogDescription className="sr-only"></DialogDescription>{' '}
+        </DialogHeader>
+
+        <CreateProject clients={clients} closeAsModal={toggle} />
+      </DialogContent>
+    </Dialog>
   )
 }
