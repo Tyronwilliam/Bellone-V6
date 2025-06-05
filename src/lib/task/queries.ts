@@ -1,5 +1,3 @@
-// lib/prisma/addTaskToColumn.ts
-
 import { prisma } from '@/lib/prisma'
 
 export type AddTaskInput = {
@@ -10,6 +8,7 @@ export type AddTaskInput = {
   columnId: string
   assigneeId?: string | null
   client_id?: string | null
+  createdById: string
 }
 
 export async function addTaskToColumn({
@@ -19,14 +18,25 @@ export async function addTaskToColumn({
   dueDate = null,
   columnId,
   assigneeId = null,
-  client_id = null
+  client_id = null,
+  createdById
 }: AddTaskInput) {
   // Récupère la position actuelle (nombre de tâches dans la colonne)
   const taskCount = await prisma.task.count({
     where: { columnId }
   })
   const task = await prisma.task.create({
-    data: { title, description, price, dueDate, columnId, assigneeId, client_id, order: taskCount }
+    data: {
+      title,
+      description,
+      price,
+      dueDate,
+      columnId,
+      assigneeId,
+      client_id,
+      createdById,
+      order: taskCount
+    }
   })
 
   return task

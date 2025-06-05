@@ -15,6 +15,7 @@ import {
   SidebarMenuItem
 } from '@/components/ui/sidebar'
 import ThemeToggle from '@/app/ThemeToggle'
+import { signOut } from 'next-auth/react'
 
 // Menu items.
 const items = [
@@ -90,7 +91,10 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
-              <button className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50">
+              <button
+                className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50"
+                onClick={() => signOut()}
+              >
                 <LogOut />
                 <span>Log out</span>
               </button>

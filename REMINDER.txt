@@ -1,9 +1,24 @@
-- Use <ImageComponent/> for displaying Image 
-- Change Logic for Adding Tags ( Relation between table )
-- Do The Backend For the Kanban 
-- Choose Tech for Backend
+- Changer la requete api/tasks/addTasks pour config avec  "const session = await requireAuth()"
+- Faire Error page SignIN
+- Envoyer un mail de connexion lors création du client 
+    - Ajouter si compte existant alors Role = Client pour se projet 
+    - Ajouter logique Schema Prisma
+    - Ajouter Role sur le tableau de tout les projets 
+
+- Ajouter un bouton pour creer un projet meme lorsqu'il y a des projets
 
 
-/////
+Reminder Security Request :
 
+- Request in action.ts & API Folder secured by server and const session = await requireAuth(req)
+- No Request in Client 
 
+FORMULAIRE 
+
+- Utiliser ZOD pour faire =>  Schéma de validation avec Zod
+        - exemple : email: z.string().email("Email invalide"),
+                    firstName: z.string().min(2, "Prénom requis")
+
+- Infer le ZOD schema pour le form => type FormValues = z.infer<typeof Schéma de validation avec Zod>
+        - Utiliser les FormValues  useForm<ClientFormValues>
+        - resolver: zodResolver(clientSchema) => Permet de recuperer les erreurs de validation fourni par ZOD

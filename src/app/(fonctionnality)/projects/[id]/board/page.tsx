@@ -1,8 +1,10 @@
 import { getKanbanData } from '@/lib/board/queries'
 import { ClientKanbanWrapper } from './components/KanbanBoard/components/ClientKanbanBoard'
+import { requireAuth } from 'auth-utils'
 
 export default async function BoardPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
+  const session = await requireAuth()
 
   try {
     const board = await getKanbanData(id)

@@ -78,11 +78,117 @@ export type Task = $Result.DefaultSelection<Prisma.$TaskPayload>
  */
 export type Label = $Result.DefaultSelection<Prisma.$LabelPayload>
 /**
+ * Model ProjectLabel
+ * //////////////////////////
+ * //////////////////////////
+ */
+export type ProjectLabel = $Result.DefaultSelection<Prisma.$ProjectLabelPayload>
+/**
+ * Model BoardLabel
+ * //////////////////////////
+ * //////////////////////////
+ */
+export type BoardLabel = $Result.DefaultSelection<Prisma.$BoardLabelPayload>
+/**
  * Model TaskLabel
  * //////////////////////////
  * //////////////////////////
  */
 export type TaskLabel = $Result.DefaultSelection<Prisma.$TaskLabelPayload>
+/**
+ * Model Quote
+ * //////////////////////////
+ * //////////////////////////
+ */
+export type Quote = $Result.DefaultSelection<Prisma.$QuotePayload>
+/**
+ * Model QuoteItem
+ * //////////////////////////
+ * //////////////////////////
+ */
+export type QuoteItem = $Result.DefaultSelection<Prisma.$QuoteItemPayload>
+/**
+ * Model Invoice
+ * //////////////////////////
+ * //////////////////////////
+ */
+export type Invoice = $Result.DefaultSelection<Prisma.$InvoicePayload>
+/**
+ * Model InvoiceItem
+ * //////////////////////////
+ * //////////////////////////
+ */
+export type InvoiceItem = $Result.DefaultSelection<Prisma.$InvoiceItemPayload>
+/**
+ * Model Payment
+ * //////////////////////////
+ * //////////////////////////
+ */
+export type Payment = $Result.DefaultSelection<Prisma.$PaymentPayload>
+
+/**
+ * Enums
+ */
+export namespace $Enums {
+  export const ClientType: {
+  INDIVIDUAL: 'INDIVIDUAL',
+  COMPANY: 'COMPANY'
+};
+
+export type ClientType = (typeof ClientType)[keyof typeof ClientType]
+
+
+export const QuoteStatus: {
+  DRAFT: 'DRAFT',
+  SENT: 'SENT',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  EXPIRED: 'EXPIRED'
+};
+
+export type QuoteStatus = (typeof QuoteStatus)[keyof typeof QuoteStatus]
+
+
+export const InvoiceStatus: {
+  DRAFT: 'DRAFT',
+  SENT: 'SENT',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  CANCELLED: 'CANCELLED'
+};
+
+export type InvoiceStatus = (typeof InvoiceStatus)[keyof typeof InvoiceStatus]
+
+
+export const PaymentMethod: {
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  CHECK: 'CHECK',
+  CASH: 'CASH',
+  CARD: 'CARD',
+  PAYPAL: 'PAYPAL',
+  STRIPE: 'STRIPE',
+  OTHER: 'OTHER'
+};
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+}
+
+export type ClientType = $Enums.ClientType
+
+export const ClientType: typeof $Enums.ClientType
+
+export type QuoteStatus = $Enums.QuoteStatus
+
+export const QuoteStatus: typeof $Enums.QuoteStatus
+
+export type InvoiceStatus = $Enums.InvoiceStatus
+
+export const InvoiceStatus: typeof $Enums.InvoiceStatus
+
+export type PaymentMethod = $Enums.PaymentMethod
+
+export const PaymentMethod: typeof $Enums.PaymentMethod
 
 /**
  * ##  Prisma Client ʲˢ
@@ -320,6 +426,26 @@ export class PrismaClient<
   get label(): Prisma.LabelDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.projectLabel`: Exposes CRUD operations for the **ProjectLabel** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ProjectLabels
+    * const projectLabels = await prisma.projectLabel.findMany()
+    * ```
+    */
+  get projectLabel(): Prisma.ProjectLabelDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.boardLabel`: Exposes CRUD operations for the **BoardLabel** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more BoardLabels
+    * const boardLabels = await prisma.boardLabel.findMany()
+    * ```
+    */
+  get boardLabel(): Prisma.BoardLabelDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.taskLabel`: Exposes CRUD operations for the **TaskLabel** model.
     * Example usage:
     * ```ts
@@ -328,6 +454,56 @@ export class PrismaClient<
     * ```
     */
   get taskLabel(): Prisma.TaskLabelDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.quote`: Exposes CRUD operations for the **Quote** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Quotes
+    * const quotes = await prisma.quote.findMany()
+    * ```
+    */
+  get quote(): Prisma.QuoteDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.quoteItem`: Exposes CRUD operations for the **QuoteItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more QuoteItems
+    * const quoteItems = await prisma.quoteItem.findMany()
+    * ```
+    */
+  get quoteItem(): Prisma.QuoteItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.invoice`: Exposes CRUD operations for the **Invoice** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Invoices
+    * const invoices = await prisma.invoice.findMany()
+    * ```
+    */
+  get invoice(): Prisma.InvoiceDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.invoiceItem`: Exposes CRUD operations for the **InvoiceItem** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InvoiceItems
+    * const invoiceItems = await prisma.invoiceItem.findMany()
+    * ```
+    */
+  get invoiceItem(): Prisma.InvoiceItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.payment`: Exposes CRUD operations for the **Payment** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Payments
+    * const payments = await prisma.payment.findMany()
+    * ```
+    */
+  get payment(): Prisma.PaymentDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -779,7 +955,14 @@ export namespace Prisma {
     Column: 'Column',
     Task: 'Task',
     Label: 'Label',
-    TaskLabel: 'TaskLabel'
+    ProjectLabel: 'ProjectLabel',
+    BoardLabel: 'BoardLabel',
+    TaskLabel: 'TaskLabel',
+    Quote: 'Quote',
+    QuoteItem: 'QuoteItem',
+    Invoice: 'Invoice',
+    InvoiceItem: 'InvoiceItem',
+    Payment: 'Payment'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -798,7 +981,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "verificationToken" | "account" | "client" | "project" | "projectMember" | "board" | "column" | "task" | "label" | "taskLabel"
+      modelProps: "user" | "session" | "verificationToken" | "account" | "client" | "project" | "projectMember" | "board" | "column" | "task" | "label" | "projectLabel" | "boardLabel" | "taskLabel" | "quote" | "quoteItem" | "invoice" | "invoiceItem" | "payment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1528,6 +1711,138 @@ export namespace Prisma {
           }
         }
       }
+      ProjectLabel: {
+        payload: Prisma.$ProjectLabelPayload<ExtArgs>
+        fields: Prisma.ProjectLabelFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ProjectLabelFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectLabelPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ProjectLabelFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectLabelPayload>
+          }
+          findFirst: {
+            args: Prisma.ProjectLabelFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectLabelPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ProjectLabelFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectLabelPayload>
+          }
+          findMany: {
+            args: Prisma.ProjectLabelFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectLabelPayload>[]
+          }
+          create: {
+            args: Prisma.ProjectLabelCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectLabelPayload>
+          }
+          createMany: {
+            args: Prisma.ProjectLabelCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ProjectLabelDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectLabelPayload>
+          }
+          update: {
+            args: Prisma.ProjectLabelUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectLabelPayload>
+          }
+          deleteMany: {
+            args: Prisma.ProjectLabelDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ProjectLabelUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ProjectLabelUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ProjectLabelPayload>
+          }
+          aggregate: {
+            args: Prisma.ProjectLabelAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProjectLabel>
+          }
+          groupBy: {
+            args: Prisma.ProjectLabelGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ProjectLabelGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ProjectLabelCountArgs<ExtArgs>
+            result: $Utils.Optional<ProjectLabelCountAggregateOutputType> | number
+          }
+        }
+      }
+      BoardLabel: {
+        payload: Prisma.$BoardLabelPayload<ExtArgs>
+        fields: Prisma.BoardLabelFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.BoardLabelFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.BoardLabelFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload>
+          }
+          findFirst: {
+            args: Prisma.BoardLabelFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.BoardLabelFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload>
+          }
+          findMany: {
+            args: Prisma.BoardLabelFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload>[]
+          }
+          create: {
+            args: Prisma.BoardLabelCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload>
+          }
+          createMany: {
+            args: Prisma.BoardLabelCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.BoardLabelDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload>
+          }
+          update: {
+            args: Prisma.BoardLabelUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload>
+          }
+          deleteMany: {
+            args: Prisma.BoardLabelDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.BoardLabelUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.BoardLabelUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload>
+          }
+          aggregate: {
+            args: Prisma.BoardLabelAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateBoardLabel>
+          }
+          groupBy: {
+            args: Prisma.BoardLabelGroupByArgs<ExtArgs>
+            result: $Utils.Optional<BoardLabelGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.BoardLabelCountArgs<ExtArgs>
+            result: $Utils.Optional<BoardLabelCountAggregateOutputType> | number
+          }
+        }
+      }
       TaskLabel: {
         payload: Prisma.$TaskLabelPayload<ExtArgs>
         fields: Prisma.TaskLabelFieldRefs
@@ -1591,6 +1906,336 @@ export namespace Prisma {
           count: {
             args: Prisma.TaskLabelCountArgs<ExtArgs>
             result: $Utils.Optional<TaskLabelCountAggregateOutputType> | number
+          }
+        }
+      }
+      Quote: {
+        payload: Prisma.$QuotePayload<ExtArgs>
+        fields: Prisma.QuoteFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.QuoteFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuotePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.QuoteFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuotePayload>
+          }
+          findFirst: {
+            args: Prisma.QuoteFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuotePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.QuoteFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuotePayload>
+          }
+          findMany: {
+            args: Prisma.QuoteFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuotePayload>[]
+          }
+          create: {
+            args: Prisma.QuoteCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuotePayload>
+          }
+          createMany: {
+            args: Prisma.QuoteCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.QuoteDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuotePayload>
+          }
+          update: {
+            args: Prisma.QuoteUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuotePayload>
+          }
+          deleteMany: {
+            args: Prisma.QuoteDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.QuoteUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.QuoteUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuotePayload>
+          }
+          aggregate: {
+            args: Prisma.QuoteAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateQuote>
+          }
+          groupBy: {
+            args: Prisma.QuoteGroupByArgs<ExtArgs>
+            result: $Utils.Optional<QuoteGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.QuoteCountArgs<ExtArgs>
+            result: $Utils.Optional<QuoteCountAggregateOutputType> | number
+          }
+        }
+      }
+      QuoteItem: {
+        payload: Prisma.$QuoteItemPayload<ExtArgs>
+        fields: Prisma.QuoteItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.QuoteItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuoteItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.QuoteItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuoteItemPayload>
+          }
+          findFirst: {
+            args: Prisma.QuoteItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuoteItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.QuoteItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuoteItemPayload>
+          }
+          findMany: {
+            args: Prisma.QuoteItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuoteItemPayload>[]
+          }
+          create: {
+            args: Prisma.QuoteItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuoteItemPayload>
+          }
+          createMany: {
+            args: Prisma.QuoteItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.QuoteItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuoteItemPayload>
+          }
+          update: {
+            args: Prisma.QuoteItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuoteItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.QuoteItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.QuoteItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.QuoteItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$QuoteItemPayload>
+          }
+          aggregate: {
+            args: Prisma.QuoteItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateQuoteItem>
+          }
+          groupBy: {
+            args: Prisma.QuoteItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<QuoteItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.QuoteItemCountArgs<ExtArgs>
+            result: $Utils.Optional<QuoteItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      Invoice: {
+        payload: Prisma.$InvoicePayload<ExtArgs>
+        fields: Prisma.InvoiceFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InvoiceFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InvoiceFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          findFirst: {
+            args: Prisma.InvoiceFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InvoiceFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          findMany: {
+            args: Prisma.InvoiceFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>[]
+          }
+          create: {
+            args: Prisma.InvoiceCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          createMany: {
+            args: Prisma.InvoiceCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.InvoiceDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          update: {
+            args: Prisma.InvoiceUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          deleteMany: {
+            args: Prisma.InvoiceDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InvoiceUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.InvoiceUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoicePayload>
+          }
+          aggregate: {
+            args: Prisma.InvoiceAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInvoice>
+          }
+          groupBy: {
+            args: Prisma.InvoiceGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InvoiceGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InvoiceCountArgs<ExtArgs>
+            result: $Utils.Optional<InvoiceCountAggregateOutputType> | number
+          }
+        }
+      }
+      InvoiceItem: {
+        payload: Prisma.$InvoiceItemPayload<ExtArgs>
+        fields: Prisma.InvoiceItemFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InvoiceItemFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InvoiceItemFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload>
+          }
+          findFirst: {
+            args: Prisma.InvoiceItemFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InvoiceItemFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload>
+          }
+          findMany: {
+            args: Prisma.InvoiceItemFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload>[]
+          }
+          create: {
+            args: Prisma.InvoiceItemCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload>
+          }
+          createMany: {
+            args: Prisma.InvoiceItemCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.InvoiceItemDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload>
+          }
+          update: {
+            args: Prisma.InvoiceItemUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload>
+          }
+          deleteMany: {
+            args: Prisma.InvoiceItemDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InvoiceItemUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.InvoiceItemUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvoiceItemPayload>
+          }
+          aggregate: {
+            args: Prisma.InvoiceItemAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInvoiceItem>
+          }
+          groupBy: {
+            args: Prisma.InvoiceItemGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InvoiceItemGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InvoiceItemCountArgs<ExtArgs>
+            result: $Utils.Optional<InvoiceItemCountAggregateOutputType> | number
+          }
+        }
+      }
+      Payment: {
+        payload: Prisma.$PaymentPayload<ExtArgs>
+        fields: Prisma.PaymentFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PaymentFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PaymentFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload>
+          }
+          findFirst: {
+            args: Prisma.PaymentFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PaymentFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload>
+          }
+          findMany: {
+            args: Prisma.PaymentFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload>[]
+          }
+          create: {
+            args: Prisma.PaymentCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload>
+          }
+          createMany: {
+            args: Prisma.PaymentCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.PaymentDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload>
+          }
+          update: {
+            args: Prisma.PaymentUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload>
+          }
+          deleteMany: {
+            args: Prisma.PaymentDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PaymentUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.PaymentUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PaymentPayload>
+          }
+          aggregate: {
+            args: Prisma.PaymentAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePayment>
+          }
+          groupBy: {
+            args: Prisma.PaymentGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PaymentGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PaymentCountArgs<ExtArgs>
+            result: $Utils.Optional<PaymentCountAggregateOutputType> | number
           }
         }
       }
@@ -1689,7 +2334,14 @@ export namespace Prisma {
     column?: ColumnOmit
     task?: TaskOmit
     label?: LabelOmit
+    projectLabel?: ProjectLabelOmit
+    boardLabel?: BoardLabelOmit
     taskLabel?: TaskLabelOmit
+    quote?: QuoteOmit
+    quoteItem?: QuoteItemOmit
+    invoice?: InvoiceOmit
+    invoiceItem?: InvoiceItemOmit
+    payment?: PaymentOmit
   }
 
   /* Types for Logging */
@@ -1788,8 +2440,10 @@ export namespace Prisma {
     sessions: number
     createdBoards: number
     assignedTasks: number
-    contactClients: number
     projectMembers: number
+    createdClients: number
+    createdTasks: number
+    createdLabels: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1797,8 +2451,10 @@ export namespace Prisma {
     sessions?: boolean | UserCountOutputTypeCountSessionsArgs
     createdBoards?: boolean | UserCountOutputTypeCountCreatedBoardsArgs
     assignedTasks?: boolean | UserCountOutputTypeCountAssignedTasksArgs
-    contactClients?: boolean | UserCountOutputTypeCountContactClientsArgs
     projectMembers?: boolean | UserCountOutputTypeCountProjectMembersArgs
+    createdClients?: boolean | UserCountOutputTypeCountCreatedClientsArgs
+    createdTasks?: boolean | UserCountOutputTypeCountCreatedTasksArgs
+    createdLabels?: boolean | UserCountOutputTypeCountCreatedLabelsArgs
   }
 
   // Custom InputTypes
@@ -1843,15 +2499,29 @@ export namespace Prisma {
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountContactClientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeCountProjectMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProjectMemberWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedClientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ClientWhereInput
   }
 
   /**
    * UserCountOutputType without action
    */
-  export type UserCountOutputTypeCountProjectMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: ProjectMemberWhereInput
+  export type UserCountOutputTypeCountCreatedTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TaskWhereInput
+  }
+
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountCreatedLabelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LabelWhereInput
   }
 
 
@@ -1861,12 +2531,16 @@ export namespace Prisma {
 
   export type ClientCountOutputType = {
     projects: number
-    Task: number
+    tasks: number
+    invoices: number
+    quotes: number
   }
 
   export type ClientCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     projects?: boolean | ClientCountOutputTypeCountProjectsArgs
-    Task?: boolean | ClientCountOutputTypeCountTaskArgs
+    tasks?: boolean | ClientCountOutputTypeCountTasksArgs
+    invoices?: boolean | ClientCountOutputTypeCountInvoicesArgs
+    quotes?: boolean | ClientCountOutputTypeCountQuotesArgs
   }
 
   // Custom InputTypes
@@ -1890,8 +2564,22 @@ export namespace Prisma {
   /**
    * ClientCountOutputType without action
    */
-  export type ClientCountOutputTypeCountTaskArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type ClientCountOutputTypeCountTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TaskWhereInput
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvoiceWhereInput
+  }
+
+  /**
+   * ClientCountOutputType without action
+   */
+  export type ClientCountOutputTypeCountQuotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuoteWhereInput
   }
 
 
@@ -1902,11 +2590,17 @@ export namespace Prisma {
   export type ProjectCountOutputType = {
     members: number
     boards: number
+    labels: number
+    quotes: number
+    invoices: number
   }
 
   export type ProjectCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     members?: boolean | ProjectCountOutputTypeCountMembersArgs
     boards?: boolean | ProjectCountOutputTypeCountBoardsArgs
+    labels?: boolean | ProjectCountOutputTypeCountLabelsArgs
+    quotes?: boolean | ProjectCountOutputTypeCountQuotesArgs
+    invoices?: boolean | ProjectCountOutputTypeCountInvoicesArgs
   }
 
   // Custom InputTypes
@@ -1934,6 +2628,27 @@ export namespace Prisma {
     where?: BoardWhereInput
   }
 
+  /**
+   * ProjectCountOutputType without action
+   */
+  export type ProjectCountOutputTypeCountLabelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProjectLabelWhereInput
+  }
+
+  /**
+   * ProjectCountOutputType without action
+   */
+  export type ProjectCountOutputTypeCountQuotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuoteWhereInput
+  }
+
+  /**
+   * ProjectCountOutputType without action
+   */
+  export type ProjectCountOutputTypeCountInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvoiceWhereInput
+  }
+
 
   /**
    * Count Type BoardCountOutputType
@@ -1941,10 +2656,12 @@ export namespace Prisma {
 
   export type BoardCountOutputType = {
     columns: number
+    labels: number
   }
 
   export type BoardCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     columns?: boolean | BoardCountOutputTypeCountColumnsArgs
+    labels?: boolean | BoardCountOutputTypeCountLabelsArgs
   }
 
   // Custom InputTypes
@@ -1963,6 +2680,13 @@ export namespace Prisma {
    */
   export type BoardCountOutputTypeCountColumnsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ColumnWhereInput
+  }
+
+  /**
+   * BoardCountOutputType without action
+   */
+  export type BoardCountOutputTypeCountLabelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BoardLabelWhereInput
   }
 
 
@@ -2033,10 +2757,14 @@ export namespace Prisma {
    */
 
   export type LabelCountOutputType = {
+    projects: number
+    boards: number
     tasks: number
   }
 
   export type LabelCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    projects?: boolean | LabelCountOutputTypeCountProjectsArgs
+    boards?: boolean | LabelCountOutputTypeCountBoardsArgs
     tasks?: boolean | LabelCountOutputTypeCountTasksArgs
   }
 
@@ -2054,8 +2782,102 @@ export namespace Prisma {
   /**
    * LabelCountOutputType without action
    */
+  export type LabelCountOutputTypeCountProjectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProjectLabelWhereInput
+  }
+
+  /**
+   * LabelCountOutputType without action
+   */
+  export type LabelCountOutputTypeCountBoardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BoardLabelWhereInput
+  }
+
+  /**
+   * LabelCountOutputType without action
+   */
   export type LabelCountOutputTypeCountTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: TaskLabelWhereInput
+  }
+
+
+  /**
+   * Count Type QuoteCountOutputType
+   */
+
+  export type QuoteCountOutputType = {
+    items: number
+    invoices: number
+  }
+
+  export type QuoteCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | QuoteCountOutputTypeCountItemsArgs
+    invoices?: boolean | QuoteCountOutputTypeCountInvoicesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * QuoteCountOutputType without action
+   */
+  export type QuoteCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuoteCountOutputType
+     */
+    select?: QuoteCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * QuoteCountOutputType without action
+   */
+  export type QuoteCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuoteItemWhereInput
+  }
+
+  /**
+   * QuoteCountOutputType without action
+   */
+  export type QuoteCountOutputTypeCountInvoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvoiceWhereInput
+  }
+
+
+  /**
+   * Count Type InvoiceCountOutputType
+   */
+
+  export type InvoiceCountOutputType = {
+    items: number
+    payments: number
+  }
+
+  export type InvoiceCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    items?: boolean | InvoiceCountOutputTypeCountItemsArgs
+    payments?: boolean | InvoiceCountOutputTypeCountPaymentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * InvoiceCountOutputType without action
+   */
+  export type InvoiceCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceCountOutputType
+     */
+    select?: InvoiceCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * InvoiceCountOutputType without action
+   */
+  export type InvoiceCountOutputTypeCountItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvoiceItemWhereInput
+  }
+
+  /**
+   * InvoiceCountOutputType without action
+   */
+  export type InvoiceCountOutputTypeCountPaymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentWhereInput
   }
 
 
@@ -2081,6 +2903,7 @@ export namespace Prisma {
     role: string | null
     avatar: string | null
     image: string | null
+    emailVerified: Date | null
     created_at: Date | null
     updatedAt: Date | null
   }
@@ -2093,6 +2916,7 @@ export namespace Prisma {
     role: string | null
     avatar: string | null
     image: string | null
+    emailVerified: Date | null
     created_at: Date | null
     updatedAt: Date | null
   }
@@ -2105,6 +2929,7 @@ export namespace Prisma {
     role: number
     avatar: number
     image: number
+    emailVerified: number
     created_at: number
     updatedAt: number
     _all: number
@@ -2119,6 +2944,7 @@ export namespace Prisma {
     role?: true
     avatar?: true
     image?: true
+    emailVerified?: true
     created_at?: true
     updatedAt?: true
   }
@@ -2131,6 +2957,7 @@ export namespace Prisma {
     role?: true
     avatar?: true
     image?: true
+    emailVerified?: true
     created_at?: true
     updatedAt?: true
   }
@@ -2143,6 +2970,7 @@ export namespace Prisma {
     role?: true
     avatar?: true
     image?: true
+    emailVerified?: true
     created_at?: true
     updatedAt?: true
     _all?: true
@@ -2224,10 +3052,11 @@ export namespace Prisma {
     id: string
     email: string
     username: string | null
-    name: string
-    role: string
+    name: string | null
+    role: string | null
     avatar: string | null
     image: string | null
+    emailVerified: Date | null
     created_at: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
@@ -2257,14 +3086,18 @@ export namespace Prisma {
     role?: boolean
     avatar?: boolean
     image?: boolean
+    emailVerified?: boolean
     created_at?: boolean
     updatedAt?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     createdBoards?: boolean | User$createdBoardsArgs<ExtArgs>
     assignedTasks?: boolean | User$assignedTasksArgs<ExtArgs>
-    contactClients?: boolean | User$contactClientsArgs<ExtArgs>
     projectMembers?: boolean | User$projectMembersArgs<ExtArgs>
+    createdClients?: boolean | User$createdClientsArgs<ExtArgs>
+    createdTasks?: boolean | User$createdTasksArgs<ExtArgs>
+    createdLabels?: boolean | User$createdLabelsArgs<ExtArgs>
+    clientProfile?: boolean | User$clientProfileArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -2278,18 +3111,22 @@ export namespace Prisma {
     role?: boolean
     avatar?: boolean
     image?: boolean
+    emailVerified?: boolean
     created_at?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "username" | "name" | "role" | "avatar" | "image" | "created_at" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "username" | "name" | "role" | "avatar" | "image" | "emailVerified" | "created_at" | "updatedAt", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     sessions?: boolean | User$sessionsArgs<ExtArgs>
     createdBoards?: boolean | User$createdBoardsArgs<ExtArgs>
     assignedTasks?: boolean | User$assignedTasksArgs<ExtArgs>
-    contactClients?: boolean | User$contactClientsArgs<ExtArgs>
     projectMembers?: boolean | User$projectMembersArgs<ExtArgs>
+    createdClients?: boolean | User$createdClientsArgs<ExtArgs>
+    createdTasks?: boolean | User$createdTasksArgs<ExtArgs>
+    createdLabels?: boolean | User$createdLabelsArgs<ExtArgs>
+    clientProfile?: boolean | User$clientProfileArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2300,17 +3137,21 @@ export namespace Prisma {
       sessions: Prisma.$SessionPayload<ExtArgs>[]
       createdBoards: Prisma.$BoardPayload<ExtArgs>[]
       assignedTasks: Prisma.$TaskPayload<ExtArgs>[]
-      contactClients: Prisma.$ClientPayload<ExtArgs>[]
       projectMembers: Prisma.$ProjectMemberPayload<ExtArgs>[]
+      createdClients: Prisma.$ClientPayload<ExtArgs>[]
+      createdTasks: Prisma.$TaskPayload<ExtArgs>[]
+      createdLabels: Prisma.$LabelPayload<ExtArgs>[]
+      clientProfile: Prisma.$ClientPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       email: string
       username: string | null
-      name: string
-      role: string
+      name: string | null
+      role: string | null
       avatar: string | null
       image: string | null
+      emailVerified: Date | null
       created_at: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -2657,8 +3498,11 @@ export namespace Prisma {
     sessions<T extends User$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     createdBoards<T extends User$createdBoardsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdBoardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     assignedTasks<T extends User$assignedTasksArgs<ExtArgs> = {}>(args?: Subset<T, User$assignedTasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    contactClients<T extends User$contactClientsArgs<ExtArgs> = {}>(args?: Subset<T, User$contactClientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     projectMembers<T extends User$projectMembersArgs<ExtArgs> = {}>(args?: Subset<T, User$projectMembersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdClients<T extends User$createdClientsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdClientsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdTasks<T extends User$createdTasksArgs<ExtArgs> = {}>(args?: Subset<T, User$createdTasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    createdLabels<T extends User$createdLabelsArgs<ExtArgs> = {}>(args?: Subset<T, User$createdLabelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    clientProfile<T extends User$clientProfileArgs<ExtArgs> = {}>(args?: Subset<T, User$clientProfileArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2695,6 +3539,7 @@ export namespace Prisma {
     readonly role: FieldRef<"User", 'String'>
     readonly avatar: FieldRef<"User", 'String'>
     readonly image: FieldRef<"User", 'String'>
+    readonly emailVerified: FieldRef<"User", 'DateTime'>
     readonly created_at: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -3136,30 +3981,6 @@ export namespace Prisma {
   }
 
   /**
-   * User.contactClients
-   */
-  export type User$contactClientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Client
-     */
-    select?: ClientSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Client
-     */
-    omit?: ClientOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: ClientInclude<ExtArgs> | null
-    where?: ClientWhereInput
-    orderBy?: ClientOrderByWithRelationInput | ClientOrderByWithRelationInput[]
-    cursor?: ClientWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ClientScalarFieldEnum | ClientScalarFieldEnum[]
-  }
-
-  /**
    * User.projectMembers
    */
   export type User$projectMembersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3181,6 +4002,97 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ProjectMemberScalarFieldEnum | ProjectMemberScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdClients
+   */
+  export type User$createdClientsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    where?: ClientWhereInput
+    orderBy?: ClientOrderByWithRelationInput | ClientOrderByWithRelationInput[]
+    cursor?: ClientWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ClientScalarFieldEnum | ClientScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdTasks
+   */
+  export type User$createdTasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Task
+     */
+    select?: TaskSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Task
+     */
+    omit?: TaskOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TaskInclude<ExtArgs> | null
+    where?: TaskWhereInput
+    orderBy?: TaskOrderByWithRelationInput | TaskOrderByWithRelationInput[]
+    cursor?: TaskWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TaskScalarFieldEnum | TaskScalarFieldEnum[]
+  }
+
+  /**
+   * User.createdLabels
+   */
+  export type User$createdLabelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Label
+     */
+    select?: LabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Label
+     */
+    omit?: LabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LabelInclude<ExtArgs> | null
+    where?: LabelWhereInput
+    orderBy?: LabelOrderByWithRelationInput | LabelOrderByWithRelationInput[]
+    cursor?: LabelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LabelScalarFieldEnum | LabelScalarFieldEnum[]
+  }
+
+  /**
+   * User.clientProfile
+   */
+  export type User$clientProfileArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Client
+     */
+    select?: ClientSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Client
+     */
+    omit?: ClientOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ClientInclude<ExtArgs> | null
+    where?: ClientWhereInput
   }
 
   /**
@@ -6070,52 +6982,178 @@ export namespace Prisma {
 
   export type AggregateClient = {
     _count: ClientCountAggregateOutputType | null
+    _avg: ClientAvgAggregateOutputType | null
+    _sum: ClientSumAggregateOutputType | null
     _min: ClientMinAggregateOutputType | null
     _max: ClientMaxAggregateOutputType | null
   }
 
+  export type ClientAvgAggregateOutputType = {
+    taxRate: number | null
+  }
+
+  export type ClientSumAggregateOutputType = {
+    taxRate: number | null
+  }
+
   export type ClientMinAggregateOutputType = {
     id: string | null
-    company: string | null
-    name: string | null
-    contact_id: string | null
+    type: $Enums.ClientType | null
+    email: string | null
+    firstName: string | null
+    lastName: string | null
+    phone: string | null
+    companyName: string | null
+    siret: string | null
+    vatNumber: string | null
+    website: string | null
+    address: string | null
+    city: string | null
+    postalCode: string | null
+    country: string | null
+    currency: string | null
+    taxRate: number | null
+    userId: string | null
+    notes: string | null
+    isActive: boolean | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ClientMaxAggregateOutputType = {
     id: string | null
-    company: string | null
-    name: string | null
-    contact_id: string | null
+    type: $Enums.ClientType | null
+    email: string | null
+    firstName: string | null
+    lastName: string | null
+    phone: string | null
+    companyName: string | null
+    siret: string | null
+    vatNumber: string | null
+    website: string | null
+    address: string | null
+    city: string | null
+    postalCode: string | null
+    country: string | null
+    currency: string | null
+    taxRate: number | null
+    userId: string | null
+    notes: string | null
+    isActive: boolean | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ClientCountAggregateOutputType = {
     id: number
-    company: number
-    name: number
-    contact_id: number
+    type: number
+    email: number
+    firstName: number
+    lastName: number
+    phone: number
+    companyName: number
+    siret: number
+    vatNumber: number
+    website: number
+    address: number
+    city: number
+    postalCode: number
+    country: number
+    currency: number
+    taxRate: number
+    userId: number
+    notes: number
+    isActive: number
+    createdById: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
+  export type ClientAvgAggregateInputType = {
+    taxRate?: true
+  }
+
+  export type ClientSumAggregateInputType = {
+    taxRate?: true
+  }
+
   export type ClientMinAggregateInputType = {
     id?: true
-    company?: true
-    name?: true
-    contact_id?: true
+    type?: true
+    email?: true
+    firstName?: true
+    lastName?: true
+    phone?: true
+    companyName?: true
+    siret?: true
+    vatNumber?: true
+    website?: true
+    address?: true
+    city?: true
+    postalCode?: true
+    country?: true
+    currency?: true
+    taxRate?: true
+    userId?: true
+    notes?: true
+    isActive?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ClientMaxAggregateInputType = {
     id?: true
-    company?: true
-    name?: true
-    contact_id?: true
+    type?: true
+    email?: true
+    firstName?: true
+    lastName?: true
+    phone?: true
+    companyName?: true
+    siret?: true
+    vatNumber?: true
+    website?: true
+    address?: true
+    city?: true
+    postalCode?: true
+    country?: true
+    currency?: true
+    taxRate?: true
+    userId?: true
+    notes?: true
+    isActive?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ClientCountAggregateInputType = {
     id?: true
-    company?: true
-    name?: true
-    contact_id?: true
+    type?: true
+    email?: true
+    firstName?: true
+    lastName?: true
+    phone?: true
+    companyName?: true
+    siret?: true
+    vatNumber?: true
+    website?: true
+    address?: true
+    city?: true
+    postalCode?: true
+    country?: true
+    currency?: true
+    taxRate?: true
+    userId?: true
+    notes?: true
+    isActive?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -6157,6 +7195,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: ClientAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ClientSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ClientMinAggregateInputType
@@ -6187,16 +7237,38 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ClientCountAggregateInputType | true
+    _avg?: ClientAvgAggregateInputType
+    _sum?: ClientSumAggregateInputType
     _min?: ClientMinAggregateInputType
     _max?: ClientMaxAggregateInputType
   }
 
   export type ClientGroupByOutputType = {
     id: string
-    company: string
-    name: string
-    contact_id: string
+    type: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName: string | null
+    phone: string | null
+    companyName: string | null
+    siret: string | null
+    vatNumber: string | null
+    website: string | null
+    address: string | null
+    city: string | null
+    postalCode: string | null
+    country: string | null
+    currency: string
+    taxRate: number | null
+    userId: string | null
+    notes: string | null
+    isActive: boolean
+    createdById: string
+    createdAt: Date
+    updatedAt: Date
     _count: ClientCountAggregateOutputType | null
+    _avg: ClientAvgAggregateOutputType | null
+    _sum: ClientSumAggregateOutputType | null
     _min: ClientMinAggregateOutputType | null
     _max: ClientMaxAggregateOutputType | null
   }
@@ -6217,12 +7289,33 @@ export namespace Prisma {
 
   export type ClientSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    company?: boolean
-    name?: boolean
-    contact_id?: boolean
-    contact?: boolean | UserDefaultArgs<ExtArgs>
+    type?: boolean
+    email?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    phone?: boolean
+    companyName?: boolean
+    siret?: boolean
+    vatNumber?: boolean
+    website?: boolean
+    address?: boolean
+    city?: boolean
+    postalCode?: boolean
+    country?: boolean
+    currency?: boolean
+    taxRate?: boolean
+    userId?: boolean
+    notes?: boolean
+    isActive?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    user?: boolean | Client$userArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
     projects?: boolean | Client$projectsArgs<ExtArgs>
-    Task?: boolean | Client$TaskArgs<ExtArgs>
+    tasks?: boolean | Client$tasksArgs<ExtArgs>
+    invoices?: boolean | Client$invoicesArgs<ExtArgs>
+    quotes?: boolean | Client$quotesArgs<ExtArgs>
     _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["client"]>
 
@@ -6230,31 +7323,73 @@ export namespace Prisma {
 
   export type ClientSelectScalar = {
     id?: boolean
-    company?: boolean
-    name?: boolean
-    contact_id?: boolean
+    type?: boolean
+    email?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    phone?: boolean
+    companyName?: boolean
+    siret?: boolean
+    vatNumber?: boolean
+    website?: boolean
+    address?: boolean
+    city?: boolean
+    postalCode?: boolean
+    country?: boolean
+    currency?: boolean
+    taxRate?: boolean
+    userId?: boolean
+    notes?: boolean
+    isActive?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type ClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "company" | "name" | "contact_id", ExtArgs["result"]["client"]>
+  export type ClientOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "type" | "email" | "firstName" | "lastName" | "phone" | "companyName" | "siret" | "vatNumber" | "website" | "address" | "city" | "postalCode" | "country" | "currency" | "taxRate" | "userId" | "notes" | "isActive" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["client"]>
   export type ClientInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    contact?: boolean | UserDefaultArgs<ExtArgs>
+    user?: boolean | Client$userArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
     projects?: boolean | Client$projectsArgs<ExtArgs>
-    Task?: boolean | Client$TaskArgs<ExtArgs>
+    tasks?: boolean | Client$tasksArgs<ExtArgs>
+    invoices?: boolean | Client$invoicesArgs<ExtArgs>
+    quotes?: boolean | Client$quotesArgs<ExtArgs>
     _count?: boolean | ClientCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $ClientPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Client"
     objects: {
-      contact: Prisma.$UserPayload<ExtArgs>
+      user: Prisma.$UserPayload<ExtArgs> | null
+      createdBy: Prisma.$UserPayload<ExtArgs>
       projects: Prisma.$ProjectPayload<ExtArgs>[]
-      Task: Prisma.$TaskPayload<ExtArgs>[]
+      tasks: Prisma.$TaskPayload<ExtArgs>[]
+      invoices: Prisma.$InvoicePayload<ExtArgs>[]
+      quotes: Prisma.$QuotePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      company: string
-      name: string
-      contact_id: string
+      type: $Enums.ClientType
+      email: string
+      firstName: string
+      lastName: string | null
+      phone: string | null
+      companyName: string | null
+      siret: string | null
+      vatNumber: string | null
+      website: string | null
+      address: string | null
+      city: string | null
+      postalCode: string | null
+      country: string | null
+      currency: string
+      taxRate: number | null
+      userId: string | null
+      notes: string | null
+      isActive: boolean
+      createdById: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["client"]>
     composites: {}
   }
@@ -6595,9 +7730,12 @@ export namespace Prisma {
    */
   export interface Prisma__ClientClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    contact<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends Client$userArgs<ExtArgs> = {}>(args?: Subset<T, Client$userArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     projects<T extends Client$projectsArgs<ExtArgs> = {}>(args?: Subset<T, Client$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    Task<T extends Client$TaskArgs<ExtArgs> = {}>(args?: Subset<T, Client$TaskArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    tasks<T extends Client$tasksArgs<ExtArgs> = {}>(args?: Subset<T, Client$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    invoices<T extends Client$invoicesArgs<ExtArgs> = {}>(args?: Subset<T, Client$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    quotes<T extends Client$quotesArgs<ExtArgs> = {}>(args?: Subset<T, Client$quotesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6628,9 +7766,27 @@ export namespace Prisma {
    */
   interface ClientFieldRefs {
     readonly id: FieldRef<"Client", 'String'>
-    readonly company: FieldRef<"Client", 'String'>
-    readonly name: FieldRef<"Client", 'String'>
-    readonly contact_id: FieldRef<"Client", 'String'>
+    readonly type: FieldRef<"Client", 'ClientType'>
+    readonly email: FieldRef<"Client", 'String'>
+    readonly firstName: FieldRef<"Client", 'String'>
+    readonly lastName: FieldRef<"Client", 'String'>
+    readonly phone: FieldRef<"Client", 'String'>
+    readonly companyName: FieldRef<"Client", 'String'>
+    readonly siret: FieldRef<"Client", 'String'>
+    readonly vatNumber: FieldRef<"Client", 'String'>
+    readonly website: FieldRef<"Client", 'String'>
+    readonly address: FieldRef<"Client", 'String'>
+    readonly city: FieldRef<"Client", 'String'>
+    readonly postalCode: FieldRef<"Client", 'String'>
+    readonly country: FieldRef<"Client", 'String'>
+    readonly currency: FieldRef<"Client", 'String'>
+    readonly taxRate: FieldRef<"Client", 'Float'>
+    readonly userId: FieldRef<"Client", 'String'>
+    readonly notes: FieldRef<"Client", 'String'>
+    readonly isActive: FieldRef<"Client", 'Boolean'>
+    readonly createdById: FieldRef<"Client", 'String'>
+    readonly createdAt: FieldRef<"Client", 'DateTime'>
+    readonly updatedAt: FieldRef<"Client", 'DateTime'>
   }
     
 
@@ -6974,6 +8130,25 @@ export namespace Prisma {
   }
 
   /**
+   * Client.user
+   */
+  export type Client$userArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
    * Client.projects
    */
   export type Client$projectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6998,9 +8173,9 @@ export namespace Prisma {
   }
 
   /**
-   * Client.Task
+   * Client.tasks
    */
-  export type Client$TaskArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Client$tasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Task
      */
@@ -7019,6 +8194,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TaskScalarFieldEnum | TaskScalarFieldEnum[]
+  }
+
+  /**
+   * Client.invoices
+   */
+  export type Client$invoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    where?: InvoiceWhereInput
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    cursor?: InvoiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvoiceScalarFieldEnum | InvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * Client.quotes
+   */
+  export type Client$quotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quote
+     */
+    select?: QuoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quote
+     */
+    omit?: QuoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteInclude<ExtArgs> | null
+    where?: QuoteWhereInput
+    orderBy?: QuoteOrderByWithRelationInput | QuoteOrderByWithRelationInput[]
+    cursor?: QuoteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QuoteScalarFieldEnum | QuoteScalarFieldEnum[]
   }
 
   /**
@@ -7056,6 +8279,8 @@ export namespace Prisma {
     description: string | null
     client_id: string | null
     created_at: Date | null
+    updatedAt: Date | null
+    hiddenForClient: boolean | null
   }
 
   export type ProjectMaxAggregateOutputType = {
@@ -7064,6 +8289,8 @@ export namespace Prisma {
     description: string | null
     client_id: string | null
     created_at: Date | null
+    updatedAt: Date | null
+    hiddenForClient: boolean | null
   }
 
   export type ProjectCountAggregateOutputType = {
@@ -7072,6 +8299,8 @@ export namespace Prisma {
     description: number
     client_id: number
     created_at: number
+    updatedAt: number
+    hiddenForClient: number
     _all: number
   }
 
@@ -7082,6 +8311,8 @@ export namespace Prisma {
     description?: true
     client_id?: true
     created_at?: true
+    updatedAt?: true
+    hiddenForClient?: true
   }
 
   export type ProjectMaxAggregateInputType = {
@@ -7090,6 +8321,8 @@ export namespace Prisma {
     description?: true
     client_id?: true
     created_at?: true
+    updatedAt?: true
+    hiddenForClient?: true
   }
 
   export type ProjectCountAggregateInputType = {
@@ -7098,6 +8331,8 @@ export namespace Prisma {
     description?: true
     client_id?: true
     created_at?: true
+    updatedAt?: true
+    hiddenForClient?: true
     _all?: true
   }
 
@@ -7179,6 +8414,8 @@ export namespace Prisma {
     description: string | null
     client_id: string
     created_at: Date
+    updatedAt: Date
+    hiddenForClient: boolean
     _count: ProjectCountAggregateOutputType | null
     _min: ProjectMinAggregateOutputType | null
     _max: ProjectMaxAggregateOutputType | null
@@ -7204,9 +8441,14 @@ export namespace Prisma {
     description?: boolean
     client_id?: boolean
     created_at?: boolean
+    updatedAt?: boolean
+    hiddenForClient?: boolean
     client?: boolean | ClientDefaultArgs<ExtArgs>
     members?: boolean | Project$membersArgs<ExtArgs>
     boards?: boolean | Project$boardsArgs<ExtArgs>
+    labels?: boolean | Project$labelsArgs<ExtArgs>
+    quotes?: boolean | Project$quotesArgs<ExtArgs>
+    invoices?: boolean | Project$invoicesArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["project"]>
 
@@ -7218,13 +8460,18 @@ export namespace Prisma {
     description?: boolean
     client_id?: boolean
     created_at?: boolean
+    updatedAt?: boolean
+    hiddenForClient?: boolean
   }
 
-  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "client_id" | "created_at", ExtArgs["result"]["project"]>
+  export type ProjectOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "client_id" | "created_at" | "updatedAt" | "hiddenForClient", ExtArgs["result"]["project"]>
   export type ProjectInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     client?: boolean | ClientDefaultArgs<ExtArgs>
     members?: boolean | Project$membersArgs<ExtArgs>
     boards?: boolean | Project$boardsArgs<ExtArgs>
+    labels?: boolean | Project$labelsArgs<ExtArgs>
+    quotes?: boolean | Project$quotesArgs<ExtArgs>
+    invoices?: boolean | Project$invoicesArgs<ExtArgs>
     _count?: boolean | ProjectCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -7234,6 +8481,9 @@ export namespace Prisma {
       client: Prisma.$ClientPayload<ExtArgs>
       members: Prisma.$ProjectMemberPayload<ExtArgs>[]
       boards: Prisma.$BoardPayload<ExtArgs>[]
+      labels: Prisma.$ProjectLabelPayload<ExtArgs>[]
+      quotes: Prisma.$QuotePayload<ExtArgs>[]
+      invoices: Prisma.$InvoicePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -7241,6 +8491,8 @@ export namespace Prisma {
       description: string | null
       client_id: string
       created_at: Date
+      updatedAt: Date
+      hiddenForClient: boolean
     }, ExtArgs["result"]["project"]>
     composites: {}
   }
@@ -7584,6 +8836,9 @@ export namespace Prisma {
     client<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     members<T extends Project$membersArgs<ExtArgs> = {}>(args?: Subset<T, Project$membersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     boards<T extends Project$boardsArgs<ExtArgs> = {}>(args?: Subset<T, Project$boardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoardPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    labels<T extends Project$labelsArgs<ExtArgs> = {}>(args?: Subset<T, Project$labelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    quotes<T extends Project$quotesArgs<ExtArgs> = {}>(args?: Subset<T, Project$quotesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    invoices<T extends Project$invoicesArgs<ExtArgs> = {}>(args?: Subset<T, Project$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -7618,6 +8873,8 @@ export namespace Prisma {
     readonly description: FieldRef<"Project", 'String'>
     readonly client_id: FieldRef<"Project", 'String'>
     readonly created_at: FieldRef<"Project", 'DateTime'>
+    readonly updatedAt: FieldRef<"Project", 'DateTime'>
+    readonly hiddenForClient: FieldRef<"Project", 'Boolean'>
   }
     
 
@@ -8009,6 +9266,78 @@ export namespace Prisma {
   }
 
   /**
+   * Project.labels
+   */
+  export type Project$labelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectLabel
+     */
+    select?: ProjectLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectLabel
+     */
+    omit?: ProjectLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectLabelInclude<ExtArgs> | null
+    where?: ProjectLabelWhereInput
+    orderBy?: ProjectLabelOrderByWithRelationInput | ProjectLabelOrderByWithRelationInput[]
+    cursor?: ProjectLabelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProjectLabelScalarFieldEnum | ProjectLabelScalarFieldEnum[]
+  }
+
+  /**
+   * Project.quotes
+   */
+  export type Project$quotesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quote
+     */
+    select?: QuoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quote
+     */
+    omit?: QuoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteInclude<ExtArgs> | null
+    where?: QuoteWhereInput
+    orderBy?: QuoteOrderByWithRelationInput | QuoteOrderByWithRelationInput[]
+    cursor?: QuoteWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QuoteScalarFieldEnum | QuoteScalarFieldEnum[]
+  }
+
+  /**
+   * Project.invoices
+   */
+  export type Project$invoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    where?: InvoiceWhereInput
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    cursor?: InvoiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvoiceScalarFieldEnum | InvoiceScalarFieldEnum[]
+  }
+
+  /**
    * Project without action
    */
   export type ProjectDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8038,35 +9367,59 @@ export namespace Prisma {
   }
 
   export type ProjectMemberMinAggregateOutputType = {
+    id: string | null
     projectId: string | null
-    user_id: string | null
+    userId: string | null
+    role: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ProjectMemberMaxAggregateOutputType = {
+    id: string | null
     projectId: string | null
-    user_id: string | null
+    userId: string | null
+    role: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ProjectMemberCountAggregateOutputType = {
+    id: number
     projectId: number
-    user_id: number
+    userId: number
+    role: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
   export type ProjectMemberMinAggregateInputType = {
+    id?: true
     projectId?: true
-    user_id?: true
+    userId?: true
+    role?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ProjectMemberMaxAggregateInputType = {
+    id?: true
     projectId?: true
-    user_id?: true
+    userId?: true
+    role?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ProjectMemberCountAggregateInputType = {
+    id?: true
     projectId?: true
-    user_id?: true
+    userId?: true
+    role?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -8143,8 +9496,12 @@ export namespace Prisma {
   }
 
   export type ProjectMemberGroupByOutputType = {
+    id: string
     projectId: string
-    user_id: string
+    userId: string
+    role: string
+    createdAt: Date
+    updatedAt: Date
     _count: ProjectMemberCountAggregateOutputType | null
     _min: ProjectMemberMinAggregateOutputType | null
     _max: ProjectMemberMaxAggregateOutputType | null
@@ -8165,8 +9522,12 @@ export namespace Prisma {
 
 
   export type ProjectMemberSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
     projectId?: boolean
-    user_id?: boolean
+    userId?: boolean
+    role?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["projectMember"]>
@@ -8174,11 +9535,15 @@ export namespace Prisma {
 
 
   export type ProjectMemberSelectScalar = {
+    id?: boolean
     projectId?: boolean
-    user_id?: boolean
+    userId?: boolean
+    role?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type ProjectMemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"projectId" | "user_id", ExtArgs["result"]["projectMember"]>
+  export type ProjectMemberOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "userId" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["projectMember"]>
   export type ProjectMemberInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -8191,8 +9556,12 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
+      id: string
       projectId: string
-      user_id: string
+      userId: string
+      role: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["projectMember"]>
     composites: {}
   }
@@ -8276,8 +9645,8 @@ export namespace Prisma {
      * // Get first 10 ProjectMembers
      * const projectMembers = await prisma.projectMember.findMany({ take: 10 })
      * 
-     * // Only select the `projectId`
-     * const projectMemberWithProjectIdOnly = await prisma.projectMember.findMany({ select: { projectId: true } })
+     * // Only select the `id`
+     * const projectMemberWithIdOnly = await prisma.projectMember.findMany({ select: { id: true } })
      * 
      */
     findMany<T extends ProjectMemberFindManyArgs>(args?: SelectSubset<T, ProjectMemberFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -8564,8 +9933,12 @@ export namespace Prisma {
    * Fields of the ProjectMember model
    */
   interface ProjectMemberFieldRefs {
+    readonly id: FieldRef<"ProjectMember", 'String'>
     readonly projectId: FieldRef<"ProjectMember", 'String'>
-    readonly user_id: FieldRef<"ProjectMember", 'String'>
+    readonly userId: FieldRef<"ProjectMember", 'String'>
+    readonly role: FieldRef<"ProjectMember", 'String'>
+    readonly createdAt: FieldRef<"ProjectMember", 'DateTime'>
+    readonly updatedAt: FieldRef<"ProjectMember", 'DateTime'>
   }
     
 
@@ -8942,6 +10315,8 @@ export namespace Prisma {
     name: string | null
     projectId: string | null
     created_by_id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type BoardMaxAggregateOutputType = {
@@ -8949,6 +10324,8 @@ export namespace Prisma {
     name: string | null
     projectId: string | null
     created_by_id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type BoardCountAggregateOutputType = {
@@ -8956,6 +10333,8 @@ export namespace Prisma {
     name: number
     projectId: number
     created_by_id: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -8965,6 +10344,8 @@ export namespace Prisma {
     name?: true
     projectId?: true
     created_by_id?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type BoardMaxAggregateInputType = {
@@ -8972,6 +10353,8 @@ export namespace Prisma {
     name?: true
     projectId?: true
     created_by_id?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type BoardCountAggregateInputType = {
@@ -8979,6 +10362,8 @@ export namespace Prisma {
     name?: true
     projectId?: true
     created_by_id?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -9059,6 +10444,8 @@ export namespace Prisma {
     name: string
     projectId: string
     created_by_id: string
+    createdAt: Date
+    updatedAt: Date
     _count: BoardCountAggregateOutputType | null
     _min: BoardMinAggregateOutputType | null
     _max: BoardMaxAggregateOutputType | null
@@ -9083,9 +10470,12 @@ export namespace Prisma {
     name?: boolean
     projectId?: boolean
     created_by_id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     columns?: boolean | Board$columnsArgs<ExtArgs>
+    labels?: boolean | Board$labelsArgs<ExtArgs>
     _count?: boolean | BoardCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["board"]>
 
@@ -9096,13 +10486,16 @@ export namespace Prisma {
     name?: boolean
     projectId?: boolean
     created_by_id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type BoardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "projectId" | "created_by_id", ExtArgs["result"]["board"]>
+  export type BoardOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "projectId" | "created_by_id" | "createdAt" | "updatedAt", ExtArgs["result"]["board"]>
   export type BoardInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     columns?: boolean | Board$columnsArgs<ExtArgs>
+    labels?: boolean | Board$labelsArgs<ExtArgs>
     _count?: boolean | BoardCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -9112,12 +10505,15 @@ export namespace Prisma {
       project: Prisma.$ProjectPayload<ExtArgs>
       createdBy: Prisma.$UserPayload<ExtArgs>
       columns: Prisma.$ColumnPayload<ExtArgs>[]
+      labels: Prisma.$BoardLabelPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
       projectId: string
       created_by_id: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["board"]>
     composites: {}
   }
@@ -9461,6 +10857,7 @@ export namespace Prisma {
     project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     columns<T extends Board$columnsArgs<ExtArgs> = {}>(args?: Subset<T, Board$columnsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ColumnPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    labels<T extends Board$labelsArgs<ExtArgs> = {}>(args?: Subset<T, Board$labelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -9494,6 +10891,8 @@ export namespace Prisma {
     readonly name: FieldRef<"Board", 'String'>
     readonly projectId: FieldRef<"Board", 'String'>
     readonly created_by_id: FieldRef<"Board", 'String'>
+    readonly createdAt: FieldRef<"Board", 'DateTime'>
+    readonly updatedAt: FieldRef<"Board", 'DateTime'>
   }
     
 
@@ -9861,6 +11260,30 @@ export namespace Prisma {
   }
 
   /**
+   * Board.labels
+   */
+  export type Board$labelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoardLabel
+     */
+    select?: BoardLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoardLabel
+     */
+    omit?: BoardLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoardLabelInclude<ExtArgs> | null
+    where?: BoardLabelWhereInput
+    orderBy?: BoardLabelOrderByWithRelationInput | BoardLabelOrderByWithRelationInput[]
+    cursor?: BoardLabelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BoardLabelScalarFieldEnum | BoardLabelScalarFieldEnum[]
+  }
+
+  /**
    * Board without action
    */
   export type BoardDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9908,6 +11331,8 @@ export namespace Prisma {
     position: number | null
     color: string | null
     boardId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ColumnMaxAggregateOutputType = {
@@ -9917,6 +11342,8 @@ export namespace Prisma {
     position: number | null
     color: string | null
     boardId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ColumnCountAggregateOutputType = {
@@ -9926,6 +11353,8 @@ export namespace Prisma {
     position: number
     color: number
     boardId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -9947,6 +11376,8 @@ export namespace Prisma {
     position?: true
     color?: true
     boardId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ColumnMaxAggregateInputType = {
@@ -9956,6 +11387,8 @@ export namespace Prisma {
     position?: true
     color?: true
     boardId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type ColumnCountAggregateInputType = {
@@ -9965,6 +11398,8 @@ export namespace Prisma {
     position?: true
     color?: true
     boardId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -10061,6 +11496,8 @@ export namespace Prisma {
     position: number
     color: string | null
     boardId: string
+    createdAt: Date
+    updatedAt: Date
     _count: ColumnCountAggregateOutputType | null
     _avg: ColumnAvgAggregateOutputType | null
     _sum: ColumnSumAggregateOutputType | null
@@ -10089,6 +11526,8 @@ export namespace Prisma {
     position?: boolean
     color?: boolean
     boardId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     board?: boolean | BoardDefaultArgs<ExtArgs>
     tasks?: boolean | Column$tasksArgs<ExtArgs>
     _count?: boolean | ColumnCountOutputTypeDefaultArgs<ExtArgs>
@@ -10103,9 +11542,11 @@ export namespace Prisma {
     position?: boolean
     color?: boolean
     boardId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type ColumnOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "order" | "position" | "color" | "boardId", ExtArgs["result"]["column"]>
+  export type ColumnOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "order" | "position" | "color" | "boardId" | "createdAt" | "updatedAt", ExtArgs["result"]["column"]>
   export type ColumnInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     board?: boolean | BoardDefaultArgs<ExtArgs>
     tasks?: boolean | Column$tasksArgs<ExtArgs>
@@ -10125,6 +11566,8 @@ export namespace Prisma {
       position: number
       color: string | null
       boardId: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["column"]>
     composites: {}
   }
@@ -10502,6 +11945,8 @@ export namespace Prisma {
     readonly position: FieldRef<"Column", 'Int'>
     readonly color: FieldRef<"Column", 'String'>
     readonly boardId: FieldRef<"Column", 'String'>
+    readonly createdAt: FieldRef<"Column", 'DateTime'>
+    readonly updatedAt: FieldRef<"Column", 'DateTime'>
   }
     
 
@@ -10919,6 +12364,9 @@ export namespace Prisma {
     columnId: string | null
     assigneeId: string | null
     client_id: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type TaskMaxAggregateOutputType = {
@@ -10931,6 +12379,9 @@ export namespace Prisma {
     columnId: string | null
     assigneeId: string | null
     client_id: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type TaskCountAggregateOutputType = {
@@ -10943,6 +12394,9 @@ export namespace Prisma {
     columnId: number
     assigneeId: number
     client_id: number
+    createdById: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -10967,6 +12421,9 @@ export namespace Prisma {
     columnId?: true
     assigneeId?: true
     client_id?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type TaskMaxAggregateInputType = {
@@ -10979,6 +12436,9 @@ export namespace Prisma {
     columnId?: true
     assigneeId?: true
     client_id?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type TaskCountAggregateInputType = {
@@ -10991,6 +12451,9 @@ export namespace Prisma {
     columnId?: true
     assigneeId?: true
     client_id?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -11090,6 +12553,9 @@ export namespace Prisma {
     columnId: string
     assigneeId: string | null
     client_id: string | null
+    createdById: string
+    createdAt: Date
+    updatedAt: Date
     _count: TaskCountAggregateOutputType | null
     _avg: TaskAvgAggregateOutputType | null
     _sum: TaskSumAggregateOutputType | null
@@ -11121,9 +12587,13 @@ export namespace Prisma {
     columnId?: boolean
     assigneeId?: boolean
     client_id?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     column?: boolean | ColumnDefaultArgs<ExtArgs>
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
     client?: boolean | Task$clientArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
     tags?: boolean | Task$tagsArgs<ExtArgs>
     _count?: boolean | TaskCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["task"]>
@@ -11140,13 +12610,17 @@ export namespace Prisma {
     columnId?: boolean
     assigneeId?: boolean
     client_id?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "price" | "dueDate" | "order" | "columnId" | "assigneeId" | "client_id", ExtArgs["result"]["task"]>
+  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "price" | "dueDate" | "order" | "columnId" | "assigneeId" | "client_id" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["task"]>
   export type TaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     column?: boolean | ColumnDefaultArgs<ExtArgs>
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
     client?: boolean | Task$clientArgs<ExtArgs>
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
     tags?: boolean | Task$tagsArgs<ExtArgs>
     _count?: boolean | TaskCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -11157,6 +12631,7 @@ export namespace Prisma {
       column: Prisma.$ColumnPayload<ExtArgs>
       assignee: Prisma.$UserPayload<ExtArgs> | null
       client: Prisma.$ClientPayload<ExtArgs> | null
+      createdBy: Prisma.$UserPayload<ExtArgs>
       tags: Prisma.$TaskLabelPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -11169,6 +12644,9 @@ export namespace Prisma {
       columnId: string
       assigneeId: string | null
       client_id: string | null
+      createdById: string
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["task"]>
     composites: {}
   }
@@ -11512,6 +12990,7 @@ export namespace Prisma {
     column<T extends ColumnDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ColumnDefaultArgs<ExtArgs>>): Prisma__ColumnClient<$Result.GetResult<Prisma.$ColumnPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     assignee<T extends Task$assigneeArgs<ExtArgs> = {}>(args?: Subset<T, Task$assigneeArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     client<T extends Task$clientArgs<ExtArgs> = {}>(args?: Subset<T, Task$clientArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     tags<T extends Task$tagsArgs<ExtArgs> = {}>(args?: Subset<T, Task$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -11551,6 +13030,9 @@ export namespace Prisma {
     readonly columnId: FieldRef<"Task", 'String'>
     readonly assigneeId: FieldRef<"Task", 'String'>
     readonly client_id: FieldRef<"Task", 'String'>
+    readonly createdById: FieldRef<"Task", 'String'>
+    readonly createdAt: FieldRef<"Task", 'DateTime'>
+    readonly updatedAt: FieldRef<"Task", 'DateTime'>
   }
     
 
@@ -11980,46 +13462,94 @@ export namespace Prisma {
 
   export type AggregateLabel = {
     _count: LabelCountAggregateOutputType | null
+    _avg: LabelAvgAggregateOutputType | null
+    _sum: LabelSumAggregateOutputType | null
     _min: LabelMinAggregateOutputType | null
     _max: LabelMaxAggregateOutputType | null
+  }
+
+  export type LabelAvgAggregateOutputType = {
+    usageCount: number | null
+  }
+
+  export type LabelSumAggregateOutputType = {
+    usageCount: number | null
   }
 
   export type LabelMinAggregateOutputType = {
     id: string | null
     name: string | null
     color: string | null
+    description: string | null
+    createdById: string | null
+    usageCount: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type LabelMaxAggregateOutputType = {
     id: string | null
     name: string | null
     color: string | null
+    description: string | null
+    createdById: string | null
+    usageCount: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type LabelCountAggregateOutputType = {
     id: number
     name: number
     color: number
+    description: number
+    createdById: number
+    usageCount: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
+
+  export type LabelAvgAggregateInputType = {
+    usageCount?: true
+  }
+
+  export type LabelSumAggregateInputType = {
+    usageCount?: true
+  }
 
   export type LabelMinAggregateInputType = {
     id?: true
     name?: true
     color?: true
+    description?: true
+    createdById?: true
+    usageCount?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type LabelMaxAggregateInputType = {
     id?: true
     name?: true
     color?: true
+    description?: true
+    createdById?: true
+    usageCount?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type LabelCountAggregateInputType = {
     id?: true
     name?: true
     color?: true
+    description?: true
+    createdById?: true
+    usageCount?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -12061,6 +13591,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: LabelAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LabelSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: LabelMinAggregateInputType
@@ -12091,6 +13633,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: LabelCountAggregateInputType | true
+    _avg?: LabelAvgAggregateInputType
+    _sum?: LabelSumAggregateInputType
     _min?: LabelMinAggregateInputType
     _max?: LabelMaxAggregateInputType
   }
@@ -12099,7 +13643,14 @@ export namespace Prisma {
     id: string
     name: string
     color: string | null
+    description: string | null
+    createdById: string
+    usageCount: number
+    createdAt: Date
+    updatedAt: Date
     _count: LabelCountAggregateOutputType | null
+    _avg: LabelAvgAggregateOutputType | null
+    _sum: LabelSumAggregateOutputType | null
     _min: LabelMinAggregateOutputType | null
     _max: LabelMaxAggregateOutputType | null
   }
@@ -12122,6 +13673,14 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     color?: boolean
+    description?: boolean
+    createdById?: boolean
+    usageCount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    projects?: boolean | Label$projectsArgs<ExtArgs>
+    boards?: boolean | Label$boardsArgs<ExtArgs>
     tasks?: boolean | Label$tasksArgs<ExtArgs>
     _count?: boolean | LabelCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["label"]>
@@ -12132,10 +13691,18 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     color?: boolean
+    description?: boolean
+    createdById?: boolean
+    usageCount?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type LabelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "color", ExtArgs["result"]["label"]>
+  export type LabelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "color" | "description" | "createdById" | "usageCount" | "createdAt" | "updatedAt", ExtArgs["result"]["label"]>
   export type LabelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    createdBy?: boolean | UserDefaultArgs<ExtArgs>
+    projects?: boolean | Label$projectsArgs<ExtArgs>
+    boards?: boolean | Label$boardsArgs<ExtArgs>
     tasks?: boolean | Label$tasksArgs<ExtArgs>
     _count?: boolean | LabelCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -12143,12 +13710,20 @@ export namespace Prisma {
   export type $LabelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Label"
     objects: {
+      createdBy: Prisma.$UserPayload<ExtArgs>
+      projects: Prisma.$ProjectLabelPayload<ExtArgs>[]
+      boards: Prisma.$BoardLabelPayload<ExtArgs>[]
       tasks: Prisma.$TaskLabelPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
       color: string | null
+      description: string | null
+      createdById: string
+      usageCount: number
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["label"]>
     composites: {}
   }
@@ -12489,6 +14064,9 @@ export namespace Prisma {
    */
   export interface Prisma__LabelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    projects<T extends Label$projectsArgs<ExtArgs> = {}>(args?: Subset<T, Label$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    boards<T extends Label$boardsArgs<ExtArgs> = {}>(args?: Subset<T, Label$boardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tasks<T extends Label$tasksArgs<ExtArgs> = {}>(args?: Subset<T, Label$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -12522,6 +14100,11 @@ export namespace Prisma {
     readonly id: FieldRef<"Label", 'String'>
     readonly name: FieldRef<"Label", 'String'>
     readonly color: FieldRef<"Label", 'String'>
+    readonly description: FieldRef<"Label", 'String'>
+    readonly createdById: FieldRef<"Label", 'String'>
+    readonly usageCount: FieldRef<"Label", 'Int'>
+    readonly createdAt: FieldRef<"Label", 'DateTime'>
+    readonly updatedAt: FieldRef<"Label", 'DateTime'>
   }
     
 
@@ -12865,6 +14448,54 @@ export namespace Prisma {
   }
 
   /**
+   * Label.projects
+   */
+  export type Label$projectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectLabel
+     */
+    select?: ProjectLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectLabel
+     */
+    omit?: ProjectLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectLabelInclude<ExtArgs> | null
+    where?: ProjectLabelWhereInput
+    orderBy?: ProjectLabelOrderByWithRelationInput | ProjectLabelOrderByWithRelationInput[]
+    cursor?: ProjectLabelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ProjectLabelScalarFieldEnum | ProjectLabelScalarFieldEnum[]
+  }
+
+  /**
+   * Label.boards
+   */
+  export type Label$boardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoardLabel
+     */
+    select?: BoardLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoardLabel
+     */
+    omit?: BoardLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoardLabelInclude<ExtArgs> | null
+    where?: BoardLabelWhereInput
+    orderBy?: BoardLabelOrderByWithRelationInput | BoardLabelOrderByWithRelationInput[]
+    cursor?: BoardLabelWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: BoardLabelScalarFieldEnum | BoardLabelScalarFieldEnum[]
+  }
+
+  /**
    * Label.tasks
    */
   export type Label$tasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12908,6 +14539,1894 @@ export namespace Prisma {
 
 
   /**
+   * Model ProjectLabel
+   */
+
+  export type AggregateProjectLabel = {
+    _count: ProjectLabelCountAggregateOutputType | null
+    _min: ProjectLabelMinAggregateOutputType | null
+    _max: ProjectLabelMaxAggregateOutputType | null
+  }
+
+  export type ProjectLabelMinAggregateOutputType = {
+    id: string | null
+    projectId: string | null
+    labelId: string | null
+    addedById: string | null
+    isFavorite: boolean | null
+    createdAt: Date | null
+  }
+
+  export type ProjectLabelMaxAggregateOutputType = {
+    id: string | null
+    projectId: string | null
+    labelId: string | null
+    addedById: string | null
+    isFavorite: boolean | null
+    createdAt: Date | null
+  }
+
+  export type ProjectLabelCountAggregateOutputType = {
+    id: number
+    projectId: number
+    labelId: number
+    addedById: number
+    isFavorite: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type ProjectLabelMinAggregateInputType = {
+    id?: true
+    projectId?: true
+    labelId?: true
+    addedById?: true
+    isFavorite?: true
+    createdAt?: true
+  }
+
+  export type ProjectLabelMaxAggregateInputType = {
+    id?: true
+    projectId?: true
+    labelId?: true
+    addedById?: true
+    isFavorite?: true
+    createdAt?: true
+  }
+
+  export type ProjectLabelCountAggregateInputType = {
+    id?: true
+    projectId?: true
+    labelId?: true
+    addedById?: true
+    isFavorite?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type ProjectLabelAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProjectLabel to aggregate.
+     */
+    where?: ProjectLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProjectLabels to fetch.
+     */
+    orderBy?: ProjectLabelOrderByWithRelationInput | ProjectLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ProjectLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProjectLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProjectLabels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ProjectLabels
+    **/
+    _count?: true | ProjectLabelCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ProjectLabelMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ProjectLabelMaxAggregateInputType
+  }
+
+  export type GetProjectLabelAggregateType<T extends ProjectLabelAggregateArgs> = {
+        [P in keyof T & keyof AggregateProjectLabel]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProjectLabel[P]>
+      : GetScalarType<T[P], AggregateProjectLabel[P]>
+  }
+
+
+
+
+  export type ProjectLabelGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ProjectLabelWhereInput
+    orderBy?: ProjectLabelOrderByWithAggregationInput | ProjectLabelOrderByWithAggregationInput[]
+    by: ProjectLabelScalarFieldEnum[] | ProjectLabelScalarFieldEnum
+    having?: ProjectLabelScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ProjectLabelCountAggregateInputType | true
+    _min?: ProjectLabelMinAggregateInputType
+    _max?: ProjectLabelMaxAggregateInputType
+  }
+
+  export type ProjectLabelGroupByOutputType = {
+    id: string
+    projectId: string
+    labelId: string
+    addedById: string
+    isFavorite: boolean
+    createdAt: Date
+    _count: ProjectLabelCountAggregateOutputType | null
+    _min: ProjectLabelMinAggregateOutputType | null
+    _max: ProjectLabelMaxAggregateOutputType | null
+  }
+
+  type GetProjectLabelGroupByPayload<T extends ProjectLabelGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ProjectLabelGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ProjectLabelGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ProjectLabelGroupByOutputType[P]>
+            : GetScalarType<T[P], ProjectLabelGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ProjectLabelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    projectId?: boolean
+    labelId?: boolean
+    addedById?: boolean
+    isFavorite?: boolean
+    createdAt?: boolean
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+    label?: boolean | LabelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["projectLabel"]>
+
+
+
+  export type ProjectLabelSelectScalar = {
+    id?: boolean
+    projectId?: boolean
+    labelId?: boolean
+    addedById?: boolean
+    isFavorite?: boolean
+    createdAt?: boolean
+  }
+
+  export type ProjectLabelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "labelId" | "addedById" | "isFavorite" | "createdAt", ExtArgs["result"]["projectLabel"]>
+  export type ProjectLabelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    project?: boolean | ProjectDefaultArgs<ExtArgs>
+    label?: boolean | LabelDefaultArgs<ExtArgs>
+  }
+
+  export type $ProjectLabelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ProjectLabel"
+    objects: {
+      project: Prisma.$ProjectPayload<ExtArgs>
+      label: Prisma.$LabelPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      projectId: string
+      labelId: string
+      addedById: string
+      isFavorite: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["projectLabel"]>
+    composites: {}
+  }
+
+  type ProjectLabelGetPayload<S extends boolean | null | undefined | ProjectLabelDefaultArgs> = $Result.GetResult<Prisma.$ProjectLabelPayload, S>
+
+  type ProjectLabelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ProjectLabelFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ProjectLabelCountAggregateInputType | true
+    }
+
+  export interface ProjectLabelDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ProjectLabel'], meta: { name: 'ProjectLabel' } }
+    /**
+     * Find zero or one ProjectLabel that matches the filter.
+     * @param {ProjectLabelFindUniqueArgs} args - Arguments to find a ProjectLabel
+     * @example
+     * // Get one ProjectLabel
+     * const projectLabel = await prisma.projectLabel.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ProjectLabelFindUniqueArgs>(args: SelectSubset<T, ProjectLabelFindUniqueArgs<ExtArgs>>): Prisma__ProjectLabelClient<$Result.GetResult<Prisma.$ProjectLabelPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ProjectLabel that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ProjectLabelFindUniqueOrThrowArgs} args - Arguments to find a ProjectLabel
+     * @example
+     * // Get one ProjectLabel
+     * const projectLabel = await prisma.projectLabel.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ProjectLabelFindUniqueOrThrowArgs>(args: SelectSubset<T, ProjectLabelFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ProjectLabelClient<$Result.GetResult<Prisma.$ProjectLabelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProjectLabel that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectLabelFindFirstArgs} args - Arguments to find a ProjectLabel
+     * @example
+     * // Get one ProjectLabel
+     * const projectLabel = await prisma.projectLabel.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ProjectLabelFindFirstArgs>(args?: SelectSubset<T, ProjectLabelFindFirstArgs<ExtArgs>>): Prisma__ProjectLabelClient<$Result.GetResult<Prisma.$ProjectLabelPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ProjectLabel that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectLabelFindFirstOrThrowArgs} args - Arguments to find a ProjectLabel
+     * @example
+     * // Get one ProjectLabel
+     * const projectLabel = await prisma.projectLabel.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ProjectLabelFindFirstOrThrowArgs>(args?: SelectSubset<T, ProjectLabelFindFirstOrThrowArgs<ExtArgs>>): Prisma__ProjectLabelClient<$Result.GetResult<Prisma.$ProjectLabelPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ProjectLabels that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectLabelFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ProjectLabels
+     * const projectLabels = await prisma.projectLabel.findMany()
+     * 
+     * // Get first 10 ProjectLabels
+     * const projectLabels = await prisma.projectLabel.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const projectLabelWithIdOnly = await prisma.projectLabel.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ProjectLabelFindManyArgs>(args?: SelectSubset<T, ProjectLabelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ProjectLabel.
+     * @param {ProjectLabelCreateArgs} args - Arguments to create a ProjectLabel.
+     * @example
+     * // Create one ProjectLabel
+     * const ProjectLabel = await prisma.projectLabel.create({
+     *   data: {
+     *     // ... data to create a ProjectLabel
+     *   }
+     * })
+     * 
+     */
+    create<T extends ProjectLabelCreateArgs>(args: SelectSubset<T, ProjectLabelCreateArgs<ExtArgs>>): Prisma__ProjectLabelClient<$Result.GetResult<Prisma.$ProjectLabelPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ProjectLabels.
+     * @param {ProjectLabelCreateManyArgs} args - Arguments to create many ProjectLabels.
+     * @example
+     * // Create many ProjectLabels
+     * const projectLabel = await prisma.projectLabel.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ProjectLabelCreateManyArgs>(args?: SelectSubset<T, ProjectLabelCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a ProjectLabel.
+     * @param {ProjectLabelDeleteArgs} args - Arguments to delete one ProjectLabel.
+     * @example
+     * // Delete one ProjectLabel
+     * const ProjectLabel = await prisma.projectLabel.delete({
+     *   where: {
+     *     // ... filter to delete one ProjectLabel
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ProjectLabelDeleteArgs>(args: SelectSubset<T, ProjectLabelDeleteArgs<ExtArgs>>): Prisma__ProjectLabelClient<$Result.GetResult<Prisma.$ProjectLabelPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ProjectLabel.
+     * @param {ProjectLabelUpdateArgs} args - Arguments to update one ProjectLabel.
+     * @example
+     * // Update one ProjectLabel
+     * const projectLabel = await prisma.projectLabel.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ProjectLabelUpdateArgs>(args: SelectSubset<T, ProjectLabelUpdateArgs<ExtArgs>>): Prisma__ProjectLabelClient<$Result.GetResult<Prisma.$ProjectLabelPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ProjectLabels.
+     * @param {ProjectLabelDeleteManyArgs} args - Arguments to filter ProjectLabels to delete.
+     * @example
+     * // Delete a few ProjectLabels
+     * const { count } = await prisma.projectLabel.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ProjectLabelDeleteManyArgs>(args?: SelectSubset<T, ProjectLabelDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ProjectLabels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectLabelUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ProjectLabels
+     * const projectLabel = await prisma.projectLabel.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ProjectLabelUpdateManyArgs>(args: SelectSubset<T, ProjectLabelUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one ProjectLabel.
+     * @param {ProjectLabelUpsertArgs} args - Arguments to update or create a ProjectLabel.
+     * @example
+     * // Update or create a ProjectLabel
+     * const projectLabel = await prisma.projectLabel.upsert({
+     *   create: {
+     *     // ... data to create a ProjectLabel
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ProjectLabel we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ProjectLabelUpsertArgs>(args: SelectSubset<T, ProjectLabelUpsertArgs<ExtArgs>>): Prisma__ProjectLabelClient<$Result.GetResult<Prisma.$ProjectLabelPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ProjectLabels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectLabelCountArgs} args - Arguments to filter ProjectLabels to count.
+     * @example
+     * // Count the number of ProjectLabels
+     * const count = await prisma.projectLabel.count({
+     *   where: {
+     *     // ... the filter for the ProjectLabels we want to count
+     *   }
+     * })
+    **/
+    count<T extends ProjectLabelCountArgs>(
+      args?: Subset<T, ProjectLabelCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ProjectLabelCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ProjectLabel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectLabelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ProjectLabelAggregateArgs>(args: Subset<T, ProjectLabelAggregateArgs>): Prisma.PrismaPromise<GetProjectLabelAggregateType<T>>
+
+    /**
+     * Group by ProjectLabel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ProjectLabelGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ProjectLabelGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ProjectLabelGroupByArgs['orderBy'] }
+        : { orderBy?: ProjectLabelGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ProjectLabelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProjectLabelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ProjectLabel model
+   */
+  readonly fields: ProjectLabelFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ProjectLabel.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ProjectLabelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    label<T extends LabelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LabelDefaultArgs<ExtArgs>>): Prisma__LabelClient<$Result.GetResult<Prisma.$LabelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ProjectLabel model
+   */
+  interface ProjectLabelFieldRefs {
+    readonly id: FieldRef<"ProjectLabel", 'String'>
+    readonly projectId: FieldRef<"ProjectLabel", 'String'>
+    readonly labelId: FieldRef<"ProjectLabel", 'String'>
+    readonly addedById: FieldRef<"ProjectLabel", 'String'>
+    readonly isFavorite: FieldRef<"ProjectLabel", 'Boolean'>
+    readonly createdAt: FieldRef<"ProjectLabel", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ProjectLabel findUnique
+   */
+  export type ProjectLabelFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectLabel
+     */
+    select?: ProjectLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectLabel
+     */
+    omit?: ProjectLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectLabel to fetch.
+     */
+    where: ProjectLabelWhereUniqueInput
+  }
+
+  /**
+   * ProjectLabel findUniqueOrThrow
+   */
+  export type ProjectLabelFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectLabel
+     */
+    select?: ProjectLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectLabel
+     */
+    omit?: ProjectLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectLabel to fetch.
+     */
+    where: ProjectLabelWhereUniqueInput
+  }
+
+  /**
+   * ProjectLabel findFirst
+   */
+  export type ProjectLabelFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectLabel
+     */
+    select?: ProjectLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectLabel
+     */
+    omit?: ProjectLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectLabel to fetch.
+     */
+    where?: ProjectLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProjectLabels to fetch.
+     */
+    orderBy?: ProjectLabelOrderByWithRelationInput | ProjectLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProjectLabels.
+     */
+    cursor?: ProjectLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProjectLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProjectLabels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProjectLabels.
+     */
+    distinct?: ProjectLabelScalarFieldEnum | ProjectLabelScalarFieldEnum[]
+  }
+
+  /**
+   * ProjectLabel findFirstOrThrow
+   */
+  export type ProjectLabelFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectLabel
+     */
+    select?: ProjectLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectLabel
+     */
+    omit?: ProjectLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectLabel to fetch.
+     */
+    where?: ProjectLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProjectLabels to fetch.
+     */
+    orderBy?: ProjectLabelOrderByWithRelationInput | ProjectLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ProjectLabels.
+     */
+    cursor?: ProjectLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProjectLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProjectLabels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ProjectLabels.
+     */
+    distinct?: ProjectLabelScalarFieldEnum | ProjectLabelScalarFieldEnum[]
+  }
+
+  /**
+   * ProjectLabel findMany
+   */
+  export type ProjectLabelFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectLabel
+     */
+    select?: ProjectLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectLabel
+     */
+    omit?: ProjectLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which ProjectLabels to fetch.
+     */
+    where?: ProjectLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ProjectLabels to fetch.
+     */
+    orderBy?: ProjectLabelOrderByWithRelationInput | ProjectLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ProjectLabels.
+     */
+    cursor?: ProjectLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ProjectLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ProjectLabels.
+     */
+    skip?: number
+    distinct?: ProjectLabelScalarFieldEnum | ProjectLabelScalarFieldEnum[]
+  }
+
+  /**
+   * ProjectLabel create
+   */
+  export type ProjectLabelCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectLabel
+     */
+    select?: ProjectLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectLabel
+     */
+    omit?: ProjectLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectLabelInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ProjectLabel.
+     */
+    data: XOR<ProjectLabelCreateInput, ProjectLabelUncheckedCreateInput>
+  }
+
+  /**
+   * ProjectLabel createMany
+   */
+  export type ProjectLabelCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ProjectLabels.
+     */
+    data: ProjectLabelCreateManyInput | ProjectLabelCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ProjectLabel update
+   */
+  export type ProjectLabelUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectLabel
+     */
+    select?: ProjectLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectLabel
+     */
+    omit?: ProjectLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectLabelInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ProjectLabel.
+     */
+    data: XOR<ProjectLabelUpdateInput, ProjectLabelUncheckedUpdateInput>
+    /**
+     * Choose, which ProjectLabel to update.
+     */
+    where: ProjectLabelWhereUniqueInput
+  }
+
+  /**
+   * ProjectLabel updateMany
+   */
+  export type ProjectLabelUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ProjectLabels.
+     */
+    data: XOR<ProjectLabelUpdateManyMutationInput, ProjectLabelUncheckedUpdateManyInput>
+    /**
+     * Filter which ProjectLabels to update
+     */
+    where?: ProjectLabelWhereInput
+    /**
+     * Limit how many ProjectLabels to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProjectLabel upsert
+   */
+  export type ProjectLabelUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectLabel
+     */
+    select?: ProjectLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectLabel
+     */
+    omit?: ProjectLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectLabelInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ProjectLabel to update in case it exists.
+     */
+    where: ProjectLabelWhereUniqueInput
+    /**
+     * In case the ProjectLabel found by the `where` argument doesn't exist, create a new ProjectLabel with this data.
+     */
+    create: XOR<ProjectLabelCreateInput, ProjectLabelUncheckedCreateInput>
+    /**
+     * In case the ProjectLabel was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ProjectLabelUpdateInput, ProjectLabelUncheckedUpdateInput>
+  }
+
+  /**
+   * ProjectLabel delete
+   */
+  export type ProjectLabelDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectLabel
+     */
+    select?: ProjectLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectLabel
+     */
+    omit?: ProjectLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectLabelInclude<ExtArgs> | null
+    /**
+     * Filter which ProjectLabel to delete.
+     */
+    where: ProjectLabelWhereUniqueInput
+  }
+
+  /**
+   * ProjectLabel deleteMany
+   */
+  export type ProjectLabelDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ProjectLabels to delete
+     */
+    where?: ProjectLabelWhereInput
+    /**
+     * Limit how many ProjectLabels to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ProjectLabel without action
+   */
+  export type ProjectLabelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ProjectLabel
+     */
+    select?: ProjectLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ProjectLabel
+     */
+    omit?: ProjectLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectLabelInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model BoardLabel
+   */
+
+  export type AggregateBoardLabel = {
+    _count: BoardLabelCountAggregateOutputType | null
+    _min: BoardLabelMinAggregateOutputType | null
+    _max: BoardLabelMaxAggregateOutputType | null
+  }
+
+  export type BoardLabelMinAggregateOutputType = {
+    id: string | null
+    boardId: string | null
+    labelId: string | null
+    addedById: string | null
+    isFavorite: boolean | null
+    createdAt: Date | null
+  }
+
+  export type BoardLabelMaxAggregateOutputType = {
+    id: string | null
+    boardId: string | null
+    labelId: string | null
+    addedById: string | null
+    isFavorite: boolean | null
+    createdAt: Date | null
+  }
+
+  export type BoardLabelCountAggregateOutputType = {
+    id: number
+    boardId: number
+    labelId: number
+    addedById: number
+    isFavorite: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type BoardLabelMinAggregateInputType = {
+    id?: true
+    boardId?: true
+    labelId?: true
+    addedById?: true
+    isFavorite?: true
+    createdAt?: true
+  }
+
+  export type BoardLabelMaxAggregateInputType = {
+    id?: true
+    boardId?: true
+    labelId?: true
+    addedById?: true
+    isFavorite?: true
+    createdAt?: true
+  }
+
+  export type BoardLabelCountAggregateInputType = {
+    id?: true
+    boardId?: true
+    labelId?: true
+    addedById?: true
+    isFavorite?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type BoardLabelAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BoardLabel to aggregate.
+     */
+    where?: BoardLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BoardLabels to fetch.
+     */
+    orderBy?: BoardLabelOrderByWithRelationInput | BoardLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: BoardLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BoardLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BoardLabels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned BoardLabels
+    **/
+    _count?: true | BoardLabelCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: BoardLabelMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: BoardLabelMaxAggregateInputType
+  }
+
+  export type GetBoardLabelAggregateType<T extends BoardLabelAggregateArgs> = {
+        [P in keyof T & keyof AggregateBoardLabel]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateBoardLabel[P]>
+      : GetScalarType<T[P], AggregateBoardLabel[P]>
+  }
+
+
+
+
+  export type BoardLabelGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BoardLabelWhereInput
+    orderBy?: BoardLabelOrderByWithAggregationInput | BoardLabelOrderByWithAggregationInput[]
+    by: BoardLabelScalarFieldEnum[] | BoardLabelScalarFieldEnum
+    having?: BoardLabelScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: BoardLabelCountAggregateInputType | true
+    _min?: BoardLabelMinAggregateInputType
+    _max?: BoardLabelMaxAggregateInputType
+  }
+
+  export type BoardLabelGroupByOutputType = {
+    id: string
+    boardId: string
+    labelId: string
+    addedById: string
+    isFavorite: boolean
+    createdAt: Date
+    _count: BoardLabelCountAggregateOutputType | null
+    _min: BoardLabelMinAggregateOutputType | null
+    _max: BoardLabelMaxAggregateOutputType | null
+  }
+
+  type GetBoardLabelGroupByPayload<T extends BoardLabelGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<BoardLabelGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof BoardLabelGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], BoardLabelGroupByOutputType[P]>
+            : GetScalarType<T[P], BoardLabelGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type BoardLabelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    boardId?: boolean
+    labelId?: boolean
+    addedById?: boolean
+    isFavorite?: boolean
+    createdAt?: boolean
+    board?: boolean | BoardDefaultArgs<ExtArgs>
+    label?: boolean | LabelDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["boardLabel"]>
+
+
+
+  export type BoardLabelSelectScalar = {
+    id?: boolean
+    boardId?: boolean
+    labelId?: boolean
+    addedById?: boolean
+    isFavorite?: boolean
+    createdAt?: boolean
+  }
+
+  export type BoardLabelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "boardId" | "labelId" | "addedById" | "isFavorite" | "createdAt", ExtArgs["result"]["boardLabel"]>
+  export type BoardLabelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    board?: boolean | BoardDefaultArgs<ExtArgs>
+    label?: boolean | LabelDefaultArgs<ExtArgs>
+  }
+
+  export type $BoardLabelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "BoardLabel"
+    objects: {
+      board: Prisma.$BoardPayload<ExtArgs>
+      label: Prisma.$LabelPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      boardId: string
+      labelId: string
+      addedById: string
+      isFavorite: boolean
+      createdAt: Date
+    }, ExtArgs["result"]["boardLabel"]>
+    composites: {}
+  }
+
+  type BoardLabelGetPayload<S extends boolean | null | undefined | BoardLabelDefaultArgs> = $Result.GetResult<Prisma.$BoardLabelPayload, S>
+
+  type BoardLabelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<BoardLabelFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: BoardLabelCountAggregateInputType | true
+    }
+
+  export interface BoardLabelDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BoardLabel'], meta: { name: 'BoardLabel' } }
+    /**
+     * Find zero or one BoardLabel that matches the filter.
+     * @param {BoardLabelFindUniqueArgs} args - Arguments to find a BoardLabel
+     * @example
+     * // Get one BoardLabel
+     * const boardLabel = await prisma.boardLabel.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends BoardLabelFindUniqueArgs>(args: SelectSubset<T, BoardLabelFindUniqueArgs<ExtArgs>>): Prisma__BoardLabelClient<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one BoardLabel that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {BoardLabelFindUniqueOrThrowArgs} args - Arguments to find a BoardLabel
+     * @example
+     * // Get one BoardLabel
+     * const boardLabel = await prisma.boardLabel.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends BoardLabelFindUniqueOrThrowArgs>(args: SelectSubset<T, BoardLabelFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BoardLabelClient<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BoardLabel that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BoardLabelFindFirstArgs} args - Arguments to find a BoardLabel
+     * @example
+     * // Get one BoardLabel
+     * const boardLabel = await prisma.boardLabel.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends BoardLabelFindFirstArgs>(args?: SelectSubset<T, BoardLabelFindFirstArgs<ExtArgs>>): Prisma__BoardLabelClient<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first BoardLabel that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BoardLabelFindFirstOrThrowArgs} args - Arguments to find a BoardLabel
+     * @example
+     * // Get one BoardLabel
+     * const boardLabel = await prisma.boardLabel.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends BoardLabelFindFirstOrThrowArgs>(args?: SelectSubset<T, BoardLabelFindFirstOrThrowArgs<ExtArgs>>): Prisma__BoardLabelClient<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more BoardLabels that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BoardLabelFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all BoardLabels
+     * const boardLabels = await prisma.boardLabel.findMany()
+     * 
+     * // Get first 10 BoardLabels
+     * const boardLabels = await prisma.boardLabel.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const boardLabelWithIdOnly = await prisma.boardLabel.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends BoardLabelFindManyArgs>(args?: SelectSubset<T, BoardLabelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a BoardLabel.
+     * @param {BoardLabelCreateArgs} args - Arguments to create a BoardLabel.
+     * @example
+     * // Create one BoardLabel
+     * const BoardLabel = await prisma.boardLabel.create({
+     *   data: {
+     *     // ... data to create a BoardLabel
+     *   }
+     * })
+     * 
+     */
+    create<T extends BoardLabelCreateArgs>(args: SelectSubset<T, BoardLabelCreateArgs<ExtArgs>>): Prisma__BoardLabelClient<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many BoardLabels.
+     * @param {BoardLabelCreateManyArgs} args - Arguments to create many BoardLabels.
+     * @example
+     * // Create many BoardLabels
+     * const boardLabel = await prisma.boardLabel.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends BoardLabelCreateManyArgs>(args?: SelectSubset<T, BoardLabelCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a BoardLabel.
+     * @param {BoardLabelDeleteArgs} args - Arguments to delete one BoardLabel.
+     * @example
+     * // Delete one BoardLabel
+     * const BoardLabel = await prisma.boardLabel.delete({
+     *   where: {
+     *     // ... filter to delete one BoardLabel
+     *   }
+     * })
+     * 
+     */
+    delete<T extends BoardLabelDeleteArgs>(args: SelectSubset<T, BoardLabelDeleteArgs<ExtArgs>>): Prisma__BoardLabelClient<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one BoardLabel.
+     * @param {BoardLabelUpdateArgs} args - Arguments to update one BoardLabel.
+     * @example
+     * // Update one BoardLabel
+     * const boardLabel = await prisma.boardLabel.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends BoardLabelUpdateArgs>(args: SelectSubset<T, BoardLabelUpdateArgs<ExtArgs>>): Prisma__BoardLabelClient<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more BoardLabels.
+     * @param {BoardLabelDeleteManyArgs} args - Arguments to filter BoardLabels to delete.
+     * @example
+     * // Delete a few BoardLabels
+     * const { count } = await prisma.boardLabel.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends BoardLabelDeleteManyArgs>(args?: SelectSubset<T, BoardLabelDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more BoardLabels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BoardLabelUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many BoardLabels
+     * const boardLabel = await prisma.boardLabel.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends BoardLabelUpdateManyArgs>(args: SelectSubset<T, BoardLabelUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one BoardLabel.
+     * @param {BoardLabelUpsertArgs} args - Arguments to update or create a BoardLabel.
+     * @example
+     * // Update or create a BoardLabel
+     * const boardLabel = await prisma.boardLabel.upsert({
+     *   create: {
+     *     // ... data to create a BoardLabel
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the BoardLabel we want to update
+     *   }
+     * })
+     */
+    upsert<T extends BoardLabelUpsertArgs>(args: SelectSubset<T, BoardLabelUpsertArgs<ExtArgs>>): Prisma__BoardLabelClient<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of BoardLabels.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BoardLabelCountArgs} args - Arguments to filter BoardLabels to count.
+     * @example
+     * // Count the number of BoardLabels
+     * const count = await prisma.boardLabel.count({
+     *   where: {
+     *     // ... the filter for the BoardLabels we want to count
+     *   }
+     * })
+    **/
+    count<T extends BoardLabelCountArgs>(
+      args?: Subset<T, BoardLabelCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], BoardLabelCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a BoardLabel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BoardLabelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends BoardLabelAggregateArgs>(args: Subset<T, BoardLabelAggregateArgs>): Prisma.PrismaPromise<GetBoardLabelAggregateType<T>>
+
+    /**
+     * Group by BoardLabel.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {BoardLabelGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends BoardLabelGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: BoardLabelGroupByArgs['orderBy'] }
+        : { orderBy?: BoardLabelGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, BoardLabelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBoardLabelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the BoardLabel model
+   */
+  readonly fields: BoardLabelFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for BoardLabel.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__BoardLabelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    board<T extends BoardDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BoardDefaultArgs<ExtArgs>>): Prisma__BoardClient<$Result.GetResult<Prisma.$BoardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    label<T extends LabelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LabelDefaultArgs<ExtArgs>>): Prisma__LabelClient<$Result.GetResult<Prisma.$LabelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the BoardLabel model
+   */
+  interface BoardLabelFieldRefs {
+    readonly id: FieldRef<"BoardLabel", 'String'>
+    readonly boardId: FieldRef<"BoardLabel", 'String'>
+    readonly labelId: FieldRef<"BoardLabel", 'String'>
+    readonly addedById: FieldRef<"BoardLabel", 'String'>
+    readonly isFavorite: FieldRef<"BoardLabel", 'Boolean'>
+    readonly createdAt: FieldRef<"BoardLabel", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * BoardLabel findUnique
+   */
+  export type BoardLabelFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoardLabel
+     */
+    select?: BoardLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoardLabel
+     */
+    omit?: BoardLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoardLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which BoardLabel to fetch.
+     */
+    where: BoardLabelWhereUniqueInput
+  }
+
+  /**
+   * BoardLabel findUniqueOrThrow
+   */
+  export type BoardLabelFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoardLabel
+     */
+    select?: BoardLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoardLabel
+     */
+    omit?: BoardLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoardLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which BoardLabel to fetch.
+     */
+    where: BoardLabelWhereUniqueInput
+  }
+
+  /**
+   * BoardLabel findFirst
+   */
+  export type BoardLabelFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoardLabel
+     */
+    select?: BoardLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoardLabel
+     */
+    omit?: BoardLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoardLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which BoardLabel to fetch.
+     */
+    where?: BoardLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BoardLabels to fetch.
+     */
+    orderBy?: BoardLabelOrderByWithRelationInput | BoardLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BoardLabels.
+     */
+    cursor?: BoardLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BoardLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BoardLabels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BoardLabels.
+     */
+    distinct?: BoardLabelScalarFieldEnum | BoardLabelScalarFieldEnum[]
+  }
+
+  /**
+   * BoardLabel findFirstOrThrow
+   */
+  export type BoardLabelFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoardLabel
+     */
+    select?: BoardLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoardLabel
+     */
+    omit?: BoardLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoardLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which BoardLabel to fetch.
+     */
+    where?: BoardLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BoardLabels to fetch.
+     */
+    orderBy?: BoardLabelOrderByWithRelationInput | BoardLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for BoardLabels.
+     */
+    cursor?: BoardLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BoardLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BoardLabels.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of BoardLabels.
+     */
+    distinct?: BoardLabelScalarFieldEnum | BoardLabelScalarFieldEnum[]
+  }
+
+  /**
+   * BoardLabel findMany
+   */
+  export type BoardLabelFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoardLabel
+     */
+    select?: BoardLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoardLabel
+     */
+    omit?: BoardLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoardLabelInclude<ExtArgs> | null
+    /**
+     * Filter, which BoardLabels to fetch.
+     */
+    where?: BoardLabelWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of BoardLabels to fetch.
+     */
+    orderBy?: BoardLabelOrderByWithRelationInput | BoardLabelOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing BoardLabels.
+     */
+    cursor?: BoardLabelWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` BoardLabels from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` BoardLabels.
+     */
+    skip?: number
+    distinct?: BoardLabelScalarFieldEnum | BoardLabelScalarFieldEnum[]
+  }
+
+  /**
+   * BoardLabel create
+   */
+  export type BoardLabelCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoardLabel
+     */
+    select?: BoardLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoardLabel
+     */
+    omit?: BoardLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoardLabelInclude<ExtArgs> | null
+    /**
+     * The data needed to create a BoardLabel.
+     */
+    data: XOR<BoardLabelCreateInput, BoardLabelUncheckedCreateInput>
+  }
+
+  /**
+   * BoardLabel createMany
+   */
+  export type BoardLabelCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many BoardLabels.
+     */
+    data: BoardLabelCreateManyInput | BoardLabelCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * BoardLabel update
+   */
+  export type BoardLabelUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoardLabel
+     */
+    select?: BoardLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoardLabel
+     */
+    omit?: BoardLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoardLabelInclude<ExtArgs> | null
+    /**
+     * The data needed to update a BoardLabel.
+     */
+    data: XOR<BoardLabelUpdateInput, BoardLabelUncheckedUpdateInput>
+    /**
+     * Choose, which BoardLabel to update.
+     */
+    where: BoardLabelWhereUniqueInput
+  }
+
+  /**
+   * BoardLabel updateMany
+   */
+  export type BoardLabelUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update BoardLabels.
+     */
+    data: XOR<BoardLabelUpdateManyMutationInput, BoardLabelUncheckedUpdateManyInput>
+    /**
+     * Filter which BoardLabels to update
+     */
+    where?: BoardLabelWhereInput
+    /**
+     * Limit how many BoardLabels to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * BoardLabel upsert
+   */
+  export type BoardLabelUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoardLabel
+     */
+    select?: BoardLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoardLabel
+     */
+    omit?: BoardLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoardLabelInclude<ExtArgs> | null
+    /**
+     * The filter to search for the BoardLabel to update in case it exists.
+     */
+    where: BoardLabelWhereUniqueInput
+    /**
+     * In case the BoardLabel found by the `where` argument doesn't exist, create a new BoardLabel with this data.
+     */
+    create: XOR<BoardLabelCreateInput, BoardLabelUncheckedCreateInput>
+    /**
+     * In case the BoardLabel was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<BoardLabelUpdateInput, BoardLabelUncheckedUpdateInput>
+  }
+
+  /**
+   * BoardLabel delete
+   */
+  export type BoardLabelDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoardLabel
+     */
+    select?: BoardLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoardLabel
+     */
+    omit?: BoardLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoardLabelInclude<ExtArgs> | null
+    /**
+     * Filter which BoardLabel to delete.
+     */
+    where: BoardLabelWhereUniqueInput
+  }
+
+  /**
+   * BoardLabel deleteMany
+   */
+  export type BoardLabelDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which BoardLabels to delete
+     */
+    where?: BoardLabelWhereInput
+    /**
+     * Limit how many BoardLabels to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * BoardLabel without action
+   */
+  export type BoardLabelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BoardLabel
+     */
+    select?: BoardLabelSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the BoardLabel
+     */
+    omit?: BoardLabelOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BoardLabelInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model TaskLabel
    */
 
@@ -12920,16 +16439,19 @@ export namespace Prisma {
   export type TaskLabelMinAggregateOutputType = {
     task_id: string | null
     label_id: string | null
+    createdAt: Date | null
   }
 
   export type TaskLabelMaxAggregateOutputType = {
     task_id: string | null
     label_id: string | null
+    createdAt: Date | null
   }
 
   export type TaskLabelCountAggregateOutputType = {
     task_id: number
     label_id: number
+    createdAt: number
     _all: number
   }
 
@@ -12937,16 +16459,19 @@ export namespace Prisma {
   export type TaskLabelMinAggregateInputType = {
     task_id?: true
     label_id?: true
+    createdAt?: true
   }
 
   export type TaskLabelMaxAggregateInputType = {
     task_id?: true
     label_id?: true
+    createdAt?: true
   }
 
   export type TaskLabelCountAggregateInputType = {
     task_id?: true
     label_id?: true
+    createdAt?: true
     _all?: true
   }
 
@@ -13025,6 +16550,7 @@ export namespace Prisma {
   export type TaskLabelGroupByOutputType = {
     task_id: string
     label_id: string
+    createdAt: Date
     _count: TaskLabelCountAggregateOutputType | null
     _min: TaskLabelMinAggregateOutputType | null
     _max: TaskLabelMaxAggregateOutputType | null
@@ -13047,6 +16573,7 @@ export namespace Prisma {
   export type TaskLabelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     task_id?: boolean
     label_id?: boolean
+    createdAt?: boolean
     task?: boolean | TaskDefaultArgs<ExtArgs>
     label?: boolean | LabelDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["taskLabel"]>
@@ -13056,9 +16583,10 @@ export namespace Prisma {
   export type TaskLabelSelectScalar = {
     task_id?: boolean
     label_id?: boolean
+    createdAt?: boolean
   }
 
-  export type TaskLabelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"task_id" | "label_id", ExtArgs["result"]["taskLabel"]>
+  export type TaskLabelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"task_id" | "label_id" | "createdAt", ExtArgs["result"]["taskLabel"]>
   export type TaskLabelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     task?: boolean | TaskDefaultArgs<ExtArgs>
     label?: boolean | LabelDefaultArgs<ExtArgs>
@@ -13073,6 +16601,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       task_id: string
       label_id: string
+      createdAt: Date
     }, ExtArgs["result"]["taskLabel"]>
     composites: {}
   }
@@ -13446,6 +16975,7 @@ export namespace Prisma {
   interface TaskLabelFieldRefs {
     readonly task_id: FieldRef<"TaskLabel", 'String'>
     readonly label_id: FieldRef<"TaskLabel", 'String'>
+    readonly createdAt: FieldRef<"TaskLabel", 'DateTime'>
   }
     
 
@@ -13808,6 +17338,5545 @@ export namespace Prisma {
 
 
   /**
+   * Model Quote
+   */
+
+  export type AggregateQuote = {
+    _count: QuoteCountAggregateOutputType | null
+    _avg: QuoteAvgAggregateOutputType | null
+    _sum: QuoteSumAggregateOutputType | null
+    _min: QuoteMinAggregateOutputType | null
+    _max: QuoteMaxAggregateOutputType | null
+  }
+
+  export type QuoteAvgAggregateOutputType = {
+    subtotal: number | null
+    taxAmount: number | null
+    totalAmount: number | null
+  }
+
+  export type QuoteSumAggregateOutputType = {
+    subtotal: number | null
+    taxAmount: number | null
+    totalAmount: number | null
+  }
+
+  export type QuoteMinAggregateOutputType = {
+    id: string | null
+    number: string | null
+    title: string | null
+    description: string | null
+    clientId: string | null
+    projectId: string | null
+    status: $Enums.QuoteStatus | null
+    subtotal: number | null
+    taxAmount: number | null
+    totalAmount: number | null
+    currency: string | null
+    validUntil: Date | null
+    sentAt: Date | null
+    acceptedAt: Date | null
+    rejectedAt: Date | null
+    notes: string | null
+    terms: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type QuoteMaxAggregateOutputType = {
+    id: string | null
+    number: string | null
+    title: string | null
+    description: string | null
+    clientId: string | null
+    projectId: string | null
+    status: $Enums.QuoteStatus | null
+    subtotal: number | null
+    taxAmount: number | null
+    totalAmount: number | null
+    currency: string | null
+    validUntil: Date | null
+    sentAt: Date | null
+    acceptedAt: Date | null
+    rejectedAt: Date | null
+    notes: string | null
+    terms: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type QuoteCountAggregateOutputType = {
+    id: number
+    number: number
+    title: number
+    description: number
+    clientId: number
+    projectId: number
+    status: number
+    subtotal: number
+    taxAmount: number
+    totalAmount: number
+    currency: number
+    validUntil: number
+    sentAt: number
+    acceptedAt: number
+    rejectedAt: number
+    notes: number
+    terms: number
+    createdById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type QuoteAvgAggregateInputType = {
+    subtotal?: true
+    taxAmount?: true
+    totalAmount?: true
+  }
+
+  export type QuoteSumAggregateInputType = {
+    subtotal?: true
+    taxAmount?: true
+    totalAmount?: true
+  }
+
+  export type QuoteMinAggregateInputType = {
+    id?: true
+    number?: true
+    title?: true
+    description?: true
+    clientId?: true
+    projectId?: true
+    status?: true
+    subtotal?: true
+    taxAmount?: true
+    totalAmount?: true
+    currency?: true
+    validUntil?: true
+    sentAt?: true
+    acceptedAt?: true
+    rejectedAt?: true
+    notes?: true
+    terms?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type QuoteMaxAggregateInputType = {
+    id?: true
+    number?: true
+    title?: true
+    description?: true
+    clientId?: true
+    projectId?: true
+    status?: true
+    subtotal?: true
+    taxAmount?: true
+    totalAmount?: true
+    currency?: true
+    validUntil?: true
+    sentAt?: true
+    acceptedAt?: true
+    rejectedAt?: true
+    notes?: true
+    terms?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type QuoteCountAggregateInputType = {
+    id?: true
+    number?: true
+    title?: true
+    description?: true
+    clientId?: true
+    projectId?: true
+    status?: true
+    subtotal?: true
+    taxAmount?: true
+    totalAmount?: true
+    currency?: true
+    validUntil?: true
+    sentAt?: true
+    acceptedAt?: true
+    rejectedAt?: true
+    notes?: true
+    terms?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type QuoteAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Quote to aggregate.
+     */
+    where?: QuoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Quotes to fetch.
+     */
+    orderBy?: QuoteOrderByWithRelationInput | QuoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: QuoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Quotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Quotes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Quotes
+    **/
+    _count?: true | QuoteCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: QuoteAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: QuoteSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: QuoteMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: QuoteMaxAggregateInputType
+  }
+
+  export type GetQuoteAggregateType<T extends QuoteAggregateArgs> = {
+        [P in keyof T & keyof AggregateQuote]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateQuote[P]>
+      : GetScalarType<T[P], AggregateQuote[P]>
+  }
+
+
+
+
+  export type QuoteGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuoteWhereInput
+    orderBy?: QuoteOrderByWithAggregationInput | QuoteOrderByWithAggregationInput[]
+    by: QuoteScalarFieldEnum[] | QuoteScalarFieldEnum
+    having?: QuoteScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: QuoteCountAggregateInputType | true
+    _avg?: QuoteAvgAggregateInputType
+    _sum?: QuoteSumAggregateInputType
+    _min?: QuoteMinAggregateInputType
+    _max?: QuoteMaxAggregateInputType
+  }
+
+  export type QuoteGroupByOutputType = {
+    id: string
+    number: string
+    title: string
+    description: string | null
+    clientId: string
+    projectId: string | null
+    status: $Enums.QuoteStatus
+    subtotal: number
+    taxAmount: number
+    totalAmount: number
+    currency: string
+    validUntil: Date | null
+    sentAt: Date | null
+    acceptedAt: Date | null
+    rejectedAt: Date | null
+    notes: string | null
+    terms: string | null
+    createdById: string
+    createdAt: Date
+    updatedAt: Date
+    _count: QuoteCountAggregateOutputType | null
+    _avg: QuoteAvgAggregateOutputType | null
+    _sum: QuoteSumAggregateOutputType | null
+    _min: QuoteMinAggregateOutputType | null
+    _max: QuoteMaxAggregateOutputType | null
+  }
+
+  type GetQuoteGroupByPayload<T extends QuoteGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<QuoteGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof QuoteGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], QuoteGroupByOutputType[P]>
+            : GetScalarType<T[P], QuoteGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type QuoteSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    number?: boolean
+    title?: boolean
+    description?: boolean
+    clientId?: boolean
+    projectId?: boolean
+    status?: boolean
+    subtotal?: boolean
+    taxAmount?: boolean
+    totalAmount?: boolean
+    currency?: boolean
+    validUntil?: boolean
+    sentAt?: boolean
+    acceptedAt?: boolean
+    rejectedAt?: boolean
+    notes?: boolean
+    terms?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+    project?: boolean | Quote$projectArgs<ExtArgs>
+    items?: boolean | Quote$itemsArgs<ExtArgs>
+    invoices?: boolean | Quote$invoicesArgs<ExtArgs>
+    _count?: boolean | QuoteCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["quote"]>
+
+
+
+  export type QuoteSelectScalar = {
+    id?: boolean
+    number?: boolean
+    title?: boolean
+    description?: boolean
+    clientId?: boolean
+    projectId?: boolean
+    status?: boolean
+    subtotal?: boolean
+    taxAmount?: boolean
+    totalAmount?: boolean
+    currency?: boolean
+    validUntil?: boolean
+    sentAt?: boolean
+    acceptedAt?: boolean
+    rejectedAt?: boolean
+    notes?: boolean
+    terms?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type QuoteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "number" | "title" | "description" | "clientId" | "projectId" | "status" | "subtotal" | "taxAmount" | "totalAmount" | "currency" | "validUntil" | "sentAt" | "acceptedAt" | "rejectedAt" | "notes" | "terms" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["quote"]>
+  export type QuoteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+    project?: boolean | Quote$projectArgs<ExtArgs>
+    items?: boolean | Quote$itemsArgs<ExtArgs>
+    invoices?: boolean | Quote$invoicesArgs<ExtArgs>
+    _count?: boolean | QuoteCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $QuotePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Quote"
+    objects: {
+      client: Prisma.$ClientPayload<ExtArgs>
+      project: Prisma.$ProjectPayload<ExtArgs> | null
+      items: Prisma.$QuoteItemPayload<ExtArgs>[]
+      invoices: Prisma.$InvoicePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      number: string
+      title: string
+      description: string | null
+      clientId: string
+      projectId: string | null
+      status: $Enums.QuoteStatus
+      subtotal: number
+      taxAmount: number
+      totalAmount: number
+      currency: string
+      validUntil: Date | null
+      sentAt: Date | null
+      acceptedAt: Date | null
+      rejectedAt: Date | null
+      notes: string | null
+      terms: string | null
+      createdById: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["quote"]>
+    composites: {}
+  }
+
+  type QuoteGetPayload<S extends boolean | null | undefined | QuoteDefaultArgs> = $Result.GetResult<Prisma.$QuotePayload, S>
+
+  type QuoteCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<QuoteFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: QuoteCountAggregateInputType | true
+    }
+
+  export interface QuoteDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Quote'], meta: { name: 'Quote' } }
+    /**
+     * Find zero or one Quote that matches the filter.
+     * @param {QuoteFindUniqueArgs} args - Arguments to find a Quote
+     * @example
+     * // Get one Quote
+     * const quote = await prisma.quote.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends QuoteFindUniqueArgs>(args: SelectSubset<T, QuoteFindUniqueArgs<ExtArgs>>): Prisma__QuoteClient<$Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Quote that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {QuoteFindUniqueOrThrowArgs} args - Arguments to find a Quote
+     * @example
+     * // Get one Quote
+     * const quote = await prisma.quote.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends QuoteFindUniqueOrThrowArgs>(args: SelectSubset<T, QuoteFindUniqueOrThrowArgs<ExtArgs>>): Prisma__QuoteClient<$Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Quote that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuoteFindFirstArgs} args - Arguments to find a Quote
+     * @example
+     * // Get one Quote
+     * const quote = await prisma.quote.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends QuoteFindFirstArgs>(args?: SelectSubset<T, QuoteFindFirstArgs<ExtArgs>>): Prisma__QuoteClient<$Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Quote that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuoteFindFirstOrThrowArgs} args - Arguments to find a Quote
+     * @example
+     * // Get one Quote
+     * const quote = await prisma.quote.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends QuoteFindFirstOrThrowArgs>(args?: SelectSubset<T, QuoteFindFirstOrThrowArgs<ExtArgs>>): Prisma__QuoteClient<$Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Quotes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuoteFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Quotes
+     * const quotes = await prisma.quote.findMany()
+     * 
+     * // Get first 10 Quotes
+     * const quotes = await prisma.quote.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const quoteWithIdOnly = await prisma.quote.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends QuoteFindManyArgs>(args?: SelectSubset<T, QuoteFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Quote.
+     * @param {QuoteCreateArgs} args - Arguments to create a Quote.
+     * @example
+     * // Create one Quote
+     * const Quote = await prisma.quote.create({
+     *   data: {
+     *     // ... data to create a Quote
+     *   }
+     * })
+     * 
+     */
+    create<T extends QuoteCreateArgs>(args: SelectSubset<T, QuoteCreateArgs<ExtArgs>>): Prisma__QuoteClient<$Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Quotes.
+     * @param {QuoteCreateManyArgs} args - Arguments to create many Quotes.
+     * @example
+     * // Create many Quotes
+     * const quote = await prisma.quote.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends QuoteCreateManyArgs>(args?: SelectSubset<T, QuoteCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Quote.
+     * @param {QuoteDeleteArgs} args - Arguments to delete one Quote.
+     * @example
+     * // Delete one Quote
+     * const Quote = await prisma.quote.delete({
+     *   where: {
+     *     // ... filter to delete one Quote
+     *   }
+     * })
+     * 
+     */
+    delete<T extends QuoteDeleteArgs>(args: SelectSubset<T, QuoteDeleteArgs<ExtArgs>>): Prisma__QuoteClient<$Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Quote.
+     * @param {QuoteUpdateArgs} args - Arguments to update one Quote.
+     * @example
+     * // Update one Quote
+     * const quote = await prisma.quote.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends QuoteUpdateArgs>(args: SelectSubset<T, QuoteUpdateArgs<ExtArgs>>): Prisma__QuoteClient<$Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Quotes.
+     * @param {QuoteDeleteManyArgs} args - Arguments to filter Quotes to delete.
+     * @example
+     * // Delete a few Quotes
+     * const { count } = await prisma.quote.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends QuoteDeleteManyArgs>(args?: SelectSubset<T, QuoteDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Quotes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuoteUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Quotes
+     * const quote = await prisma.quote.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends QuoteUpdateManyArgs>(args: SelectSubset<T, QuoteUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Quote.
+     * @param {QuoteUpsertArgs} args - Arguments to update or create a Quote.
+     * @example
+     * // Update or create a Quote
+     * const quote = await prisma.quote.upsert({
+     *   create: {
+     *     // ... data to create a Quote
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Quote we want to update
+     *   }
+     * })
+     */
+    upsert<T extends QuoteUpsertArgs>(args: SelectSubset<T, QuoteUpsertArgs<ExtArgs>>): Prisma__QuoteClient<$Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Quotes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuoteCountArgs} args - Arguments to filter Quotes to count.
+     * @example
+     * // Count the number of Quotes
+     * const count = await prisma.quote.count({
+     *   where: {
+     *     // ... the filter for the Quotes we want to count
+     *   }
+     * })
+    **/
+    count<T extends QuoteCountArgs>(
+      args?: Subset<T, QuoteCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], QuoteCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Quote.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuoteAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends QuoteAggregateArgs>(args: Subset<T, QuoteAggregateArgs>): Prisma.PrismaPromise<GetQuoteAggregateType<T>>
+
+    /**
+     * Group by Quote.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuoteGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends QuoteGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: QuoteGroupByArgs['orderBy'] }
+        : { orderBy?: QuoteGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, QuoteGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetQuoteGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Quote model
+   */
+  readonly fields: QuoteFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Quote.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__QuoteClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    project<T extends Quote$projectArgs<ExtArgs> = {}>(args?: Subset<T, Quote$projectArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    items<T extends Quote$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Quote$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuoteItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    invoices<T extends Quote$invoicesArgs<ExtArgs> = {}>(args?: Subset<T, Quote$invoicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Quote model
+   */
+  interface QuoteFieldRefs {
+    readonly id: FieldRef<"Quote", 'String'>
+    readonly number: FieldRef<"Quote", 'String'>
+    readonly title: FieldRef<"Quote", 'String'>
+    readonly description: FieldRef<"Quote", 'String'>
+    readonly clientId: FieldRef<"Quote", 'String'>
+    readonly projectId: FieldRef<"Quote", 'String'>
+    readonly status: FieldRef<"Quote", 'QuoteStatus'>
+    readonly subtotal: FieldRef<"Quote", 'Float'>
+    readonly taxAmount: FieldRef<"Quote", 'Float'>
+    readonly totalAmount: FieldRef<"Quote", 'Float'>
+    readonly currency: FieldRef<"Quote", 'String'>
+    readonly validUntil: FieldRef<"Quote", 'DateTime'>
+    readonly sentAt: FieldRef<"Quote", 'DateTime'>
+    readonly acceptedAt: FieldRef<"Quote", 'DateTime'>
+    readonly rejectedAt: FieldRef<"Quote", 'DateTime'>
+    readonly notes: FieldRef<"Quote", 'String'>
+    readonly terms: FieldRef<"Quote", 'String'>
+    readonly createdById: FieldRef<"Quote", 'String'>
+    readonly createdAt: FieldRef<"Quote", 'DateTime'>
+    readonly updatedAt: FieldRef<"Quote", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Quote findUnique
+   */
+  export type QuoteFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quote
+     */
+    select?: QuoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quote
+     */
+    omit?: QuoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Quote to fetch.
+     */
+    where: QuoteWhereUniqueInput
+  }
+
+  /**
+   * Quote findUniqueOrThrow
+   */
+  export type QuoteFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quote
+     */
+    select?: QuoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quote
+     */
+    omit?: QuoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Quote to fetch.
+     */
+    where: QuoteWhereUniqueInput
+  }
+
+  /**
+   * Quote findFirst
+   */
+  export type QuoteFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quote
+     */
+    select?: QuoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quote
+     */
+    omit?: QuoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Quote to fetch.
+     */
+    where?: QuoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Quotes to fetch.
+     */
+    orderBy?: QuoteOrderByWithRelationInput | QuoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Quotes.
+     */
+    cursor?: QuoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Quotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Quotes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Quotes.
+     */
+    distinct?: QuoteScalarFieldEnum | QuoteScalarFieldEnum[]
+  }
+
+  /**
+   * Quote findFirstOrThrow
+   */
+  export type QuoteFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quote
+     */
+    select?: QuoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quote
+     */
+    omit?: QuoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Quote to fetch.
+     */
+    where?: QuoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Quotes to fetch.
+     */
+    orderBy?: QuoteOrderByWithRelationInput | QuoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Quotes.
+     */
+    cursor?: QuoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Quotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Quotes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Quotes.
+     */
+    distinct?: QuoteScalarFieldEnum | QuoteScalarFieldEnum[]
+  }
+
+  /**
+   * Quote findMany
+   */
+  export type QuoteFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quote
+     */
+    select?: QuoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quote
+     */
+    omit?: QuoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteInclude<ExtArgs> | null
+    /**
+     * Filter, which Quotes to fetch.
+     */
+    where?: QuoteWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Quotes to fetch.
+     */
+    orderBy?: QuoteOrderByWithRelationInput | QuoteOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Quotes.
+     */
+    cursor?: QuoteWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Quotes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Quotes.
+     */
+    skip?: number
+    distinct?: QuoteScalarFieldEnum | QuoteScalarFieldEnum[]
+  }
+
+  /**
+   * Quote create
+   */
+  export type QuoteCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quote
+     */
+    select?: QuoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quote
+     */
+    omit?: QuoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Quote.
+     */
+    data: XOR<QuoteCreateInput, QuoteUncheckedCreateInput>
+  }
+
+  /**
+   * Quote createMany
+   */
+  export type QuoteCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Quotes.
+     */
+    data: QuoteCreateManyInput | QuoteCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Quote update
+   */
+  export type QuoteUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quote
+     */
+    select?: QuoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quote
+     */
+    omit?: QuoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Quote.
+     */
+    data: XOR<QuoteUpdateInput, QuoteUncheckedUpdateInput>
+    /**
+     * Choose, which Quote to update.
+     */
+    where: QuoteWhereUniqueInput
+  }
+
+  /**
+   * Quote updateMany
+   */
+  export type QuoteUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Quotes.
+     */
+    data: XOR<QuoteUpdateManyMutationInput, QuoteUncheckedUpdateManyInput>
+    /**
+     * Filter which Quotes to update
+     */
+    where?: QuoteWhereInput
+    /**
+     * Limit how many Quotes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Quote upsert
+   */
+  export type QuoteUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quote
+     */
+    select?: QuoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quote
+     */
+    omit?: QuoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Quote to update in case it exists.
+     */
+    where: QuoteWhereUniqueInput
+    /**
+     * In case the Quote found by the `where` argument doesn't exist, create a new Quote with this data.
+     */
+    create: XOR<QuoteCreateInput, QuoteUncheckedCreateInput>
+    /**
+     * In case the Quote was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<QuoteUpdateInput, QuoteUncheckedUpdateInput>
+  }
+
+  /**
+   * Quote delete
+   */
+  export type QuoteDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quote
+     */
+    select?: QuoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quote
+     */
+    omit?: QuoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteInclude<ExtArgs> | null
+    /**
+     * Filter which Quote to delete.
+     */
+    where: QuoteWhereUniqueInput
+  }
+
+  /**
+   * Quote deleteMany
+   */
+  export type QuoteDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Quotes to delete
+     */
+    where?: QuoteWhereInput
+    /**
+     * Limit how many Quotes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Quote.project
+   */
+  export type Quote$projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Project
+     */
+    select?: ProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Project
+     */
+    omit?: ProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    where?: ProjectWhereInput
+  }
+
+  /**
+   * Quote.items
+   */
+  export type Quote$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuoteItem
+     */
+    select?: QuoteItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuoteItem
+     */
+    omit?: QuoteItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteItemInclude<ExtArgs> | null
+    where?: QuoteItemWhereInput
+    orderBy?: QuoteItemOrderByWithRelationInput | QuoteItemOrderByWithRelationInput[]
+    cursor?: QuoteItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: QuoteItemScalarFieldEnum | QuoteItemScalarFieldEnum[]
+  }
+
+  /**
+   * Quote.invoices
+   */
+  export type Quote$invoicesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    where?: InvoiceWhereInput
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    cursor?: InvoiceWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvoiceScalarFieldEnum | InvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * Quote without action
+   */
+  export type QuoteDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quote
+     */
+    select?: QuoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quote
+     */
+    omit?: QuoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model QuoteItem
+   */
+
+  export type AggregateQuoteItem = {
+    _count: QuoteItemCountAggregateOutputType | null
+    _avg: QuoteItemAvgAggregateOutputType | null
+    _sum: QuoteItemSumAggregateOutputType | null
+    _min: QuoteItemMinAggregateOutputType | null
+    _max: QuoteItemMaxAggregateOutputType | null
+  }
+
+  export type QuoteItemAvgAggregateOutputType = {
+    quantity: number | null
+    unitPrice: number | null
+    totalPrice: number | null
+    order: number | null
+  }
+
+  export type QuoteItemSumAggregateOutputType = {
+    quantity: number | null
+    unitPrice: number | null
+    totalPrice: number | null
+    order: number | null
+  }
+
+  export type QuoteItemMinAggregateOutputType = {
+    id: string | null
+    quoteId: string | null
+    description: string | null
+    quantity: number | null
+    unitPrice: number | null
+    totalPrice: number | null
+    order: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type QuoteItemMaxAggregateOutputType = {
+    id: string | null
+    quoteId: string | null
+    description: string | null
+    quantity: number | null
+    unitPrice: number | null
+    totalPrice: number | null
+    order: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type QuoteItemCountAggregateOutputType = {
+    id: number
+    quoteId: number
+    description: number
+    quantity: number
+    unitPrice: number
+    totalPrice: number
+    order: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type QuoteItemAvgAggregateInputType = {
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
+    order?: true
+  }
+
+  export type QuoteItemSumAggregateInputType = {
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
+    order?: true
+  }
+
+  export type QuoteItemMinAggregateInputType = {
+    id?: true
+    quoteId?: true
+    description?: true
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
+    order?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type QuoteItemMaxAggregateInputType = {
+    id?: true
+    quoteId?: true
+    description?: true
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
+    order?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type QuoteItemCountAggregateInputType = {
+    id?: true
+    quoteId?: true
+    description?: true
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
+    order?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type QuoteItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which QuoteItem to aggregate.
+     */
+    where?: QuoteItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuoteItems to fetch.
+     */
+    orderBy?: QuoteItemOrderByWithRelationInput | QuoteItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: QuoteItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuoteItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuoteItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned QuoteItems
+    **/
+    _count?: true | QuoteItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: QuoteItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: QuoteItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: QuoteItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: QuoteItemMaxAggregateInputType
+  }
+
+  export type GetQuoteItemAggregateType<T extends QuoteItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateQuoteItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateQuoteItem[P]>
+      : GetScalarType<T[P], AggregateQuoteItem[P]>
+  }
+
+
+
+
+  export type QuoteItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: QuoteItemWhereInput
+    orderBy?: QuoteItemOrderByWithAggregationInput | QuoteItemOrderByWithAggregationInput[]
+    by: QuoteItemScalarFieldEnum[] | QuoteItemScalarFieldEnum
+    having?: QuoteItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: QuoteItemCountAggregateInputType | true
+    _avg?: QuoteItemAvgAggregateInputType
+    _sum?: QuoteItemSumAggregateInputType
+    _min?: QuoteItemMinAggregateInputType
+    _max?: QuoteItemMaxAggregateInputType
+  }
+
+  export type QuoteItemGroupByOutputType = {
+    id: string
+    quoteId: string
+    description: string
+    quantity: number
+    unitPrice: number
+    totalPrice: number
+    order: number
+    createdAt: Date
+    updatedAt: Date
+    _count: QuoteItemCountAggregateOutputType | null
+    _avg: QuoteItemAvgAggregateOutputType | null
+    _sum: QuoteItemSumAggregateOutputType | null
+    _min: QuoteItemMinAggregateOutputType | null
+    _max: QuoteItemMaxAggregateOutputType | null
+  }
+
+  type GetQuoteItemGroupByPayload<T extends QuoteItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<QuoteItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof QuoteItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], QuoteItemGroupByOutputType[P]>
+            : GetScalarType<T[P], QuoteItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type QuoteItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    quoteId?: boolean
+    description?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    totalPrice?: boolean
+    order?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    quote?: boolean | QuoteDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["quoteItem"]>
+
+
+
+  export type QuoteItemSelectScalar = {
+    id?: boolean
+    quoteId?: boolean
+    description?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    totalPrice?: boolean
+    order?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type QuoteItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "quoteId" | "description" | "quantity" | "unitPrice" | "totalPrice" | "order" | "createdAt" | "updatedAt", ExtArgs["result"]["quoteItem"]>
+  export type QuoteItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quote?: boolean | QuoteDefaultArgs<ExtArgs>
+  }
+
+  export type $QuoteItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "QuoteItem"
+    objects: {
+      quote: Prisma.$QuotePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      quoteId: string
+      description: string
+      quantity: number
+      unitPrice: number
+      totalPrice: number
+      order: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["quoteItem"]>
+    composites: {}
+  }
+
+  type QuoteItemGetPayload<S extends boolean | null | undefined | QuoteItemDefaultArgs> = $Result.GetResult<Prisma.$QuoteItemPayload, S>
+
+  type QuoteItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<QuoteItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: QuoteItemCountAggregateInputType | true
+    }
+
+  export interface QuoteItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['QuoteItem'], meta: { name: 'QuoteItem' } }
+    /**
+     * Find zero or one QuoteItem that matches the filter.
+     * @param {QuoteItemFindUniqueArgs} args - Arguments to find a QuoteItem
+     * @example
+     * // Get one QuoteItem
+     * const quoteItem = await prisma.quoteItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends QuoteItemFindUniqueArgs>(args: SelectSubset<T, QuoteItemFindUniqueArgs<ExtArgs>>): Prisma__QuoteItemClient<$Result.GetResult<Prisma.$QuoteItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one QuoteItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {QuoteItemFindUniqueOrThrowArgs} args - Arguments to find a QuoteItem
+     * @example
+     * // Get one QuoteItem
+     * const quoteItem = await prisma.quoteItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends QuoteItemFindUniqueOrThrowArgs>(args: SelectSubset<T, QuoteItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__QuoteItemClient<$Result.GetResult<Prisma.$QuoteItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QuoteItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuoteItemFindFirstArgs} args - Arguments to find a QuoteItem
+     * @example
+     * // Get one QuoteItem
+     * const quoteItem = await prisma.quoteItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends QuoteItemFindFirstArgs>(args?: SelectSubset<T, QuoteItemFindFirstArgs<ExtArgs>>): Prisma__QuoteItemClient<$Result.GetResult<Prisma.$QuoteItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first QuoteItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuoteItemFindFirstOrThrowArgs} args - Arguments to find a QuoteItem
+     * @example
+     * // Get one QuoteItem
+     * const quoteItem = await prisma.quoteItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends QuoteItemFindFirstOrThrowArgs>(args?: SelectSubset<T, QuoteItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__QuoteItemClient<$Result.GetResult<Prisma.$QuoteItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more QuoteItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuoteItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all QuoteItems
+     * const quoteItems = await prisma.quoteItem.findMany()
+     * 
+     * // Get first 10 QuoteItems
+     * const quoteItems = await prisma.quoteItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const quoteItemWithIdOnly = await prisma.quoteItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends QuoteItemFindManyArgs>(args?: SelectSubset<T, QuoteItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$QuoteItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a QuoteItem.
+     * @param {QuoteItemCreateArgs} args - Arguments to create a QuoteItem.
+     * @example
+     * // Create one QuoteItem
+     * const QuoteItem = await prisma.quoteItem.create({
+     *   data: {
+     *     // ... data to create a QuoteItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends QuoteItemCreateArgs>(args: SelectSubset<T, QuoteItemCreateArgs<ExtArgs>>): Prisma__QuoteItemClient<$Result.GetResult<Prisma.$QuoteItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many QuoteItems.
+     * @param {QuoteItemCreateManyArgs} args - Arguments to create many QuoteItems.
+     * @example
+     * // Create many QuoteItems
+     * const quoteItem = await prisma.quoteItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends QuoteItemCreateManyArgs>(args?: SelectSubset<T, QuoteItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a QuoteItem.
+     * @param {QuoteItemDeleteArgs} args - Arguments to delete one QuoteItem.
+     * @example
+     * // Delete one QuoteItem
+     * const QuoteItem = await prisma.quoteItem.delete({
+     *   where: {
+     *     // ... filter to delete one QuoteItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends QuoteItemDeleteArgs>(args: SelectSubset<T, QuoteItemDeleteArgs<ExtArgs>>): Prisma__QuoteItemClient<$Result.GetResult<Prisma.$QuoteItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one QuoteItem.
+     * @param {QuoteItemUpdateArgs} args - Arguments to update one QuoteItem.
+     * @example
+     * // Update one QuoteItem
+     * const quoteItem = await prisma.quoteItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends QuoteItemUpdateArgs>(args: SelectSubset<T, QuoteItemUpdateArgs<ExtArgs>>): Prisma__QuoteItemClient<$Result.GetResult<Prisma.$QuoteItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more QuoteItems.
+     * @param {QuoteItemDeleteManyArgs} args - Arguments to filter QuoteItems to delete.
+     * @example
+     * // Delete a few QuoteItems
+     * const { count } = await prisma.quoteItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends QuoteItemDeleteManyArgs>(args?: SelectSubset<T, QuoteItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more QuoteItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuoteItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many QuoteItems
+     * const quoteItem = await prisma.quoteItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends QuoteItemUpdateManyArgs>(args: SelectSubset<T, QuoteItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one QuoteItem.
+     * @param {QuoteItemUpsertArgs} args - Arguments to update or create a QuoteItem.
+     * @example
+     * // Update or create a QuoteItem
+     * const quoteItem = await prisma.quoteItem.upsert({
+     *   create: {
+     *     // ... data to create a QuoteItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the QuoteItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends QuoteItemUpsertArgs>(args: SelectSubset<T, QuoteItemUpsertArgs<ExtArgs>>): Prisma__QuoteItemClient<$Result.GetResult<Prisma.$QuoteItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of QuoteItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuoteItemCountArgs} args - Arguments to filter QuoteItems to count.
+     * @example
+     * // Count the number of QuoteItems
+     * const count = await prisma.quoteItem.count({
+     *   where: {
+     *     // ... the filter for the QuoteItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends QuoteItemCountArgs>(
+      args?: Subset<T, QuoteItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], QuoteItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a QuoteItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuoteItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends QuoteItemAggregateArgs>(args: Subset<T, QuoteItemAggregateArgs>): Prisma.PrismaPromise<GetQuoteItemAggregateType<T>>
+
+    /**
+     * Group by QuoteItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {QuoteItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends QuoteItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: QuoteItemGroupByArgs['orderBy'] }
+        : { orderBy?: QuoteItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, QuoteItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetQuoteItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the QuoteItem model
+   */
+  readonly fields: QuoteItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for QuoteItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__QuoteItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    quote<T extends QuoteDefaultArgs<ExtArgs> = {}>(args?: Subset<T, QuoteDefaultArgs<ExtArgs>>): Prisma__QuoteClient<$Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the QuoteItem model
+   */
+  interface QuoteItemFieldRefs {
+    readonly id: FieldRef<"QuoteItem", 'String'>
+    readonly quoteId: FieldRef<"QuoteItem", 'String'>
+    readonly description: FieldRef<"QuoteItem", 'String'>
+    readonly quantity: FieldRef<"QuoteItem", 'Float'>
+    readonly unitPrice: FieldRef<"QuoteItem", 'Float'>
+    readonly totalPrice: FieldRef<"QuoteItem", 'Float'>
+    readonly order: FieldRef<"QuoteItem", 'Int'>
+    readonly createdAt: FieldRef<"QuoteItem", 'DateTime'>
+    readonly updatedAt: FieldRef<"QuoteItem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * QuoteItem findUnique
+   */
+  export type QuoteItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuoteItem
+     */
+    select?: QuoteItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuoteItem
+     */
+    omit?: QuoteItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteItemInclude<ExtArgs> | null
+    /**
+     * Filter, which QuoteItem to fetch.
+     */
+    where: QuoteItemWhereUniqueInput
+  }
+
+  /**
+   * QuoteItem findUniqueOrThrow
+   */
+  export type QuoteItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuoteItem
+     */
+    select?: QuoteItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuoteItem
+     */
+    omit?: QuoteItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteItemInclude<ExtArgs> | null
+    /**
+     * Filter, which QuoteItem to fetch.
+     */
+    where: QuoteItemWhereUniqueInput
+  }
+
+  /**
+   * QuoteItem findFirst
+   */
+  export type QuoteItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuoteItem
+     */
+    select?: QuoteItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuoteItem
+     */
+    omit?: QuoteItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteItemInclude<ExtArgs> | null
+    /**
+     * Filter, which QuoteItem to fetch.
+     */
+    where?: QuoteItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuoteItems to fetch.
+     */
+    orderBy?: QuoteItemOrderByWithRelationInput | QuoteItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for QuoteItems.
+     */
+    cursor?: QuoteItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuoteItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuoteItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of QuoteItems.
+     */
+    distinct?: QuoteItemScalarFieldEnum | QuoteItemScalarFieldEnum[]
+  }
+
+  /**
+   * QuoteItem findFirstOrThrow
+   */
+  export type QuoteItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuoteItem
+     */
+    select?: QuoteItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuoteItem
+     */
+    omit?: QuoteItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteItemInclude<ExtArgs> | null
+    /**
+     * Filter, which QuoteItem to fetch.
+     */
+    where?: QuoteItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuoteItems to fetch.
+     */
+    orderBy?: QuoteItemOrderByWithRelationInput | QuoteItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for QuoteItems.
+     */
+    cursor?: QuoteItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuoteItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuoteItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of QuoteItems.
+     */
+    distinct?: QuoteItemScalarFieldEnum | QuoteItemScalarFieldEnum[]
+  }
+
+  /**
+   * QuoteItem findMany
+   */
+  export type QuoteItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuoteItem
+     */
+    select?: QuoteItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuoteItem
+     */
+    omit?: QuoteItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteItemInclude<ExtArgs> | null
+    /**
+     * Filter, which QuoteItems to fetch.
+     */
+    where?: QuoteItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of QuoteItems to fetch.
+     */
+    orderBy?: QuoteItemOrderByWithRelationInput | QuoteItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing QuoteItems.
+     */
+    cursor?: QuoteItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` QuoteItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` QuoteItems.
+     */
+    skip?: number
+    distinct?: QuoteItemScalarFieldEnum | QuoteItemScalarFieldEnum[]
+  }
+
+  /**
+   * QuoteItem create
+   */
+  export type QuoteItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuoteItem
+     */
+    select?: QuoteItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuoteItem
+     */
+    omit?: QuoteItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a QuoteItem.
+     */
+    data: XOR<QuoteItemCreateInput, QuoteItemUncheckedCreateInput>
+  }
+
+  /**
+   * QuoteItem createMany
+   */
+  export type QuoteItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many QuoteItems.
+     */
+    data: QuoteItemCreateManyInput | QuoteItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * QuoteItem update
+   */
+  export type QuoteItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuoteItem
+     */
+    select?: QuoteItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuoteItem
+     */
+    omit?: QuoteItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a QuoteItem.
+     */
+    data: XOR<QuoteItemUpdateInput, QuoteItemUncheckedUpdateInput>
+    /**
+     * Choose, which QuoteItem to update.
+     */
+    where: QuoteItemWhereUniqueInput
+  }
+
+  /**
+   * QuoteItem updateMany
+   */
+  export type QuoteItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update QuoteItems.
+     */
+    data: XOR<QuoteItemUpdateManyMutationInput, QuoteItemUncheckedUpdateManyInput>
+    /**
+     * Filter which QuoteItems to update
+     */
+    where?: QuoteItemWhereInput
+    /**
+     * Limit how many QuoteItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * QuoteItem upsert
+   */
+  export type QuoteItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuoteItem
+     */
+    select?: QuoteItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuoteItem
+     */
+    omit?: QuoteItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the QuoteItem to update in case it exists.
+     */
+    where: QuoteItemWhereUniqueInput
+    /**
+     * In case the QuoteItem found by the `where` argument doesn't exist, create a new QuoteItem with this data.
+     */
+    create: XOR<QuoteItemCreateInput, QuoteItemUncheckedCreateInput>
+    /**
+     * In case the QuoteItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<QuoteItemUpdateInput, QuoteItemUncheckedUpdateInput>
+  }
+
+  /**
+   * QuoteItem delete
+   */
+  export type QuoteItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuoteItem
+     */
+    select?: QuoteItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuoteItem
+     */
+    omit?: QuoteItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteItemInclude<ExtArgs> | null
+    /**
+     * Filter which QuoteItem to delete.
+     */
+    where: QuoteItemWhereUniqueInput
+  }
+
+  /**
+   * QuoteItem deleteMany
+   */
+  export type QuoteItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which QuoteItems to delete
+     */
+    where?: QuoteItemWhereInput
+    /**
+     * Limit how many QuoteItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * QuoteItem without action
+   */
+  export type QuoteItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the QuoteItem
+     */
+    select?: QuoteItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the QuoteItem
+     */
+    omit?: QuoteItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Invoice
+   */
+
+  export type AggregateInvoice = {
+    _count: InvoiceCountAggregateOutputType | null
+    _avg: InvoiceAvgAggregateOutputType | null
+    _sum: InvoiceSumAggregateOutputType | null
+    _min: InvoiceMinAggregateOutputType | null
+    _max: InvoiceMaxAggregateOutputType | null
+  }
+
+  export type InvoiceAvgAggregateOutputType = {
+    subtotal: number | null
+    taxAmount: number | null
+    totalAmount: number | null
+    paidAmount: number | null
+  }
+
+  export type InvoiceSumAggregateOutputType = {
+    subtotal: number | null
+    taxAmount: number | null
+    totalAmount: number | null
+    paidAmount: number | null
+  }
+
+  export type InvoiceMinAggregateOutputType = {
+    id: string | null
+    number: string | null
+    title: string | null
+    description: string | null
+    clientId: string | null
+    projectId: string | null
+    quoteId: string | null
+    status: $Enums.InvoiceStatus | null
+    subtotal: number | null
+    taxAmount: number | null
+    totalAmount: number | null
+    paidAmount: number | null
+    currency: string | null
+    issueDate: Date | null
+    dueDate: Date | null
+    paidAt: Date | null
+    notes: string | null
+    terms: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InvoiceMaxAggregateOutputType = {
+    id: string | null
+    number: string | null
+    title: string | null
+    description: string | null
+    clientId: string | null
+    projectId: string | null
+    quoteId: string | null
+    status: $Enums.InvoiceStatus | null
+    subtotal: number | null
+    taxAmount: number | null
+    totalAmount: number | null
+    paidAmount: number | null
+    currency: string | null
+    issueDate: Date | null
+    dueDate: Date | null
+    paidAt: Date | null
+    notes: string | null
+    terms: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InvoiceCountAggregateOutputType = {
+    id: number
+    number: number
+    title: number
+    description: number
+    clientId: number
+    projectId: number
+    quoteId: number
+    status: number
+    subtotal: number
+    taxAmount: number
+    totalAmount: number
+    paidAmount: number
+    currency: number
+    issueDate: number
+    dueDate: number
+    paidAt: number
+    notes: number
+    terms: number
+    createdById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type InvoiceAvgAggregateInputType = {
+    subtotal?: true
+    taxAmount?: true
+    totalAmount?: true
+    paidAmount?: true
+  }
+
+  export type InvoiceSumAggregateInputType = {
+    subtotal?: true
+    taxAmount?: true
+    totalAmount?: true
+    paidAmount?: true
+  }
+
+  export type InvoiceMinAggregateInputType = {
+    id?: true
+    number?: true
+    title?: true
+    description?: true
+    clientId?: true
+    projectId?: true
+    quoteId?: true
+    status?: true
+    subtotal?: true
+    taxAmount?: true
+    totalAmount?: true
+    paidAmount?: true
+    currency?: true
+    issueDate?: true
+    dueDate?: true
+    paidAt?: true
+    notes?: true
+    terms?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InvoiceMaxAggregateInputType = {
+    id?: true
+    number?: true
+    title?: true
+    description?: true
+    clientId?: true
+    projectId?: true
+    quoteId?: true
+    status?: true
+    subtotal?: true
+    taxAmount?: true
+    totalAmount?: true
+    paidAmount?: true
+    currency?: true
+    issueDate?: true
+    dueDate?: true
+    paidAt?: true
+    notes?: true
+    terms?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InvoiceCountAggregateInputType = {
+    id?: true
+    number?: true
+    title?: true
+    description?: true
+    clientId?: true
+    projectId?: true
+    quoteId?: true
+    status?: true
+    subtotal?: true
+    taxAmount?: true
+    totalAmount?: true
+    paidAmount?: true
+    currency?: true
+    issueDate?: true
+    dueDate?: true
+    paidAt?: true
+    notes?: true
+    terms?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type InvoiceAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Invoice to aggregate.
+     */
+    where?: InvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invoices to fetch.
+     */
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invoices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Invoices
+    **/
+    _count?: true | InvoiceCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InvoiceAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InvoiceSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InvoiceMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InvoiceMaxAggregateInputType
+  }
+
+  export type GetInvoiceAggregateType<T extends InvoiceAggregateArgs> = {
+        [P in keyof T & keyof AggregateInvoice]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInvoice[P]>
+      : GetScalarType<T[P], AggregateInvoice[P]>
+  }
+
+
+
+
+  export type InvoiceGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvoiceWhereInput
+    orderBy?: InvoiceOrderByWithAggregationInput | InvoiceOrderByWithAggregationInput[]
+    by: InvoiceScalarFieldEnum[] | InvoiceScalarFieldEnum
+    having?: InvoiceScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InvoiceCountAggregateInputType | true
+    _avg?: InvoiceAvgAggregateInputType
+    _sum?: InvoiceSumAggregateInputType
+    _min?: InvoiceMinAggregateInputType
+    _max?: InvoiceMaxAggregateInputType
+  }
+
+  export type InvoiceGroupByOutputType = {
+    id: string
+    number: string
+    title: string
+    description: string | null
+    clientId: string
+    projectId: string | null
+    quoteId: string | null
+    status: $Enums.InvoiceStatus
+    subtotal: number
+    taxAmount: number
+    totalAmount: number
+    paidAmount: number
+    currency: string
+    issueDate: Date
+    dueDate: Date | null
+    paidAt: Date | null
+    notes: string | null
+    terms: string | null
+    createdById: string
+    createdAt: Date
+    updatedAt: Date
+    _count: InvoiceCountAggregateOutputType | null
+    _avg: InvoiceAvgAggregateOutputType | null
+    _sum: InvoiceSumAggregateOutputType | null
+    _min: InvoiceMinAggregateOutputType | null
+    _max: InvoiceMaxAggregateOutputType | null
+  }
+
+  type GetInvoiceGroupByPayload<T extends InvoiceGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InvoiceGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InvoiceGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InvoiceGroupByOutputType[P]>
+            : GetScalarType<T[P], InvoiceGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InvoiceSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    number?: boolean
+    title?: boolean
+    description?: boolean
+    clientId?: boolean
+    projectId?: boolean
+    quoteId?: boolean
+    status?: boolean
+    subtotal?: boolean
+    taxAmount?: boolean
+    totalAmount?: boolean
+    paidAmount?: boolean
+    currency?: boolean
+    issueDate?: boolean
+    dueDate?: boolean
+    paidAt?: boolean
+    notes?: boolean
+    terms?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+    project?: boolean | Invoice$projectArgs<ExtArgs>
+    quote?: boolean | Invoice$quoteArgs<ExtArgs>
+    items?: boolean | Invoice$itemsArgs<ExtArgs>
+    payments?: boolean | Invoice$paymentsArgs<ExtArgs>
+    _count?: boolean | InvoiceCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["invoice"]>
+
+
+
+  export type InvoiceSelectScalar = {
+    id?: boolean
+    number?: boolean
+    title?: boolean
+    description?: boolean
+    clientId?: boolean
+    projectId?: boolean
+    quoteId?: boolean
+    status?: boolean
+    subtotal?: boolean
+    taxAmount?: boolean
+    totalAmount?: boolean
+    paidAmount?: boolean
+    currency?: boolean
+    issueDate?: boolean
+    dueDate?: boolean
+    paidAt?: boolean
+    notes?: boolean
+    terms?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type InvoiceOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "number" | "title" | "description" | "clientId" | "projectId" | "quoteId" | "status" | "subtotal" | "taxAmount" | "totalAmount" | "paidAmount" | "currency" | "issueDate" | "dueDate" | "paidAt" | "notes" | "terms" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["invoice"]>
+  export type InvoiceInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    client?: boolean | ClientDefaultArgs<ExtArgs>
+    project?: boolean | Invoice$projectArgs<ExtArgs>
+    quote?: boolean | Invoice$quoteArgs<ExtArgs>
+    items?: boolean | Invoice$itemsArgs<ExtArgs>
+    payments?: boolean | Invoice$paymentsArgs<ExtArgs>
+    _count?: boolean | InvoiceCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $InvoicePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Invoice"
+    objects: {
+      client: Prisma.$ClientPayload<ExtArgs>
+      project: Prisma.$ProjectPayload<ExtArgs> | null
+      quote: Prisma.$QuotePayload<ExtArgs> | null
+      items: Prisma.$InvoiceItemPayload<ExtArgs>[]
+      payments: Prisma.$PaymentPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      number: string
+      title: string
+      description: string | null
+      clientId: string
+      projectId: string | null
+      quoteId: string | null
+      status: $Enums.InvoiceStatus
+      subtotal: number
+      taxAmount: number
+      totalAmount: number
+      paidAmount: number
+      currency: string
+      issueDate: Date
+      dueDate: Date | null
+      paidAt: Date | null
+      notes: string | null
+      terms: string | null
+      createdById: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["invoice"]>
+    composites: {}
+  }
+
+  type InvoiceGetPayload<S extends boolean | null | undefined | InvoiceDefaultArgs> = $Result.GetResult<Prisma.$InvoicePayload, S>
+
+  type InvoiceCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InvoiceFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InvoiceCountAggregateInputType | true
+    }
+
+  export interface InvoiceDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Invoice'], meta: { name: 'Invoice' } }
+    /**
+     * Find zero or one Invoice that matches the filter.
+     * @param {InvoiceFindUniqueArgs} args - Arguments to find a Invoice
+     * @example
+     * // Get one Invoice
+     * const invoice = await prisma.invoice.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InvoiceFindUniqueArgs>(args: SelectSubset<T, InvoiceFindUniqueArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Invoice that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InvoiceFindUniqueOrThrowArgs} args - Arguments to find a Invoice
+     * @example
+     * // Get one Invoice
+     * const invoice = await prisma.invoice.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InvoiceFindUniqueOrThrowArgs>(args: SelectSubset<T, InvoiceFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Invoice that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceFindFirstArgs} args - Arguments to find a Invoice
+     * @example
+     * // Get one Invoice
+     * const invoice = await prisma.invoice.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InvoiceFindFirstArgs>(args?: SelectSubset<T, InvoiceFindFirstArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Invoice that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceFindFirstOrThrowArgs} args - Arguments to find a Invoice
+     * @example
+     * // Get one Invoice
+     * const invoice = await prisma.invoice.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InvoiceFindFirstOrThrowArgs>(args?: SelectSubset<T, InvoiceFindFirstOrThrowArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Invoices that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Invoices
+     * const invoices = await prisma.invoice.findMany()
+     * 
+     * // Get first 10 Invoices
+     * const invoices = await prisma.invoice.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const invoiceWithIdOnly = await prisma.invoice.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InvoiceFindManyArgs>(args?: SelectSubset<T, InvoiceFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Invoice.
+     * @param {InvoiceCreateArgs} args - Arguments to create a Invoice.
+     * @example
+     * // Create one Invoice
+     * const Invoice = await prisma.invoice.create({
+     *   data: {
+     *     // ... data to create a Invoice
+     *   }
+     * })
+     * 
+     */
+    create<T extends InvoiceCreateArgs>(args: SelectSubset<T, InvoiceCreateArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Invoices.
+     * @param {InvoiceCreateManyArgs} args - Arguments to create many Invoices.
+     * @example
+     * // Create many Invoices
+     * const invoice = await prisma.invoice.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InvoiceCreateManyArgs>(args?: SelectSubset<T, InvoiceCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Invoice.
+     * @param {InvoiceDeleteArgs} args - Arguments to delete one Invoice.
+     * @example
+     * // Delete one Invoice
+     * const Invoice = await prisma.invoice.delete({
+     *   where: {
+     *     // ... filter to delete one Invoice
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InvoiceDeleteArgs>(args: SelectSubset<T, InvoiceDeleteArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Invoice.
+     * @param {InvoiceUpdateArgs} args - Arguments to update one Invoice.
+     * @example
+     * // Update one Invoice
+     * const invoice = await prisma.invoice.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InvoiceUpdateArgs>(args: SelectSubset<T, InvoiceUpdateArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Invoices.
+     * @param {InvoiceDeleteManyArgs} args - Arguments to filter Invoices to delete.
+     * @example
+     * // Delete a few Invoices
+     * const { count } = await prisma.invoice.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InvoiceDeleteManyArgs>(args?: SelectSubset<T, InvoiceDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Invoices.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Invoices
+     * const invoice = await prisma.invoice.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InvoiceUpdateManyArgs>(args: SelectSubset<T, InvoiceUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Invoice.
+     * @param {InvoiceUpsertArgs} args - Arguments to update or create a Invoice.
+     * @example
+     * // Update or create a Invoice
+     * const invoice = await prisma.invoice.upsert({
+     *   create: {
+     *     // ... data to create a Invoice
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Invoice we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InvoiceUpsertArgs>(args: SelectSubset<T, InvoiceUpsertArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Invoices.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceCountArgs} args - Arguments to filter Invoices to count.
+     * @example
+     * // Count the number of Invoices
+     * const count = await prisma.invoice.count({
+     *   where: {
+     *     // ... the filter for the Invoices we want to count
+     *   }
+     * })
+    **/
+    count<T extends InvoiceCountArgs>(
+      args?: Subset<T, InvoiceCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InvoiceCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Invoice.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InvoiceAggregateArgs>(args: Subset<T, InvoiceAggregateArgs>): Prisma.PrismaPromise<GetInvoiceAggregateType<T>>
+
+    /**
+     * Group by Invoice.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InvoiceGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InvoiceGroupByArgs['orderBy'] }
+        : { orderBy?: InvoiceGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InvoiceGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInvoiceGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Invoice model
+   */
+  readonly fields: InvoiceFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Invoice.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InvoiceClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    client<T extends ClientDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ClientDefaultArgs<ExtArgs>>): Prisma__ClientClient<$Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    project<T extends Invoice$projectArgs<ExtArgs> = {}>(args?: Subset<T, Invoice$projectArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    quote<T extends Invoice$quoteArgs<ExtArgs> = {}>(args?: Subset<T, Invoice$quoteArgs<ExtArgs>>): Prisma__QuoteClient<$Result.GetResult<Prisma.$QuotePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    items<T extends Invoice$itemsArgs<ExtArgs> = {}>(args?: Subset<T, Invoice$itemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    payments<T extends Invoice$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, Invoice$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Invoice model
+   */
+  interface InvoiceFieldRefs {
+    readonly id: FieldRef<"Invoice", 'String'>
+    readonly number: FieldRef<"Invoice", 'String'>
+    readonly title: FieldRef<"Invoice", 'String'>
+    readonly description: FieldRef<"Invoice", 'String'>
+    readonly clientId: FieldRef<"Invoice", 'String'>
+    readonly projectId: FieldRef<"Invoice", 'String'>
+    readonly quoteId: FieldRef<"Invoice", 'String'>
+    readonly status: FieldRef<"Invoice", 'InvoiceStatus'>
+    readonly subtotal: FieldRef<"Invoice", 'Float'>
+    readonly taxAmount: FieldRef<"Invoice", 'Float'>
+    readonly totalAmount: FieldRef<"Invoice", 'Float'>
+    readonly paidAmount: FieldRef<"Invoice", 'Float'>
+    readonly currency: FieldRef<"Invoice", 'String'>
+    readonly issueDate: FieldRef<"Invoice", 'DateTime'>
+    readonly dueDate: FieldRef<"Invoice", 'DateTime'>
+    readonly paidAt: FieldRef<"Invoice", 'DateTime'>
+    readonly notes: FieldRef<"Invoice", 'String'>
+    readonly terms: FieldRef<"Invoice", 'String'>
+    readonly createdById: FieldRef<"Invoice", 'String'>
+    readonly createdAt: FieldRef<"Invoice", 'DateTime'>
+    readonly updatedAt: FieldRef<"Invoice", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Invoice findUnique
+   */
+  export type InvoiceFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Invoice to fetch.
+     */
+    where: InvoiceWhereUniqueInput
+  }
+
+  /**
+   * Invoice findUniqueOrThrow
+   */
+  export type InvoiceFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Invoice to fetch.
+     */
+    where: InvoiceWhereUniqueInput
+  }
+
+  /**
+   * Invoice findFirst
+   */
+  export type InvoiceFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Invoice to fetch.
+     */
+    where?: InvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invoices to fetch.
+     */
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Invoices.
+     */
+    cursor?: InvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invoices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Invoices.
+     */
+    distinct?: InvoiceScalarFieldEnum | InvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * Invoice findFirstOrThrow
+   */
+  export type InvoiceFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Invoice to fetch.
+     */
+    where?: InvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invoices to fetch.
+     */
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Invoices.
+     */
+    cursor?: InvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invoices.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Invoices.
+     */
+    distinct?: InvoiceScalarFieldEnum | InvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * Invoice findMany
+   */
+  export type InvoiceFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter, which Invoices to fetch.
+     */
+    where?: InvoiceWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invoices to fetch.
+     */
+    orderBy?: InvoiceOrderByWithRelationInput | InvoiceOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Invoices.
+     */
+    cursor?: InvoiceWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invoices from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invoices.
+     */
+    skip?: number
+    distinct?: InvoiceScalarFieldEnum | InvoiceScalarFieldEnum[]
+  }
+
+  /**
+   * Invoice create
+   */
+  export type InvoiceCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Invoice.
+     */
+    data: XOR<InvoiceCreateInput, InvoiceUncheckedCreateInput>
+  }
+
+  /**
+   * Invoice createMany
+   */
+  export type InvoiceCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Invoices.
+     */
+    data: InvoiceCreateManyInput | InvoiceCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Invoice update
+   */
+  export type InvoiceUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Invoice.
+     */
+    data: XOR<InvoiceUpdateInput, InvoiceUncheckedUpdateInput>
+    /**
+     * Choose, which Invoice to update.
+     */
+    where: InvoiceWhereUniqueInput
+  }
+
+  /**
+   * Invoice updateMany
+   */
+  export type InvoiceUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Invoices.
+     */
+    data: XOR<InvoiceUpdateManyMutationInput, InvoiceUncheckedUpdateManyInput>
+    /**
+     * Filter which Invoices to update
+     */
+    where?: InvoiceWhereInput
+    /**
+     * Limit how many Invoices to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Invoice upsert
+   */
+  export type InvoiceUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Invoice to update in case it exists.
+     */
+    where: InvoiceWhereUniqueInput
+    /**
+     * In case the Invoice found by the `where` argument doesn't exist, create a new Invoice with this data.
+     */
+    create: XOR<InvoiceCreateInput, InvoiceUncheckedCreateInput>
+    /**
+     * In case the Invoice was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InvoiceUpdateInput, InvoiceUncheckedUpdateInput>
+  }
+
+  /**
+   * Invoice delete
+   */
+  export type InvoiceDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+    /**
+     * Filter which Invoice to delete.
+     */
+    where: InvoiceWhereUniqueInput
+  }
+
+  /**
+   * Invoice deleteMany
+   */
+  export type InvoiceDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Invoices to delete
+     */
+    where?: InvoiceWhereInput
+    /**
+     * Limit how many Invoices to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Invoice.project
+   */
+  export type Invoice$projectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Project
+     */
+    select?: ProjectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Project
+     */
+    omit?: ProjectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ProjectInclude<ExtArgs> | null
+    where?: ProjectWhereInput
+  }
+
+  /**
+   * Invoice.quote
+   */
+  export type Invoice$quoteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Quote
+     */
+    select?: QuoteSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Quote
+     */
+    omit?: QuoteOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: QuoteInclude<ExtArgs> | null
+    where?: QuoteWhereInput
+  }
+
+  /**
+   * Invoice.items
+   */
+  export type Invoice$itemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    where?: InvoiceItemWhereInput
+    orderBy?: InvoiceItemOrderByWithRelationInput | InvoiceItemOrderByWithRelationInput[]
+    cursor?: InvoiceItemWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvoiceItemScalarFieldEnum | InvoiceItemScalarFieldEnum[]
+  }
+
+  /**
+   * Invoice.payments
+   */
+  export type Invoice$paymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    where?: PaymentWhereInput
+    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
+    cursor?: PaymentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
+  }
+
+  /**
+   * Invoice without action
+   */
+  export type InvoiceDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invoice
+     */
+    select?: InvoiceSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invoice
+     */
+    omit?: InvoiceOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model InvoiceItem
+   */
+
+  export type AggregateInvoiceItem = {
+    _count: InvoiceItemCountAggregateOutputType | null
+    _avg: InvoiceItemAvgAggregateOutputType | null
+    _sum: InvoiceItemSumAggregateOutputType | null
+    _min: InvoiceItemMinAggregateOutputType | null
+    _max: InvoiceItemMaxAggregateOutputType | null
+  }
+
+  export type InvoiceItemAvgAggregateOutputType = {
+    quantity: number | null
+    unitPrice: number | null
+    totalPrice: number | null
+    order: number | null
+  }
+
+  export type InvoiceItemSumAggregateOutputType = {
+    quantity: number | null
+    unitPrice: number | null
+    totalPrice: number | null
+    order: number | null
+  }
+
+  export type InvoiceItemMinAggregateOutputType = {
+    id: string | null
+    invoiceId: string | null
+    description: string | null
+    quantity: number | null
+    unitPrice: number | null
+    totalPrice: number | null
+    order: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InvoiceItemMaxAggregateOutputType = {
+    id: string | null
+    invoiceId: string | null
+    description: string | null
+    quantity: number | null
+    unitPrice: number | null
+    totalPrice: number | null
+    order: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type InvoiceItemCountAggregateOutputType = {
+    id: number
+    invoiceId: number
+    description: number
+    quantity: number
+    unitPrice: number
+    totalPrice: number
+    order: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type InvoiceItemAvgAggregateInputType = {
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
+    order?: true
+  }
+
+  export type InvoiceItemSumAggregateInputType = {
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
+    order?: true
+  }
+
+  export type InvoiceItemMinAggregateInputType = {
+    id?: true
+    invoiceId?: true
+    description?: true
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
+    order?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InvoiceItemMaxAggregateInputType = {
+    id?: true
+    invoiceId?: true
+    description?: true
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
+    order?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type InvoiceItemCountAggregateInputType = {
+    id?: true
+    invoiceId?: true
+    description?: true
+    quantity?: true
+    unitPrice?: true
+    totalPrice?: true
+    order?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type InvoiceItemAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InvoiceItem to aggregate.
+     */
+    where?: InvoiceItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InvoiceItems to fetch.
+     */
+    orderBy?: InvoiceItemOrderByWithRelationInput | InvoiceItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InvoiceItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InvoiceItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InvoiceItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InvoiceItems
+    **/
+    _count?: true | InvoiceItemCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: InvoiceItemAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: InvoiceItemSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InvoiceItemMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InvoiceItemMaxAggregateInputType
+  }
+
+  export type GetInvoiceItemAggregateType<T extends InvoiceItemAggregateArgs> = {
+        [P in keyof T & keyof AggregateInvoiceItem]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInvoiceItem[P]>
+      : GetScalarType<T[P], AggregateInvoiceItem[P]>
+  }
+
+
+
+
+  export type InvoiceItemGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvoiceItemWhereInput
+    orderBy?: InvoiceItemOrderByWithAggregationInput | InvoiceItemOrderByWithAggregationInput[]
+    by: InvoiceItemScalarFieldEnum[] | InvoiceItemScalarFieldEnum
+    having?: InvoiceItemScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InvoiceItemCountAggregateInputType | true
+    _avg?: InvoiceItemAvgAggregateInputType
+    _sum?: InvoiceItemSumAggregateInputType
+    _min?: InvoiceItemMinAggregateInputType
+    _max?: InvoiceItemMaxAggregateInputType
+  }
+
+  export type InvoiceItemGroupByOutputType = {
+    id: string
+    invoiceId: string
+    description: string
+    quantity: number
+    unitPrice: number
+    totalPrice: number
+    order: number
+    createdAt: Date
+    updatedAt: Date
+    _count: InvoiceItemCountAggregateOutputType | null
+    _avg: InvoiceItemAvgAggregateOutputType | null
+    _sum: InvoiceItemSumAggregateOutputType | null
+    _min: InvoiceItemMinAggregateOutputType | null
+    _max: InvoiceItemMaxAggregateOutputType | null
+  }
+
+  type GetInvoiceItemGroupByPayload<T extends InvoiceItemGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InvoiceItemGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InvoiceItemGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InvoiceItemGroupByOutputType[P]>
+            : GetScalarType<T[P], InvoiceItemGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InvoiceItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invoiceId?: boolean
+    description?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    totalPrice?: boolean
+    order?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    invoice?: boolean | InvoiceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["invoiceItem"]>
+
+
+
+  export type InvoiceItemSelectScalar = {
+    id?: boolean
+    invoiceId?: boolean
+    description?: boolean
+    quantity?: boolean
+    unitPrice?: boolean
+    totalPrice?: boolean
+    order?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type InvoiceItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "invoiceId" | "description" | "quantity" | "unitPrice" | "totalPrice" | "order" | "createdAt" | "updatedAt", ExtArgs["result"]["invoiceItem"]>
+  export type InvoiceItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    invoice?: boolean | InvoiceDefaultArgs<ExtArgs>
+  }
+
+  export type $InvoiceItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InvoiceItem"
+    objects: {
+      invoice: Prisma.$InvoicePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      invoiceId: string
+      description: string
+      quantity: number
+      unitPrice: number
+      totalPrice: number
+      order: number
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["invoiceItem"]>
+    composites: {}
+  }
+
+  type InvoiceItemGetPayload<S extends boolean | null | undefined | InvoiceItemDefaultArgs> = $Result.GetResult<Prisma.$InvoiceItemPayload, S>
+
+  type InvoiceItemCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InvoiceItemFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InvoiceItemCountAggregateInputType | true
+    }
+
+  export interface InvoiceItemDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InvoiceItem'], meta: { name: 'InvoiceItem' } }
+    /**
+     * Find zero or one InvoiceItem that matches the filter.
+     * @param {InvoiceItemFindUniqueArgs} args - Arguments to find a InvoiceItem
+     * @example
+     * // Get one InvoiceItem
+     * const invoiceItem = await prisma.invoiceItem.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InvoiceItemFindUniqueArgs>(args: SelectSubset<T, InvoiceItemFindUniqueArgs<ExtArgs>>): Prisma__InvoiceItemClient<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InvoiceItem that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InvoiceItemFindUniqueOrThrowArgs} args - Arguments to find a InvoiceItem
+     * @example
+     * // Get one InvoiceItem
+     * const invoiceItem = await prisma.invoiceItem.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InvoiceItemFindUniqueOrThrowArgs>(args: SelectSubset<T, InvoiceItemFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InvoiceItemClient<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InvoiceItem that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceItemFindFirstArgs} args - Arguments to find a InvoiceItem
+     * @example
+     * // Get one InvoiceItem
+     * const invoiceItem = await prisma.invoiceItem.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InvoiceItemFindFirstArgs>(args?: SelectSubset<T, InvoiceItemFindFirstArgs<ExtArgs>>): Prisma__InvoiceItemClient<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InvoiceItem that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceItemFindFirstOrThrowArgs} args - Arguments to find a InvoiceItem
+     * @example
+     * // Get one InvoiceItem
+     * const invoiceItem = await prisma.invoiceItem.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InvoiceItemFindFirstOrThrowArgs>(args?: SelectSubset<T, InvoiceItemFindFirstOrThrowArgs<ExtArgs>>): Prisma__InvoiceItemClient<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InvoiceItems that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceItemFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InvoiceItems
+     * const invoiceItems = await prisma.invoiceItem.findMany()
+     * 
+     * // Get first 10 InvoiceItems
+     * const invoiceItems = await prisma.invoiceItem.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const invoiceItemWithIdOnly = await prisma.invoiceItem.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InvoiceItemFindManyArgs>(args?: SelectSubset<T, InvoiceItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InvoiceItem.
+     * @param {InvoiceItemCreateArgs} args - Arguments to create a InvoiceItem.
+     * @example
+     * // Create one InvoiceItem
+     * const InvoiceItem = await prisma.invoiceItem.create({
+     *   data: {
+     *     // ... data to create a InvoiceItem
+     *   }
+     * })
+     * 
+     */
+    create<T extends InvoiceItemCreateArgs>(args: SelectSubset<T, InvoiceItemCreateArgs<ExtArgs>>): Prisma__InvoiceItemClient<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InvoiceItems.
+     * @param {InvoiceItemCreateManyArgs} args - Arguments to create many InvoiceItems.
+     * @example
+     * // Create many InvoiceItems
+     * const invoiceItem = await prisma.invoiceItem.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InvoiceItemCreateManyArgs>(args?: SelectSubset<T, InvoiceItemCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a InvoiceItem.
+     * @param {InvoiceItemDeleteArgs} args - Arguments to delete one InvoiceItem.
+     * @example
+     * // Delete one InvoiceItem
+     * const InvoiceItem = await prisma.invoiceItem.delete({
+     *   where: {
+     *     // ... filter to delete one InvoiceItem
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InvoiceItemDeleteArgs>(args: SelectSubset<T, InvoiceItemDeleteArgs<ExtArgs>>): Prisma__InvoiceItemClient<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InvoiceItem.
+     * @param {InvoiceItemUpdateArgs} args - Arguments to update one InvoiceItem.
+     * @example
+     * // Update one InvoiceItem
+     * const invoiceItem = await prisma.invoiceItem.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InvoiceItemUpdateArgs>(args: SelectSubset<T, InvoiceItemUpdateArgs<ExtArgs>>): Prisma__InvoiceItemClient<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InvoiceItems.
+     * @param {InvoiceItemDeleteManyArgs} args - Arguments to filter InvoiceItems to delete.
+     * @example
+     * // Delete a few InvoiceItems
+     * const { count } = await prisma.invoiceItem.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InvoiceItemDeleteManyArgs>(args?: SelectSubset<T, InvoiceItemDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InvoiceItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceItemUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InvoiceItems
+     * const invoiceItem = await prisma.invoiceItem.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InvoiceItemUpdateManyArgs>(args: SelectSubset<T, InvoiceItemUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one InvoiceItem.
+     * @param {InvoiceItemUpsertArgs} args - Arguments to update or create a InvoiceItem.
+     * @example
+     * // Update or create a InvoiceItem
+     * const invoiceItem = await prisma.invoiceItem.upsert({
+     *   create: {
+     *     // ... data to create a InvoiceItem
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InvoiceItem we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InvoiceItemUpsertArgs>(args: SelectSubset<T, InvoiceItemUpsertArgs<ExtArgs>>): Prisma__InvoiceItemClient<$Result.GetResult<Prisma.$InvoiceItemPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InvoiceItems.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceItemCountArgs} args - Arguments to filter InvoiceItems to count.
+     * @example
+     * // Count the number of InvoiceItems
+     * const count = await prisma.invoiceItem.count({
+     *   where: {
+     *     // ... the filter for the InvoiceItems we want to count
+     *   }
+     * })
+    **/
+    count<T extends InvoiceItemCountArgs>(
+      args?: Subset<T, InvoiceItemCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InvoiceItemCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InvoiceItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceItemAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InvoiceItemAggregateArgs>(args: Subset<T, InvoiceItemAggregateArgs>): Prisma.PrismaPromise<GetInvoiceItemAggregateType<T>>
+
+    /**
+     * Group by InvoiceItem.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvoiceItemGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InvoiceItemGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InvoiceItemGroupByArgs['orderBy'] }
+        : { orderBy?: InvoiceItemGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InvoiceItemGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInvoiceItemGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InvoiceItem model
+   */
+  readonly fields: InvoiceItemFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InvoiceItem.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InvoiceItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    invoice<T extends InvoiceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InvoiceDefaultArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InvoiceItem model
+   */
+  interface InvoiceItemFieldRefs {
+    readonly id: FieldRef<"InvoiceItem", 'String'>
+    readonly invoiceId: FieldRef<"InvoiceItem", 'String'>
+    readonly description: FieldRef<"InvoiceItem", 'String'>
+    readonly quantity: FieldRef<"InvoiceItem", 'Float'>
+    readonly unitPrice: FieldRef<"InvoiceItem", 'Float'>
+    readonly totalPrice: FieldRef<"InvoiceItem", 'Float'>
+    readonly order: FieldRef<"InvoiceItem", 'Int'>
+    readonly createdAt: FieldRef<"InvoiceItem", 'DateTime'>
+    readonly updatedAt: FieldRef<"InvoiceItem", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * InvoiceItem findUnique
+   */
+  export type InvoiceItemFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter, which InvoiceItem to fetch.
+     */
+    where: InvoiceItemWhereUniqueInput
+  }
+
+  /**
+   * InvoiceItem findUniqueOrThrow
+   */
+  export type InvoiceItemFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter, which InvoiceItem to fetch.
+     */
+    where: InvoiceItemWhereUniqueInput
+  }
+
+  /**
+   * InvoiceItem findFirst
+   */
+  export type InvoiceItemFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter, which InvoiceItem to fetch.
+     */
+    where?: InvoiceItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InvoiceItems to fetch.
+     */
+    orderBy?: InvoiceItemOrderByWithRelationInput | InvoiceItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InvoiceItems.
+     */
+    cursor?: InvoiceItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InvoiceItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InvoiceItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InvoiceItems.
+     */
+    distinct?: InvoiceItemScalarFieldEnum | InvoiceItemScalarFieldEnum[]
+  }
+
+  /**
+   * InvoiceItem findFirstOrThrow
+   */
+  export type InvoiceItemFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter, which InvoiceItem to fetch.
+     */
+    where?: InvoiceItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InvoiceItems to fetch.
+     */
+    orderBy?: InvoiceItemOrderByWithRelationInput | InvoiceItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InvoiceItems.
+     */
+    cursor?: InvoiceItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InvoiceItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InvoiceItems.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InvoiceItems.
+     */
+    distinct?: InvoiceItemScalarFieldEnum | InvoiceItemScalarFieldEnum[]
+  }
+
+  /**
+   * InvoiceItem findMany
+   */
+  export type InvoiceItemFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter, which InvoiceItems to fetch.
+     */
+    where?: InvoiceItemWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InvoiceItems to fetch.
+     */
+    orderBy?: InvoiceItemOrderByWithRelationInput | InvoiceItemOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InvoiceItems.
+     */
+    cursor?: InvoiceItemWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InvoiceItems from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InvoiceItems.
+     */
+    skip?: number
+    distinct?: InvoiceItemScalarFieldEnum | InvoiceItemScalarFieldEnum[]
+  }
+
+  /**
+   * InvoiceItem create
+   */
+  export type InvoiceItemCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * The data needed to create a InvoiceItem.
+     */
+    data: XOR<InvoiceItemCreateInput, InvoiceItemUncheckedCreateInput>
+  }
+
+  /**
+   * InvoiceItem createMany
+   */
+  export type InvoiceItemCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InvoiceItems.
+     */
+    data: InvoiceItemCreateManyInput | InvoiceItemCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InvoiceItem update
+   */
+  export type InvoiceItemUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * The data needed to update a InvoiceItem.
+     */
+    data: XOR<InvoiceItemUpdateInput, InvoiceItemUncheckedUpdateInput>
+    /**
+     * Choose, which InvoiceItem to update.
+     */
+    where: InvoiceItemWhereUniqueInput
+  }
+
+  /**
+   * InvoiceItem updateMany
+   */
+  export type InvoiceItemUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InvoiceItems.
+     */
+    data: XOR<InvoiceItemUpdateManyMutationInput, InvoiceItemUncheckedUpdateManyInput>
+    /**
+     * Filter which InvoiceItems to update
+     */
+    where?: InvoiceItemWhereInput
+    /**
+     * Limit how many InvoiceItems to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InvoiceItem upsert
+   */
+  export type InvoiceItemUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * The filter to search for the InvoiceItem to update in case it exists.
+     */
+    where: InvoiceItemWhereUniqueInput
+    /**
+     * In case the InvoiceItem found by the `where` argument doesn't exist, create a new InvoiceItem with this data.
+     */
+    create: XOR<InvoiceItemCreateInput, InvoiceItemUncheckedCreateInput>
+    /**
+     * In case the InvoiceItem was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InvoiceItemUpdateInput, InvoiceItemUncheckedUpdateInput>
+  }
+
+  /**
+   * InvoiceItem delete
+   */
+  export type InvoiceItemDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+    /**
+     * Filter which InvoiceItem to delete.
+     */
+    where: InvoiceItemWhereUniqueInput
+  }
+
+  /**
+   * InvoiceItem deleteMany
+   */
+  export type InvoiceItemDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InvoiceItems to delete
+     */
+    where?: InvoiceItemWhereInput
+    /**
+     * Limit how many InvoiceItems to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InvoiceItem without action
+   */
+  export type InvoiceItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InvoiceItem
+     */
+    select?: InvoiceItemSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InvoiceItem
+     */
+    omit?: InvoiceItemOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvoiceItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Payment
+   */
+
+  export type AggregatePayment = {
+    _count: PaymentCountAggregateOutputType | null
+    _avg: PaymentAvgAggregateOutputType | null
+    _sum: PaymentSumAggregateOutputType | null
+    _min: PaymentMinAggregateOutputType | null
+    _max: PaymentMaxAggregateOutputType | null
+  }
+
+  export type PaymentAvgAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type PaymentSumAggregateOutputType = {
+    amount: number | null
+  }
+
+  export type PaymentMinAggregateOutputType = {
+    id: string | null
+    invoiceId: string | null
+    amount: number | null
+    currency: string | null
+    method: $Enums.PaymentMethod | null
+    reference: string | null
+    paidAt: Date | null
+    notes: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PaymentMaxAggregateOutputType = {
+    id: string | null
+    invoiceId: string | null
+    amount: number | null
+    currency: string | null
+    method: $Enums.PaymentMethod | null
+    reference: string | null
+    paidAt: Date | null
+    notes: string | null
+    createdById: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PaymentCountAggregateOutputType = {
+    id: number
+    invoiceId: number
+    amount: number
+    currency: number
+    method: number
+    reference: number
+    paidAt: number
+    notes: number
+    createdById: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PaymentAvgAggregateInputType = {
+    amount?: true
+  }
+
+  export type PaymentSumAggregateInputType = {
+    amount?: true
+  }
+
+  export type PaymentMinAggregateInputType = {
+    id?: true
+    invoiceId?: true
+    amount?: true
+    currency?: true
+    method?: true
+    reference?: true
+    paidAt?: true
+    notes?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PaymentMaxAggregateInputType = {
+    id?: true
+    invoiceId?: true
+    amount?: true
+    currency?: true
+    method?: true
+    reference?: true
+    paidAt?: true
+    notes?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PaymentCountAggregateInputType = {
+    id?: true
+    invoiceId?: true
+    amount?: true
+    currency?: true
+    method?: true
+    reference?: true
+    paidAt?: true
+    notes?: true
+    createdById?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PaymentAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Payment to aggregate.
+     */
+    where?: PaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Payments to fetch.
+     */
+    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Payments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Payments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Payments
+    **/
+    _count?: true | PaymentCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PaymentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PaymentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PaymentMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PaymentMaxAggregateInputType
+  }
+
+  export type GetPaymentAggregateType<T extends PaymentAggregateArgs> = {
+        [P in keyof T & keyof AggregatePayment]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePayment[P]>
+      : GetScalarType<T[P], AggregatePayment[P]>
+  }
+
+
+
+
+  export type PaymentGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PaymentWhereInput
+    orderBy?: PaymentOrderByWithAggregationInput | PaymentOrderByWithAggregationInput[]
+    by: PaymentScalarFieldEnum[] | PaymentScalarFieldEnum
+    having?: PaymentScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PaymentCountAggregateInputType | true
+    _avg?: PaymentAvgAggregateInputType
+    _sum?: PaymentSumAggregateInputType
+    _min?: PaymentMinAggregateInputType
+    _max?: PaymentMaxAggregateInputType
+  }
+
+  export type PaymentGroupByOutputType = {
+    id: string
+    invoiceId: string
+    amount: number
+    currency: string
+    method: $Enums.PaymentMethod
+    reference: string | null
+    paidAt: Date
+    notes: string | null
+    createdById: string
+    createdAt: Date
+    updatedAt: Date
+    _count: PaymentCountAggregateOutputType | null
+    _avg: PaymentAvgAggregateOutputType | null
+    _sum: PaymentSumAggregateOutputType | null
+    _min: PaymentMinAggregateOutputType | null
+    _max: PaymentMaxAggregateOutputType | null
+  }
+
+  type GetPaymentGroupByPayload<T extends PaymentGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PaymentGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PaymentGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PaymentGroupByOutputType[P]>
+            : GetScalarType<T[P], PaymentGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PaymentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    invoiceId?: boolean
+    amount?: boolean
+    currency?: boolean
+    method?: boolean
+    reference?: boolean
+    paidAt?: boolean
+    notes?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    invoice?: boolean | InvoiceDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["payment"]>
+
+
+
+  export type PaymentSelectScalar = {
+    id?: boolean
+    invoiceId?: boolean
+    amount?: boolean
+    currency?: boolean
+    method?: boolean
+    reference?: boolean
+    paidAt?: boolean
+    notes?: boolean
+    createdById?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PaymentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "invoiceId" | "amount" | "currency" | "method" | "reference" | "paidAt" | "notes" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["payment"]>
+  export type PaymentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    invoice?: boolean | InvoiceDefaultArgs<ExtArgs>
+  }
+
+  export type $PaymentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Payment"
+    objects: {
+      invoice: Prisma.$InvoicePayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      invoiceId: string
+      amount: number
+      currency: string
+      method: $Enums.PaymentMethod
+      reference: string | null
+      paidAt: Date
+      notes: string | null
+      createdById: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["payment"]>
+    composites: {}
+  }
+
+  type PaymentGetPayload<S extends boolean | null | undefined | PaymentDefaultArgs> = $Result.GetResult<Prisma.$PaymentPayload, S>
+
+  type PaymentCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PaymentFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PaymentCountAggregateInputType | true
+    }
+
+  export interface PaymentDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Payment'], meta: { name: 'Payment' } }
+    /**
+     * Find zero or one Payment that matches the filter.
+     * @param {PaymentFindUniqueArgs} args - Arguments to find a Payment
+     * @example
+     * // Get one Payment
+     * const payment = await prisma.payment.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PaymentFindUniqueArgs>(args: SelectSubset<T, PaymentFindUniqueArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Payment that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PaymentFindUniqueOrThrowArgs} args - Arguments to find a Payment
+     * @example
+     * // Get one Payment
+     * const payment = await prisma.payment.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PaymentFindUniqueOrThrowArgs>(args: SelectSubset<T, PaymentFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Payment that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentFindFirstArgs} args - Arguments to find a Payment
+     * @example
+     * // Get one Payment
+     * const payment = await prisma.payment.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PaymentFindFirstArgs>(args?: SelectSubset<T, PaymentFindFirstArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Payment that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentFindFirstOrThrowArgs} args - Arguments to find a Payment
+     * @example
+     * // Get one Payment
+     * const payment = await prisma.payment.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PaymentFindFirstOrThrowArgs>(args?: SelectSubset<T, PaymentFindFirstOrThrowArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Payments that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Payments
+     * const payments = await prisma.payment.findMany()
+     * 
+     * // Get first 10 Payments
+     * const payments = await prisma.payment.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const paymentWithIdOnly = await prisma.payment.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PaymentFindManyArgs>(args?: SelectSubset<T, PaymentFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Payment.
+     * @param {PaymentCreateArgs} args - Arguments to create a Payment.
+     * @example
+     * // Create one Payment
+     * const Payment = await prisma.payment.create({
+     *   data: {
+     *     // ... data to create a Payment
+     *   }
+     * })
+     * 
+     */
+    create<T extends PaymentCreateArgs>(args: SelectSubset<T, PaymentCreateArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Payments.
+     * @param {PaymentCreateManyArgs} args - Arguments to create many Payments.
+     * @example
+     * // Create many Payments
+     * const payment = await prisma.payment.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PaymentCreateManyArgs>(args?: SelectSubset<T, PaymentCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Payment.
+     * @param {PaymentDeleteArgs} args - Arguments to delete one Payment.
+     * @example
+     * // Delete one Payment
+     * const Payment = await prisma.payment.delete({
+     *   where: {
+     *     // ... filter to delete one Payment
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PaymentDeleteArgs>(args: SelectSubset<T, PaymentDeleteArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Payment.
+     * @param {PaymentUpdateArgs} args - Arguments to update one Payment.
+     * @example
+     * // Update one Payment
+     * const payment = await prisma.payment.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PaymentUpdateArgs>(args: SelectSubset<T, PaymentUpdateArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Payments.
+     * @param {PaymentDeleteManyArgs} args - Arguments to filter Payments to delete.
+     * @example
+     * // Delete a few Payments
+     * const { count } = await prisma.payment.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PaymentDeleteManyArgs>(args?: SelectSubset<T, PaymentDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Payments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Payments
+     * const payment = await prisma.payment.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PaymentUpdateManyArgs>(args: SelectSubset<T, PaymentUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Payment.
+     * @param {PaymentUpsertArgs} args - Arguments to update or create a Payment.
+     * @example
+     * // Update or create a Payment
+     * const payment = await prisma.payment.upsert({
+     *   create: {
+     *     // ... data to create a Payment
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Payment we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PaymentUpsertArgs>(args: SelectSubset<T, PaymentUpsertArgs<ExtArgs>>): Prisma__PaymentClient<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Payments.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentCountArgs} args - Arguments to filter Payments to count.
+     * @example
+     * // Count the number of Payments
+     * const count = await prisma.payment.count({
+     *   where: {
+     *     // ... the filter for the Payments we want to count
+     *   }
+     * })
+    **/
+    count<T extends PaymentCountArgs>(
+      args?: Subset<T, PaymentCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PaymentCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Payment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PaymentAggregateArgs>(args: Subset<T, PaymentAggregateArgs>): Prisma.PrismaPromise<GetPaymentAggregateType<T>>
+
+    /**
+     * Group by Payment.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PaymentGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PaymentGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PaymentGroupByArgs['orderBy'] }
+        : { orderBy?: PaymentGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PaymentGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPaymentGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Payment model
+   */
+  readonly fields: PaymentFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Payment.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PaymentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    invoice<T extends InvoiceDefaultArgs<ExtArgs> = {}>(args?: Subset<T, InvoiceDefaultArgs<ExtArgs>>): Prisma__InvoiceClient<$Result.GetResult<Prisma.$InvoicePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Payment model
+   */
+  interface PaymentFieldRefs {
+    readonly id: FieldRef<"Payment", 'String'>
+    readonly invoiceId: FieldRef<"Payment", 'String'>
+    readonly amount: FieldRef<"Payment", 'Float'>
+    readonly currency: FieldRef<"Payment", 'String'>
+    readonly method: FieldRef<"Payment", 'PaymentMethod'>
+    readonly reference: FieldRef<"Payment", 'String'>
+    readonly paidAt: FieldRef<"Payment", 'DateTime'>
+    readonly notes: FieldRef<"Payment", 'String'>
+    readonly createdById: FieldRef<"Payment", 'String'>
+    readonly createdAt: FieldRef<"Payment", 'DateTime'>
+    readonly updatedAt: FieldRef<"Payment", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Payment findUnique
+   */
+  export type PaymentFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which Payment to fetch.
+     */
+    where: PaymentWhereUniqueInput
+  }
+
+  /**
+   * Payment findUniqueOrThrow
+   */
+  export type PaymentFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which Payment to fetch.
+     */
+    where: PaymentWhereUniqueInput
+  }
+
+  /**
+   * Payment findFirst
+   */
+  export type PaymentFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which Payment to fetch.
+     */
+    where?: PaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Payments to fetch.
+     */
+    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Payments.
+     */
+    cursor?: PaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Payments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Payments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Payments.
+     */
+    distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
+  }
+
+  /**
+   * Payment findFirstOrThrow
+   */
+  export type PaymentFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which Payment to fetch.
+     */
+    where?: PaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Payments to fetch.
+     */
+    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Payments.
+     */
+    cursor?: PaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Payments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Payments.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Payments.
+     */
+    distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
+  }
+
+  /**
+   * Payment findMany
+   */
+  export type PaymentFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * Filter, which Payments to fetch.
+     */
+    where?: PaymentWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Payments to fetch.
+     */
+    orderBy?: PaymentOrderByWithRelationInput | PaymentOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Payments.
+     */
+    cursor?: PaymentWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Payments from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Payments.
+     */
+    skip?: number
+    distinct?: PaymentScalarFieldEnum | PaymentScalarFieldEnum[]
+  }
+
+  /**
+   * Payment create
+   */
+  export type PaymentCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Payment.
+     */
+    data: XOR<PaymentCreateInput, PaymentUncheckedCreateInput>
+  }
+
+  /**
+   * Payment createMany
+   */
+  export type PaymentCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Payments.
+     */
+    data: PaymentCreateManyInput | PaymentCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Payment update
+   */
+  export type PaymentUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Payment.
+     */
+    data: XOR<PaymentUpdateInput, PaymentUncheckedUpdateInput>
+    /**
+     * Choose, which Payment to update.
+     */
+    where: PaymentWhereUniqueInput
+  }
+
+  /**
+   * Payment updateMany
+   */
+  export type PaymentUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Payments.
+     */
+    data: XOR<PaymentUpdateManyMutationInput, PaymentUncheckedUpdateManyInput>
+    /**
+     * Filter which Payments to update
+     */
+    where?: PaymentWhereInput
+    /**
+     * Limit how many Payments to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Payment upsert
+   */
+  export type PaymentUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Payment to update in case it exists.
+     */
+    where: PaymentWhereUniqueInput
+    /**
+     * In case the Payment found by the `where` argument doesn't exist, create a new Payment with this data.
+     */
+    create: XOR<PaymentCreateInput, PaymentUncheckedCreateInput>
+    /**
+     * In case the Payment was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PaymentUpdateInput, PaymentUncheckedUpdateInput>
+  }
+
+  /**
+   * Payment delete
+   */
+  export type PaymentDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+    /**
+     * Filter which Payment to delete.
+     */
+    where: PaymentWhereUniqueInput
+  }
+
+  /**
+   * Payment deleteMany
+   */
+  export type PaymentDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Payments to delete
+     */
+    where?: PaymentWhereInput
+    /**
+     * Limit how many Payments to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Payment without action
+   */
+  export type PaymentDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Payment
+     */
+    select?: PaymentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Payment
+     */
+    omit?: PaymentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PaymentInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -13829,6 +22898,7 @@ export namespace Prisma {
     role: 'role',
     avatar: 'avatar',
     image: 'image',
+    emailVerified: 'emailVerified',
     created_at: 'created_at',
     updatedAt: 'updatedAt'
   };
@@ -13879,9 +22949,27 @@ export namespace Prisma {
 
   export const ClientScalarFieldEnum: {
     id: 'id',
-    company: 'company',
-    name: 'name',
-    contact_id: 'contact_id'
+    type: 'type',
+    email: 'email',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    phone: 'phone',
+    companyName: 'companyName',
+    siret: 'siret',
+    vatNumber: 'vatNumber',
+    website: 'website',
+    address: 'address',
+    city: 'city',
+    postalCode: 'postalCode',
+    country: 'country',
+    currency: 'currency',
+    taxRate: 'taxRate',
+    userId: 'userId',
+    notes: 'notes',
+    isActive: 'isActive',
+    createdById: 'createdById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
@@ -13892,15 +22980,21 @@ export namespace Prisma {
     name: 'name',
     description: 'description',
     client_id: 'client_id',
-    created_at: 'created_at'
+    created_at: 'created_at',
+    updatedAt: 'updatedAt',
+    hiddenForClient: 'hiddenForClient'
   };
 
   export type ProjectScalarFieldEnum = (typeof ProjectScalarFieldEnum)[keyof typeof ProjectScalarFieldEnum]
 
 
   export const ProjectMemberScalarFieldEnum: {
+    id: 'id',
     projectId: 'projectId',
-    user_id: 'user_id'
+    userId: 'userId',
+    role: 'role',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ProjectMemberScalarFieldEnum = (typeof ProjectMemberScalarFieldEnum)[keyof typeof ProjectMemberScalarFieldEnum]
@@ -13910,7 +23004,9 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     projectId: 'projectId',
-    created_by_id: 'created_by_id'
+    created_by_id: 'created_by_id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type BoardScalarFieldEnum = (typeof BoardScalarFieldEnum)[keyof typeof BoardScalarFieldEnum]
@@ -13922,7 +23018,9 @@ export namespace Prisma {
     order: 'order',
     position: 'position',
     color: 'color',
-    boardId: 'boardId'
+    boardId: 'boardId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ColumnScalarFieldEnum = (typeof ColumnScalarFieldEnum)[keyof typeof ColumnScalarFieldEnum]
@@ -13937,7 +23035,10 @@ export namespace Prisma {
     order: 'order',
     columnId: 'columnId',
     assigneeId: 'assigneeId',
-    client_id: 'client_id'
+    client_id: 'client_id',
+    createdById: 'createdById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
@@ -13946,18 +23047,148 @@ export namespace Prisma {
   export const LabelScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    color: 'color'
+    color: 'color',
+    description: 'description',
+    createdById: 'createdById',
+    usageCount: 'usageCount',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type LabelScalarFieldEnum = (typeof LabelScalarFieldEnum)[keyof typeof LabelScalarFieldEnum]
 
 
+  export const ProjectLabelScalarFieldEnum: {
+    id: 'id',
+    projectId: 'projectId',
+    labelId: 'labelId',
+    addedById: 'addedById',
+    isFavorite: 'isFavorite',
+    createdAt: 'createdAt'
+  };
+
+  export type ProjectLabelScalarFieldEnum = (typeof ProjectLabelScalarFieldEnum)[keyof typeof ProjectLabelScalarFieldEnum]
+
+
+  export const BoardLabelScalarFieldEnum: {
+    id: 'id',
+    boardId: 'boardId',
+    labelId: 'labelId',
+    addedById: 'addedById',
+    isFavorite: 'isFavorite',
+    createdAt: 'createdAt'
+  };
+
+  export type BoardLabelScalarFieldEnum = (typeof BoardLabelScalarFieldEnum)[keyof typeof BoardLabelScalarFieldEnum]
+
+
   export const TaskLabelScalarFieldEnum: {
     task_id: 'task_id',
-    label_id: 'label_id'
+    label_id: 'label_id',
+    createdAt: 'createdAt'
   };
 
   export type TaskLabelScalarFieldEnum = (typeof TaskLabelScalarFieldEnum)[keyof typeof TaskLabelScalarFieldEnum]
+
+
+  export const QuoteScalarFieldEnum: {
+    id: 'id',
+    number: 'number',
+    title: 'title',
+    description: 'description',
+    clientId: 'clientId',
+    projectId: 'projectId',
+    status: 'status',
+    subtotal: 'subtotal',
+    taxAmount: 'taxAmount',
+    totalAmount: 'totalAmount',
+    currency: 'currency',
+    validUntil: 'validUntil',
+    sentAt: 'sentAt',
+    acceptedAt: 'acceptedAt',
+    rejectedAt: 'rejectedAt',
+    notes: 'notes',
+    terms: 'terms',
+    createdById: 'createdById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type QuoteScalarFieldEnum = (typeof QuoteScalarFieldEnum)[keyof typeof QuoteScalarFieldEnum]
+
+
+  export const QuoteItemScalarFieldEnum: {
+    id: 'id',
+    quoteId: 'quoteId',
+    description: 'description',
+    quantity: 'quantity',
+    unitPrice: 'unitPrice',
+    totalPrice: 'totalPrice',
+    order: 'order',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type QuoteItemScalarFieldEnum = (typeof QuoteItemScalarFieldEnum)[keyof typeof QuoteItemScalarFieldEnum]
+
+
+  export const InvoiceScalarFieldEnum: {
+    id: 'id',
+    number: 'number',
+    title: 'title',
+    description: 'description',
+    clientId: 'clientId',
+    projectId: 'projectId',
+    quoteId: 'quoteId',
+    status: 'status',
+    subtotal: 'subtotal',
+    taxAmount: 'taxAmount',
+    totalAmount: 'totalAmount',
+    paidAmount: 'paidAmount',
+    currency: 'currency',
+    issueDate: 'issueDate',
+    dueDate: 'dueDate',
+    paidAt: 'paidAt',
+    notes: 'notes',
+    terms: 'terms',
+    createdById: 'createdById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type InvoiceScalarFieldEnum = (typeof InvoiceScalarFieldEnum)[keyof typeof InvoiceScalarFieldEnum]
+
+
+  export const InvoiceItemScalarFieldEnum: {
+    id: 'id',
+    invoiceId: 'invoiceId',
+    description: 'description',
+    quantity: 'quantity',
+    unitPrice: 'unitPrice',
+    totalPrice: 'totalPrice',
+    order: 'order',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type InvoiceItemScalarFieldEnum = (typeof InvoiceItemScalarFieldEnum)[keyof typeof InvoiceItemScalarFieldEnum]
+
+
+  export const PaymentScalarFieldEnum: {
+    id: 'id',
+    invoiceId: 'invoiceId',
+    amount: 'amount',
+    currency: 'currency',
+    method: 'method',
+    reference: 'reference',
+    paidAt: 'paidAt',
+    notes: 'notes',
+    createdById: 'createdById',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -14025,9 +23256,22 @@ export namespace Prisma {
 
   export const ClientOrderByRelevanceFieldEnum: {
     id: 'id',
-    company: 'company',
-    name: 'name',
-    contact_id: 'contact_id'
+    email: 'email',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    phone: 'phone',
+    companyName: 'companyName',
+    siret: 'siret',
+    vatNumber: 'vatNumber',
+    website: 'website',
+    address: 'address',
+    city: 'city',
+    postalCode: 'postalCode',
+    country: 'country',
+    currency: 'currency',
+    userId: 'userId',
+    notes: 'notes',
+    createdById: 'createdById'
   };
 
   export type ClientOrderByRelevanceFieldEnum = (typeof ClientOrderByRelevanceFieldEnum)[keyof typeof ClientOrderByRelevanceFieldEnum]
@@ -14044,8 +23288,10 @@ export namespace Prisma {
 
 
   export const ProjectMemberOrderByRelevanceFieldEnum: {
+    id: 'id',
     projectId: 'projectId',
-    user_id: 'user_id'
+    userId: 'userId',
+    role: 'role'
   };
 
   export type ProjectMemberOrderByRelevanceFieldEnum = (typeof ProjectMemberOrderByRelevanceFieldEnum)[keyof typeof ProjectMemberOrderByRelevanceFieldEnum]
@@ -14077,7 +23323,8 @@ export namespace Prisma {
     description: 'description',
     columnId: 'columnId',
     assigneeId: 'assigneeId',
-    client_id: 'client_id'
+    client_id: 'client_id',
+    createdById: 'createdById'
   };
 
   export type TaskOrderByRelevanceFieldEnum = (typeof TaskOrderByRelevanceFieldEnum)[keyof typeof TaskOrderByRelevanceFieldEnum]
@@ -14086,10 +23333,32 @@ export namespace Prisma {
   export const LabelOrderByRelevanceFieldEnum: {
     id: 'id',
     name: 'name',
-    color: 'color'
+    color: 'color',
+    description: 'description',
+    createdById: 'createdById'
   };
 
   export type LabelOrderByRelevanceFieldEnum = (typeof LabelOrderByRelevanceFieldEnum)[keyof typeof LabelOrderByRelevanceFieldEnum]
+
+
+  export const ProjectLabelOrderByRelevanceFieldEnum: {
+    id: 'id',
+    projectId: 'projectId',
+    labelId: 'labelId',
+    addedById: 'addedById'
+  };
+
+  export type ProjectLabelOrderByRelevanceFieldEnum = (typeof ProjectLabelOrderByRelevanceFieldEnum)[keyof typeof ProjectLabelOrderByRelevanceFieldEnum]
+
+
+  export const BoardLabelOrderByRelevanceFieldEnum: {
+    id: 'id',
+    boardId: 'boardId',
+    labelId: 'labelId',
+    addedById: 'addedById'
+  };
+
+  export type BoardLabelOrderByRelevanceFieldEnum = (typeof BoardLabelOrderByRelevanceFieldEnum)[keyof typeof BoardLabelOrderByRelevanceFieldEnum]
 
 
   export const TaskLabelOrderByRelevanceFieldEnum: {
@@ -14098,6 +23367,69 @@ export namespace Prisma {
   };
 
   export type TaskLabelOrderByRelevanceFieldEnum = (typeof TaskLabelOrderByRelevanceFieldEnum)[keyof typeof TaskLabelOrderByRelevanceFieldEnum]
+
+
+  export const QuoteOrderByRelevanceFieldEnum: {
+    id: 'id',
+    number: 'number',
+    title: 'title',
+    description: 'description',
+    clientId: 'clientId',
+    projectId: 'projectId',
+    currency: 'currency',
+    notes: 'notes',
+    terms: 'terms',
+    createdById: 'createdById'
+  };
+
+  export type QuoteOrderByRelevanceFieldEnum = (typeof QuoteOrderByRelevanceFieldEnum)[keyof typeof QuoteOrderByRelevanceFieldEnum]
+
+
+  export const QuoteItemOrderByRelevanceFieldEnum: {
+    id: 'id',
+    quoteId: 'quoteId',
+    description: 'description'
+  };
+
+  export type QuoteItemOrderByRelevanceFieldEnum = (typeof QuoteItemOrderByRelevanceFieldEnum)[keyof typeof QuoteItemOrderByRelevanceFieldEnum]
+
+
+  export const InvoiceOrderByRelevanceFieldEnum: {
+    id: 'id',
+    number: 'number',
+    title: 'title',
+    description: 'description',
+    clientId: 'clientId',
+    projectId: 'projectId',
+    quoteId: 'quoteId',
+    currency: 'currency',
+    notes: 'notes',
+    terms: 'terms',
+    createdById: 'createdById'
+  };
+
+  export type InvoiceOrderByRelevanceFieldEnum = (typeof InvoiceOrderByRelevanceFieldEnum)[keyof typeof InvoiceOrderByRelevanceFieldEnum]
+
+
+  export const InvoiceItemOrderByRelevanceFieldEnum: {
+    id: 'id',
+    invoiceId: 'invoiceId',
+    description: 'description'
+  };
+
+  export type InvoiceItemOrderByRelevanceFieldEnum = (typeof InvoiceItemOrderByRelevanceFieldEnum)[keyof typeof InvoiceItemOrderByRelevanceFieldEnum]
+
+
+  export const PaymentOrderByRelevanceFieldEnum: {
+    id: 'id',
+    invoiceId: 'invoiceId',
+    currency: 'currency',
+    reference: 'reference',
+    notes: 'notes',
+    createdById: 'createdById'
+  };
+
+  export type PaymentOrderByRelevanceFieldEnum = (typeof PaymentOrderByRelevanceFieldEnum)[keyof typeof PaymentOrderByRelevanceFieldEnum]
 
 
   /**
@@ -14127,9 +23459,44 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'ClientType'
+   */
+  export type EnumClientTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ClientType'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'QuoteStatus'
+   */
+  export type EnumQuoteStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QuoteStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'InvoiceStatus'
+   */
+  export type EnumInvoiceStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvoiceStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'PaymentMethod'
+   */
+  export type EnumPaymentMethodFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'PaymentMethod'>
     
   /**
    * Deep Input Types
@@ -14143,36 +23510,44 @@ export namespace Prisma {
     id?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     username?: StringNullableFilter<"User"> | string | null
-    name?: StringFilter<"User"> | string
-    role?: StringFilter<"User"> | string
+    name?: StringNullableFilter<"User"> | string | null
+    role?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
     image?: StringNullableFilter<"User"> | string | null
+    emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     created_at?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     createdBoards?: BoardListRelationFilter
     assignedTasks?: TaskListRelationFilter
-    contactClients?: ClientListRelationFilter
     projectMembers?: ProjectMemberListRelationFilter
+    createdClients?: ClientListRelationFilter
+    createdTasks?: TaskListRelationFilter
+    createdLabels?: LabelListRelationFilter
+    clientProfile?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
   }
 
   export type UserOrderByWithRelationInput = {
     id?: SortOrder
     email?: SortOrder
     username?: SortOrderInput | SortOrder
-    name?: SortOrder
-    role?: SortOrder
+    name?: SortOrderInput | SortOrder
+    role?: SortOrderInput | SortOrder
     avatar?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
+    emailVerified?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updatedAt?: SortOrder
     accounts?: AccountOrderByRelationAggregateInput
     sessions?: SessionOrderByRelationAggregateInput
     createdBoards?: BoardOrderByRelationAggregateInput
     assignedTasks?: TaskOrderByRelationAggregateInput
-    contactClients?: ClientOrderByRelationAggregateInput
     projectMembers?: ProjectMemberOrderByRelationAggregateInput
+    createdClients?: ClientOrderByRelationAggregateInput
+    createdTasks?: TaskOrderByRelationAggregateInput
+    createdLabels?: LabelOrderByRelationAggregateInput
+    clientProfile?: ClientOrderByWithRelationInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -14183,28 +23558,33 @@ export namespace Prisma {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    name?: StringFilter<"User"> | string
-    role?: StringFilter<"User"> | string
+    name?: StringNullableFilter<"User"> | string | null
+    role?: StringNullableFilter<"User"> | string | null
     avatar?: StringNullableFilter<"User"> | string | null
     image?: StringNullableFilter<"User"> | string | null
+    emailVerified?: DateTimeNullableFilter<"User"> | Date | string | null
     created_at?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
     accounts?: AccountListRelationFilter
     sessions?: SessionListRelationFilter
     createdBoards?: BoardListRelationFilter
     assignedTasks?: TaskListRelationFilter
-    contactClients?: ClientListRelationFilter
     projectMembers?: ProjectMemberListRelationFilter
+    createdClients?: ClientListRelationFilter
+    createdTasks?: TaskListRelationFilter
+    createdLabels?: LabelListRelationFilter
+    clientProfile?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
   }, "id" | "email" | "username">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
     username?: SortOrderInput | SortOrder
-    name?: SortOrder
-    role?: SortOrder
+    name?: SortOrderInput | SortOrder
+    role?: SortOrderInput | SortOrder
     avatar?: SortOrderInput | SortOrder
     image?: SortOrderInput | SortOrder
+    emailVerified?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -14219,10 +23599,11 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     username?: StringNullableWithAggregatesFilter<"User"> | string | null
-    name?: StringWithAggregatesFilter<"User"> | string
-    role?: StringWithAggregatesFilter<"User"> | string
+    name?: StringNullableWithAggregatesFilter<"User"> | string | null
+    role?: StringNullableWithAggregatesFilter<"User"> | string | null
     avatar?: StringNullableWithAggregatesFilter<"User"> | string | null
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
+    emailVerified?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
     created_at?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -14441,46 +23822,129 @@ export namespace Prisma {
     OR?: ClientWhereInput[]
     NOT?: ClientWhereInput | ClientWhereInput[]
     id?: StringFilter<"Client"> | string
-    company?: StringFilter<"Client"> | string
-    name?: StringFilter<"Client"> | string
-    contact_id?: StringFilter<"Client"> | string
-    contact?: XOR<UserScalarRelationFilter, UserWhereInput>
+    type?: EnumClientTypeFilter<"Client"> | $Enums.ClientType
+    email?: StringFilter<"Client"> | string
+    firstName?: StringFilter<"Client"> | string
+    lastName?: StringNullableFilter<"Client"> | string | null
+    phone?: StringNullableFilter<"Client"> | string | null
+    companyName?: StringNullableFilter<"Client"> | string | null
+    siret?: StringNullableFilter<"Client"> | string | null
+    vatNumber?: StringNullableFilter<"Client"> | string | null
+    website?: StringNullableFilter<"Client"> | string | null
+    address?: StringNullableFilter<"Client"> | string | null
+    city?: StringNullableFilter<"Client"> | string | null
+    postalCode?: StringNullableFilter<"Client"> | string | null
+    country?: StringNullableFilter<"Client"> | string | null
+    currency?: StringFilter<"Client"> | string
+    taxRate?: FloatNullableFilter<"Client"> | number | null
+    userId?: StringNullableFilter<"Client"> | string | null
+    notes?: StringNullableFilter<"Client"> | string | null
+    isActive?: BoolFilter<"Client"> | boolean
+    createdById?: StringFilter<"Client"> | string
+    createdAt?: DateTimeFilter<"Client"> | Date | string
+    updatedAt?: DateTimeFilter<"Client"> | Date | string
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     projects?: ProjectListRelationFilter
-    Task?: TaskListRelationFilter
+    tasks?: TaskListRelationFilter
+    invoices?: InvoiceListRelationFilter
+    quotes?: QuoteListRelationFilter
   }
 
   export type ClientOrderByWithRelationInput = {
     id?: SortOrder
-    company?: SortOrder
-    name?: SortOrder
-    contact_id?: SortOrder
-    contact?: UserOrderByWithRelationInput
+    type?: SortOrder
+    email?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    companyName?: SortOrderInput | SortOrder
+    siret?: SortOrderInput | SortOrder
+    vatNumber?: SortOrderInput | SortOrder
+    website?: SortOrderInput | SortOrder
+    address?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
+    postalCode?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
+    currency?: SortOrder
+    taxRate?: SortOrderInput | SortOrder
+    userId?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    user?: UserOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
     projects?: ProjectOrderByRelationAggregateInput
-    Task?: TaskOrderByRelationAggregateInput
+    tasks?: TaskOrderByRelationAggregateInput
+    invoices?: InvoiceOrderByRelationAggregateInput
+    quotes?: QuoteOrderByRelationAggregateInput
     _relevance?: ClientOrderByRelevanceInput
   }
 
   export type ClientWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    email?: string
+    siret?: string
+    vatNumber?: string
+    userId?: string
     AND?: ClientWhereInput | ClientWhereInput[]
     OR?: ClientWhereInput[]
     NOT?: ClientWhereInput | ClientWhereInput[]
-    company?: StringFilter<"Client"> | string
-    name?: StringFilter<"Client"> | string
-    contact_id?: StringFilter<"Client"> | string
-    contact?: XOR<UserScalarRelationFilter, UserWhereInput>
+    type?: EnumClientTypeFilter<"Client"> | $Enums.ClientType
+    firstName?: StringFilter<"Client"> | string
+    lastName?: StringNullableFilter<"Client"> | string | null
+    phone?: StringNullableFilter<"Client"> | string | null
+    companyName?: StringNullableFilter<"Client"> | string | null
+    website?: StringNullableFilter<"Client"> | string | null
+    address?: StringNullableFilter<"Client"> | string | null
+    city?: StringNullableFilter<"Client"> | string | null
+    postalCode?: StringNullableFilter<"Client"> | string | null
+    country?: StringNullableFilter<"Client"> | string | null
+    currency?: StringFilter<"Client"> | string
+    taxRate?: FloatNullableFilter<"Client"> | number | null
+    notes?: StringNullableFilter<"Client"> | string | null
+    isActive?: BoolFilter<"Client"> | boolean
+    createdById?: StringFilter<"Client"> | string
+    createdAt?: DateTimeFilter<"Client"> | Date | string
+    updatedAt?: DateTimeFilter<"Client"> | Date | string
+    user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     projects?: ProjectListRelationFilter
-    Task?: TaskListRelationFilter
-  }, "id">
+    tasks?: TaskListRelationFilter
+    invoices?: InvoiceListRelationFilter
+    quotes?: QuoteListRelationFilter
+  }, "id" | "email" | "siret" | "vatNumber" | "userId">
 
   export type ClientOrderByWithAggregationInput = {
     id?: SortOrder
-    company?: SortOrder
-    name?: SortOrder
-    contact_id?: SortOrder
+    type?: SortOrder
+    email?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrderInput | SortOrder
+    phone?: SortOrderInput | SortOrder
+    companyName?: SortOrderInput | SortOrder
+    siret?: SortOrderInput | SortOrder
+    vatNumber?: SortOrderInput | SortOrder
+    website?: SortOrderInput | SortOrder
+    address?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
+    postalCode?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
+    currency?: SortOrder
+    taxRate?: SortOrderInput | SortOrder
+    userId?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: ClientCountOrderByAggregateInput
+    _avg?: ClientAvgOrderByAggregateInput
     _max?: ClientMaxOrderByAggregateInput
     _min?: ClientMinOrderByAggregateInput
+    _sum?: ClientSumOrderByAggregateInput
   }
 
   export type ClientScalarWhereWithAggregatesInput = {
@@ -14488,9 +23952,27 @@ export namespace Prisma {
     OR?: ClientScalarWhereWithAggregatesInput[]
     NOT?: ClientScalarWhereWithAggregatesInput | ClientScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Client"> | string
-    company?: StringWithAggregatesFilter<"Client"> | string
-    name?: StringWithAggregatesFilter<"Client"> | string
-    contact_id?: StringWithAggregatesFilter<"Client"> | string
+    type?: EnumClientTypeWithAggregatesFilter<"Client"> | $Enums.ClientType
+    email?: StringWithAggregatesFilter<"Client"> | string
+    firstName?: StringWithAggregatesFilter<"Client"> | string
+    lastName?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    phone?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    companyName?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    siret?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    vatNumber?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    website?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    address?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    city?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    postalCode?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    country?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    currency?: StringWithAggregatesFilter<"Client"> | string
+    taxRate?: FloatNullableWithAggregatesFilter<"Client"> | number | null
+    userId?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    notes?: StringNullableWithAggregatesFilter<"Client"> | string | null
+    isActive?: BoolWithAggregatesFilter<"Client"> | boolean
+    createdById?: StringWithAggregatesFilter<"Client"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Client"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Client"> | Date | string
   }
 
   export type ProjectWhereInput = {
@@ -14502,9 +23984,14 @@ export namespace Prisma {
     description?: StringNullableFilter<"Project"> | string | null
     client_id?: StringFilter<"Project"> | string
     created_at?: DateTimeFilter<"Project"> | Date | string
+    updatedAt?: DateTimeFilter<"Project"> | Date | string
+    hiddenForClient?: BoolFilter<"Project"> | boolean
     client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
     members?: ProjectMemberListRelationFilter
     boards?: BoardListRelationFilter
+    labels?: ProjectLabelListRelationFilter
+    quotes?: QuoteListRelationFilter
+    invoices?: InvoiceListRelationFilter
   }
 
   export type ProjectOrderByWithRelationInput = {
@@ -14513,9 +24000,14 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     client_id?: SortOrder
     created_at?: SortOrder
+    updatedAt?: SortOrder
+    hiddenForClient?: SortOrder
     client?: ClientOrderByWithRelationInput
     members?: ProjectMemberOrderByRelationAggregateInput
     boards?: BoardOrderByRelationAggregateInput
+    labels?: ProjectLabelOrderByRelationAggregateInput
+    quotes?: QuoteOrderByRelationAggregateInput
+    invoices?: InvoiceOrderByRelationAggregateInput
     _relevance?: ProjectOrderByRelevanceInput
   }
 
@@ -14528,9 +24020,14 @@ export namespace Prisma {
     description?: StringNullableFilter<"Project"> | string | null
     client_id?: StringFilter<"Project"> | string
     created_at?: DateTimeFilter<"Project"> | Date | string
+    updatedAt?: DateTimeFilter<"Project"> | Date | string
+    hiddenForClient?: BoolFilter<"Project"> | boolean
     client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
     members?: ProjectMemberListRelationFilter
     boards?: BoardListRelationFilter
+    labels?: ProjectLabelListRelationFilter
+    quotes?: QuoteListRelationFilter
+    invoices?: InvoiceListRelationFilter
   }, "id">
 
   export type ProjectOrderByWithAggregationInput = {
@@ -14539,6 +24036,8 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     client_id?: SortOrder
     created_at?: SortOrder
+    updatedAt?: SortOrder
+    hiddenForClient?: SortOrder
     _count?: ProjectCountOrderByAggregateInput
     _max?: ProjectMaxOrderByAggregateInput
     _min?: ProjectMinOrderByAggregateInput
@@ -14553,40 +24052,58 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"Project"> | string | null
     client_id?: StringWithAggregatesFilter<"Project"> | string
     created_at?: DateTimeWithAggregatesFilter<"Project"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Project"> | Date | string
+    hiddenForClient?: BoolWithAggregatesFilter<"Project"> | boolean
   }
 
   export type ProjectMemberWhereInput = {
     AND?: ProjectMemberWhereInput | ProjectMemberWhereInput[]
     OR?: ProjectMemberWhereInput[]
     NOT?: ProjectMemberWhereInput | ProjectMemberWhereInput[]
+    id?: StringFilter<"ProjectMember"> | string
     projectId?: StringFilter<"ProjectMember"> | string
-    user_id?: StringFilter<"ProjectMember"> | string
+    userId?: StringFilter<"ProjectMember"> | string
+    role?: StringFilter<"ProjectMember"> | string
+    createdAt?: DateTimeFilter<"ProjectMember"> | Date | string
+    updatedAt?: DateTimeFilter<"ProjectMember"> | Date | string
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type ProjectMemberOrderByWithRelationInput = {
+    id?: SortOrder
     projectId?: SortOrder
-    user_id?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     project?: ProjectOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     _relevance?: ProjectMemberOrderByRelevanceInput
   }
 
   export type ProjectMemberWhereUniqueInput = Prisma.AtLeast<{
-    projectId_user_id?: ProjectMemberProjectIdUser_idCompoundUniqueInput
+    id?: string
+    projectId_userId?: ProjectMemberProjectIdUserIdCompoundUniqueInput
     AND?: ProjectMemberWhereInput | ProjectMemberWhereInput[]
     OR?: ProjectMemberWhereInput[]
     NOT?: ProjectMemberWhereInput | ProjectMemberWhereInput[]
     projectId?: StringFilter<"ProjectMember"> | string
-    user_id?: StringFilter<"ProjectMember"> | string
+    userId?: StringFilter<"ProjectMember"> | string
+    role?: StringFilter<"ProjectMember"> | string
+    createdAt?: DateTimeFilter<"ProjectMember"> | Date | string
+    updatedAt?: DateTimeFilter<"ProjectMember"> | Date | string
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
-  }, "projectId_user_id">
+  }, "id" | "projectId_userId">
 
   export type ProjectMemberOrderByWithAggregationInput = {
+    id?: SortOrder
     projectId?: SortOrder
-    user_id?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: ProjectMemberCountOrderByAggregateInput
     _max?: ProjectMemberMaxOrderByAggregateInput
     _min?: ProjectMemberMinOrderByAggregateInput
@@ -14596,8 +24113,12 @@ export namespace Prisma {
     AND?: ProjectMemberScalarWhereWithAggregatesInput | ProjectMemberScalarWhereWithAggregatesInput[]
     OR?: ProjectMemberScalarWhereWithAggregatesInput[]
     NOT?: ProjectMemberScalarWhereWithAggregatesInput | ProjectMemberScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ProjectMember"> | string
     projectId?: StringWithAggregatesFilter<"ProjectMember"> | string
-    user_id?: StringWithAggregatesFilter<"ProjectMember"> | string
+    userId?: StringWithAggregatesFilter<"ProjectMember"> | string
+    role?: StringWithAggregatesFilter<"ProjectMember"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"ProjectMember"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ProjectMember"> | Date | string
   }
 
   export type BoardWhereInput = {
@@ -14608,9 +24129,12 @@ export namespace Prisma {
     name?: StringFilter<"Board"> | string
     projectId?: StringFilter<"Board"> | string
     created_by_id?: StringFilter<"Board"> | string
+    createdAt?: DateTimeFilter<"Board"> | Date | string
+    updatedAt?: DateTimeFilter<"Board"> | Date | string
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     columns?: ColumnListRelationFilter
+    labels?: BoardLabelListRelationFilter
   }
 
   export type BoardOrderByWithRelationInput = {
@@ -14618,9 +24142,12 @@ export namespace Prisma {
     name?: SortOrder
     projectId?: SortOrder
     created_by_id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     project?: ProjectOrderByWithRelationInput
     createdBy?: UserOrderByWithRelationInput
     columns?: ColumnOrderByRelationAggregateInput
+    labels?: BoardLabelOrderByRelationAggregateInput
     _relevance?: BoardOrderByRelevanceInput
   }
 
@@ -14632,9 +24159,12 @@ export namespace Prisma {
     name?: StringFilter<"Board"> | string
     projectId?: StringFilter<"Board"> | string
     created_by_id?: StringFilter<"Board"> | string
+    createdAt?: DateTimeFilter<"Board"> | Date | string
+    updatedAt?: DateTimeFilter<"Board"> | Date | string
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     columns?: ColumnListRelationFilter
+    labels?: BoardLabelListRelationFilter
   }, "id">
 
   export type BoardOrderByWithAggregationInput = {
@@ -14642,6 +24172,8 @@ export namespace Prisma {
     name?: SortOrder
     projectId?: SortOrder
     created_by_id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: BoardCountOrderByAggregateInput
     _max?: BoardMaxOrderByAggregateInput
     _min?: BoardMinOrderByAggregateInput
@@ -14655,6 +24187,8 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"Board"> | string
     projectId?: StringWithAggregatesFilter<"Board"> | string
     created_by_id?: StringWithAggregatesFilter<"Board"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Board"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Board"> | Date | string
   }
 
   export type ColumnWhereInput = {
@@ -14667,6 +24201,8 @@ export namespace Prisma {
     position?: IntFilter<"Column"> | number
     color?: StringNullableFilter<"Column"> | string | null
     boardId?: StringFilter<"Column"> | string
+    createdAt?: DateTimeFilter<"Column"> | Date | string
+    updatedAt?: DateTimeFilter<"Column"> | Date | string
     board?: XOR<BoardScalarRelationFilter, BoardWhereInput>
     tasks?: TaskListRelationFilter
   }
@@ -14678,6 +24214,8 @@ export namespace Prisma {
     position?: SortOrder
     color?: SortOrderInput | SortOrder
     boardId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     board?: BoardOrderByWithRelationInput
     tasks?: TaskOrderByRelationAggregateInput
     _relevance?: ColumnOrderByRelevanceInput
@@ -14693,6 +24231,8 @@ export namespace Prisma {
     position?: IntFilter<"Column"> | number
     color?: StringNullableFilter<"Column"> | string | null
     boardId?: StringFilter<"Column"> | string
+    createdAt?: DateTimeFilter<"Column"> | Date | string
+    updatedAt?: DateTimeFilter<"Column"> | Date | string
     board?: XOR<BoardScalarRelationFilter, BoardWhereInput>
     tasks?: TaskListRelationFilter
   }, "id">
@@ -14704,6 +24244,8 @@ export namespace Prisma {
     position?: SortOrder
     color?: SortOrderInput | SortOrder
     boardId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: ColumnCountOrderByAggregateInput
     _avg?: ColumnAvgOrderByAggregateInput
     _max?: ColumnMaxOrderByAggregateInput
@@ -14721,6 +24263,8 @@ export namespace Prisma {
     position?: IntWithAggregatesFilter<"Column"> | number
     color?: StringNullableWithAggregatesFilter<"Column"> | string | null
     boardId?: StringWithAggregatesFilter<"Column"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Column"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Column"> | Date | string
   }
 
   export type TaskWhereInput = {
@@ -14736,9 +24280,13 @@ export namespace Prisma {
     columnId?: StringFilter<"Task"> | string
     assigneeId?: StringNullableFilter<"Task"> | string | null
     client_id?: StringNullableFilter<"Task"> | string | null
+    createdById?: StringFilter<"Task"> | string
+    createdAt?: DateTimeFilter<"Task"> | Date | string
+    updatedAt?: DateTimeFilter<"Task"> | Date | string
     column?: XOR<ColumnScalarRelationFilter, ColumnWhereInput>
     assignee?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     tags?: TaskLabelListRelationFilter
   }
 
@@ -14752,9 +24300,13 @@ export namespace Prisma {
     columnId?: SortOrder
     assigneeId?: SortOrderInput | SortOrder
     client_id?: SortOrderInput | SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     column?: ColumnOrderByWithRelationInput
     assignee?: UserOrderByWithRelationInput
     client?: ClientOrderByWithRelationInput
+    createdBy?: UserOrderByWithRelationInput
     tags?: TaskLabelOrderByRelationAggregateInput
     _relevance?: TaskOrderByRelevanceInput
   }
@@ -14772,9 +24324,13 @@ export namespace Prisma {
     columnId?: StringFilter<"Task"> | string
     assigneeId?: StringNullableFilter<"Task"> | string | null
     client_id?: StringNullableFilter<"Task"> | string | null
+    createdById?: StringFilter<"Task"> | string
+    createdAt?: DateTimeFilter<"Task"> | Date | string
+    updatedAt?: DateTimeFilter<"Task"> | Date | string
     column?: XOR<ColumnScalarRelationFilter, ColumnWhereInput>
     assignee?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     client?: XOR<ClientNullableScalarRelationFilter, ClientWhereInput> | null
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     tags?: TaskLabelListRelationFilter
   }, "id">
 
@@ -14788,6 +24344,9 @@ export namespace Prisma {
     columnId?: SortOrder
     assigneeId?: SortOrderInput | SortOrder
     client_id?: SortOrderInput | SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: TaskCountOrderByAggregateInput
     _avg?: TaskAvgOrderByAggregateInput
     _max?: TaskMaxOrderByAggregateInput
@@ -14808,6 +24367,9 @@ export namespace Prisma {
     columnId?: StringWithAggregatesFilter<"Task"> | string
     assigneeId?: StringNullableWithAggregatesFilter<"Task"> | string | null
     client_id?: StringNullableWithAggregatesFilter<"Task"> | string | null
+    createdById?: StringWithAggregatesFilter<"Task"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Task"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Task"> | Date | string
   }
 
   export type LabelWhereInput = {
@@ -14817,6 +24379,14 @@ export namespace Prisma {
     id?: StringFilter<"Label"> | string
     name?: StringFilter<"Label"> | string
     color?: StringNullableFilter<"Label"> | string | null
+    description?: StringNullableFilter<"Label"> | string | null
+    createdById?: StringFilter<"Label"> | string
+    usageCount?: IntFilter<"Label"> | number
+    createdAt?: DateTimeFilter<"Label"> | Date | string
+    updatedAt?: DateTimeFilter<"Label"> | Date | string
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    projects?: ProjectLabelListRelationFilter
+    boards?: BoardLabelListRelationFilter
     tasks?: TaskLabelListRelationFilter
   }
 
@@ -14824,27 +24394,50 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     color?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    createdById?: SortOrder
+    usageCount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    createdBy?: UserOrderByWithRelationInput
+    projects?: ProjectLabelOrderByRelationAggregateInput
+    boards?: BoardLabelOrderByRelationAggregateInput
     tasks?: TaskLabelOrderByRelationAggregateInput
     _relevance?: LabelOrderByRelevanceInput
   }
 
   export type LabelWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    name?: string
     AND?: LabelWhereInput | LabelWhereInput[]
     OR?: LabelWhereInput[]
     NOT?: LabelWhereInput | LabelWhereInput[]
-    name?: StringFilter<"Label"> | string
     color?: StringNullableFilter<"Label"> | string | null
+    description?: StringNullableFilter<"Label"> | string | null
+    createdById?: StringFilter<"Label"> | string
+    usageCount?: IntFilter<"Label"> | number
+    createdAt?: DateTimeFilter<"Label"> | Date | string
+    updatedAt?: DateTimeFilter<"Label"> | Date | string
+    createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
+    projects?: ProjectLabelListRelationFilter
+    boards?: BoardLabelListRelationFilter
     tasks?: TaskLabelListRelationFilter
-  }, "id">
+  }, "id" | "name">
 
   export type LabelOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     color?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    createdById?: SortOrder
+    usageCount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: LabelCountOrderByAggregateInput
+    _avg?: LabelAvgOrderByAggregateInput
     _max?: LabelMaxOrderByAggregateInput
     _min?: LabelMinOrderByAggregateInput
+    _sum?: LabelSumOrderByAggregateInput
   }
 
   export type LabelScalarWhereWithAggregatesInput = {
@@ -14854,6 +24447,141 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Label"> | string
     name?: StringWithAggregatesFilter<"Label"> | string
     color?: StringNullableWithAggregatesFilter<"Label"> | string | null
+    description?: StringNullableWithAggregatesFilter<"Label"> | string | null
+    createdById?: StringWithAggregatesFilter<"Label"> | string
+    usageCount?: IntWithAggregatesFilter<"Label"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"Label"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Label"> | Date | string
+  }
+
+  export type ProjectLabelWhereInput = {
+    AND?: ProjectLabelWhereInput | ProjectLabelWhereInput[]
+    OR?: ProjectLabelWhereInput[]
+    NOT?: ProjectLabelWhereInput | ProjectLabelWhereInput[]
+    id?: StringFilter<"ProjectLabel"> | string
+    projectId?: StringFilter<"ProjectLabel"> | string
+    labelId?: StringFilter<"ProjectLabel"> | string
+    addedById?: StringFilter<"ProjectLabel"> | string
+    isFavorite?: BoolFilter<"ProjectLabel"> | boolean
+    createdAt?: DateTimeFilter<"ProjectLabel"> | Date | string
+    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
+    label?: XOR<LabelScalarRelationFilter, LabelWhereInput>
+  }
+
+  export type ProjectLabelOrderByWithRelationInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    labelId?: SortOrder
+    addedById?: SortOrder
+    isFavorite?: SortOrder
+    createdAt?: SortOrder
+    project?: ProjectOrderByWithRelationInput
+    label?: LabelOrderByWithRelationInput
+    _relevance?: ProjectLabelOrderByRelevanceInput
+  }
+
+  export type ProjectLabelWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    projectId_labelId?: ProjectLabelProjectIdLabelIdCompoundUniqueInput
+    AND?: ProjectLabelWhereInput | ProjectLabelWhereInput[]
+    OR?: ProjectLabelWhereInput[]
+    NOT?: ProjectLabelWhereInput | ProjectLabelWhereInput[]
+    projectId?: StringFilter<"ProjectLabel"> | string
+    labelId?: StringFilter<"ProjectLabel"> | string
+    addedById?: StringFilter<"ProjectLabel"> | string
+    isFavorite?: BoolFilter<"ProjectLabel"> | boolean
+    createdAt?: DateTimeFilter<"ProjectLabel"> | Date | string
+    project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
+    label?: XOR<LabelScalarRelationFilter, LabelWhereInput>
+  }, "id" | "projectId_labelId">
+
+  export type ProjectLabelOrderByWithAggregationInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    labelId?: SortOrder
+    addedById?: SortOrder
+    isFavorite?: SortOrder
+    createdAt?: SortOrder
+    _count?: ProjectLabelCountOrderByAggregateInput
+    _max?: ProjectLabelMaxOrderByAggregateInput
+    _min?: ProjectLabelMinOrderByAggregateInput
+  }
+
+  export type ProjectLabelScalarWhereWithAggregatesInput = {
+    AND?: ProjectLabelScalarWhereWithAggregatesInput | ProjectLabelScalarWhereWithAggregatesInput[]
+    OR?: ProjectLabelScalarWhereWithAggregatesInput[]
+    NOT?: ProjectLabelScalarWhereWithAggregatesInput | ProjectLabelScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ProjectLabel"> | string
+    projectId?: StringWithAggregatesFilter<"ProjectLabel"> | string
+    labelId?: StringWithAggregatesFilter<"ProjectLabel"> | string
+    addedById?: StringWithAggregatesFilter<"ProjectLabel"> | string
+    isFavorite?: BoolWithAggregatesFilter<"ProjectLabel"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"ProjectLabel"> | Date | string
+  }
+
+  export type BoardLabelWhereInput = {
+    AND?: BoardLabelWhereInput | BoardLabelWhereInput[]
+    OR?: BoardLabelWhereInput[]
+    NOT?: BoardLabelWhereInput | BoardLabelWhereInput[]
+    id?: StringFilter<"BoardLabel"> | string
+    boardId?: StringFilter<"BoardLabel"> | string
+    labelId?: StringFilter<"BoardLabel"> | string
+    addedById?: StringFilter<"BoardLabel"> | string
+    isFavorite?: BoolFilter<"BoardLabel"> | boolean
+    createdAt?: DateTimeFilter<"BoardLabel"> | Date | string
+    board?: XOR<BoardScalarRelationFilter, BoardWhereInput>
+    label?: XOR<LabelScalarRelationFilter, LabelWhereInput>
+  }
+
+  export type BoardLabelOrderByWithRelationInput = {
+    id?: SortOrder
+    boardId?: SortOrder
+    labelId?: SortOrder
+    addedById?: SortOrder
+    isFavorite?: SortOrder
+    createdAt?: SortOrder
+    board?: BoardOrderByWithRelationInput
+    label?: LabelOrderByWithRelationInput
+    _relevance?: BoardLabelOrderByRelevanceInput
+  }
+
+  export type BoardLabelWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    boardId_labelId?: BoardLabelBoardIdLabelIdCompoundUniqueInput
+    AND?: BoardLabelWhereInput | BoardLabelWhereInput[]
+    OR?: BoardLabelWhereInput[]
+    NOT?: BoardLabelWhereInput | BoardLabelWhereInput[]
+    boardId?: StringFilter<"BoardLabel"> | string
+    labelId?: StringFilter<"BoardLabel"> | string
+    addedById?: StringFilter<"BoardLabel"> | string
+    isFavorite?: BoolFilter<"BoardLabel"> | boolean
+    createdAt?: DateTimeFilter<"BoardLabel"> | Date | string
+    board?: XOR<BoardScalarRelationFilter, BoardWhereInput>
+    label?: XOR<LabelScalarRelationFilter, LabelWhereInput>
+  }, "id" | "boardId_labelId">
+
+  export type BoardLabelOrderByWithAggregationInput = {
+    id?: SortOrder
+    boardId?: SortOrder
+    labelId?: SortOrder
+    addedById?: SortOrder
+    isFavorite?: SortOrder
+    createdAt?: SortOrder
+    _count?: BoardLabelCountOrderByAggregateInput
+    _max?: BoardLabelMaxOrderByAggregateInput
+    _min?: BoardLabelMinOrderByAggregateInput
+  }
+
+  export type BoardLabelScalarWhereWithAggregatesInput = {
+    AND?: BoardLabelScalarWhereWithAggregatesInput | BoardLabelScalarWhereWithAggregatesInput[]
+    OR?: BoardLabelScalarWhereWithAggregatesInput[]
+    NOT?: BoardLabelScalarWhereWithAggregatesInput | BoardLabelScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"BoardLabel"> | string
+    boardId?: StringWithAggregatesFilter<"BoardLabel"> | string
+    labelId?: StringWithAggregatesFilter<"BoardLabel"> | string
+    addedById?: StringWithAggregatesFilter<"BoardLabel"> | string
+    isFavorite?: BoolWithAggregatesFilter<"BoardLabel"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"BoardLabel"> | Date | string
   }
 
   export type TaskLabelWhereInput = {
@@ -14862,6 +24590,7 @@ export namespace Prisma {
     NOT?: TaskLabelWhereInput | TaskLabelWhereInput[]
     task_id?: StringFilter<"TaskLabel"> | string
     label_id?: StringFilter<"TaskLabel"> | string
+    createdAt?: DateTimeFilter<"TaskLabel"> | Date | string
     task?: XOR<TaskScalarRelationFilter, TaskWhereInput>
     label?: XOR<LabelScalarRelationFilter, LabelWhereInput>
   }
@@ -14869,6 +24598,7 @@ export namespace Prisma {
   export type TaskLabelOrderByWithRelationInput = {
     task_id?: SortOrder
     label_id?: SortOrder
+    createdAt?: SortOrder
     task?: TaskOrderByWithRelationInput
     label?: LabelOrderByWithRelationInput
     _relevance?: TaskLabelOrderByRelevanceInput
@@ -14881,6 +24611,7 @@ export namespace Prisma {
     NOT?: TaskLabelWhereInput | TaskLabelWhereInput[]
     task_id?: StringFilter<"TaskLabel"> | string
     label_id?: StringFilter<"TaskLabel"> | string
+    createdAt?: DateTimeFilter<"TaskLabel"> | Date | string
     task?: XOR<TaskScalarRelationFilter, TaskWhereInput>
     label?: XOR<LabelScalarRelationFilter, LabelWhereInput>
   }, "task_id_label_id">
@@ -14888,6 +24619,7 @@ export namespace Prisma {
   export type TaskLabelOrderByWithAggregationInput = {
     task_id?: SortOrder
     label_id?: SortOrder
+    createdAt?: SortOrder
     _count?: TaskLabelCountOrderByAggregateInput
     _max?: TaskLabelMaxOrderByAggregateInput
     _min?: TaskLabelMinOrderByAggregateInput
@@ -14899,88 +24631,642 @@ export namespace Prisma {
     NOT?: TaskLabelScalarWhereWithAggregatesInput | TaskLabelScalarWhereWithAggregatesInput[]
     task_id?: StringWithAggregatesFilter<"TaskLabel"> | string
     label_id?: StringWithAggregatesFilter<"TaskLabel"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"TaskLabel"> | Date | string
+  }
+
+  export type QuoteWhereInput = {
+    AND?: QuoteWhereInput | QuoteWhereInput[]
+    OR?: QuoteWhereInput[]
+    NOT?: QuoteWhereInput | QuoteWhereInput[]
+    id?: StringFilter<"Quote"> | string
+    number?: StringFilter<"Quote"> | string
+    title?: StringFilter<"Quote"> | string
+    description?: StringNullableFilter<"Quote"> | string | null
+    clientId?: StringFilter<"Quote"> | string
+    projectId?: StringNullableFilter<"Quote"> | string | null
+    status?: EnumQuoteStatusFilter<"Quote"> | $Enums.QuoteStatus
+    subtotal?: FloatFilter<"Quote"> | number
+    taxAmount?: FloatFilter<"Quote"> | number
+    totalAmount?: FloatFilter<"Quote"> | number
+    currency?: StringFilter<"Quote"> | string
+    validUntil?: DateTimeNullableFilter<"Quote"> | Date | string | null
+    sentAt?: DateTimeNullableFilter<"Quote"> | Date | string | null
+    acceptedAt?: DateTimeNullableFilter<"Quote"> | Date | string | null
+    rejectedAt?: DateTimeNullableFilter<"Quote"> | Date | string | null
+    notes?: StringNullableFilter<"Quote"> | string | null
+    terms?: StringNullableFilter<"Quote"> | string | null
+    createdById?: StringFilter<"Quote"> | string
+    createdAt?: DateTimeFilter<"Quote"> | Date | string
+    updatedAt?: DateTimeFilter<"Quote"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+    project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
+    items?: QuoteItemListRelationFilter
+    invoices?: InvoiceListRelationFilter
+  }
+
+  export type QuoteOrderByWithRelationInput = {
+    id?: SortOrder
+    number?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    clientId?: SortOrder
+    projectId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    subtotal?: SortOrder
+    taxAmount?: SortOrder
+    totalAmount?: SortOrder
+    currency?: SortOrder
+    validUntil?: SortOrderInput | SortOrder
+    sentAt?: SortOrderInput | SortOrder
+    acceptedAt?: SortOrderInput | SortOrder
+    rejectedAt?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    terms?: SortOrderInput | SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    client?: ClientOrderByWithRelationInput
+    project?: ProjectOrderByWithRelationInput
+    items?: QuoteItemOrderByRelationAggregateInput
+    invoices?: InvoiceOrderByRelationAggregateInput
+    _relevance?: QuoteOrderByRelevanceInput
+  }
+
+  export type QuoteWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    number?: string
+    AND?: QuoteWhereInput | QuoteWhereInput[]
+    OR?: QuoteWhereInput[]
+    NOT?: QuoteWhereInput | QuoteWhereInput[]
+    title?: StringFilter<"Quote"> | string
+    description?: StringNullableFilter<"Quote"> | string | null
+    clientId?: StringFilter<"Quote"> | string
+    projectId?: StringNullableFilter<"Quote"> | string | null
+    status?: EnumQuoteStatusFilter<"Quote"> | $Enums.QuoteStatus
+    subtotal?: FloatFilter<"Quote"> | number
+    taxAmount?: FloatFilter<"Quote"> | number
+    totalAmount?: FloatFilter<"Quote"> | number
+    currency?: StringFilter<"Quote"> | string
+    validUntil?: DateTimeNullableFilter<"Quote"> | Date | string | null
+    sentAt?: DateTimeNullableFilter<"Quote"> | Date | string | null
+    acceptedAt?: DateTimeNullableFilter<"Quote"> | Date | string | null
+    rejectedAt?: DateTimeNullableFilter<"Quote"> | Date | string | null
+    notes?: StringNullableFilter<"Quote"> | string | null
+    terms?: StringNullableFilter<"Quote"> | string | null
+    createdById?: StringFilter<"Quote"> | string
+    createdAt?: DateTimeFilter<"Quote"> | Date | string
+    updatedAt?: DateTimeFilter<"Quote"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+    project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
+    items?: QuoteItemListRelationFilter
+    invoices?: InvoiceListRelationFilter
+  }, "id" | "number">
+
+  export type QuoteOrderByWithAggregationInput = {
+    id?: SortOrder
+    number?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    clientId?: SortOrder
+    projectId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    subtotal?: SortOrder
+    taxAmount?: SortOrder
+    totalAmount?: SortOrder
+    currency?: SortOrder
+    validUntil?: SortOrderInput | SortOrder
+    sentAt?: SortOrderInput | SortOrder
+    acceptedAt?: SortOrderInput | SortOrder
+    rejectedAt?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    terms?: SortOrderInput | SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: QuoteCountOrderByAggregateInput
+    _avg?: QuoteAvgOrderByAggregateInput
+    _max?: QuoteMaxOrderByAggregateInput
+    _min?: QuoteMinOrderByAggregateInput
+    _sum?: QuoteSumOrderByAggregateInput
+  }
+
+  export type QuoteScalarWhereWithAggregatesInput = {
+    AND?: QuoteScalarWhereWithAggregatesInput | QuoteScalarWhereWithAggregatesInput[]
+    OR?: QuoteScalarWhereWithAggregatesInput[]
+    NOT?: QuoteScalarWhereWithAggregatesInput | QuoteScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Quote"> | string
+    number?: StringWithAggregatesFilter<"Quote"> | string
+    title?: StringWithAggregatesFilter<"Quote"> | string
+    description?: StringNullableWithAggregatesFilter<"Quote"> | string | null
+    clientId?: StringWithAggregatesFilter<"Quote"> | string
+    projectId?: StringNullableWithAggregatesFilter<"Quote"> | string | null
+    status?: EnumQuoteStatusWithAggregatesFilter<"Quote"> | $Enums.QuoteStatus
+    subtotal?: FloatWithAggregatesFilter<"Quote"> | number
+    taxAmount?: FloatWithAggregatesFilter<"Quote"> | number
+    totalAmount?: FloatWithAggregatesFilter<"Quote"> | number
+    currency?: StringWithAggregatesFilter<"Quote"> | string
+    validUntil?: DateTimeNullableWithAggregatesFilter<"Quote"> | Date | string | null
+    sentAt?: DateTimeNullableWithAggregatesFilter<"Quote"> | Date | string | null
+    acceptedAt?: DateTimeNullableWithAggregatesFilter<"Quote"> | Date | string | null
+    rejectedAt?: DateTimeNullableWithAggregatesFilter<"Quote"> | Date | string | null
+    notes?: StringNullableWithAggregatesFilter<"Quote"> | string | null
+    terms?: StringNullableWithAggregatesFilter<"Quote"> | string | null
+    createdById?: StringWithAggregatesFilter<"Quote"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Quote"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Quote"> | Date | string
+  }
+
+  export type QuoteItemWhereInput = {
+    AND?: QuoteItemWhereInput | QuoteItemWhereInput[]
+    OR?: QuoteItemWhereInput[]
+    NOT?: QuoteItemWhereInput | QuoteItemWhereInput[]
+    id?: StringFilter<"QuoteItem"> | string
+    quoteId?: StringFilter<"QuoteItem"> | string
+    description?: StringFilter<"QuoteItem"> | string
+    quantity?: FloatFilter<"QuoteItem"> | number
+    unitPrice?: FloatFilter<"QuoteItem"> | number
+    totalPrice?: FloatFilter<"QuoteItem"> | number
+    order?: IntFilter<"QuoteItem"> | number
+    createdAt?: DateTimeFilter<"QuoteItem"> | Date | string
+    updatedAt?: DateTimeFilter<"QuoteItem"> | Date | string
+    quote?: XOR<QuoteScalarRelationFilter, QuoteWhereInput>
+  }
+
+  export type QuoteItemOrderByWithRelationInput = {
+    id?: SortOrder
+    quoteId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    quote?: QuoteOrderByWithRelationInput
+    _relevance?: QuoteItemOrderByRelevanceInput
+  }
+
+  export type QuoteItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: QuoteItemWhereInput | QuoteItemWhereInput[]
+    OR?: QuoteItemWhereInput[]
+    NOT?: QuoteItemWhereInput | QuoteItemWhereInput[]
+    quoteId?: StringFilter<"QuoteItem"> | string
+    description?: StringFilter<"QuoteItem"> | string
+    quantity?: FloatFilter<"QuoteItem"> | number
+    unitPrice?: FloatFilter<"QuoteItem"> | number
+    totalPrice?: FloatFilter<"QuoteItem"> | number
+    order?: IntFilter<"QuoteItem"> | number
+    createdAt?: DateTimeFilter<"QuoteItem"> | Date | string
+    updatedAt?: DateTimeFilter<"QuoteItem"> | Date | string
+    quote?: XOR<QuoteScalarRelationFilter, QuoteWhereInput>
+  }, "id">
+
+  export type QuoteItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    quoteId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: QuoteItemCountOrderByAggregateInput
+    _avg?: QuoteItemAvgOrderByAggregateInput
+    _max?: QuoteItemMaxOrderByAggregateInput
+    _min?: QuoteItemMinOrderByAggregateInput
+    _sum?: QuoteItemSumOrderByAggregateInput
+  }
+
+  export type QuoteItemScalarWhereWithAggregatesInput = {
+    AND?: QuoteItemScalarWhereWithAggregatesInput | QuoteItemScalarWhereWithAggregatesInput[]
+    OR?: QuoteItemScalarWhereWithAggregatesInput[]
+    NOT?: QuoteItemScalarWhereWithAggregatesInput | QuoteItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"QuoteItem"> | string
+    quoteId?: StringWithAggregatesFilter<"QuoteItem"> | string
+    description?: StringWithAggregatesFilter<"QuoteItem"> | string
+    quantity?: FloatWithAggregatesFilter<"QuoteItem"> | number
+    unitPrice?: FloatWithAggregatesFilter<"QuoteItem"> | number
+    totalPrice?: FloatWithAggregatesFilter<"QuoteItem"> | number
+    order?: IntWithAggregatesFilter<"QuoteItem"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"QuoteItem"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"QuoteItem"> | Date | string
+  }
+
+  export type InvoiceWhereInput = {
+    AND?: InvoiceWhereInput | InvoiceWhereInput[]
+    OR?: InvoiceWhereInput[]
+    NOT?: InvoiceWhereInput | InvoiceWhereInput[]
+    id?: StringFilter<"Invoice"> | string
+    number?: StringFilter<"Invoice"> | string
+    title?: StringFilter<"Invoice"> | string
+    description?: StringNullableFilter<"Invoice"> | string | null
+    clientId?: StringFilter<"Invoice"> | string
+    projectId?: StringNullableFilter<"Invoice"> | string | null
+    quoteId?: StringNullableFilter<"Invoice"> | string | null
+    status?: EnumInvoiceStatusFilter<"Invoice"> | $Enums.InvoiceStatus
+    subtotal?: FloatFilter<"Invoice"> | number
+    taxAmount?: FloatFilter<"Invoice"> | number
+    totalAmount?: FloatFilter<"Invoice"> | number
+    paidAmount?: FloatFilter<"Invoice"> | number
+    currency?: StringFilter<"Invoice"> | string
+    issueDate?: DateTimeFilter<"Invoice"> | Date | string
+    dueDate?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    paidAt?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    notes?: StringNullableFilter<"Invoice"> | string | null
+    terms?: StringNullableFilter<"Invoice"> | string | null
+    createdById?: StringFilter<"Invoice"> | string
+    createdAt?: DateTimeFilter<"Invoice"> | Date | string
+    updatedAt?: DateTimeFilter<"Invoice"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+    project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
+    quote?: XOR<QuoteNullableScalarRelationFilter, QuoteWhereInput> | null
+    items?: InvoiceItemListRelationFilter
+    payments?: PaymentListRelationFilter
+  }
+
+  export type InvoiceOrderByWithRelationInput = {
+    id?: SortOrder
+    number?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    clientId?: SortOrder
+    projectId?: SortOrderInput | SortOrder
+    quoteId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    subtotal?: SortOrder
+    taxAmount?: SortOrder
+    totalAmount?: SortOrder
+    paidAmount?: SortOrder
+    currency?: SortOrder
+    issueDate?: SortOrder
+    dueDate?: SortOrderInput | SortOrder
+    paidAt?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    terms?: SortOrderInput | SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    client?: ClientOrderByWithRelationInput
+    project?: ProjectOrderByWithRelationInput
+    quote?: QuoteOrderByWithRelationInput
+    items?: InvoiceItemOrderByRelationAggregateInput
+    payments?: PaymentOrderByRelationAggregateInput
+    _relevance?: InvoiceOrderByRelevanceInput
+  }
+
+  export type InvoiceWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    number?: string
+    AND?: InvoiceWhereInput | InvoiceWhereInput[]
+    OR?: InvoiceWhereInput[]
+    NOT?: InvoiceWhereInput | InvoiceWhereInput[]
+    title?: StringFilter<"Invoice"> | string
+    description?: StringNullableFilter<"Invoice"> | string | null
+    clientId?: StringFilter<"Invoice"> | string
+    projectId?: StringNullableFilter<"Invoice"> | string | null
+    quoteId?: StringNullableFilter<"Invoice"> | string | null
+    status?: EnumInvoiceStatusFilter<"Invoice"> | $Enums.InvoiceStatus
+    subtotal?: FloatFilter<"Invoice"> | number
+    taxAmount?: FloatFilter<"Invoice"> | number
+    totalAmount?: FloatFilter<"Invoice"> | number
+    paidAmount?: FloatFilter<"Invoice"> | number
+    currency?: StringFilter<"Invoice"> | string
+    issueDate?: DateTimeFilter<"Invoice"> | Date | string
+    dueDate?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    paidAt?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    notes?: StringNullableFilter<"Invoice"> | string | null
+    terms?: StringNullableFilter<"Invoice"> | string | null
+    createdById?: StringFilter<"Invoice"> | string
+    createdAt?: DateTimeFilter<"Invoice"> | Date | string
+    updatedAt?: DateTimeFilter<"Invoice"> | Date | string
+    client?: XOR<ClientScalarRelationFilter, ClientWhereInput>
+    project?: XOR<ProjectNullableScalarRelationFilter, ProjectWhereInput> | null
+    quote?: XOR<QuoteNullableScalarRelationFilter, QuoteWhereInput> | null
+    items?: InvoiceItemListRelationFilter
+    payments?: PaymentListRelationFilter
+  }, "id" | "number">
+
+  export type InvoiceOrderByWithAggregationInput = {
+    id?: SortOrder
+    number?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    clientId?: SortOrder
+    projectId?: SortOrderInput | SortOrder
+    quoteId?: SortOrderInput | SortOrder
+    status?: SortOrder
+    subtotal?: SortOrder
+    taxAmount?: SortOrder
+    totalAmount?: SortOrder
+    paidAmount?: SortOrder
+    currency?: SortOrder
+    issueDate?: SortOrder
+    dueDate?: SortOrderInput | SortOrder
+    paidAt?: SortOrderInput | SortOrder
+    notes?: SortOrderInput | SortOrder
+    terms?: SortOrderInput | SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: InvoiceCountOrderByAggregateInput
+    _avg?: InvoiceAvgOrderByAggregateInput
+    _max?: InvoiceMaxOrderByAggregateInput
+    _min?: InvoiceMinOrderByAggregateInput
+    _sum?: InvoiceSumOrderByAggregateInput
+  }
+
+  export type InvoiceScalarWhereWithAggregatesInput = {
+    AND?: InvoiceScalarWhereWithAggregatesInput | InvoiceScalarWhereWithAggregatesInput[]
+    OR?: InvoiceScalarWhereWithAggregatesInput[]
+    NOT?: InvoiceScalarWhereWithAggregatesInput | InvoiceScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Invoice"> | string
+    number?: StringWithAggregatesFilter<"Invoice"> | string
+    title?: StringWithAggregatesFilter<"Invoice"> | string
+    description?: StringNullableWithAggregatesFilter<"Invoice"> | string | null
+    clientId?: StringWithAggregatesFilter<"Invoice"> | string
+    projectId?: StringNullableWithAggregatesFilter<"Invoice"> | string | null
+    quoteId?: StringNullableWithAggregatesFilter<"Invoice"> | string | null
+    status?: EnumInvoiceStatusWithAggregatesFilter<"Invoice"> | $Enums.InvoiceStatus
+    subtotal?: FloatWithAggregatesFilter<"Invoice"> | number
+    taxAmount?: FloatWithAggregatesFilter<"Invoice"> | number
+    totalAmount?: FloatWithAggregatesFilter<"Invoice"> | number
+    paidAmount?: FloatWithAggregatesFilter<"Invoice"> | number
+    currency?: StringWithAggregatesFilter<"Invoice"> | string
+    issueDate?: DateTimeWithAggregatesFilter<"Invoice"> | Date | string
+    dueDate?: DateTimeNullableWithAggregatesFilter<"Invoice"> | Date | string | null
+    paidAt?: DateTimeNullableWithAggregatesFilter<"Invoice"> | Date | string | null
+    notes?: StringNullableWithAggregatesFilter<"Invoice"> | string | null
+    terms?: StringNullableWithAggregatesFilter<"Invoice"> | string | null
+    createdById?: StringWithAggregatesFilter<"Invoice"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Invoice"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Invoice"> | Date | string
+  }
+
+  export type InvoiceItemWhereInput = {
+    AND?: InvoiceItemWhereInput | InvoiceItemWhereInput[]
+    OR?: InvoiceItemWhereInput[]
+    NOT?: InvoiceItemWhereInput | InvoiceItemWhereInput[]
+    id?: StringFilter<"InvoiceItem"> | string
+    invoiceId?: StringFilter<"InvoiceItem"> | string
+    description?: StringFilter<"InvoiceItem"> | string
+    quantity?: FloatFilter<"InvoiceItem"> | number
+    unitPrice?: FloatFilter<"InvoiceItem"> | number
+    totalPrice?: FloatFilter<"InvoiceItem"> | number
+    order?: IntFilter<"InvoiceItem"> | number
+    createdAt?: DateTimeFilter<"InvoiceItem"> | Date | string
+    updatedAt?: DateTimeFilter<"InvoiceItem"> | Date | string
+    invoice?: XOR<InvoiceScalarRelationFilter, InvoiceWhereInput>
+  }
+
+  export type InvoiceItemOrderByWithRelationInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    invoice?: InvoiceOrderByWithRelationInput
+    _relevance?: InvoiceItemOrderByRelevanceInput
+  }
+
+  export type InvoiceItemWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: InvoiceItemWhereInput | InvoiceItemWhereInput[]
+    OR?: InvoiceItemWhereInput[]
+    NOT?: InvoiceItemWhereInput | InvoiceItemWhereInput[]
+    invoiceId?: StringFilter<"InvoiceItem"> | string
+    description?: StringFilter<"InvoiceItem"> | string
+    quantity?: FloatFilter<"InvoiceItem"> | number
+    unitPrice?: FloatFilter<"InvoiceItem"> | number
+    totalPrice?: FloatFilter<"InvoiceItem"> | number
+    order?: IntFilter<"InvoiceItem"> | number
+    createdAt?: DateTimeFilter<"InvoiceItem"> | Date | string
+    updatedAt?: DateTimeFilter<"InvoiceItem"> | Date | string
+    invoice?: XOR<InvoiceScalarRelationFilter, InvoiceWhereInput>
+  }, "id">
+
+  export type InvoiceItemOrderByWithAggregationInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: InvoiceItemCountOrderByAggregateInput
+    _avg?: InvoiceItemAvgOrderByAggregateInput
+    _max?: InvoiceItemMaxOrderByAggregateInput
+    _min?: InvoiceItemMinOrderByAggregateInput
+    _sum?: InvoiceItemSumOrderByAggregateInput
+  }
+
+  export type InvoiceItemScalarWhereWithAggregatesInput = {
+    AND?: InvoiceItemScalarWhereWithAggregatesInput | InvoiceItemScalarWhereWithAggregatesInput[]
+    OR?: InvoiceItemScalarWhereWithAggregatesInput[]
+    NOT?: InvoiceItemScalarWhereWithAggregatesInput | InvoiceItemScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"InvoiceItem"> | string
+    invoiceId?: StringWithAggregatesFilter<"InvoiceItem"> | string
+    description?: StringWithAggregatesFilter<"InvoiceItem"> | string
+    quantity?: FloatWithAggregatesFilter<"InvoiceItem"> | number
+    unitPrice?: FloatWithAggregatesFilter<"InvoiceItem"> | number
+    totalPrice?: FloatWithAggregatesFilter<"InvoiceItem"> | number
+    order?: IntWithAggregatesFilter<"InvoiceItem"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"InvoiceItem"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"InvoiceItem"> | Date | string
+  }
+
+  export type PaymentWhereInput = {
+    AND?: PaymentWhereInput | PaymentWhereInput[]
+    OR?: PaymentWhereInput[]
+    NOT?: PaymentWhereInput | PaymentWhereInput[]
+    id?: StringFilter<"Payment"> | string
+    invoiceId?: StringFilter<"Payment"> | string
+    amount?: FloatFilter<"Payment"> | number
+    currency?: StringFilter<"Payment"> | string
+    method?: EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
+    reference?: StringNullableFilter<"Payment"> | string | null
+    paidAt?: DateTimeFilter<"Payment"> | Date | string
+    notes?: StringNullableFilter<"Payment"> | string | null
+    createdById?: StringFilter<"Payment"> | string
+    createdAt?: DateTimeFilter<"Payment"> | Date | string
+    updatedAt?: DateTimeFilter<"Payment"> | Date | string
+    invoice?: XOR<InvoiceScalarRelationFilter, InvoiceWhereInput>
+  }
+
+  export type PaymentOrderByWithRelationInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    method?: SortOrder
+    reference?: SortOrderInput | SortOrder
+    paidAt?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    invoice?: InvoiceOrderByWithRelationInput
+    _relevance?: PaymentOrderByRelevanceInput
+  }
+
+  export type PaymentWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: PaymentWhereInput | PaymentWhereInput[]
+    OR?: PaymentWhereInput[]
+    NOT?: PaymentWhereInput | PaymentWhereInput[]
+    invoiceId?: StringFilter<"Payment"> | string
+    amount?: FloatFilter<"Payment"> | number
+    currency?: StringFilter<"Payment"> | string
+    method?: EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
+    reference?: StringNullableFilter<"Payment"> | string | null
+    paidAt?: DateTimeFilter<"Payment"> | Date | string
+    notes?: StringNullableFilter<"Payment"> | string | null
+    createdById?: StringFilter<"Payment"> | string
+    createdAt?: DateTimeFilter<"Payment"> | Date | string
+    updatedAt?: DateTimeFilter<"Payment"> | Date | string
+    invoice?: XOR<InvoiceScalarRelationFilter, InvoiceWhereInput>
+  }, "id">
+
+  export type PaymentOrderByWithAggregationInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    method?: SortOrder
+    reference?: SortOrderInput | SortOrder
+    paidAt?: SortOrder
+    notes?: SortOrderInput | SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PaymentCountOrderByAggregateInput
+    _avg?: PaymentAvgOrderByAggregateInput
+    _max?: PaymentMaxOrderByAggregateInput
+    _min?: PaymentMinOrderByAggregateInput
+    _sum?: PaymentSumOrderByAggregateInput
+  }
+
+  export type PaymentScalarWhereWithAggregatesInput = {
+    AND?: PaymentScalarWhereWithAggregatesInput | PaymentScalarWhereWithAggregatesInput[]
+    OR?: PaymentScalarWhereWithAggregatesInput[]
+    NOT?: PaymentScalarWhereWithAggregatesInput | PaymentScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Payment"> | string
+    invoiceId?: StringWithAggregatesFilter<"Payment"> | string
+    amount?: FloatWithAggregatesFilter<"Payment"> | number
+    currency?: StringWithAggregatesFilter<"Payment"> | string
+    method?: EnumPaymentMethodWithAggregatesFilter<"Payment"> | $Enums.PaymentMethod
+    reference?: StringNullableWithAggregatesFilter<"Payment"> | string | null
+    paidAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
+    notes?: StringNullableWithAggregatesFilter<"Payment"> | string | null
+    createdById?: StringWithAggregatesFilter<"Payment"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Payment"> | Date | string
   }
 
   export type UserCreateInput = {
     id?: string
     email: string
     username?: string | null
-    name: string
-    role: string
+    name?: string | null
+    role?: string | null
     avatar?: string | null
     image?: string | null
+    emailVerified?: Date | string | null
     created_at?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     createdBoards?: BoardCreateNestedManyWithoutCreatedByInput
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
-    contactClients?: ClientCreateNestedManyWithoutContactInput
     projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
+    createdClients?: ClientCreateNestedManyWithoutCreatedByInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
     id?: string
     email: string
     username?: string | null
-    name: string
-    role: string
+    name?: string | null
+    role?: string | null
     avatar?: string | null
     image?: string | null
+    emailVerified?: Date | string | null
     created_at?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     createdBoards?: BoardUncheckedCreateNestedManyWithoutCreatedByInput
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
-    contactClients?: ClientUncheckedCreateNestedManyWithoutContactInput
     projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
+    createdClients?: ClientUncheckedCreateNestedManyWithoutCreatedByInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelUncheckedCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     createdBoards?: BoardUpdateManyWithoutCreatedByNestedInput
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
-    contactClients?: ClientUpdateManyWithoutContactNestedInput
     projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
+    createdClients?: ClientUpdateManyWithoutCreatedByNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     createdBoards?: BoardUncheckedUpdateManyWithoutCreatedByNestedInput
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
-    contactClients?: ClientUncheckedUpdateManyWithoutContactNestedInput
     projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdClients?: ClientUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUncheckedUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
     id?: string
     email: string
     username?: string | null
-    name: string
-    role: string
+    name?: string | null
+    role?: string | null
     avatar?: string | null
     image?: string | null
+    emailVerified?: Date | string | null
     created_at?: Date | string
     updatedAt?: Date | string
   }
@@ -14989,10 +25275,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15001,10 +25288,11 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15233,58 +25521,191 @@ export namespace Prisma {
 
   export type ClientCreateInput = {
     id?: string
-    company: string
-    name: string
-    contact: UserCreateNestedOneWithoutContactClientsInput
+    type?: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName?: string | null
+    phone?: string | null
+    companyName?: string | null
+    siret?: string | null
+    vatNumber?: string | null
+    website?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    country?: string | null
+    currency?: string
+    taxRate?: number | null
+    notes?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutClientProfileInput
+    createdBy: UserCreateNestedOneWithoutCreatedClientsInput
     projects?: ProjectCreateNestedManyWithoutClientInput
-    Task?: TaskCreateNestedManyWithoutClientInput
+    tasks?: TaskCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    quotes?: QuoteCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateInput = {
     id?: string
-    company: string
-    name: string
-    contact_id: string
+    type?: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName?: string | null
+    phone?: string | null
+    companyName?: string | null
+    siret?: string | null
+    vatNumber?: string | null
+    website?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    country?: string | null
+    currency?: string
+    taxRate?: number | null
+    userId?: string | null
+    notes?: string | null
+    isActive?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     projects?: ProjectUncheckedCreateNestedManyWithoutClientInput
-    Task?: TaskUncheckedCreateNestedManyWithoutClientInput
+    tasks?: TaskUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    quotes?: QuoteUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contact?: UserUpdateOneRequiredWithoutContactClientsNestedInput
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutClientProfileNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedClientsNestedInput
     projects?: ProjectUpdateManyWithoutClientNestedInput
-    Task?: TaskUpdateManyWithoutClientNestedInput
+    tasks?: TaskUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    quotes?: QuoteUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contact_id?: StringFieldUpdateOperationsInput | string
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     projects?: ProjectUncheckedUpdateManyWithoutClientNestedInput
-    Task?: TaskUncheckedUpdateManyWithoutClientNestedInput
+    tasks?: TaskUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    quotes?: QuoteUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ClientCreateManyInput = {
     id?: string
-    company: string
-    name: string
-    contact_id: string
+    type?: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName?: string | null
+    phone?: string | null
+    companyName?: string | null
+    siret?: string | null
+    vatNumber?: string | null
+    website?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    country?: string | null
+    currency?: string
+    taxRate?: number | null
+    userId?: string | null
+    notes?: string | null
+    isActive?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ClientUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ClientUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contact_id?: StringFieldUpdateOperationsInput | string
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectCreateInput = {
@@ -15292,9 +25713,14 @@ export namespace Prisma {
     name: string
     description?: string | null
     created_at?: Date | string
+    updatedAt?: Date | string
+    hiddenForClient?: boolean
     client: ClientCreateNestedOneWithoutProjectsInput
     members?: ProjectMemberCreateNestedManyWithoutProjectInput
     boards?: BoardCreateNestedManyWithoutProjectInput
+    labels?: ProjectLabelCreateNestedManyWithoutProjectInput
+    quotes?: QuoteCreateNestedManyWithoutProjectInput
+    invoices?: InvoiceCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateInput = {
@@ -15303,8 +25729,13 @@ export namespace Prisma {
     description?: string | null
     client_id: string
     created_at?: Date | string
+    updatedAt?: Date | string
+    hiddenForClient?: boolean
     members?: ProjectMemberUncheckedCreateNestedManyWithoutProjectInput
     boards?: BoardUncheckedCreateNestedManyWithoutProjectInput
+    labels?: ProjectLabelUncheckedCreateNestedManyWithoutProjectInput
+    quotes?: QuoteUncheckedCreateNestedManyWithoutProjectInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUpdateInput = {
@@ -15312,9 +25743,14 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
     client?: ClientUpdateOneRequiredWithoutProjectsNestedInput
     members?: ProjectMemberUpdateManyWithoutProjectNestedInput
     boards?: BoardUpdateManyWithoutProjectNestedInput
+    labels?: ProjectLabelUpdateManyWithoutProjectNestedInput
+    quotes?: QuoteUpdateManyWithoutProjectNestedInput
+    invoices?: InvoiceUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateInput = {
@@ -15323,8 +25759,13 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     client_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
     members?: ProjectMemberUncheckedUpdateManyWithoutProjectNestedInput
     boards?: BoardUncheckedUpdateManyWithoutProjectNestedInput
+    labels?: ProjectLabelUncheckedUpdateManyWithoutProjectNestedInput
+    quotes?: QuoteUncheckedUpdateManyWithoutProjectNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectCreateManyInput = {
@@ -15333,6 +25774,8 @@ export namespace Prisma {
     description?: string | null
     client_id: string
     created_at?: Date | string
+    updatedAt?: Date | string
+    hiddenForClient?: boolean
   }
 
   export type ProjectUpdateManyMutationInput = {
@@ -15340,6 +25783,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ProjectUncheckedUpdateManyInput = {
@@ -15348,48 +25793,80 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     client_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type ProjectMemberCreateInput = {
+    id?: string
+    role: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutMembersInput
     user: UserCreateNestedOneWithoutProjectMembersInput
   }
 
   export type ProjectMemberUncheckedCreateInput = {
+    id?: string
     projectId: string
-    user_id: string
+    userId: string
+    role: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProjectMemberUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutMembersNestedInput
     user?: UserUpdateOneRequiredWithoutProjectMembersNestedInput
   }
 
   export type ProjectMemberUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
-    user_id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectMemberCreateManyInput = {
+    id?: string
     projectId: string
-    user_id: string
+    userId: string
+    role: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProjectMemberUpdateManyMutationInput = {
-
+    id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectMemberUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
-    user_id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BoardCreateInput = {
     id?: string
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutBoardsInput
     createdBy: UserCreateNestedOneWithoutCreatedBoardsInput
     columns?: ColumnCreateNestedManyWithoutBoardInput
+    labels?: BoardLabelCreateNestedManyWithoutBoardInput
   }
 
   export type BoardUncheckedCreateInput = {
@@ -15397,15 +25874,21 @@ export namespace Prisma {
     name: string
     projectId: string
     created_by_id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     columns?: ColumnUncheckedCreateNestedManyWithoutBoardInput
+    labels?: BoardLabelUncheckedCreateNestedManyWithoutBoardInput
   }
 
   export type BoardUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutBoardsNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedBoardsNestedInput
     columns?: ColumnUpdateManyWithoutBoardNestedInput
+    labels?: BoardLabelUpdateManyWithoutBoardNestedInput
   }
 
   export type BoardUncheckedUpdateInput = {
@@ -15413,7 +25896,10 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     created_by_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     columns?: ColumnUncheckedUpdateManyWithoutBoardNestedInput
+    labels?: BoardLabelUncheckedUpdateManyWithoutBoardNestedInput
   }
 
   export type BoardCreateManyInput = {
@@ -15421,11 +25907,15 @@ export namespace Prisma {
     name: string
     projectId: string
     created_by_id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BoardUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BoardUncheckedUpdateManyInput = {
@@ -15433,6 +25923,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     created_by_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ColumnCreateInput = {
@@ -15441,6 +25933,8 @@ export namespace Prisma {
     order: number
     position: number
     color?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     board: BoardCreateNestedOneWithoutColumnsInput
     tasks?: TaskCreateNestedManyWithoutColumnInput
   }
@@ -15452,6 +25946,8 @@ export namespace Prisma {
     position: number
     color?: string | null
     boardId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     tasks?: TaskUncheckedCreateNestedManyWithoutColumnInput
   }
 
@@ -15461,6 +25957,8 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     position?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     board?: BoardUpdateOneRequiredWithoutColumnsNestedInput
     tasks?: TaskUpdateManyWithoutColumnNestedInput
   }
@@ -15472,6 +25970,8 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     boardId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tasks?: TaskUncheckedUpdateManyWithoutColumnNestedInput
   }
 
@@ -15482,6 +25982,8 @@ export namespace Prisma {
     position: number
     color?: string | null
     boardId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ColumnUpdateManyMutationInput = {
@@ -15490,6 +25992,8 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     position?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ColumnUncheckedUpdateManyInput = {
@@ -15499,6 +26003,8 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     boardId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TaskCreateInput = {
@@ -15508,9 +26014,12 @@ export namespace Prisma {
     price?: number | null
     dueDate?: Date | string | null
     order: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     column: ColumnCreateNestedOneWithoutTasksInput
     assignee?: UserCreateNestedOneWithoutAssignedTasksInput
-    client?: ClientCreateNestedOneWithoutTaskInput
+    client?: ClientCreateNestedOneWithoutTasksInput
+    createdBy: UserCreateNestedOneWithoutCreatedTasksInput
     tags?: TaskLabelCreateNestedManyWithoutTaskInput
   }
 
@@ -15524,6 +26033,9 @@ export namespace Prisma {
     columnId: string
     assigneeId?: string | null
     client_id?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     tags?: TaskLabelUncheckedCreateNestedManyWithoutTaskInput
   }
 
@@ -15534,9 +26046,12 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     column?: ColumnUpdateOneRequiredWithoutTasksNestedInput
     assignee?: UserUpdateOneWithoutAssignedTasksNestedInput
-    client?: ClientUpdateOneWithoutTaskNestedInput
+    client?: ClientUpdateOneWithoutTasksNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedTasksNestedInput
     tags?: TaskLabelUpdateManyWithoutTaskNestedInput
   }
 
@@ -15550,6 +26065,9 @@ export namespace Prisma {
     columnId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     client_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TaskLabelUncheckedUpdateManyWithoutTaskNestedInput
   }
 
@@ -15563,6 +26081,9 @@ export namespace Prisma {
     columnId: string
     assigneeId?: string | null
     client_id?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type TaskUpdateManyMutationInput = {
@@ -15572,6 +26093,8 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TaskUncheckedUpdateManyInput = {
@@ -15584,12 +26107,22 @@ export namespace Prisma {
     columnId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     client_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LabelCreateInput = {
     id?: string
     name: string
     color?: string | null
+    description?: string | null
+    usageCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedLabelsInput
+    projects?: ProjectLabelCreateNestedManyWithoutLabelInput
+    boards?: BoardLabelCreateNestedManyWithoutLabelInput
     tasks?: TaskLabelCreateNestedManyWithoutLabelInput
   }
 
@@ -15597,6 +26130,13 @@ export namespace Prisma {
     id?: string
     name: string
     color?: string | null
+    description?: string | null
+    createdById: string
+    usageCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projects?: ProjectLabelUncheckedCreateNestedManyWithoutLabelInput
+    boards?: BoardLabelUncheckedCreateNestedManyWithoutLabelInput
     tasks?: TaskLabelUncheckedCreateNestedManyWithoutLabelInput
   }
 
@@ -15604,6 +26144,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    usageCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedLabelsNestedInput
+    projects?: ProjectLabelUpdateManyWithoutLabelNestedInput
+    boards?: BoardLabelUpdateManyWithoutLabelNestedInput
     tasks?: TaskLabelUpdateManyWithoutLabelNestedInput
   }
 
@@ -15611,6 +26158,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    usageCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectLabelUncheckedUpdateManyWithoutLabelNestedInput
+    boards?: BoardLabelUncheckedUpdateManyWithoutLabelNestedInput
     tasks?: TaskLabelUncheckedUpdateManyWithoutLabelNestedInput
   }
 
@@ -15618,21 +26172,158 @@ export namespace Prisma {
     id?: string
     name: string
     color?: string | null
+    description?: string | null
+    createdById: string
+    usageCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type LabelUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    usageCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LabelUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    usageCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectLabelCreateInput = {
+    id?: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
+    project: ProjectCreateNestedOneWithoutLabelsInput
+    label: LabelCreateNestedOneWithoutProjectsInput
+  }
+
+  export type ProjectLabelUncheckedCreateInput = {
+    id?: string
+    projectId: string
+    labelId: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ProjectLabelUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneRequiredWithoutLabelsNestedInput
+    label?: LabelUpdateOneRequiredWithoutProjectsNestedInput
+  }
+
+  export type ProjectLabelUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    labelId?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectLabelCreateManyInput = {
+    id?: string
+    projectId: string
+    labelId: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ProjectLabelUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectLabelUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    labelId?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BoardLabelCreateInput = {
+    id?: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
+    board: BoardCreateNestedOneWithoutLabelsInput
+    label: LabelCreateNestedOneWithoutBoardsInput
+  }
+
+  export type BoardLabelUncheckedCreateInput = {
+    id?: string
+    boardId: string
+    labelId: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
+  }
+
+  export type BoardLabelUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    board?: BoardUpdateOneRequiredWithoutLabelsNestedInput
+    label?: LabelUpdateOneRequiredWithoutBoardsNestedInput
+  }
+
+  export type BoardLabelUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    boardId?: StringFieldUpdateOperationsInput | string
+    labelId?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BoardLabelCreateManyInput = {
+    id?: string
+    boardId: string
+    labelId: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
+  }
+
+  export type BoardLabelUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BoardLabelUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    boardId?: StringFieldUpdateOperationsInput | string
+    labelId?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TaskLabelCreateInput = {
+    createdAt?: Date | string
     task: TaskCreateNestedOneWithoutTagsInput
     label: LabelCreateNestedOneWithoutTasksInput
   }
@@ -15640,9 +26331,11 @@ export namespace Prisma {
   export type TaskLabelUncheckedCreateInput = {
     task_id: string
     label_id: string
+    createdAt?: Date | string
   }
 
   export type TaskLabelUpdateInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     task?: TaskUpdateOneRequiredWithoutTagsNestedInput
     label?: LabelUpdateOneRequiredWithoutTasksNestedInput
   }
@@ -15650,20 +26343,626 @@ export namespace Prisma {
   export type TaskLabelUncheckedUpdateInput = {
     task_id?: StringFieldUpdateOperationsInput | string
     label_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TaskLabelCreateManyInput = {
     task_id: string
     label_id: string
+    createdAt?: Date | string
   }
 
   export type TaskLabelUpdateManyMutationInput = {
-
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TaskLabelUncheckedUpdateManyInput = {
     task_id?: StringFieldUpdateOperationsInput | string
     label_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuoteCreateInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    status?: $Enums.QuoteStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    currency?: string
+    validUntil?: Date | string | null
+    sentAt?: Date | string | null
+    acceptedAt?: Date | string | null
+    rejectedAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutQuotesInput
+    project?: ProjectCreateNestedOneWithoutQuotesInput
+    items?: QuoteItemCreateNestedManyWithoutQuoteInput
+    invoices?: InvoiceCreateNestedManyWithoutQuoteInput
+  }
+
+  export type QuoteUncheckedCreateInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    clientId: string
+    projectId?: string | null
+    status?: $Enums.QuoteStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    currency?: string
+    validUntil?: Date | string | null
+    sentAt?: Date | string | null
+    acceptedAt?: Date | string | null
+    rejectedAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: QuoteItemUncheckedCreateNestedManyWithoutQuoteInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutQuoteInput
+  }
+
+  export type QuoteUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rejectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutQuotesNestedInput
+    project?: ProjectUpdateOneWithoutQuotesNestedInput
+    items?: QuoteItemUpdateManyWithoutQuoteNestedInput
+    invoices?: InvoiceUpdateManyWithoutQuoteNestedInput
+  }
+
+  export type QuoteUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rejectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutQuoteNestedInput
+  }
+
+  export type QuoteCreateManyInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    clientId: string
+    projectId?: string | null
+    status?: $Enums.QuoteStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    currency?: string
+    validUntil?: Date | string | null
+    sentAt?: Date | string | null
+    acceptedAt?: Date | string | null
+    rejectedAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QuoteUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rejectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuoteUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rejectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuoteItemCreateInput = {
+    id?: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    totalPrice: number
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    quote: QuoteCreateNestedOneWithoutItemsInput
+  }
+
+  export type QuoteItemUncheckedCreateInput = {
+    id?: string
+    quoteId: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    totalPrice: number
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QuoteItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    quote?: QuoteUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type QuoteItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quoteId?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuoteItemCreateManyInput = {
+    id?: string
+    quoteId: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    totalPrice: number
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QuoteItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuoteItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quoteId?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceCreateInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    status?: $Enums.InvoiceStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    paidAmount?: number
+    currency?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    paidAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutInvoicesInput
+    project?: ProjectCreateNestedOneWithoutInvoicesInput
+    quote?: QuoteCreateNestedOneWithoutInvoicesInput
+    items?: InvoiceItemCreateNestedManyWithoutInvoiceInput
+    payments?: PaymentCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceUncheckedCreateInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    clientId: string
+    projectId?: string | null
+    quoteId?: string | null
+    status?: $Enums.InvoiceStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    paidAmount?: number
+    currency?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    paidAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutInvoicesNestedInput
+    project?: ProjectUpdateOneWithoutInvoicesNestedInput
+    quote?: QuoteUpdateOneWithoutInvoicesNestedInput
+    items?: InvoiceItemUpdateManyWithoutInvoiceNestedInput
+    payments?: PaymentUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    quoteId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceCreateManyInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    clientId: string
+    projectId?: string | null
+    quoteId?: string | null
+    status?: $Enums.InvoiceStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    paidAmount?: number
+    currency?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    paidAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    quoteId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceItemCreateInput = {
+    id?: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    totalPrice: number
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    invoice: InvoiceCreateNestedOneWithoutItemsInput
+  }
+
+  export type InvoiceItemUncheckedCreateInput = {
+    id?: string
+    invoiceId: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    totalPrice: number
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceItemUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoice?: InvoiceUpdateOneRequiredWithoutItemsNestedInput
+  }
+
+  export type InvoiceItemUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceId?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceItemCreateManyInput = {
+    id?: string
+    invoiceId: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    totalPrice: number
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceItemUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceItemUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceId?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentCreateInput = {
+    id?: string
+    amount: number
+    currency?: string
+    method?: $Enums.PaymentMethod
+    reference?: string | null
+    paidAt?: Date | string
+    notes?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    invoice: InvoiceCreateNestedOneWithoutPaymentsInput
+  }
+
+  export type PaymentUncheckedCreateInput = {
+    id?: string
+    invoiceId: string
+    amount: number
+    currency?: string
+    method?: $Enums.PaymentMethod
+    reference?: string | null
+    paidAt?: Date | string
+    notes?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PaymentUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoice?: InvoiceUpdateOneRequiredWithoutPaymentsNestedInput
+  }
+
+  export type PaymentUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceId?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentCreateManyInput = {
+    id?: string
+    invoiceId: string
+    amount: number
+    currency?: string
+    method?: $Enums.PaymentMethod
+    reference?: string | null
+    paidAt?: Date | string
+    notes?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PaymentUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    invoiceId?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -15694,6 +26993,17 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type DateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -15731,16 +27041,27 @@ export namespace Prisma {
     none?: TaskWhereInput
   }
 
+  export type ProjectMemberListRelationFilter = {
+    every?: ProjectMemberWhereInput
+    some?: ProjectMemberWhereInput
+    none?: ProjectMemberWhereInput
+  }
+
   export type ClientListRelationFilter = {
     every?: ClientWhereInput
     some?: ClientWhereInput
     none?: ClientWhereInput
   }
 
-  export type ProjectMemberListRelationFilter = {
-    every?: ProjectMemberWhereInput
-    some?: ProjectMemberWhereInput
-    none?: ProjectMemberWhereInput
+  export type LabelListRelationFilter = {
+    every?: LabelWhereInput
+    some?: LabelWhereInput
+    none?: LabelWhereInput
+  }
+
+  export type ClientNullableScalarRelationFilter = {
+    is?: ClientWhereInput | null
+    isNot?: ClientWhereInput | null
   }
 
   export type SortOrderInput = {
@@ -15764,11 +27085,15 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type ProjectMemberOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type ClientOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type ProjectMemberOrderByRelationAggregateInput = {
+  export type LabelOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -15786,6 +27111,7 @@ export namespace Prisma {
     role?: SortOrder
     avatar?: SortOrder
     image?: SortOrder
+    emailVerified?: SortOrder
     created_at?: SortOrder
     updatedAt?: SortOrder
   }
@@ -15798,6 +27124,7 @@ export namespace Prisma {
     role?: SortOrder
     avatar?: SortOrder
     image?: SortOrder
+    emailVerified?: SortOrder
     created_at?: SortOrder
     updatedAt?: SortOrder
   }
@@ -15810,6 +27137,7 @@ export namespace Prisma {
     role?: SortOrder
     avatar?: SortOrder
     image?: SortOrder
+    emailVerified?: SortOrder
     created_at?: SortOrder
     updatedAt?: SortOrder
   }
@@ -15848,6 +27176,20 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
     _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -16028,13 +27370,61 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type EnumClientTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ClientType | EnumClientTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ClientType[]
+    notIn?: $Enums.ClientType[]
+    not?: NestedEnumClientTypeFilter<$PrismaModel> | $Enums.ClientType
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type UserNullableScalarRelationFilter = {
+    is?: UserWhereInput | null
+    isNot?: UserWhereInput | null
+  }
+
   export type ProjectListRelationFilter = {
     every?: ProjectWhereInput
     some?: ProjectWhereInput
     none?: ProjectWhereInput
   }
 
+  export type InvoiceListRelationFilter = {
+    every?: InvoiceWhereInput
+    some?: InvoiceWhereInput
+    none?: InvoiceWhereInput
+  }
+
+  export type QuoteListRelationFilter = {
+    every?: QuoteWhereInput
+    some?: QuoteWhereInput
+    none?: QuoteWhereInput
+  }
+
   export type ProjectOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InvoiceOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type QuoteOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -16046,28 +27436,134 @@ export namespace Prisma {
 
   export type ClientCountOrderByAggregateInput = {
     id?: SortOrder
-    company?: SortOrder
-    name?: SortOrder
-    contact_id?: SortOrder
+    type?: SortOrder
+    email?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    phone?: SortOrder
+    companyName?: SortOrder
+    siret?: SortOrder
+    vatNumber?: SortOrder
+    website?: SortOrder
+    address?: SortOrder
+    city?: SortOrder
+    postalCode?: SortOrder
+    country?: SortOrder
+    currency?: SortOrder
+    taxRate?: SortOrder
+    userId?: SortOrder
+    notes?: SortOrder
+    isActive?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClientAvgOrderByAggregateInput = {
+    taxRate?: SortOrder
   }
 
   export type ClientMaxOrderByAggregateInput = {
     id?: SortOrder
-    company?: SortOrder
-    name?: SortOrder
-    contact_id?: SortOrder
+    type?: SortOrder
+    email?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    phone?: SortOrder
+    companyName?: SortOrder
+    siret?: SortOrder
+    vatNumber?: SortOrder
+    website?: SortOrder
+    address?: SortOrder
+    city?: SortOrder
+    postalCode?: SortOrder
+    country?: SortOrder
+    currency?: SortOrder
+    taxRate?: SortOrder
+    userId?: SortOrder
+    notes?: SortOrder
+    isActive?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ClientMinOrderByAggregateInput = {
     id?: SortOrder
-    company?: SortOrder
-    name?: SortOrder
-    contact_id?: SortOrder
+    type?: SortOrder
+    email?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    phone?: SortOrder
+    companyName?: SortOrder
+    siret?: SortOrder
+    vatNumber?: SortOrder
+    website?: SortOrder
+    address?: SortOrder
+    city?: SortOrder
+    postalCode?: SortOrder
+    country?: SortOrder
+    currency?: SortOrder
+    taxRate?: SortOrder
+    userId?: SortOrder
+    notes?: SortOrder
+    isActive?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ClientSumOrderByAggregateInput = {
+    taxRate?: SortOrder
+  }
+
+  export type EnumClientTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ClientType | EnumClientTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ClientType[]
+    notIn?: $Enums.ClientType[]
+    not?: NestedEnumClientTypeWithAggregatesFilter<$PrismaModel> | $Enums.ClientType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumClientTypeFilter<$PrismaModel>
+    _max?: NestedEnumClientTypeFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type ClientScalarRelationFilter = {
     is?: ClientWhereInput
     isNot?: ClientWhereInput
+  }
+
+  export type ProjectLabelListRelationFilter = {
+    every?: ProjectLabelWhereInput
+    some?: ProjectLabelWhereInput
+    none?: ProjectLabelWhereInput
+  }
+
+  export type ProjectLabelOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type ProjectOrderByRelevanceInput = {
@@ -16082,6 +27578,8 @@ export namespace Prisma {
     description?: SortOrder
     client_id?: SortOrder
     created_at?: SortOrder
+    updatedAt?: SortOrder
+    hiddenForClient?: SortOrder
   }
 
   export type ProjectMaxOrderByAggregateInput = {
@@ -16090,6 +27588,8 @@ export namespace Prisma {
     description?: SortOrder
     client_id?: SortOrder
     created_at?: SortOrder
+    updatedAt?: SortOrder
+    hiddenForClient?: SortOrder
   }
 
   export type ProjectMinOrderByAggregateInput = {
@@ -16098,6 +27598,8 @@ export namespace Prisma {
     description?: SortOrder
     client_id?: SortOrder
     created_at?: SortOrder
+    updatedAt?: SortOrder
+    hiddenForClient?: SortOrder
   }
 
   export type ProjectScalarRelationFilter = {
@@ -16111,24 +27613,36 @@ export namespace Prisma {
     search: string
   }
 
-  export type ProjectMemberProjectIdUser_idCompoundUniqueInput = {
+  export type ProjectMemberProjectIdUserIdCompoundUniqueInput = {
     projectId: string
-    user_id: string
+    userId: string
   }
 
   export type ProjectMemberCountOrderByAggregateInput = {
+    id?: SortOrder
     projectId?: SortOrder
-    user_id?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ProjectMemberMaxOrderByAggregateInput = {
+    id?: SortOrder
     projectId?: SortOrder
-    user_id?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ProjectMemberMinOrderByAggregateInput = {
+    id?: SortOrder
     projectId?: SortOrder
-    user_id?: SortOrder
+    userId?: SortOrder
+    role?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ColumnListRelationFilter = {
@@ -16137,7 +27651,17 @@ export namespace Prisma {
     none?: ColumnWhereInput
   }
 
+  export type BoardLabelListRelationFilter = {
+    every?: BoardLabelWhereInput
+    some?: BoardLabelWhereInput
+    none?: BoardLabelWhereInput
+  }
+
   export type ColumnOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type BoardLabelOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -16152,6 +27676,8 @@ export namespace Prisma {
     name?: SortOrder
     projectId?: SortOrder
     created_by_id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BoardMaxOrderByAggregateInput = {
@@ -16159,6 +27685,8 @@ export namespace Prisma {
     name?: SortOrder
     projectId?: SortOrder
     created_by_id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BoardMinOrderByAggregateInput = {
@@ -16166,6 +27694,8 @@ export namespace Prisma {
     name?: SortOrder
     projectId?: SortOrder
     created_by_id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -16197,6 +27727,8 @@ export namespace Prisma {
     position?: SortOrder
     color?: SortOrder
     boardId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ColumnAvgOrderByAggregateInput = {
@@ -16211,6 +27743,8 @@ export namespace Prisma {
     position?: SortOrder
     color?: SortOrder
     boardId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ColumnMinOrderByAggregateInput = {
@@ -16220,6 +27754,8 @@ export namespace Prisma {
     position?: SortOrder
     color?: SortOrder
     boardId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ColumnSumOrderByAggregateInput = {
@@ -16243,41 +27779,9 @@ export namespace Prisma {
     _max?: NestedIntFilter<$PrismaModel>
   }
 
-  export type FloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type DateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
   export type ColumnScalarRelationFilter = {
     is?: ColumnWhereInput
     isNot?: ColumnWhereInput
-  }
-
-  export type UserNullableScalarRelationFilter = {
-    is?: UserWhereInput | null
-    isNot?: UserWhereInput | null
-  }
-
-  export type ClientNullableScalarRelationFilter = {
-    is?: ClientWhereInput | null
-    isNot?: ClientWhereInput | null
   }
 
   export type TaskLabelListRelationFilter = {
@@ -16306,6 +27810,9 @@ export namespace Prisma {
     columnId?: SortOrder
     assigneeId?: SortOrder
     client_id?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type TaskAvgOrderByAggregateInput = {
@@ -16323,6 +27830,9 @@ export namespace Prisma {
     columnId?: SortOrder
     assigneeId?: SortOrder
     client_id?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type TaskMinOrderByAggregateInput = {
@@ -16335,41 +27845,14 @@ export namespace Prisma {
     columnId?: SortOrder
     assigneeId?: SortOrder
     client_id?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type TaskSumOrderByAggregateInput = {
     price?: SortOrder
     order?: SortOrder
-  }
-
-  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type LabelOrderByRelevanceInput = {
@@ -16382,28 +27865,127 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     color?: SortOrder
+    description?: SortOrder
+    createdById?: SortOrder
+    usageCount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type LabelAvgOrderByAggregateInput = {
+    usageCount?: SortOrder
   }
 
   export type LabelMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     color?: SortOrder
+    description?: SortOrder
+    createdById?: SortOrder
+    usageCount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type LabelMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     color?: SortOrder
+    description?: SortOrder
+    createdById?: SortOrder
+    usageCount?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
-  export type TaskScalarRelationFilter = {
-    is?: TaskWhereInput
-    isNot?: TaskWhereInput
+  export type LabelSumOrderByAggregateInput = {
+    usageCount?: SortOrder
   }
 
   export type LabelScalarRelationFilter = {
     is?: LabelWhereInput
     isNot?: LabelWhereInput
+  }
+
+  export type ProjectLabelOrderByRelevanceInput = {
+    fields: ProjectLabelOrderByRelevanceFieldEnum | ProjectLabelOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ProjectLabelProjectIdLabelIdCompoundUniqueInput = {
+    projectId: string
+    labelId: string
+  }
+
+  export type ProjectLabelCountOrderByAggregateInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    labelId?: SortOrder
+    addedById?: SortOrder
+    isFavorite?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ProjectLabelMaxOrderByAggregateInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    labelId?: SortOrder
+    addedById?: SortOrder
+    isFavorite?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type ProjectLabelMinOrderByAggregateInput = {
+    id?: SortOrder
+    projectId?: SortOrder
+    labelId?: SortOrder
+    addedById?: SortOrder
+    isFavorite?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BoardLabelOrderByRelevanceInput = {
+    fields: BoardLabelOrderByRelevanceFieldEnum | BoardLabelOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type BoardLabelBoardIdLabelIdCompoundUniqueInput = {
+    boardId: string
+    labelId: string
+  }
+
+  export type BoardLabelCountOrderByAggregateInput = {
+    id?: SortOrder
+    boardId?: SortOrder
+    labelId?: SortOrder
+    addedById?: SortOrder
+    isFavorite?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BoardLabelMaxOrderByAggregateInput = {
+    id?: SortOrder
+    boardId?: SortOrder
+    labelId?: SortOrder
+    addedById?: SortOrder
+    isFavorite?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type BoardLabelMinOrderByAggregateInput = {
+    id?: SortOrder
+    boardId?: SortOrder
+    labelId?: SortOrder
+    addedById?: SortOrder
+    isFavorite?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TaskScalarRelationFilter = {
+    is?: TaskWhereInput
+    isNot?: TaskWhereInput
   }
 
   export type TaskLabelOrderByRelevanceInput = {
@@ -16420,16 +28002,494 @@ export namespace Prisma {
   export type TaskLabelCountOrderByAggregateInput = {
     task_id?: SortOrder
     label_id?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type TaskLabelMaxOrderByAggregateInput = {
     task_id?: SortOrder
     label_id?: SortOrder
+    createdAt?: SortOrder
   }
 
   export type TaskLabelMinOrderByAggregateInput = {
     task_id?: SortOrder
     label_id?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnumQuoteStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.QuoteStatus | EnumQuoteStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.QuoteStatus[]
+    notIn?: $Enums.QuoteStatus[]
+    not?: NestedEnumQuoteStatusFilter<$PrismaModel> | $Enums.QuoteStatus
+  }
+
+  export type FloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
+  export type ProjectNullableScalarRelationFilter = {
+    is?: ProjectWhereInput | null
+    isNot?: ProjectWhereInput | null
+  }
+
+  export type QuoteItemListRelationFilter = {
+    every?: QuoteItemWhereInput
+    some?: QuoteItemWhereInput
+    none?: QuoteItemWhereInput
+  }
+
+  export type QuoteItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type QuoteOrderByRelevanceInput = {
+    fields: QuoteOrderByRelevanceFieldEnum | QuoteOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type QuoteCountOrderByAggregateInput = {
+    id?: SortOrder
+    number?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    clientId?: SortOrder
+    projectId?: SortOrder
+    status?: SortOrder
+    subtotal?: SortOrder
+    taxAmount?: SortOrder
+    totalAmount?: SortOrder
+    currency?: SortOrder
+    validUntil?: SortOrder
+    sentAt?: SortOrder
+    acceptedAt?: SortOrder
+    rejectedAt?: SortOrder
+    notes?: SortOrder
+    terms?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type QuoteAvgOrderByAggregateInput = {
+    subtotal?: SortOrder
+    taxAmount?: SortOrder
+    totalAmount?: SortOrder
+  }
+
+  export type QuoteMaxOrderByAggregateInput = {
+    id?: SortOrder
+    number?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    clientId?: SortOrder
+    projectId?: SortOrder
+    status?: SortOrder
+    subtotal?: SortOrder
+    taxAmount?: SortOrder
+    totalAmount?: SortOrder
+    currency?: SortOrder
+    validUntil?: SortOrder
+    sentAt?: SortOrder
+    acceptedAt?: SortOrder
+    rejectedAt?: SortOrder
+    notes?: SortOrder
+    terms?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type QuoteMinOrderByAggregateInput = {
+    id?: SortOrder
+    number?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    clientId?: SortOrder
+    projectId?: SortOrder
+    status?: SortOrder
+    subtotal?: SortOrder
+    taxAmount?: SortOrder
+    totalAmount?: SortOrder
+    currency?: SortOrder
+    validUntil?: SortOrder
+    sentAt?: SortOrder
+    acceptedAt?: SortOrder
+    rejectedAt?: SortOrder
+    notes?: SortOrder
+    terms?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type QuoteSumOrderByAggregateInput = {
+    subtotal?: SortOrder
+    taxAmount?: SortOrder
+    totalAmount?: SortOrder
+  }
+
+  export type EnumQuoteStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.QuoteStatus | EnumQuoteStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.QuoteStatus[]
+    notIn?: $Enums.QuoteStatus[]
+    not?: NestedEnumQuoteStatusWithAggregatesFilter<$PrismaModel> | $Enums.QuoteStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumQuoteStatusFilter<$PrismaModel>
+    _max?: NestedEnumQuoteStatusFilter<$PrismaModel>
+  }
+
+  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
+  }
+
+  export type QuoteScalarRelationFilter = {
+    is?: QuoteWhereInput
+    isNot?: QuoteWhereInput
+  }
+
+  export type QuoteItemOrderByRelevanceInput = {
+    fields: QuoteItemOrderByRelevanceFieldEnum | QuoteItemOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type QuoteItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    quoteId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type QuoteItemAvgOrderByAggregateInput = {
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    order?: SortOrder
+  }
+
+  export type QuoteItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    quoteId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type QuoteItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    quoteId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type QuoteItemSumOrderByAggregateInput = {
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    order?: SortOrder
+  }
+
+  export type EnumInvoiceStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.InvoiceStatus | EnumInvoiceStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InvoiceStatus[]
+    notIn?: $Enums.InvoiceStatus[]
+    not?: NestedEnumInvoiceStatusFilter<$PrismaModel> | $Enums.InvoiceStatus
+  }
+
+  export type QuoteNullableScalarRelationFilter = {
+    is?: QuoteWhereInput | null
+    isNot?: QuoteWhereInput | null
+  }
+
+  export type InvoiceItemListRelationFilter = {
+    every?: InvoiceItemWhereInput
+    some?: InvoiceItemWhereInput
+    none?: InvoiceItemWhereInput
+  }
+
+  export type PaymentListRelationFilter = {
+    every?: PaymentWhereInput
+    some?: PaymentWhereInput
+    none?: PaymentWhereInput
+  }
+
+  export type InvoiceItemOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PaymentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InvoiceOrderByRelevanceInput = {
+    fields: InvoiceOrderByRelevanceFieldEnum | InvoiceOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type InvoiceCountOrderByAggregateInput = {
+    id?: SortOrder
+    number?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    clientId?: SortOrder
+    projectId?: SortOrder
+    quoteId?: SortOrder
+    status?: SortOrder
+    subtotal?: SortOrder
+    taxAmount?: SortOrder
+    totalAmount?: SortOrder
+    paidAmount?: SortOrder
+    currency?: SortOrder
+    issueDate?: SortOrder
+    dueDate?: SortOrder
+    paidAt?: SortOrder
+    notes?: SortOrder
+    terms?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InvoiceAvgOrderByAggregateInput = {
+    subtotal?: SortOrder
+    taxAmount?: SortOrder
+    totalAmount?: SortOrder
+    paidAmount?: SortOrder
+  }
+
+  export type InvoiceMaxOrderByAggregateInput = {
+    id?: SortOrder
+    number?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    clientId?: SortOrder
+    projectId?: SortOrder
+    quoteId?: SortOrder
+    status?: SortOrder
+    subtotal?: SortOrder
+    taxAmount?: SortOrder
+    totalAmount?: SortOrder
+    paidAmount?: SortOrder
+    currency?: SortOrder
+    issueDate?: SortOrder
+    dueDate?: SortOrder
+    paidAt?: SortOrder
+    notes?: SortOrder
+    terms?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InvoiceMinOrderByAggregateInput = {
+    id?: SortOrder
+    number?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    clientId?: SortOrder
+    projectId?: SortOrder
+    quoteId?: SortOrder
+    status?: SortOrder
+    subtotal?: SortOrder
+    taxAmount?: SortOrder
+    totalAmount?: SortOrder
+    paidAmount?: SortOrder
+    currency?: SortOrder
+    issueDate?: SortOrder
+    dueDate?: SortOrder
+    paidAt?: SortOrder
+    notes?: SortOrder
+    terms?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InvoiceSumOrderByAggregateInput = {
+    subtotal?: SortOrder
+    taxAmount?: SortOrder
+    totalAmount?: SortOrder
+    paidAmount?: SortOrder
+  }
+
+  export type EnumInvoiceStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InvoiceStatus | EnumInvoiceStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InvoiceStatus[]
+    notIn?: $Enums.InvoiceStatus[]
+    not?: NestedEnumInvoiceStatusWithAggregatesFilter<$PrismaModel> | $Enums.InvoiceStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInvoiceStatusFilter<$PrismaModel>
+    _max?: NestedEnumInvoiceStatusFilter<$PrismaModel>
+  }
+
+  export type InvoiceScalarRelationFilter = {
+    is?: InvoiceWhereInput
+    isNot?: InvoiceWhereInput
+  }
+
+  export type InvoiceItemOrderByRelevanceInput = {
+    fields: InvoiceItemOrderByRelevanceFieldEnum | InvoiceItemOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type InvoiceItemCountOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InvoiceItemAvgOrderByAggregateInput = {
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    order?: SortOrder
+  }
+
+  export type InvoiceItemMaxOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InvoiceItemMinOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    description?: SortOrder
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    order?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type InvoiceItemSumOrderByAggregateInput = {
+    quantity?: SortOrder
+    unitPrice?: SortOrder
+    totalPrice?: SortOrder
+    order?: SortOrder
+  }
+
+  export type EnumPaymentMethodFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentMethod[]
+    notIn?: $Enums.PaymentMethod[]
+    not?: NestedEnumPaymentMethodFilter<$PrismaModel> | $Enums.PaymentMethod
+  }
+
+  export type PaymentOrderByRelevanceInput = {
+    fields: PaymentOrderByRelevanceFieldEnum | PaymentOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type PaymentCountOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    method?: SortOrder
+    reference?: SortOrder
+    paidAt?: SortOrder
+    notes?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PaymentAvgOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type PaymentMaxOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    method?: SortOrder
+    reference?: SortOrder
+    paidAt?: SortOrder
+    notes?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PaymentMinOrderByAggregateInput = {
+    id?: SortOrder
+    invoiceId?: SortOrder
+    amount?: SortOrder
+    currency?: SortOrder
+    method?: SortOrder
+    reference?: SortOrder
+    paidAt?: SortOrder
+    notes?: SortOrder
+    createdById?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PaymentSumOrderByAggregateInput = {
+    amount?: SortOrder
+  }
+
+  export type EnumPaymentMethodWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentMethod[]
+    notIn?: $Enums.PaymentMethod[]
+    not?: NestedEnumPaymentMethodWithAggregatesFilter<$PrismaModel> | $Enums.PaymentMethod
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentMethodFilter<$PrismaModel>
+    _max?: NestedEnumPaymentMethodFilter<$PrismaModel>
   }
 
   export type AccountCreateNestedManyWithoutUserInput = {
@@ -16460,18 +28520,38 @@ export namespace Prisma {
     connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
   }
 
-  export type ClientCreateNestedManyWithoutContactInput = {
-    create?: XOR<ClientCreateWithoutContactInput, ClientUncheckedCreateWithoutContactInput> | ClientCreateWithoutContactInput[] | ClientUncheckedCreateWithoutContactInput[]
-    connectOrCreate?: ClientCreateOrConnectWithoutContactInput | ClientCreateOrConnectWithoutContactInput[]
-    createMany?: ClientCreateManyContactInputEnvelope
-    connect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
-  }
-
   export type ProjectMemberCreateNestedManyWithoutUserInput = {
     create?: XOR<ProjectMemberCreateWithoutUserInput, ProjectMemberUncheckedCreateWithoutUserInput> | ProjectMemberCreateWithoutUserInput[] | ProjectMemberUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProjectMemberCreateOrConnectWithoutUserInput | ProjectMemberCreateOrConnectWithoutUserInput[]
     createMany?: ProjectMemberCreateManyUserInputEnvelope
     connect?: ProjectMemberWhereUniqueInput | ProjectMemberWhereUniqueInput[]
+  }
+
+  export type ClientCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ClientCreateWithoutCreatedByInput, ClientUncheckedCreateWithoutCreatedByInput> | ClientCreateWithoutCreatedByInput[] | ClientUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ClientCreateOrConnectWithoutCreatedByInput | ClientCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ClientCreateManyCreatedByInputEnvelope
+    connect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+  }
+
+  export type TaskCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<TaskCreateWithoutCreatedByInput, TaskUncheckedCreateWithoutCreatedByInput> | TaskCreateWithoutCreatedByInput[] | TaskUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TaskCreateOrConnectWithoutCreatedByInput | TaskCreateOrConnectWithoutCreatedByInput[]
+    createMany?: TaskCreateManyCreatedByInputEnvelope
+    connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+  }
+
+  export type LabelCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<LabelCreateWithoutCreatedByInput, LabelUncheckedCreateWithoutCreatedByInput> | LabelCreateWithoutCreatedByInput[] | LabelUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: LabelCreateOrConnectWithoutCreatedByInput | LabelCreateOrConnectWithoutCreatedByInput[]
+    createMany?: LabelCreateManyCreatedByInputEnvelope
+    connect?: LabelWhereUniqueInput | LabelWhereUniqueInput[]
+  }
+
+  export type ClientCreateNestedOneWithoutUserInput = {
+    create?: XOR<ClientCreateWithoutUserInput, ClientUncheckedCreateWithoutUserInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutUserInput
+    connect?: ClientWhereUniqueInput
   }
 
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
@@ -16502,18 +28582,38 @@ export namespace Prisma {
     connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
   }
 
-  export type ClientUncheckedCreateNestedManyWithoutContactInput = {
-    create?: XOR<ClientCreateWithoutContactInput, ClientUncheckedCreateWithoutContactInput> | ClientCreateWithoutContactInput[] | ClientUncheckedCreateWithoutContactInput[]
-    connectOrCreate?: ClientCreateOrConnectWithoutContactInput | ClientCreateOrConnectWithoutContactInput[]
-    createMany?: ClientCreateManyContactInputEnvelope
-    connect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
-  }
-
   export type ProjectMemberUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<ProjectMemberCreateWithoutUserInput, ProjectMemberUncheckedCreateWithoutUserInput> | ProjectMemberCreateWithoutUserInput[] | ProjectMemberUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProjectMemberCreateOrConnectWithoutUserInput | ProjectMemberCreateOrConnectWithoutUserInput[]
     createMany?: ProjectMemberCreateManyUserInputEnvelope
     connect?: ProjectMemberWhereUniqueInput | ProjectMemberWhereUniqueInput[]
+  }
+
+  export type ClientUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<ClientCreateWithoutCreatedByInput, ClientUncheckedCreateWithoutCreatedByInput> | ClientCreateWithoutCreatedByInput[] | ClientUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ClientCreateOrConnectWithoutCreatedByInput | ClientCreateOrConnectWithoutCreatedByInput[]
+    createMany?: ClientCreateManyCreatedByInputEnvelope
+    connect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+  }
+
+  export type TaskUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<TaskCreateWithoutCreatedByInput, TaskUncheckedCreateWithoutCreatedByInput> | TaskCreateWithoutCreatedByInput[] | TaskUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TaskCreateOrConnectWithoutCreatedByInput | TaskCreateOrConnectWithoutCreatedByInput[]
+    createMany?: TaskCreateManyCreatedByInputEnvelope
+    connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+  }
+
+  export type LabelUncheckedCreateNestedManyWithoutCreatedByInput = {
+    create?: XOR<LabelCreateWithoutCreatedByInput, LabelUncheckedCreateWithoutCreatedByInput> | LabelCreateWithoutCreatedByInput[] | LabelUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: LabelCreateOrConnectWithoutCreatedByInput | LabelCreateOrConnectWithoutCreatedByInput[]
+    createMany?: LabelCreateManyCreatedByInputEnvelope
+    connect?: LabelWhereUniqueInput | LabelWhereUniqueInput[]
+  }
+
+  export type ClientUncheckedCreateNestedOneWithoutUserInput = {
+    create?: XOR<ClientCreateWithoutUserInput, ClientUncheckedCreateWithoutUserInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutUserInput
+    connect?: ClientWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -16522,6 +28622,10 @@ export namespace Prisma {
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type NullableDateTimeFieldUpdateOperationsInput = {
+    set?: Date | string | null
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
@@ -16584,20 +28688,6 @@ export namespace Prisma {
     deleteMany?: TaskScalarWhereInput | TaskScalarWhereInput[]
   }
 
-  export type ClientUpdateManyWithoutContactNestedInput = {
-    create?: XOR<ClientCreateWithoutContactInput, ClientUncheckedCreateWithoutContactInput> | ClientCreateWithoutContactInput[] | ClientUncheckedCreateWithoutContactInput[]
-    connectOrCreate?: ClientCreateOrConnectWithoutContactInput | ClientCreateOrConnectWithoutContactInput[]
-    upsert?: ClientUpsertWithWhereUniqueWithoutContactInput | ClientUpsertWithWhereUniqueWithoutContactInput[]
-    createMany?: ClientCreateManyContactInputEnvelope
-    set?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
-    disconnect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
-    delete?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
-    connect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
-    update?: ClientUpdateWithWhereUniqueWithoutContactInput | ClientUpdateWithWhereUniqueWithoutContactInput[]
-    updateMany?: ClientUpdateManyWithWhereWithoutContactInput | ClientUpdateManyWithWhereWithoutContactInput[]
-    deleteMany?: ClientScalarWhereInput | ClientScalarWhereInput[]
-  }
-
   export type ProjectMemberUpdateManyWithoutUserNestedInput = {
     create?: XOR<ProjectMemberCreateWithoutUserInput, ProjectMemberUncheckedCreateWithoutUserInput> | ProjectMemberCreateWithoutUserInput[] | ProjectMemberUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProjectMemberCreateOrConnectWithoutUserInput | ProjectMemberCreateOrConnectWithoutUserInput[]
@@ -16610,6 +28700,58 @@ export namespace Prisma {
     update?: ProjectMemberUpdateWithWhereUniqueWithoutUserInput | ProjectMemberUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ProjectMemberUpdateManyWithWhereWithoutUserInput | ProjectMemberUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ProjectMemberScalarWhereInput | ProjectMemberScalarWhereInput[]
+  }
+
+  export type ClientUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ClientCreateWithoutCreatedByInput, ClientUncheckedCreateWithoutCreatedByInput> | ClientCreateWithoutCreatedByInput[] | ClientUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ClientCreateOrConnectWithoutCreatedByInput | ClientCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ClientUpsertWithWhereUniqueWithoutCreatedByInput | ClientUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ClientCreateManyCreatedByInputEnvelope
+    set?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    disconnect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    delete?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    connect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    update?: ClientUpdateWithWhereUniqueWithoutCreatedByInput | ClientUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ClientUpdateManyWithWhereWithoutCreatedByInput | ClientUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ClientScalarWhereInput | ClientScalarWhereInput[]
+  }
+
+  export type TaskUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<TaskCreateWithoutCreatedByInput, TaskUncheckedCreateWithoutCreatedByInput> | TaskCreateWithoutCreatedByInput[] | TaskUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TaskCreateOrConnectWithoutCreatedByInput | TaskCreateOrConnectWithoutCreatedByInput[]
+    upsert?: TaskUpsertWithWhereUniqueWithoutCreatedByInput | TaskUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: TaskCreateManyCreatedByInputEnvelope
+    set?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+    disconnect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+    delete?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+    connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+    update?: TaskUpdateWithWhereUniqueWithoutCreatedByInput | TaskUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: TaskUpdateManyWithWhereWithoutCreatedByInput | TaskUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: TaskScalarWhereInput | TaskScalarWhereInput[]
+  }
+
+  export type LabelUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<LabelCreateWithoutCreatedByInput, LabelUncheckedCreateWithoutCreatedByInput> | LabelCreateWithoutCreatedByInput[] | LabelUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: LabelCreateOrConnectWithoutCreatedByInput | LabelCreateOrConnectWithoutCreatedByInput[]
+    upsert?: LabelUpsertWithWhereUniqueWithoutCreatedByInput | LabelUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: LabelCreateManyCreatedByInputEnvelope
+    set?: LabelWhereUniqueInput | LabelWhereUniqueInput[]
+    disconnect?: LabelWhereUniqueInput | LabelWhereUniqueInput[]
+    delete?: LabelWhereUniqueInput | LabelWhereUniqueInput[]
+    connect?: LabelWhereUniqueInput | LabelWhereUniqueInput[]
+    update?: LabelUpdateWithWhereUniqueWithoutCreatedByInput | LabelUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: LabelUpdateManyWithWhereWithoutCreatedByInput | LabelUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: LabelScalarWhereInput | LabelScalarWhereInput[]
+  }
+
+  export type ClientUpdateOneWithoutUserNestedInput = {
+    create?: XOR<ClientCreateWithoutUserInput, ClientUncheckedCreateWithoutUserInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutUserInput
+    upsert?: ClientUpsertWithoutUserInput
+    disconnect?: ClientWhereInput | boolean
+    delete?: ClientWhereInput | boolean
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutUserInput, ClientUpdateWithoutUserInput>, ClientUncheckedUpdateWithoutUserInput>
   }
 
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
@@ -16668,20 +28810,6 @@ export namespace Prisma {
     deleteMany?: TaskScalarWhereInput | TaskScalarWhereInput[]
   }
 
-  export type ClientUncheckedUpdateManyWithoutContactNestedInput = {
-    create?: XOR<ClientCreateWithoutContactInput, ClientUncheckedCreateWithoutContactInput> | ClientCreateWithoutContactInput[] | ClientUncheckedCreateWithoutContactInput[]
-    connectOrCreate?: ClientCreateOrConnectWithoutContactInput | ClientCreateOrConnectWithoutContactInput[]
-    upsert?: ClientUpsertWithWhereUniqueWithoutContactInput | ClientUpsertWithWhereUniqueWithoutContactInput[]
-    createMany?: ClientCreateManyContactInputEnvelope
-    set?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
-    disconnect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
-    delete?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
-    connect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
-    update?: ClientUpdateWithWhereUniqueWithoutContactInput | ClientUpdateWithWhereUniqueWithoutContactInput[]
-    updateMany?: ClientUpdateManyWithWhereWithoutContactInput | ClientUpdateManyWithWhereWithoutContactInput[]
-    deleteMany?: ClientScalarWhereInput | ClientScalarWhereInput[]
-  }
-
   export type ProjectMemberUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<ProjectMemberCreateWithoutUserInput, ProjectMemberUncheckedCreateWithoutUserInput> | ProjectMemberCreateWithoutUserInput[] | ProjectMemberUncheckedCreateWithoutUserInput[]
     connectOrCreate?: ProjectMemberCreateOrConnectWithoutUserInput | ProjectMemberCreateOrConnectWithoutUserInput[]
@@ -16694,6 +28822,58 @@ export namespace Prisma {
     update?: ProjectMemberUpdateWithWhereUniqueWithoutUserInput | ProjectMemberUpdateWithWhereUniqueWithoutUserInput[]
     updateMany?: ProjectMemberUpdateManyWithWhereWithoutUserInput | ProjectMemberUpdateManyWithWhereWithoutUserInput[]
     deleteMany?: ProjectMemberScalarWhereInput | ProjectMemberScalarWhereInput[]
+  }
+
+  export type ClientUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<ClientCreateWithoutCreatedByInput, ClientUncheckedCreateWithoutCreatedByInput> | ClientCreateWithoutCreatedByInput[] | ClientUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: ClientCreateOrConnectWithoutCreatedByInput | ClientCreateOrConnectWithoutCreatedByInput[]
+    upsert?: ClientUpsertWithWhereUniqueWithoutCreatedByInput | ClientUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: ClientCreateManyCreatedByInputEnvelope
+    set?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    disconnect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    delete?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    connect?: ClientWhereUniqueInput | ClientWhereUniqueInput[]
+    update?: ClientUpdateWithWhereUniqueWithoutCreatedByInput | ClientUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: ClientUpdateManyWithWhereWithoutCreatedByInput | ClientUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: ClientScalarWhereInput | ClientScalarWhereInput[]
+  }
+
+  export type TaskUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<TaskCreateWithoutCreatedByInput, TaskUncheckedCreateWithoutCreatedByInput> | TaskCreateWithoutCreatedByInput[] | TaskUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: TaskCreateOrConnectWithoutCreatedByInput | TaskCreateOrConnectWithoutCreatedByInput[]
+    upsert?: TaskUpsertWithWhereUniqueWithoutCreatedByInput | TaskUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: TaskCreateManyCreatedByInputEnvelope
+    set?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+    disconnect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+    delete?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+    connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
+    update?: TaskUpdateWithWhereUniqueWithoutCreatedByInput | TaskUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: TaskUpdateManyWithWhereWithoutCreatedByInput | TaskUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: TaskScalarWhereInput | TaskScalarWhereInput[]
+  }
+
+  export type LabelUncheckedUpdateManyWithoutCreatedByNestedInput = {
+    create?: XOR<LabelCreateWithoutCreatedByInput, LabelUncheckedCreateWithoutCreatedByInput> | LabelCreateWithoutCreatedByInput[] | LabelUncheckedCreateWithoutCreatedByInput[]
+    connectOrCreate?: LabelCreateOrConnectWithoutCreatedByInput | LabelCreateOrConnectWithoutCreatedByInput[]
+    upsert?: LabelUpsertWithWhereUniqueWithoutCreatedByInput | LabelUpsertWithWhereUniqueWithoutCreatedByInput[]
+    createMany?: LabelCreateManyCreatedByInputEnvelope
+    set?: LabelWhereUniqueInput | LabelWhereUniqueInput[]
+    disconnect?: LabelWhereUniqueInput | LabelWhereUniqueInput[]
+    delete?: LabelWhereUniqueInput | LabelWhereUniqueInput[]
+    connect?: LabelWhereUniqueInput | LabelWhereUniqueInput[]
+    update?: LabelUpdateWithWhereUniqueWithoutCreatedByInput | LabelUpdateWithWhereUniqueWithoutCreatedByInput[]
+    updateMany?: LabelUpdateManyWithWhereWithoutCreatedByInput | LabelUpdateManyWithWhereWithoutCreatedByInput[]
+    deleteMany?: LabelScalarWhereInput | LabelScalarWhereInput[]
+  }
+
+  export type ClientUncheckedUpdateOneWithoutUserNestedInput = {
+    create?: XOR<ClientCreateWithoutUserInput, ClientUncheckedCreateWithoutUserInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutUserInput
+    upsert?: ClientUpsertWithoutUserInput
+    disconnect?: ClientWhereInput | boolean
+    delete?: ClientWhereInput | boolean
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutUserInput, ClientUpdateWithoutUserInput>, ClientUncheckedUpdateWithoutUserInput>
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -16732,9 +28912,15 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAccountsInput, UserUpdateWithoutAccountsInput>, UserUncheckedUpdateWithoutAccountsInput>
   }
 
-  export type UserCreateNestedOneWithoutContactClientsInput = {
-    create?: XOR<UserCreateWithoutContactClientsInput, UserUncheckedCreateWithoutContactClientsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutContactClientsInput
+  export type UserCreateNestedOneWithoutClientProfileInput = {
+    create?: XOR<UserCreateWithoutClientProfileInput, UserUncheckedCreateWithoutClientProfileInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClientProfileInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCreatedClientsInput = {
+    create?: XOR<UserCreateWithoutCreatedClientsInput, UserUncheckedCreateWithoutCreatedClientsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedClientsInput
     connect?: UserWhereUniqueInput
   }
 
@@ -16752,6 +28938,20 @@ export namespace Prisma {
     connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
   }
 
+  export type InvoiceCreateNestedManyWithoutClientInput = {
+    create?: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput> | InvoiceCreateWithoutClientInput[] | InvoiceUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutClientInput | InvoiceCreateOrConnectWithoutClientInput[]
+    createMany?: InvoiceCreateManyClientInputEnvelope
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+  }
+
+  export type QuoteCreateNestedManyWithoutClientInput = {
+    create?: XOR<QuoteCreateWithoutClientInput, QuoteUncheckedCreateWithoutClientInput> | QuoteCreateWithoutClientInput[] | QuoteUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: QuoteCreateOrConnectWithoutClientInput | QuoteCreateOrConnectWithoutClientInput[]
+    createMany?: QuoteCreateManyClientInputEnvelope
+    connect?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+  }
+
   export type ProjectUncheckedCreateNestedManyWithoutClientInput = {
     create?: XOR<ProjectCreateWithoutClientInput, ProjectUncheckedCreateWithoutClientInput> | ProjectCreateWithoutClientInput[] | ProjectUncheckedCreateWithoutClientInput[]
     connectOrCreate?: ProjectCreateOrConnectWithoutClientInput | ProjectCreateOrConnectWithoutClientInput[]
@@ -16766,12 +28966,52 @@ export namespace Prisma {
     connect?: TaskWhereUniqueInput | TaskWhereUniqueInput[]
   }
 
-  export type UserUpdateOneRequiredWithoutContactClientsNestedInput = {
-    create?: XOR<UserCreateWithoutContactClientsInput, UserUncheckedCreateWithoutContactClientsInput>
-    connectOrCreate?: UserCreateOrConnectWithoutContactClientsInput
-    upsert?: UserUpsertWithoutContactClientsInput
+  export type InvoiceUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput> | InvoiceCreateWithoutClientInput[] | InvoiceUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutClientInput | InvoiceCreateOrConnectWithoutClientInput[]
+    createMany?: InvoiceCreateManyClientInputEnvelope
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+  }
+
+  export type QuoteUncheckedCreateNestedManyWithoutClientInput = {
+    create?: XOR<QuoteCreateWithoutClientInput, QuoteUncheckedCreateWithoutClientInput> | QuoteCreateWithoutClientInput[] | QuoteUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: QuoteCreateOrConnectWithoutClientInput | QuoteCreateOrConnectWithoutClientInput[]
+    createMany?: QuoteCreateManyClientInputEnvelope
+    connect?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+  }
+
+  export type EnumClientTypeFieldUpdateOperationsInput = {
+    set?: $Enums.ClientType
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type UserUpdateOneWithoutClientProfileNestedInput = {
+    create?: XOR<UserCreateWithoutClientProfileInput, UserUncheckedCreateWithoutClientProfileInput>
+    connectOrCreate?: UserCreateOrConnectWithoutClientProfileInput
+    upsert?: UserUpsertWithoutClientProfileInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
-    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutContactClientsInput, UserUpdateWithoutContactClientsInput>, UserUncheckedUpdateWithoutContactClientsInput>
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutClientProfileInput, UserUpdateWithoutClientProfileInput>, UserUncheckedUpdateWithoutClientProfileInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutCreatedClientsNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedClientsInput, UserUncheckedCreateWithoutCreatedClientsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedClientsInput
+    upsert?: UserUpsertWithoutCreatedClientsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedClientsInput, UserUpdateWithoutCreatedClientsInput>, UserUncheckedUpdateWithoutCreatedClientsInput>
   }
 
   export type ProjectUpdateManyWithoutClientNestedInput = {
@@ -16802,6 +29042,34 @@ export namespace Prisma {
     deleteMany?: TaskScalarWhereInput | TaskScalarWhereInput[]
   }
 
+  export type InvoiceUpdateManyWithoutClientNestedInput = {
+    create?: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput> | InvoiceCreateWithoutClientInput[] | InvoiceUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutClientInput | InvoiceCreateOrConnectWithoutClientInput[]
+    upsert?: InvoiceUpsertWithWhereUniqueWithoutClientInput | InvoiceUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: InvoiceCreateManyClientInputEnvelope
+    set?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    disconnect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    delete?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    update?: InvoiceUpdateWithWhereUniqueWithoutClientInput | InvoiceUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: InvoiceUpdateManyWithWhereWithoutClientInput | InvoiceUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+  }
+
+  export type QuoteUpdateManyWithoutClientNestedInput = {
+    create?: XOR<QuoteCreateWithoutClientInput, QuoteUncheckedCreateWithoutClientInput> | QuoteCreateWithoutClientInput[] | QuoteUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: QuoteCreateOrConnectWithoutClientInput | QuoteCreateOrConnectWithoutClientInput[]
+    upsert?: QuoteUpsertWithWhereUniqueWithoutClientInput | QuoteUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: QuoteCreateManyClientInputEnvelope
+    set?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+    disconnect?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+    delete?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+    connect?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+    update?: QuoteUpdateWithWhereUniqueWithoutClientInput | QuoteUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: QuoteUpdateManyWithWhereWithoutClientInput | QuoteUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: QuoteScalarWhereInput | QuoteScalarWhereInput[]
+  }
+
   export type ProjectUncheckedUpdateManyWithoutClientNestedInput = {
     create?: XOR<ProjectCreateWithoutClientInput, ProjectUncheckedCreateWithoutClientInput> | ProjectCreateWithoutClientInput[] | ProjectUncheckedCreateWithoutClientInput[]
     connectOrCreate?: ProjectCreateOrConnectWithoutClientInput | ProjectCreateOrConnectWithoutClientInput[]
@@ -16830,6 +29098,34 @@ export namespace Prisma {
     deleteMany?: TaskScalarWhereInput | TaskScalarWhereInput[]
   }
 
+  export type InvoiceUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput> | InvoiceCreateWithoutClientInput[] | InvoiceUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutClientInput | InvoiceCreateOrConnectWithoutClientInput[]
+    upsert?: InvoiceUpsertWithWhereUniqueWithoutClientInput | InvoiceUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: InvoiceCreateManyClientInputEnvelope
+    set?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    disconnect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    delete?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    update?: InvoiceUpdateWithWhereUniqueWithoutClientInput | InvoiceUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: InvoiceUpdateManyWithWhereWithoutClientInput | InvoiceUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+  }
+
+  export type QuoteUncheckedUpdateManyWithoutClientNestedInput = {
+    create?: XOR<QuoteCreateWithoutClientInput, QuoteUncheckedCreateWithoutClientInput> | QuoteCreateWithoutClientInput[] | QuoteUncheckedCreateWithoutClientInput[]
+    connectOrCreate?: QuoteCreateOrConnectWithoutClientInput | QuoteCreateOrConnectWithoutClientInput[]
+    upsert?: QuoteUpsertWithWhereUniqueWithoutClientInput | QuoteUpsertWithWhereUniqueWithoutClientInput[]
+    createMany?: QuoteCreateManyClientInputEnvelope
+    set?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+    disconnect?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+    delete?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+    connect?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+    update?: QuoteUpdateWithWhereUniqueWithoutClientInput | QuoteUpdateWithWhereUniqueWithoutClientInput[]
+    updateMany?: QuoteUpdateManyWithWhereWithoutClientInput | QuoteUpdateManyWithWhereWithoutClientInput[]
+    deleteMany?: QuoteScalarWhereInput | QuoteScalarWhereInput[]
+  }
+
   export type ClientCreateNestedOneWithoutProjectsInput = {
     create?: XOR<ClientCreateWithoutProjectsInput, ClientUncheckedCreateWithoutProjectsInput>
     connectOrCreate?: ClientCreateOrConnectWithoutProjectsInput
@@ -16850,6 +29146,27 @@ export namespace Prisma {
     connect?: BoardWhereUniqueInput | BoardWhereUniqueInput[]
   }
 
+  export type ProjectLabelCreateNestedManyWithoutProjectInput = {
+    create?: XOR<ProjectLabelCreateWithoutProjectInput, ProjectLabelUncheckedCreateWithoutProjectInput> | ProjectLabelCreateWithoutProjectInput[] | ProjectLabelUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectLabelCreateOrConnectWithoutProjectInput | ProjectLabelCreateOrConnectWithoutProjectInput[]
+    createMany?: ProjectLabelCreateManyProjectInputEnvelope
+    connect?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+  }
+
+  export type QuoteCreateNestedManyWithoutProjectInput = {
+    create?: XOR<QuoteCreateWithoutProjectInput, QuoteUncheckedCreateWithoutProjectInput> | QuoteCreateWithoutProjectInput[] | QuoteUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: QuoteCreateOrConnectWithoutProjectInput | QuoteCreateOrConnectWithoutProjectInput[]
+    createMany?: QuoteCreateManyProjectInputEnvelope
+    connect?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+  }
+
+  export type InvoiceCreateNestedManyWithoutProjectInput = {
+    create?: XOR<InvoiceCreateWithoutProjectInput, InvoiceUncheckedCreateWithoutProjectInput> | InvoiceCreateWithoutProjectInput[] | InvoiceUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutProjectInput | InvoiceCreateOrConnectWithoutProjectInput[]
+    createMany?: InvoiceCreateManyProjectInputEnvelope
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+  }
+
   export type ProjectMemberUncheckedCreateNestedManyWithoutProjectInput = {
     create?: XOR<ProjectMemberCreateWithoutProjectInput, ProjectMemberUncheckedCreateWithoutProjectInput> | ProjectMemberCreateWithoutProjectInput[] | ProjectMemberUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: ProjectMemberCreateOrConnectWithoutProjectInput | ProjectMemberCreateOrConnectWithoutProjectInput[]
@@ -16862,6 +29179,27 @@ export namespace Prisma {
     connectOrCreate?: BoardCreateOrConnectWithoutProjectInput | BoardCreateOrConnectWithoutProjectInput[]
     createMany?: BoardCreateManyProjectInputEnvelope
     connect?: BoardWhereUniqueInput | BoardWhereUniqueInput[]
+  }
+
+  export type ProjectLabelUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<ProjectLabelCreateWithoutProjectInput, ProjectLabelUncheckedCreateWithoutProjectInput> | ProjectLabelCreateWithoutProjectInput[] | ProjectLabelUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectLabelCreateOrConnectWithoutProjectInput | ProjectLabelCreateOrConnectWithoutProjectInput[]
+    createMany?: ProjectLabelCreateManyProjectInputEnvelope
+    connect?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+  }
+
+  export type QuoteUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<QuoteCreateWithoutProjectInput, QuoteUncheckedCreateWithoutProjectInput> | QuoteCreateWithoutProjectInput[] | QuoteUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: QuoteCreateOrConnectWithoutProjectInput | QuoteCreateOrConnectWithoutProjectInput[]
+    createMany?: QuoteCreateManyProjectInputEnvelope
+    connect?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+  }
+
+  export type InvoiceUncheckedCreateNestedManyWithoutProjectInput = {
+    create?: XOR<InvoiceCreateWithoutProjectInput, InvoiceUncheckedCreateWithoutProjectInput> | InvoiceCreateWithoutProjectInput[] | InvoiceUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutProjectInput | InvoiceCreateOrConnectWithoutProjectInput[]
+    createMany?: InvoiceCreateManyProjectInputEnvelope
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
   }
 
   export type ClientUpdateOneRequiredWithoutProjectsNestedInput = {
@@ -16900,6 +29238,48 @@ export namespace Prisma {
     deleteMany?: BoardScalarWhereInput | BoardScalarWhereInput[]
   }
 
+  export type ProjectLabelUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<ProjectLabelCreateWithoutProjectInput, ProjectLabelUncheckedCreateWithoutProjectInput> | ProjectLabelCreateWithoutProjectInput[] | ProjectLabelUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectLabelCreateOrConnectWithoutProjectInput | ProjectLabelCreateOrConnectWithoutProjectInput[]
+    upsert?: ProjectLabelUpsertWithWhereUniqueWithoutProjectInput | ProjectLabelUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: ProjectLabelCreateManyProjectInputEnvelope
+    set?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+    disconnect?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+    delete?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+    connect?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+    update?: ProjectLabelUpdateWithWhereUniqueWithoutProjectInput | ProjectLabelUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: ProjectLabelUpdateManyWithWhereWithoutProjectInput | ProjectLabelUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: ProjectLabelScalarWhereInput | ProjectLabelScalarWhereInput[]
+  }
+
+  export type QuoteUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<QuoteCreateWithoutProjectInput, QuoteUncheckedCreateWithoutProjectInput> | QuoteCreateWithoutProjectInput[] | QuoteUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: QuoteCreateOrConnectWithoutProjectInput | QuoteCreateOrConnectWithoutProjectInput[]
+    upsert?: QuoteUpsertWithWhereUniqueWithoutProjectInput | QuoteUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: QuoteCreateManyProjectInputEnvelope
+    set?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+    disconnect?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+    delete?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+    connect?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+    update?: QuoteUpdateWithWhereUniqueWithoutProjectInput | QuoteUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: QuoteUpdateManyWithWhereWithoutProjectInput | QuoteUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: QuoteScalarWhereInput | QuoteScalarWhereInput[]
+  }
+
+  export type InvoiceUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<InvoiceCreateWithoutProjectInput, InvoiceUncheckedCreateWithoutProjectInput> | InvoiceCreateWithoutProjectInput[] | InvoiceUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutProjectInput | InvoiceCreateOrConnectWithoutProjectInput[]
+    upsert?: InvoiceUpsertWithWhereUniqueWithoutProjectInput | InvoiceUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: InvoiceCreateManyProjectInputEnvelope
+    set?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    disconnect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    delete?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    update?: InvoiceUpdateWithWhereUniqueWithoutProjectInput | InvoiceUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: InvoiceUpdateManyWithWhereWithoutProjectInput | InvoiceUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+  }
+
   export type ProjectMemberUncheckedUpdateManyWithoutProjectNestedInput = {
     create?: XOR<ProjectMemberCreateWithoutProjectInput, ProjectMemberUncheckedCreateWithoutProjectInput> | ProjectMemberCreateWithoutProjectInput[] | ProjectMemberUncheckedCreateWithoutProjectInput[]
     connectOrCreate?: ProjectMemberCreateOrConnectWithoutProjectInput | ProjectMemberCreateOrConnectWithoutProjectInput[]
@@ -16926,6 +29306,48 @@ export namespace Prisma {
     update?: BoardUpdateWithWhereUniqueWithoutProjectInput | BoardUpdateWithWhereUniqueWithoutProjectInput[]
     updateMany?: BoardUpdateManyWithWhereWithoutProjectInput | BoardUpdateManyWithWhereWithoutProjectInput[]
     deleteMany?: BoardScalarWhereInput | BoardScalarWhereInput[]
+  }
+
+  export type ProjectLabelUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<ProjectLabelCreateWithoutProjectInput, ProjectLabelUncheckedCreateWithoutProjectInput> | ProjectLabelCreateWithoutProjectInput[] | ProjectLabelUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: ProjectLabelCreateOrConnectWithoutProjectInput | ProjectLabelCreateOrConnectWithoutProjectInput[]
+    upsert?: ProjectLabelUpsertWithWhereUniqueWithoutProjectInput | ProjectLabelUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: ProjectLabelCreateManyProjectInputEnvelope
+    set?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+    disconnect?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+    delete?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+    connect?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+    update?: ProjectLabelUpdateWithWhereUniqueWithoutProjectInput | ProjectLabelUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: ProjectLabelUpdateManyWithWhereWithoutProjectInput | ProjectLabelUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: ProjectLabelScalarWhereInput | ProjectLabelScalarWhereInput[]
+  }
+
+  export type QuoteUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<QuoteCreateWithoutProjectInput, QuoteUncheckedCreateWithoutProjectInput> | QuoteCreateWithoutProjectInput[] | QuoteUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: QuoteCreateOrConnectWithoutProjectInput | QuoteCreateOrConnectWithoutProjectInput[]
+    upsert?: QuoteUpsertWithWhereUniqueWithoutProjectInput | QuoteUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: QuoteCreateManyProjectInputEnvelope
+    set?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+    disconnect?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+    delete?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+    connect?: QuoteWhereUniqueInput | QuoteWhereUniqueInput[]
+    update?: QuoteUpdateWithWhereUniqueWithoutProjectInput | QuoteUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: QuoteUpdateManyWithWhereWithoutProjectInput | QuoteUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: QuoteScalarWhereInput | QuoteScalarWhereInput[]
+  }
+
+  export type InvoiceUncheckedUpdateManyWithoutProjectNestedInput = {
+    create?: XOR<InvoiceCreateWithoutProjectInput, InvoiceUncheckedCreateWithoutProjectInput> | InvoiceCreateWithoutProjectInput[] | InvoiceUncheckedCreateWithoutProjectInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutProjectInput | InvoiceCreateOrConnectWithoutProjectInput[]
+    upsert?: InvoiceUpsertWithWhereUniqueWithoutProjectInput | InvoiceUpsertWithWhereUniqueWithoutProjectInput[]
+    createMany?: InvoiceCreateManyProjectInputEnvelope
+    set?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    disconnect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    delete?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    update?: InvoiceUpdateWithWhereUniqueWithoutProjectInput | InvoiceUpdateWithWhereUniqueWithoutProjectInput[]
+    updateMany?: InvoiceUpdateManyWithWhereWithoutProjectInput | InvoiceUpdateManyWithWhereWithoutProjectInput[]
+    deleteMany?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
   }
 
   export type ProjectCreateNestedOneWithoutMembersInput = {
@@ -16975,11 +29397,25 @@ export namespace Prisma {
     connect?: ColumnWhereUniqueInput | ColumnWhereUniqueInput[]
   }
 
+  export type BoardLabelCreateNestedManyWithoutBoardInput = {
+    create?: XOR<BoardLabelCreateWithoutBoardInput, BoardLabelUncheckedCreateWithoutBoardInput> | BoardLabelCreateWithoutBoardInput[] | BoardLabelUncheckedCreateWithoutBoardInput[]
+    connectOrCreate?: BoardLabelCreateOrConnectWithoutBoardInput | BoardLabelCreateOrConnectWithoutBoardInput[]
+    createMany?: BoardLabelCreateManyBoardInputEnvelope
+    connect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+  }
+
   export type ColumnUncheckedCreateNestedManyWithoutBoardInput = {
     create?: XOR<ColumnCreateWithoutBoardInput, ColumnUncheckedCreateWithoutBoardInput> | ColumnCreateWithoutBoardInput[] | ColumnUncheckedCreateWithoutBoardInput[]
     connectOrCreate?: ColumnCreateOrConnectWithoutBoardInput | ColumnCreateOrConnectWithoutBoardInput[]
     createMany?: ColumnCreateManyBoardInputEnvelope
     connect?: ColumnWhereUniqueInput | ColumnWhereUniqueInput[]
+  }
+
+  export type BoardLabelUncheckedCreateNestedManyWithoutBoardInput = {
+    create?: XOR<BoardLabelCreateWithoutBoardInput, BoardLabelUncheckedCreateWithoutBoardInput> | BoardLabelCreateWithoutBoardInput[] | BoardLabelUncheckedCreateWithoutBoardInput[]
+    connectOrCreate?: BoardLabelCreateOrConnectWithoutBoardInput | BoardLabelCreateOrConnectWithoutBoardInput[]
+    createMany?: BoardLabelCreateManyBoardInputEnvelope
+    connect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
   }
 
   export type ProjectUpdateOneRequiredWithoutBoardsNestedInput = {
@@ -17012,6 +29448,20 @@ export namespace Prisma {
     deleteMany?: ColumnScalarWhereInput | ColumnScalarWhereInput[]
   }
 
+  export type BoardLabelUpdateManyWithoutBoardNestedInput = {
+    create?: XOR<BoardLabelCreateWithoutBoardInput, BoardLabelUncheckedCreateWithoutBoardInput> | BoardLabelCreateWithoutBoardInput[] | BoardLabelUncheckedCreateWithoutBoardInput[]
+    connectOrCreate?: BoardLabelCreateOrConnectWithoutBoardInput | BoardLabelCreateOrConnectWithoutBoardInput[]
+    upsert?: BoardLabelUpsertWithWhereUniqueWithoutBoardInput | BoardLabelUpsertWithWhereUniqueWithoutBoardInput[]
+    createMany?: BoardLabelCreateManyBoardInputEnvelope
+    set?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+    disconnect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+    delete?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+    connect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+    update?: BoardLabelUpdateWithWhereUniqueWithoutBoardInput | BoardLabelUpdateWithWhereUniqueWithoutBoardInput[]
+    updateMany?: BoardLabelUpdateManyWithWhereWithoutBoardInput | BoardLabelUpdateManyWithWhereWithoutBoardInput[]
+    deleteMany?: BoardLabelScalarWhereInput | BoardLabelScalarWhereInput[]
+  }
+
   export type ColumnUncheckedUpdateManyWithoutBoardNestedInput = {
     create?: XOR<ColumnCreateWithoutBoardInput, ColumnUncheckedCreateWithoutBoardInput> | ColumnCreateWithoutBoardInput[] | ColumnUncheckedCreateWithoutBoardInput[]
     connectOrCreate?: ColumnCreateOrConnectWithoutBoardInput | ColumnCreateOrConnectWithoutBoardInput[]
@@ -17024,6 +29474,20 @@ export namespace Prisma {
     update?: ColumnUpdateWithWhereUniqueWithoutBoardInput | ColumnUpdateWithWhereUniqueWithoutBoardInput[]
     updateMany?: ColumnUpdateManyWithWhereWithoutBoardInput | ColumnUpdateManyWithWhereWithoutBoardInput[]
     deleteMany?: ColumnScalarWhereInput | ColumnScalarWhereInput[]
+  }
+
+  export type BoardLabelUncheckedUpdateManyWithoutBoardNestedInput = {
+    create?: XOR<BoardLabelCreateWithoutBoardInput, BoardLabelUncheckedCreateWithoutBoardInput> | BoardLabelCreateWithoutBoardInput[] | BoardLabelUncheckedCreateWithoutBoardInput[]
+    connectOrCreate?: BoardLabelCreateOrConnectWithoutBoardInput | BoardLabelCreateOrConnectWithoutBoardInput[]
+    upsert?: BoardLabelUpsertWithWhereUniqueWithoutBoardInput | BoardLabelUpsertWithWhereUniqueWithoutBoardInput[]
+    createMany?: BoardLabelCreateManyBoardInputEnvelope
+    set?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+    disconnect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+    delete?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+    connect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+    update?: BoardLabelUpdateWithWhereUniqueWithoutBoardInput | BoardLabelUpdateWithWhereUniqueWithoutBoardInput[]
+    updateMany?: BoardLabelUpdateManyWithWhereWithoutBoardInput | BoardLabelUpdateManyWithWhereWithoutBoardInput[]
+    deleteMany?: BoardLabelScalarWhereInput | BoardLabelScalarWhereInput[]
   }
 
   export type BoardCreateNestedOneWithoutColumnsInput = {
@@ -17102,10 +29566,16 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
-  export type ClientCreateNestedOneWithoutTaskInput = {
-    create?: XOR<ClientCreateWithoutTaskInput, ClientUncheckedCreateWithoutTaskInput>
-    connectOrCreate?: ClientCreateOrConnectWithoutTaskInput
+  export type ClientCreateNestedOneWithoutTasksInput = {
+    create?: XOR<ClientCreateWithoutTasksInput, ClientUncheckedCreateWithoutTasksInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutTasksInput
     connect?: ClientWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutCreatedTasksInput = {
+    create?: XOR<UserCreateWithoutCreatedTasksInput, UserUncheckedCreateWithoutCreatedTasksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedTasksInput
+    connect?: UserWhereUniqueInput
   }
 
   export type TaskLabelCreateNestedManyWithoutTaskInput = {
@@ -17120,18 +29590,6 @@ export namespace Prisma {
     connectOrCreate?: TaskLabelCreateOrConnectWithoutTaskInput | TaskLabelCreateOrConnectWithoutTaskInput[]
     createMany?: TaskLabelCreateManyTaskInputEnvelope
     connect?: TaskLabelWhereUniqueInput | TaskLabelWhereUniqueInput[]
-  }
-
-  export type NullableFloatFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type NullableDateTimeFieldUpdateOperationsInput = {
-    set?: Date | string | null
   }
 
   export type ColumnUpdateOneRequiredWithoutTasksNestedInput = {
@@ -17152,14 +29610,22 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAssignedTasksInput, UserUpdateWithoutAssignedTasksInput>, UserUncheckedUpdateWithoutAssignedTasksInput>
   }
 
-  export type ClientUpdateOneWithoutTaskNestedInput = {
-    create?: XOR<ClientCreateWithoutTaskInput, ClientUncheckedCreateWithoutTaskInput>
-    connectOrCreate?: ClientCreateOrConnectWithoutTaskInput
-    upsert?: ClientUpsertWithoutTaskInput
+  export type ClientUpdateOneWithoutTasksNestedInput = {
+    create?: XOR<ClientCreateWithoutTasksInput, ClientUncheckedCreateWithoutTasksInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutTasksInput
+    upsert?: ClientUpsertWithoutTasksInput
     disconnect?: ClientWhereInput | boolean
     delete?: ClientWhereInput | boolean
     connect?: ClientWhereUniqueInput
-    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutTaskInput, ClientUpdateWithoutTaskInput>, ClientUncheckedUpdateWithoutTaskInput>
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutTasksInput, ClientUpdateWithoutTasksInput>, ClientUncheckedUpdateWithoutTasksInput>
+  }
+
+  export type UserUpdateOneRequiredWithoutCreatedTasksNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedTasksInput, UserUncheckedCreateWithoutCreatedTasksInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedTasksInput
+    upsert?: UserUpsertWithoutCreatedTasksInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedTasksInput, UserUpdateWithoutCreatedTasksInput>, UserUncheckedUpdateWithoutCreatedTasksInput>
   }
 
   export type TaskLabelUpdateManyWithoutTaskNestedInput = {
@@ -17190,6 +29656,26 @@ export namespace Prisma {
     deleteMany?: TaskLabelScalarWhereInput | TaskLabelScalarWhereInput[]
   }
 
+  export type UserCreateNestedOneWithoutCreatedLabelsInput = {
+    create?: XOR<UserCreateWithoutCreatedLabelsInput, UserUncheckedCreateWithoutCreatedLabelsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedLabelsInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type ProjectLabelCreateNestedManyWithoutLabelInput = {
+    create?: XOR<ProjectLabelCreateWithoutLabelInput, ProjectLabelUncheckedCreateWithoutLabelInput> | ProjectLabelCreateWithoutLabelInput[] | ProjectLabelUncheckedCreateWithoutLabelInput[]
+    connectOrCreate?: ProjectLabelCreateOrConnectWithoutLabelInput | ProjectLabelCreateOrConnectWithoutLabelInput[]
+    createMany?: ProjectLabelCreateManyLabelInputEnvelope
+    connect?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+  }
+
+  export type BoardLabelCreateNestedManyWithoutLabelInput = {
+    create?: XOR<BoardLabelCreateWithoutLabelInput, BoardLabelUncheckedCreateWithoutLabelInput> | BoardLabelCreateWithoutLabelInput[] | BoardLabelUncheckedCreateWithoutLabelInput[]
+    connectOrCreate?: BoardLabelCreateOrConnectWithoutLabelInput | BoardLabelCreateOrConnectWithoutLabelInput[]
+    createMany?: BoardLabelCreateManyLabelInputEnvelope
+    connect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+  }
+
   export type TaskLabelCreateNestedManyWithoutLabelInput = {
     create?: XOR<TaskLabelCreateWithoutLabelInput, TaskLabelUncheckedCreateWithoutLabelInput> | TaskLabelCreateWithoutLabelInput[] | TaskLabelUncheckedCreateWithoutLabelInput[]
     connectOrCreate?: TaskLabelCreateOrConnectWithoutLabelInput | TaskLabelCreateOrConnectWithoutLabelInput[]
@@ -17197,11 +29683,61 @@ export namespace Prisma {
     connect?: TaskLabelWhereUniqueInput | TaskLabelWhereUniqueInput[]
   }
 
+  export type ProjectLabelUncheckedCreateNestedManyWithoutLabelInput = {
+    create?: XOR<ProjectLabelCreateWithoutLabelInput, ProjectLabelUncheckedCreateWithoutLabelInput> | ProjectLabelCreateWithoutLabelInput[] | ProjectLabelUncheckedCreateWithoutLabelInput[]
+    connectOrCreate?: ProjectLabelCreateOrConnectWithoutLabelInput | ProjectLabelCreateOrConnectWithoutLabelInput[]
+    createMany?: ProjectLabelCreateManyLabelInputEnvelope
+    connect?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+  }
+
+  export type BoardLabelUncheckedCreateNestedManyWithoutLabelInput = {
+    create?: XOR<BoardLabelCreateWithoutLabelInput, BoardLabelUncheckedCreateWithoutLabelInput> | BoardLabelCreateWithoutLabelInput[] | BoardLabelUncheckedCreateWithoutLabelInput[]
+    connectOrCreate?: BoardLabelCreateOrConnectWithoutLabelInput | BoardLabelCreateOrConnectWithoutLabelInput[]
+    createMany?: BoardLabelCreateManyLabelInputEnvelope
+    connect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+  }
+
   export type TaskLabelUncheckedCreateNestedManyWithoutLabelInput = {
     create?: XOR<TaskLabelCreateWithoutLabelInput, TaskLabelUncheckedCreateWithoutLabelInput> | TaskLabelCreateWithoutLabelInput[] | TaskLabelUncheckedCreateWithoutLabelInput[]
     connectOrCreate?: TaskLabelCreateOrConnectWithoutLabelInput | TaskLabelCreateOrConnectWithoutLabelInput[]
     createMany?: TaskLabelCreateManyLabelInputEnvelope
     connect?: TaskLabelWhereUniqueInput | TaskLabelWhereUniqueInput[]
+  }
+
+  export type UserUpdateOneRequiredWithoutCreatedLabelsNestedInput = {
+    create?: XOR<UserCreateWithoutCreatedLabelsInput, UserUncheckedCreateWithoutCreatedLabelsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutCreatedLabelsInput
+    upsert?: UserUpsertWithoutCreatedLabelsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutCreatedLabelsInput, UserUpdateWithoutCreatedLabelsInput>, UserUncheckedUpdateWithoutCreatedLabelsInput>
+  }
+
+  export type ProjectLabelUpdateManyWithoutLabelNestedInput = {
+    create?: XOR<ProjectLabelCreateWithoutLabelInput, ProjectLabelUncheckedCreateWithoutLabelInput> | ProjectLabelCreateWithoutLabelInput[] | ProjectLabelUncheckedCreateWithoutLabelInput[]
+    connectOrCreate?: ProjectLabelCreateOrConnectWithoutLabelInput | ProjectLabelCreateOrConnectWithoutLabelInput[]
+    upsert?: ProjectLabelUpsertWithWhereUniqueWithoutLabelInput | ProjectLabelUpsertWithWhereUniqueWithoutLabelInput[]
+    createMany?: ProjectLabelCreateManyLabelInputEnvelope
+    set?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+    disconnect?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+    delete?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+    connect?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+    update?: ProjectLabelUpdateWithWhereUniqueWithoutLabelInput | ProjectLabelUpdateWithWhereUniqueWithoutLabelInput[]
+    updateMany?: ProjectLabelUpdateManyWithWhereWithoutLabelInput | ProjectLabelUpdateManyWithWhereWithoutLabelInput[]
+    deleteMany?: ProjectLabelScalarWhereInput | ProjectLabelScalarWhereInput[]
+  }
+
+  export type BoardLabelUpdateManyWithoutLabelNestedInput = {
+    create?: XOR<BoardLabelCreateWithoutLabelInput, BoardLabelUncheckedCreateWithoutLabelInput> | BoardLabelCreateWithoutLabelInput[] | BoardLabelUncheckedCreateWithoutLabelInput[]
+    connectOrCreate?: BoardLabelCreateOrConnectWithoutLabelInput | BoardLabelCreateOrConnectWithoutLabelInput[]
+    upsert?: BoardLabelUpsertWithWhereUniqueWithoutLabelInput | BoardLabelUpsertWithWhereUniqueWithoutLabelInput[]
+    createMany?: BoardLabelCreateManyLabelInputEnvelope
+    set?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+    disconnect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+    delete?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+    connect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+    update?: BoardLabelUpdateWithWhereUniqueWithoutLabelInput | BoardLabelUpdateWithWhereUniqueWithoutLabelInput[]
+    updateMany?: BoardLabelUpdateManyWithWhereWithoutLabelInput | BoardLabelUpdateManyWithWhereWithoutLabelInput[]
+    deleteMany?: BoardLabelScalarWhereInput | BoardLabelScalarWhereInput[]
   }
 
   export type TaskLabelUpdateManyWithoutLabelNestedInput = {
@@ -17218,6 +29754,34 @@ export namespace Prisma {
     deleteMany?: TaskLabelScalarWhereInput | TaskLabelScalarWhereInput[]
   }
 
+  export type ProjectLabelUncheckedUpdateManyWithoutLabelNestedInput = {
+    create?: XOR<ProjectLabelCreateWithoutLabelInput, ProjectLabelUncheckedCreateWithoutLabelInput> | ProjectLabelCreateWithoutLabelInput[] | ProjectLabelUncheckedCreateWithoutLabelInput[]
+    connectOrCreate?: ProjectLabelCreateOrConnectWithoutLabelInput | ProjectLabelCreateOrConnectWithoutLabelInput[]
+    upsert?: ProjectLabelUpsertWithWhereUniqueWithoutLabelInput | ProjectLabelUpsertWithWhereUniqueWithoutLabelInput[]
+    createMany?: ProjectLabelCreateManyLabelInputEnvelope
+    set?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+    disconnect?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+    delete?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+    connect?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
+    update?: ProjectLabelUpdateWithWhereUniqueWithoutLabelInput | ProjectLabelUpdateWithWhereUniqueWithoutLabelInput[]
+    updateMany?: ProjectLabelUpdateManyWithWhereWithoutLabelInput | ProjectLabelUpdateManyWithWhereWithoutLabelInput[]
+    deleteMany?: ProjectLabelScalarWhereInput | ProjectLabelScalarWhereInput[]
+  }
+
+  export type BoardLabelUncheckedUpdateManyWithoutLabelNestedInput = {
+    create?: XOR<BoardLabelCreateWithoutLabelInput, BoardLabelUncheckedCreateWithoutLabelInput> | BoardLabelCreateWithoutLabelInput[] | BoardLabelUncheckedCreateWithoutLabelInput[]
+    connectOrCreate?: BoardLabelCreateOrConnectWithoutLabelInput | BoardLabelCreateOrConnectWithoutLabelInput[]
+    upsert?: BoardLabelUpsertWithWhereUniqueWithoutLabelInput | BoardLabelUpsertWithWhereUniqueWithoutLabelInput[]
+    createMany?: BoardLabelCreateManyLabelInputEnvelope
+    set?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+    disconnect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+    delete?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+    connect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
+    update?: BoardLabelUpdateWithWhereUniqueWithoutLabelInput | BoardLabelUpdateWithWhereUniqueWithoutLabelInput[]
+    updateMany?: BoardLabelUpdateManyWithWhereWithoutLabelInput | BoardLabelUpdateManyWithWhereWithoutLabelInput[]
+    deleteMany?: BoardLabelScalarWhereInput | BoardLabelScalarWhereInput[]
+  }
+
   export type TaskLabelUncheckedUpdateManyWithoutLabelNestedInput = {
     create?: XOR<TaskLabelCreateWithoutLabelInput, TaskLabelUncheckedCreateWithoutLabelInput> | TaskLabelCreateWithoutLabelInput[] | TaskLabelUncheckedCreateWithoutLabelInput[]
     connectOrCreate?: TaskLabelCreateOrConnectWithoutLabelInput | TaskLabelCreateOrConnectWithoutLabelInput[]
@@ -17230,6 +29794,62 @@ export namespace Prisma {
     update?: TaskLabelUpdateWithWhereUniqueWithoutLabelInput | TaskLabelUpdateWithWhereUniqueWithoutLabelInput[]
     updateMany?: TaskLabelUpdateManyWithWhereWithoutLabelInput | TaskLabelUpdateManyWithWhereWithoutLabelInput[]
     deleteMany?: TaskLabelScalarWhereInput | TaskLabelScalarWhereInput[]
+  }
+
+  export type ProjectCreateNestedOneWithoutLabelsInput = {
+    create?: XOR<ProjectCreateWithoutLabelsInput, ProjectUncheckedCreateWithoutLabelsInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutLabelsInput
+    connect?: ProjectWhereUniqueInput
+  }
+
+  export type LabelCreateNestedOneWithoutProjectsInput = {
+    create?: XOR<LabelCreateWithoutProjectsInput, LabelUncheckedCreateWithoutProjectsInput>
+    connectOrCreate?: LabelCreateOrConnectWithoutProjectsInput
+    connect?: LabelWhereUniqueInput
+  }
+
+  export type ProjectUpdateOneRequiredWithoutLabelsNestedInput = {
+    create?: XOR<ProjectCreateWithoutLabelsInput, ProjectUncheckedCreateWithoutLabelsInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutLabelsInput
+    upsert?: ProjectUpsertWithoutLabelsInput
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutLabelsInput, ProjectUpdateWithoutLabelsInput>, ProjectUncheckedUpdateWithoutLabelsInput>
+  }
+
+  export type LabelUpdateOneRequiredWithoutProjectsNestedInput = {
+    create?: XOR<LabelCreateWithoutProjectsInput, LabelUncheckedCreateWithoutProjectsInput>
+    connectOrCreate?: LabelCreateOrConnectWithoutProjectsInput
+    upsert?: LabelUpsertWithoutProjectsInput
+    connect?: LabelWhereUniqueInput
+    update?: XOR<XOR<LabelUpdateToOneWithWhereWithoutProjectsInput, LabelUpdateWithoutProjectsInput>, LabelUncheckedUpdateWithoutProjectsInput>
+  }
+
+  export type BoardCreateNestedOneWithoutLabelsInput = {
+    create?: XOR<BoardCreateWithoutLabelsInput, BoardUncheckedCreateWithoutLabelsInput>
+    connectOrCreate?: BoardCreateOrConnectWithoutLabelsInput
+    connect?: BoardWhereUniqueInput
+  }
+
+  export type LabelCreateNestedOneWithoutBoardsInput = {
+    create?: XOR<LabelCreateWithoutBoardsInput, LabelUncheckedCreateWithoutBoardsInput>
+    connectOrCreate?: LabelCreateOrConnectWithoutBoardsInput
+    connect?: LabelWhereUniqueInput
+  }
+
+  export type BoardUpdateOneRequiredWithoutLabelsNestedInput = {
+    create?: XOR<BoardCreateWithoutLabelsInput, BoardUncheckedCreateWithoutLabelsInput>
+    connectOrCreate?: BoardCreateOrConnectWithoutLabelsInput
+    upsert?: BoardUpsertWithoutLabelsInput
+    connect?: BoardWhereUniqueInput
+    update?: XOR<XOR<BoardUpdateToOneWithWhereWithoutLabelsInput, BoardUpdateWithoutLabelsInput>, BoardUncheckedUpdateWithoutLabelsInput>
+  }
+
+  export type LabelUpdateOneRequiredWithoutBoardsNestedInput = {
+    create?: XOR<LabelCreateWithoutBoardsInput, LabelUncheckedCreateWithoutBoardsInput>
+    connectOrCreate?: LabelCreateOrConnectWithoutBoardsInput
+    upsert?: LabelUpsertWithoutBoardsInput
+    connect?: LabelWhereUniqueInput
+    update?: XOR<XOR<LabelUpdateToOneWithWhereWithoutBoardsInput, LabelUpdateWithoutBoardsInput>, LabelUncheckedUpdateWithoutBoardsInput>
   }
 
   export type TaskCreateNestedOneWithoutTagsInput = {
@@ -17260,6 +29880,312 @@ export namespace Prisma {
     update?: XOR<XOR<LabelUpdateToOneWithWhereWithoutTasksInput, LabelUpdateWithoutTasksInput>, LabelUncheckedUpdateWithoutTasksInput>
   }
 
+  export type ClientCreateNestedOneWithoutQuotesInput = {
+    create?: XOR<ClientCreateWithoutQuotesInput, ClientUncheckedCreateWithoutQuotesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutQuotesInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type ProjectCreateNestedOneWithoutQuotesInput = {
+    create?: XOR<ProjectCreateWithoutQuotesInput, ProjectUncheckedCreateWithoutQuotesInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutQuotesInput
+    connect?: ProjectWhereUniqueInput
+  }
+
+  export type QuoteItemCreateNestedManyWithoutQuoteInput = {
+    create?: XOR<QuoteItemCreateWithoutQuoteInput, QuoteItemUncheckedCreateWithoutQuoteInput> | QuoteItemCreateWithoutQuoteInput[] | QuoteItemUncheckedCreateWithoutQuoteInput[]
+    connectOrCreate?: QuoteItemCreateOrConnectWithoutQuoteInput | QuoteItemCreateOrConnectWithoutQuoteInput[]
+    createMany?: QuoteItemCreateManyQuoteInputEnvelope
+    connect?: QuoteItemWhereUniqueInput | QuoteItemWhereUniqueInput[]
+  }
+
+  export type InvoiceCreateNestedManyWithoutQuoteInput = {
+    create?: XOR<InvoiceCreateWithoutQuoteInput, InvoiceUncheckedCreateWithoutQuoteInput> | InvoiceCreateWithoutQuoteInput[] | InvoiceUncheckedCreateWithoutQuoteInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutQuoteInput | InvoiceCreateOrConnectWithoutQuoteInput[]
+    createMany?: InvoiceCreateManyQuoteInputEnvelope
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+  }
+
+  export type QuoteItemUncheckedCreateNestedManyWithoutQuoteInput = {
+    create?: XOR<QuoteItemCreateWithoutQuoteInput, QuoteItemUncheckedCreateWithoutQuoteInput> | QuoteItemCreateWithoutQuoteInput[] | QuoteItemUncheckedCreateWithoutQuoteInput[]
+    connectOrCreate?: QuoteItemCreateOrConnectWithoutQuoteInput | QuoteItemCreateOrConnectWithoutQuoteInput[]
+    createMany?: QuoteItemCreateManyQuoteInputEnvelope
+    connect?: QuoteItemWhereUniqueInput | QuoteItemWhereUniqueInput[]
+  }
+
+  export type InvoiceUncheckedCreateNestedManyWithoutQuoteInput = {
+    create?: XOR<InvoiceCreateWithoutQuoteInput, InvoiceUncheckedCreateWithoutQuoteInput> | InvoiceCreateWithoutQuoteInput[] | InvoiceUncheckedCreateWithoutQuoteInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutQuoteInput | InvoiceCreateOrConnectWithoutQuoteInput[]
+    createMany?: InvoiceCreateManyQuoteInputEnvelope
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+  }
+
+  export type EnumQuoteStatusFieldUpdateOperationsInput = {
+    set?: $Enums.QuoteStatus
+  }
+
+  export type FloatFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type ClientUpdateOneRequiredWithoutQuotesNestedInput = {
+    create?: XOR<ClientCreateWithoutQuotesInput, ClientUncheckedCreateWithoutQuotesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutQuotesInput
+    upsert?: ClientUpsertWithoutQuotesInput
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutQuotesInput, ClientUpdateWithoutQuotesInput>, ClientUncheckedUpdateWithoutQuotesInput>
+  }
+
+  export type ProjectUpdateOneWithoutQuotesNestedInput = {
+    create?: XOR<ProjectCreateWithoutQuotesInput, ProjectUncheckedCreateWithoutQuotesInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutQuotesInput
+    upsert?: ProjectUpsertWithoutQuotesInput
+    disconnect?: ProjectWhereInput | boolean
+    delete?: ProjectWhereInput | boolean
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutQuotesInput, ProjectUpdateWithoutQuotesInput>, ProjectUncheckedUpdateWithoutQuotesInput>
+  }
+
+  export type QuoteItemUpdateManyWithoutQuoteNestedInput = {
+    create?: XOR<QuoteItemCreateWithoutQuoteInput, QuoteItemUncheckedCreateWithoutQuoteInput> | QuoteItemCreateWithoutQuoteInput[] | QuoteItemUncheckedCreateWithoutQuoteInput[]
+    connectOrCreate?: QuoteItemCreateOrConnectWithoutQuoteInput | QuoteItemCreateOrConnectWithoutQuoteInput[]
+    upsert?: QuoteItemUpsertWithWhereUniqueWithoutQuoteInput | QuoteItemUpsertWithWhereUniqueWithoutQuoteInput[]
+    createMany?: QuoteItemCreateManyQuoteInputEnvelope
+    set?: QuoteItemWhereUniqueInput | QuoteItemWhereUniqueInput[]
+    disconnect?: QuoteItemWhereUniqueInput | QuoteItemWhereUniqueInput[]
+    delete?: QuoteItemWhereUniqueInput | QuoteItemWhereUniqueInput[]
+    connect?: QuoteItemWhereUniqueInput | QuoteItemWhereUniqueInput[]
+    update?: QuoteItemUpdateWithWhereUniqueWithoutQuoteInput | QuoteItemUpdateWithWhereUniqueWithoutQuoteInput[]
+    updateMany?: QuoteItemUpdateManyWithWhereWithoutQuoteInput | QuoteItemUpdateManyWithWhereWithoutQuoteInput[]
+    deleteMany?: QuoteItemScalarWhereInput | QuoteItemScalarWhereInput[]
+  }
+
+  export type InvoiceUpdateManyWithoutQuoteNestedInput = {
+    create?: XOR<InvoiceCreateWithoutQuoteInput, InvoiceUncheckedCreateWithoutQuoteInput> | InvoiceCreateWithoutQuoteInput[] | InvoiceUncheckedCreateWithoutQuoteInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutQuoteInput | InvoiceCreateOrConnectWithoutQuoteInput[]
+    upsert?: InvoiceUpsertWithWhereUniqueWithoutQuoteInput | InvoiceUpsertWithWhereUniqueWithoutQuoteInput[]
+    createMany?: InvoiceCreateManyQuoteInputEnvelope
+    set?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    disconnect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    delete?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    update?: InvoiceUpdateWithWhereUniqueWithoutQuoteInput | InvoiceUpdateWithWhereUniqueWithoutQuoteInput[]
+    updateMany?: InvoiceUpdateManyWithWhereWithoutQuoteInput | InvoiceUpdateManyWithWhereWithoutQuoteInput[]
+    deleteMany?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+  }
+
+  export type QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput = {
+    create?: XOR<QuoteItemCreateWithoutQuoteInput, QuoteItemUncheckedCreateWithoutQuoteInput> | QuoteItemCreateWithoutQuoteInput[] | QuoteItemUncheckedCreateWithoutQuoteInput[]
+    connectOrCreate?: QuoteItemCreateOrConnectWithoutQuoteInput | QuoteItemCreateOrConnectWithoutQuoteInput[]
+    upsert?: QuoteItemUpsertWithWhereUniqueWithoutQuoteInput | QuoteItemUpsertWithWhereUniqueWithoutQuoteInput[]
+    createMany?: QuoteItemCreateManyQuoteInputEnvelope
+    set?: QuoteItemWhereUniqueInput | QuoteItemWhereUniqueInput[]
+    disconnect?: QuoteItemWhereUniqueInput | QuoteItemWhereUniqueInput[]
+    delete?: QuoteItemWhereUniqueInput | QuoteItemWhereUniqueInput[]
+    connect?: QuoteItemWhereUniqueInput | QuoteItemWhereUniqueInput[]
+    update?: QuoteItemUpdateWithWhereUniqueWithoutQuoteInput | QuoteItemUpdateWithWhereUniqueWithoutQuoteInput[]
+    updateMany?: QuoteItemUpdateManyWithWhereWithoutQuoteInput | QuoteItemUpdateManyWithWhereWithoutQuoteInput[]
+    deleteMany?: QuoteItemScalarWhereInput | QuoteItemScalarWhereInput[]
+  }
+
+  export type InvoiceUncheckedUpdateManyWithoutQuoteNestedInput = {
+    create?: XOR<InvoiceCreateWithoutQuoteInput, InvoiceUncheckedCreateWithoutQuoteInput> | InvoiceCreateWithoutQuoteInput[] | InvoiceUncheckedCreateWithoutQuoteInput[]
+    connectOrCreate?: InvoiceCreateOrConnectWithoutQuoteInput | InvoiceCreateOrConnectWithoutQuoteInput[]
+    upsert?: InvoiceUpsertWithWhereUniqueWithoutQuoteInput | InvoiceUpsertWithWhereUniqueWithoutQuoteInput[]
+    createMany?: InvoiceCreateManyQuoteInputEnvelope
+    set?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    disconnect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    delete?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    connect?: InvoiceWhereUniqueInput | InvoiceWhereUniqueInput[]
+    update?: InvoiceUpdateWithWhereUniqueWithoutQuoteInput | InvoiceUpdateWithWhereUniqueWithoutQuoteInput[]
+    updateMany?: InvoiceUpdateManyWithWhereWithoutQuoteInput | InvoiceUpdateManyWithWhereWithoutQuoteInput[]
+    deleteMany?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+  }
+
+  export type QuoteCreateNestedOneWithoutItemsInput = {
+    create?: XOR<QuoteCreateWithoutItemsInput, QuoteUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: QuoteCreateOrConnectWithoutItemsInput
+    connect?: QuoteWhereUniqueInput
+  }
+
+  export type QuoteUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<QuoteCreateWithoutItemsInput, QuoteUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: QuoteCreateOrConnectWithoutItemsInput
+    upsert?: QuoteUpsertWithoutItemsInput
+    connect?: QuoteWhereUniqueInput
+    update?: XOR<XOR<QuoteUpdateToOneWithWhereWithoutItemsInput, QuoteUpdateWithoutItemsInput>, QuoteUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type ClientCreateNestedOneWithoutInvoicesInput = {
+    create?: XOR<ClientCreateWithoutInvoicesInput, ClientUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutInvoicesInput
+    connect?: ClientWhereUniqueInput
+  }
+
+  export type ProjectCreateNestedOneWithoutInvoicesInput = {
+    create?: XOR<ProjectCreateWithoutInvoicesInput, ProjectUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutInvoicesInput
+    connect?: ProjectWhereUniqueInput
+  }
+
+  export type QuoteCreateNestedOneWithoutInvoicesInput = {
+    create?: XOR<QuoteCreateWithoutInvoicesInput, QuoteUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: QuoteCreateOrConnectWithoutInvoicesInput
+    connect?: QuoteWhereUniqueInput
+  }
+
+  export type InvoiceItemCreateNestedManyWithoutInvoiceInput = {
+    create?: XOR<InvoiceItemCreateWithoutInvoiceInput, InvoiceItemUncheckedCreateWithoutInvoiceInput> | InvoiceItemCreateWithoutInvoiceInput[] | InvoiceItemUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: InvoiceItemCreateOrConnectWithoutInvoiceInput | InvoiceItemCreateOrConnectWithoutInvoiceInput[]
+    createMany?: InvoiceItemCreateManyInvoiceInputEnvelope
+    connect?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+  }
+
+  export type PaymentCreateNestedManyWithoutInvoiceInput = {
+    create?: XOR<PaymentCreateWithoutInvoiceInput, PaymentUncheckedCreateWithoutInvoiceInput> | PaymentCreateWithoutInvoiceInput[] | PaymentUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutInvoiceInput | PaymentCreateOrConnectWithoutInvoiceInput[]
+    createMany?: PaymentCreateManyInvoiceInputEnvelope
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
+  export type InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput = {
+    create?: XOR<InvoiceItemCreateWithoutInvoiceInput, InvoiceItemUncheckedCreateWithoutInvoiceInput> | InvoiceItemCreateWithoutInvoiceInput[] | InvoiceItemUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: InvoiceItemCreateOrConnectWithoutInvoiceInput | InvoiceItemCreateOrConnectWithoutInvoiceInput[]
+    createMany?: InvoiceItemCreateManyInvoiceInputEnvelope
+    connect?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+  }
+
+  export type PaymentUncheckedCreateNestedManyWithoutInvoiceInput = {
+    create?: XOR<PaymentCreateWithoutInvoiceInput, PaymentUncheckedCreateWithoutInvoiceInput> | PaymentCreateWithoutInvoiceInput[] | PaymentUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutInvoiceInput | PaymentCreateOrConnectWithoutInvoiceInput[]
+    createMany?: PaymentCreateManyInvoiceInputEnvelope
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+  }
+
+  export type EnumInvoiceStatusFieldUpdateOperationsInput = {
+    set?: $Enums.InvoiceStatus
+  }
+
+  export type ClientUpdateOneRequiredWithoutInvoicesNestedInput = {
+    create?: XOR<ClientCreateWithoutInvoicesInput, ClientUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: ClientCreateOrConnectWithoutInvoicesInput
+    upsert?: ClientUpsertWithoutInvoicesInput
+    connect?: ClientWhereUniqueInput
+    update?: XOR<XOR<ClientUpdateToOneWithWhereWithoutInvoicesInput, ClientUpdateWithoutInvoicesInput>, ClientUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type ProjectUpdateOneWithoutInvoicesNestedInput = {
+    create?: XOR<ProjectCreateWithoutInvoicesInput, ProjectUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: ProjectCreateOrConnectWithoutInvoicesInput
+    upsert?: ProjectUpsertWithoutInvoicesInput
+    disconnect?: ProjectWhereInput | boolean
+    delete?: ProjectWhereInput | boolean
+    connect?: ProjectWhereUniqueInput
+    update?: XOR<XOR<ProjectUpdateToOneWithWhereWithoutInvoicesInput, ProjectUpdateWithoutInvoicesInput>, ProjectUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type QuoteUpdateOneWithoutInvoicesNestedInput = {
+    create?: XOR<QuoteCreateWithoutInvoicesInput, QuoteUncheckedCreateWithoutInvoicesInput>
+    connectOrCreate?: QuoteCreateOrConnectWithoutInvoicesInput
+    upsert?: QuoteUpsertWithoutInvoicesInput
+    disconnect?: QuoteWhereInput | boolean
+    delete?: QuoteWhereInput | boolean
+    connect?: QuoteWhereUniqueInput
+    update?: XOR<XOR<QuoteUpdateToOneWithWhereWithoutInvoicesInput, QuoteUpdateWithoutInvoicesInput>, QuoteUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type InvoiceItemUpdateManyWithoutInvoiceNestedInput = {
+    create?: XOR<InvoiceItemCreateWithoutInvoiceInput, InvoiceItemUncheckedCreateWithoutInvoiceInput> | InvoiceItemCreateWithoutInvoiceInput[] | InvoiceItemUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: InvoiceItemCreateOrConnectWithoutInvoiceInput | InvoiceItemCreateOrConnectWithoutInvoiceInput[]
+    upsert?: InvoiceItemUpsertWithWhereUniqueWithoutInvoiceInput | InvoiceItemUpsertWithWhereUniqueWithoutInvoiceInput[]
+    createMany?: InvoiceItemCreateManyInvoiceInputEnvelope
+    set?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+    disconnect?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+    delete?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+    connect?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+    update?: InvoiceItemUpdateWithWhereUniqueWithoutInvoiceInput | InvoiceItemUpdateWithWhereUniqueWithoutInvoiceInput[]
+    updateMany?: InvoiceItemUpdateManyWithWhereWithoutInvoiceInput | InvoiceItemUpdateManyWithWhereWithoutInvoiceInput[]
+    deleteMany?: InvoiceItemScalarWhereInput | InvoiceItemScalarWhereInput[]
+  }
+
+  export type PaymentUpdateManyWithoutInvoiceNestedInput = {
+    create?: XOR<PaymentCreateWithoutInvoiceInput, PaymentUncheckedCreateWithoutInvoiceInput> | PaymentCreateWithoutInvoiceInput[] | PaymentUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutInvoiceInput | PaymentCreateOrConnectWithoutInvoiceInput[]
+    upsert?: PaymentUpsertWithWhereUniqueWithoutInvoiceInput | PaymentUpsertWithWhereUniqueWithoutInvoiceInput[]
+    createMany?: PaymentCreateManyInvoiceInputEnvelope
+    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    update?: PaymentUpdateWithWhereUniqueWithoutInvoiceInput | PaymentUpdateWithWhereUniqueWithoutInvoiceInput[]
+    updateMany?: PaymentUpdateManyWithWhereWithoutInvoiceInput | PaymentUpdateManyWithWhereWithoutInvoiceInput[]
+    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+  }
+
+  export type InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput = {
+    create?: XOR<InvoiceItemCreateWithoutInvoiceInput, InvoiceItemUncheckedCreateWithoutInvoiceInput> | InvoiceItemCreateWithoutInvoiceInput[] | InvoiceItemUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: InvoiceItemCreateOrConnectWithoutInvoiceInput | InvoiceItemCreateOrConnectWithoutInvoiceInput[]
+    upsert?: InvoiceItemUpsertWithWhereUniqueWithoutInvoiceInput | InvoiceItemUpsertWithWhereUniqueWithoutInvoiceInput[]
+    createMany?: InvoiceItemCreateManyInvoiceInputEnvelope
+    set?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+    disconnect?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+    delete?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+    connect?: InvoiceItemWhereUniqueInput | InvoiceItemWhereUniqueInput[]
+    update?: InvoiceItemUpdateWithWhereUniqueWithoutInvoiceInput | InvoiceItemUpdateWithWhereUniqueWithoutInvoiceInput[]
+    updateMany?: InvoiceItemUpdateManyWithWhereWithoutInvoiceInput | InvoiceItemUpdateManyWithWhereWithoutInvoiceInput[]
+    deleteMany?: InvoiceItemScalarWhereInput | InvoiceItemScalarWhereInput[]
+  }
+
+  export type PaymentUncheckedUpdateManyWithoutInvoiceNestedInput = {
+    create?: XOR<PaymentCreateWithoutInvoiceInput, PaymentUncheckedCreateWithoutInvoiceInput> | PaymentCreateWithoutInvoiceInput[] | PaymentUncheckedCreateWithoutInvoiceInput[]
+    connectOrCreate?: PaymentCreateOrConnectWithoutInvoiceInput | PaymentCreateOrConnectWithoutInvoiceInput[]
+    upsert?: PaymentUpsertWithWhereUniqueWithoutInvoiceInput | PaymentUpsertWithWhereUniqueWithoutInvoiceInput[]
+    createMany?: PaymentCreateManyInvoiceInputEnvelope
+    set?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    disconnect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    delete?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    connect?: PaymentWhereUniqueInput | PaymentWhereUniqueInput[]
+    update?: PaymentUpdateWithWhereUniqueWithoutInvoiceInput | PaymentUpdateWithWhereUniqueWithoutInvoiceInput[]
+    updateMany?: PaymentUpdateManyWithWhereWithoutInvoiceInput | PaymentUpdateManyWithWhereWithoutInvoiceInput[]
+    deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+  }
+
+  export type InvoiceCreateNestedOneWithoutItemsInput = {
+    create?: XOR<InvoiceCreateWithoutItemsInput, InvoiceUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: InvoiceCreateOrConnectWithoutItemsInput
+    connect?: InvoiceWhereUniqueInput
+  }
+
+  export type InvoiceUpdateOneRequiredWithoutItemsNestedInput = {
+    create?: XOR<InvoiceCreateWithoutItemsInput, InvoiceUncheckedCreateWithoutItemsInput>
+    connectOrCreate?: InvoiceCreateOrConnectWithoutItemsInput
+    upsert?: InvoiceUpsertWithoutItemsInput
+    connect?: InvoiceWhereUniqueInput
+    update?: XOR<XOR<InvoiceUpdateToOneWithWhereWithoutItemsInput, InvoiceUpdateWithoutItemsInput>, InvoiceUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type InvoiceCreateNestedOneWithoutPaymentsInput = {
+    create?: XOR<InvoiceCreateWithoutPaymentsInput, InvoiceUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: InvoiceCreateOrConnectWithoutPaymentsInput
+    connect?: InvoiceWhereUniqueInput
+  }
+
+  export type EnumPaymentMethodFieldUpdateOperationsInput = {
+    set?: $Enums.PaymentMethod
+  }
+
+  export type InvoiceUpdateOneRequiredWithoutPaymentsNestedInput = {
+    create?: XOR<InvoiceCreateWithoutPaymentsInput, InvoiceUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: InvoiceCreateOrConnectWithoutPaymentsInput
+    upsert?: InvoiceUpsertWithoutPaymentsInput
+    connect?: InvoiceWhereUniqueInput
+    update?: XOR<XOR<InvoiceUpdateToOneWithWhereWithoutPaymentsInput, InvoiceUpdateWithoutPaymentsInput>, InvoiceUncheckedUpdateWithoutPaymentsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[]
@@ -17288,6 +30214,17 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -17359,6 +30296,20 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | null
+    notIn?: Date[] | string[] | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[]
@@ -17400,6 +30351,52 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedEnumClientTypeFilter<$PrismaModel = never> = {
+    equals?: $Enums.ClientType | EnumClientTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ClientType[]
+    notIn?: $Enums.ClientType[]
+    not?: NestedEnumClientTypeFilter<$PrismaModel> | $Enums.ClientType
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedEnumClientTypeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ClientType | EnumClientTypeFieldRefInput<$PrismaModel>
+    in?: $Enums.ClientType[]
+    notIn?: $Enums.ClientType[]
+    not?: NestedEnumClientTypeWithAggregatesFilter<$PrismaModel> | $Enums.ClientType
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumClientTypeFilter<$PrismaModel>
+    _max?: NestedEnumClientTypeFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | null
+    notIn?: number[] | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[]
@@ -17427,45 +30424,71 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
+  export type NestedEnumQuoteStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.QuoteStatus | EnumQuoteStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.QuoteStatus[]
+    notIn?: $Enums.QuoteStatus[]
+    not?: NestedEnumQuoteStatusFilter<$PrismaModel> | $Enums.QuoteStatus
   }
 
-  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
+  export type NestedEnumQuoteStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.QuoteStatus | EnumQuoteStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.QuoteStatus[]
+    notIn?: $Enums.QuoteStatus[]
+    not?: NestedEnumQuoteStatusWithAggregatesFilter<$PrismaModel> | $Enums.QuoteStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumQuoteStatusFilter<$PrismaModel>
+    _max?: NestedEnumQuoteStatusFilter<$PrismaModel>
+  }
+
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[]
+    notIn?: number[]
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | null
-    notIn?: Date[] | string[] | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  export type NestedEnumInvoiceStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.InvoiceStatus | EnumInvoiceStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InvoiceStatus[]
+    notIn?: $Enums.InvoiceStatus[]
+    not?: NestedEnumInvoiceStatusFilter<$PrismaModel> | $Enums.InvoiceStatus
+  }
+
+  export type NestedEnumInvoiceStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.InvoiceStatus | EnumInvoiceStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.InvoiceStatus[]
+    notIn?: $Enums.InvoiceStatus[]
+    not?: NestedEnumInvoiceStatusWithAggregatesFilter<$PrismaModel> | $Enums.InvoiceStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumInvoiceStatusFilter<$PrismaModel>
+    _max?: NestedEnumInvoiceStatusFilter<$PrismaModel>
+  }
+
+  export type NestedEnumPaymentMethodFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentMethod[]
+    notIn?: $Enums.PaymentMethod[]
+    not?: NestedEnumPaymentMethodFilter<$PrismaModel> | $Enums.PaymentMethod
+  }
+
+  export type NestedEnumPaymentMethodWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.PaymentMethod | EnumPaymentMethodFieldRefInput<$PrismaModel>
+    in?: $Enums.PaymentMethod[]
+    notIn?: $Enums.PaymentMethod[]
+    not?: NestedEnumPaymentMethodWithAggregatesFilter<$PrismaModel> | $Enums.PaymentMethod
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumPaymentMethodFilter<$PrismaModel>
+    _max?: NestedEnumPaymentMethodFilter<$PrismaModel>
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -17539,15 +30562,21 @@ export namespace Prisma {
   export type BoardCreateWithoutCreatedByInput = {
     id?: string
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutBoardsInput
     columns?: ColumnCreateNestedManyWithoutBoardInput
+    labels?: BoardLabelCreateNestedManyWithoutBoardInput
   }
 
   export type BoardUncheckedCreateWithoutCreatedByInput = {
     id?: string
     name: string
     projectId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     columns?: ColumnUncheckedCreateNestedManyWithoutBoardInput
+    labels?: BoardLabelUncheckedCreateNestedManyWithoutBoardInput
   }
 
   export type BoardCreateOrConnectWithoutCreatedByInput = {
@@ -17567,8 +30596,11 @@ export namespace Prisma {
     price?: number | null
     dueDate?: Date | string | null
     order: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     column: ColumnCreateNestedOneWithoutTasksInput
-    client?: ClientCreateNestedOneWithoutTaskInput
+    client?: ClientCreateNestedOneWithoutTasksInput
+    createdBy: UserCreateNestedOneWithoutCreatedTasksInput
     tags?: TaskLabelCreateNestedManyWithoutTaskInput
   }
 
@@ -17581,6 +30613,9 @@ export namespace Prisma {
     order: number
     columnId: string
     client_id?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     tags?: TaskLabelUncheckedCreateNestedManyWithoutTaskInput
   }
 
@@ -17594,38 +30629,20 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ClientCreateWithoutContactInput = {
-    id?: string
-    company: string
-    name: string
-    projects?: ProjectCreateNestedManyWithoutClientInput
-    Task?: TaskCreateNestedManyWithoutClientInput
-  }
-
-  export type ClientUncheckedCreateWithoutContactInput = {
-    id?: string
-    company: string
-    name: string
-    projects?: ProjectUncheckedCreateNestedManyWithoutClientInput
-    Task?: TaskUncheckedCreateNestedManyWithoutClientInput
-  }
-
-  export type ClientCreateOrConnectWithoutContactInput = {
-    where: ClientWhereUniqueInput
-    create: XOR<ClientCreateWithoutContactInput, ClientUncheckedCreateWithoutContactInput>
-  }
-
-  export type ClientCreateManyContactInputEnvelope = {
-    data: ClientCreateManyContactInput | ClientCreateManyContactInput[]
-    skipDuplicates?: boolean
-  }
-
   export type ProjectMemberCreateWithoutUserInput = {
+    id?: string
+    role: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutMembersInput
   }
 
   export type ProjectMemberUncheckedCreateWithoutUserInput = {
+    id?: string
     projectId: string
+    role: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProjectMemberCreateOrConnectWithoutUserInput = {
@@ -17636,6 +30653,209 @@ export namespace Prisma {
   export type ProjectMemberCreateManyUserInputEnvelope = {
     data: ProjectMemberCreateManyUserInput | ProjectMemberCreateManyUserInput[]
     skipDuplicates?: boolean
+  }
+
+  export type ClientCreateWithoutCreatedByInput = {
+    id?: string
+    type?: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName?: string | null
+    phone?: string | null
+    companyName?: string | null
+    siret?: string | null
+    vatNumber?: string | null
+    website?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    country?: string | null
+    currency?: string
+    taxRate?: number | null
+    notes?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutClientProfileInput
+    projects?: ProjectCreateNestedManyWithoutClientInput
+    tasks?: TaskCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    quotes?: QuoteCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    type?: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName?: string | null
+    phone?: string | null
+    companyName?: string | null
+    siret?: string | null
+    vatNumber?: string | null
+    website?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    country?: string | null
+    currency?: string
+    taxRate?: number | null
+    userId?: string | null
+    notes?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projects?: ProjectUncheckedCreateNestedManyWithoutClientInput
+    tasks?: TaskUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    quotes?: QuoteUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutCreatedByInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutCreatedByInput, ClientUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ClientCreateManyCreatedByInputEnvelope = {
+    data: ClientCreateManyCreatedByInput | ClientCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TaskCreateWithoutCreatedByInput = {
+    id?: string
+    title: string
+    description?: string | null
+    price?: number | null
+    dueDate?: Date | string | null
+    order: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    column: ColumnCreateNestedOneWithoutTasksInput
+    assignee?: UserCreateNestedOneWithoutAssignedTasksInput
+    client?: ClientCreateNestedOneWithoutTasksInput
+    tags?: TaskLabelCreateNestedManyWithoutTaskInput
+  }
+
+  export type TaskUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    title: string
+    description?: string | null
+    price?: number | null
+    dueDate?: Date | string | null
+    order: number
+    columnId: string
+    assigneeId?: string | null
+    client_id?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tags?: TaskLabelUncheckedCreateNestedManyWithoutTaskInput
+  }
+
+  export type TaskCreateOrConnectWithoutCreatedByInput = {
+    where: TaskWhereUniqueInput
+    create: XOR<TaskCreateWithoutCreatedByInput, TaskUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type TaskCreateManyCreatedByInputEnvelope = {
+    data: TaskCreateManyCreatedByInput | TaskCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type LabelCreateWithoutCreatedByInput = {
+    id?: string
+    name: string
+    color?: string | null
+    description?: string | null
+    usageCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projects?: ProjectLabelCreateNestedManyWithoutLabelInput
+    boards?: BoardLabelCreateNestedManyWithoutLabelInput
+    tasks?: TaskLabelCreateNestedManyWithoutLabelInput
+  }
+
+  export type LabelUncheckedCreateWithoutCreatedByInput = {
+    id?: string
+    name: string
+    color?: string | null
+    description?: string | null
+    usageCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projects?: ProjectLabelUncheckedCreateNestedManyWithoutLabelInput
+    boards?: BoardLabelUncheckedCreateNestedManyWithoutLabelInput
+    tasks?: TaskLabelUncheckedCreateNestedManyWithoutLabelInput
+  }
+
+  export type LabelCreateOrConnectWithoutCreatedByInput = {
+    where: LabelWhereUniqueInput
+    create: XOR<LabelCreateWithoutCreatedByInput, LabelUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type LabelCreateManyCreatedByInputEnvelope = {
+    data: LabelCreateManyCreatedByInput | LabelCreateManyCreatedByInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ClientCreateWithoutUserInput = {
+    id?: string
+    type?: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName?: string | null
+    phone?: string | null
+    companyName?: string | null
+    siret?: string | null
+    vatNumber?: string | null
+    website?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    country?: string | null
+    currency?: string
+    taxRate?: number | null
+    notes?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedClientsInput
+    projects?: ProjectCreateNestedManyWithoutClientInput
+    tasks?: TaskCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    quotes?: QuoteCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutUserInput = {
+    id?: string
+    type?: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName?: string | null
+    phone?: string | null
+    companyName?: string | null
+    siret?: string | null
+    vatNumber?: string | null
+    website?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    country?: string | null
+    currency?: string
+    taxRate?: number | null
+    notes?: string | null
+    isActive?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projects?: ProjectUncheckedCreateNestedManyWithoutClientInput
+    tasks?: TaskUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    quotes?: QuoteUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutUserInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutUserInput, ClientUncheckedCreateWithoutUserInput>
   }
 
   export type AccountUpsertWithWhereUniqueWithoutUserInput = {
@@ -17726,6 +30946,8 @@ export namespace Prisma {
     name?: StringFilter<"Board"> | string
     projectId?: StringFilter<"Board"> | string
     created_by_id?: StringFilter<"Board"> | string
+    createdAt?: DateTimeFilter<"Board"> | Date | string
+    updatedAt?: DateTimeFilter<"Board"> | Date | string
   }
 
   export type TaskUpsertWithWhereUniqueWithoutAssigneeInput = {
@@ -17757,32 +30979,9 @@ export namespace Prisma {
     columnId?: StringFilter<"Task"> | string
     assigneeId?: StringNullableFilter<"Task"> | string | null
     client_id?: StringNullableFilter<"Task"> | string | null
-  }
-
-  export type ClientUpsertWithWhereUniqueWithoutContactInput = {
-    where: ClientWhereUniqueInput
-    update: XOR<ClientUpdateWithoutContactInput, ClientUncheckedUpdateWithoutContactInput>
-    create: XOR<ClientCreateWithoutContactInput, ClientUncheckedCreateWithoutContactInput>
-  }
-
-  export type ClientUpdateWithWhereUniqueWithoutContactInput = {
-    where: ClientWhereUniqueInput
-    data: XOR<ClientUpdateWithoutContactInput, ClientUncheckedUpdateWithoutContactInput>
-  }
-
-  export type ClientUpdateManyWithWhereWithoutContactInput = {
-    where: ClientScalarWhereInput
-    data: XOR<ClientUpdateManyMutationInput, ClientUncheckedUpdateManyWithoutContactInput>
-  }
-
-  export type ClientScalarWhereInput = {
-    AND?: ClientScalarWhereInput | ClientScalarWhereInput[]
-    OR?: ClientScalarWhereInput[]
-    NOT?: ClientScalarWhereInput | ClientScalarWhereInput[]
-    id?: StringFilter<"Client"> | string
-    company?: StringFilter<"Client"> | string
-    name?: StringFilter<"Client"> | string
-    contact_id?: StringFilter<"Client"> | string
+    createdById?: StringFilter<"Task"> | string
+    createdAt?: DateTimeFilter<"Task"> | Date | string
+    updatedAt?: DateTimeFilter<"Task"> | Date | string
   }
 
   export type ProjectMemberUpsertWithWhereUniqueWithoutUserInput = {
@@ -17805,42 +31004,211 @@ export namespace Prisma {
     AND?: ProjectMemberScalarWhereInput | ProjectMemberScalarWhereInput[]
     OR?: ProjectMemberScalarWhereInput[]
     NOT?: ProjectMemberScalarWhereInput | ProjectMemberScalarWhereInput[]
+    id?: StringFilter<"ProjectMember"> | string
     projectId?: StringFilter<"ProjectMember"> | string
-    user_id?: StringFilter<"ProjectMember"> | string
+    userId?: StringFilter<"ProjectMember"> | string
+    role?: StringFilter<"ProjectMember"> | string
+    createdAt?: DateTimeFilter<"ProjectMember"> | Date | string
+    updatedAt?: DateTimeFilter<"ProjectMember"> | Date | string
+  }
+
+  export type ClientUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: ClientWhereUniqueInput
+    update: XOR<ClientUpdateWithoutCreatedByInput, ClientUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<ClientCreateWithoutCreatedByInput, ClientUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type ClientUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: ClientWhereUniqueInput
+    data: XOR<ClientUpdateWithoutCreatedByInput, ClientUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type ClientUpdateManyWithWhereWithoutCreatedByInput = {
+    where: ClientScalarWhereInput
+    data: XOR<ClientUpdateManyMutationInput, ClientUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type ClientScalarWhereInput = {
+    AND?: ClientScalarWhereInput | ClientScalarWhereInput[]
+    OR?: ClientScalarWhereInput[]
+    NOT?: ClientScalarWhereInput | ClientScalarWhereInput[]
+    id?: StringFilter<"Client"> | string
+    type?: EnumClientTypeFilter<"Client"> | $Enums.ClientType
+    email?: StringFilter<"Client"> | string
+    firstName?: StringFilter<"Client"> | string
+    lastName?: StringNullableFilter<"Client"> | string | null
+    phone?: StringNullableFilter<"Client"> | string | null
+    companyName?: StringNullableFilter<"Client"> | string | null
+    siret?: StringNullableFilter<"Client"> | string | null
+    vatNumber?: StringNullableFilter<"Client"> | string | null
+    website?: StringNullableFilter<"Client"> | string | null
+    address?: StringNullableFilter<"Client"> | string | null
+    city?: StringNullableFilter<"Client"> | string | null
+    postalCode?: StringNullableFilter<"Client"> | string | null
+    country?: StringNullableFilter<"Client"> | string | null
+    currency?: StringFilter<"Client"> | string
+    taxRate?: FloatNullableFilter<"Client"> | number | null
+    userId?: StringNullableFilter<"Client"> | string | null
+    notes?: StringNullableFilter<"Client"> | string | null
+    isActive?: BoolFilter<"Client"> | boolean
+    createdById?: StringFilter<"Client"> | string
+    createdAt?: DateTimeFilter<"Client"> | Date | string
+    updatedAt?: DateTimeFilter<"Client"> | Date | string
+  }
+
+  export type TaskUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: TaskWhereUniqueInput
+    update: XOR<TaskUpdateWithoutCreatedByInput, TaskUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<TaskCreateWithoutCreatedByInput, TaskUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type TaskUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: TaskWhereUniqueInput
+    data: XOR<TaskUpdateWithoutCreatedByInput, TaskUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type TaskUpdateManyWithWhereWithoutCreatedByInput = {
+    where: TaskScalarWhereInput
+    data: XOR<TaskUpdateManyMutationInput, TaskUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type LabelUpsertWithWhereUniqueWithoutCreatedByInput = {
+    where: LabelWhereUniqueInput
+    update: XOR<LabelUpdateWithoutCreatedByInput, LabelUncheckedUpdateWithoutCreatedByInput>
+    create: XOR<LabelCreateWithoutCreatedByInput, LabelUncheckedCreateWithoutCreatedByInput>
+  }
+
+  export type LabelUpdateWithWhereUniqueWithoutCreatedByInput = {
+    where: LabelWhereUniqueInput
+    data: XOR<LabelUpdateWithoutCreatedByInput, LabelUncheckedUpdateWithoutCreatedByInput>
+  }
+
+  export type LabelUpdateManyWithWhereWithoutCreatedByInput = {
+    where: LabelScalarWhereInput
+    data: XOR<LabelUpdateManyMutationInput, LabelUncheckedUpdateManyWithoutCreatedByInput>
+  }
+
+  export type LabelScalarWhereInput = {
+    AND?: LabelScalarWhereInput | LabelScalarWhereInput[]
+    OR?: LabelScalarWhereInput[]
+    NOT?: LabelScalarWhereInput | LabelScalarWhereInput[]
+    id?: StringFilter<"Label"> | string
+    name?: StringFilter<"Label"> | string
+    color?: StringNullableFilter<"Label"> | string | null
+    description?: StringNullableFilter<"Label"> | string | null
+    createdById?: StringFilter<"Label"> | string
+    usageCount?: IntFilter<"Label"> | number
+    createdAt?: DateTimeFilter<"Label"> | Date | string
+    updatedAt?: DateTimeFilter<"Label"> | Date | string
+  }
+
+  export type ClientUpsertWithoutUserInput = {
+    update: XOR<ClientUpdateWithoutUserInput, ClientUncheckedUpdateWithoutUserInput>
+    create: XOR<ClientCreateWithoutUserInput, ClientUncheckedCreateWithoutUserInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutUserInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutUserInput, ClientUncheckedUpdateWithoutUserInput>
+  }
+
+  export type ClientUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedClientsNestedInput
+    projects?: ProjectUpdateManyWithoutClientNestedInput
+    tasks?: TaskUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    quotes?: QuoteUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUncheckedUpdateManyWithoutClientNestedInput
+    tasks?: TaskUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    quotes?: QuoteUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type UserCreateWithoutSessionsInput = {
     id?: string
     email: string
     username?: string | null
-    name: string
-    role: string
+    name?: string | null
+    role?: string | null
     avatar?: string | null
     image?: string | null
+    emailVerified?: Date | string | null
     created_at?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     createdBoards?: BoardCreateNestedManyWithoutCreatedByInput
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
-    contactClients?: ClientCreateNestedManyWithoutContactInput
     projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
+    createdClients?: ClientCreateNestedManyWithoutCreatedByInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutSessionsInput = {
     id?: string
     email: string
     username?: string | null
-    name: string
-    role: string
+    name?: string | null
+    role?: string | null
     avatar?: string | null
     image?: string | null
+    emailVerified?: Date | string | null
     created_at?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     createdBoards?: BoardUncheckedCreateNestedManyWithoutCreatedByInput
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
-    contactClients?: ClientUncheckedCreateNestedManyWithoutContactInput
     projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
+    createdClients?: ClientUncheckedCreateNestedManyWithoutCreatedByInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelUncheckedCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutSessionsInput = {
@@ -17863,68 +31231,84 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     createdBoards?: BoardUpdateManyWithoutCreatedByNestedInput
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
-    contactClients?: ClientUpdateManyWithoutContactNestedInput
     projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
+    createdClients?: ClientUpdateManyWithoutCreatedByNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSessionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     createdBoards?: BoardUncheckedUpdateManyWithoutCreatedByNestedInput
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
-    contactClients?: ClientUncheckedUpdateManyWithoutContactNestedInput
     projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdClients?: ClientUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUncheckedUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type UserCreateWithoutAccountsInput = {
     id?: string
     email: string
     username?: string | null
-    name: string
-    role: string
+    name?: string | null
+    role?: string | null
     avatar?: string | null
     image?: string | null
+    emailVerified?: Date | string | null
     created_at?: Date | string
     updatedAt?: Date | string
     sessions?: SessionCreateNestedManyWithoutUserInput
     createdBoards?: BoardCreateNestedManyWithoutCreatedByInput
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
-    contactClients?: ClientCreateNestedManyWithoutContactInput
     projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
+    createdClients?: ClientCreateNestedManyWithoutCreatedByInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
     id?: string
     email: string
     username?: string | null
-    name: string
-    role: string
+    name?: string | null
+    role?: string | null
     avatar?: string | null
     image?: string | null
+    emailVerified?: Date | string | null
     created_at?: Date | string
     updatedAt?: Date | string
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     createdBoards?: BoardUncheckedCreateNestedManyWithoutCreatedByInput
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
-    contactClients?: ClientUncheckedCreateNestedManyWithoutContactInput
     projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
+    createdClients?: ClientUncheckedCreateNestedManyWithoutCreatedByInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelUncheckedCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -17947,44 +31331,53 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUpdateManyWithoutUserNestedInput
     createdBoards?: BoardUpdateManyWithoutCreatedByNestedInput
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
-    contactClients?: ClientUpdateManyWithoutContactNestedInput
     projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
+    createdClients?: ClientUpdateManyWithoutCreatedByNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     createdBoards?: BoardUncheckedUpdateManyWithoutCreatedByNestedInput
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
-    contactClients?: ClientUncheckedUpdateManyWithoutContactNestedInput
     projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdClients?: ClientUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUncheckedUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUncheckedUpdateOneWithoutUserNestedInput
   }
 
-  export type UserCreateWithoutContactClientsInput = {
+  export type UserCreateWithoutClientProfileInput = {
     id?: string
     email: string
     username?: string | null
-    name: string
-    role: string
+    name?: string | null
+    role?: string | null
     avatar?: string | null
     image?: string | null
+    emailVerified?: Date | string | null
     created_at?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -17992,16 +31385,20 @@ export namespace Prisma {
     createdBoards?: BoardCreateNestedManyWithoutCreatedByInput
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
     projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
+    createdClients?: ClientCreateNestedManyWithoutCreatedByInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelCreateNestedManyWithoutCreatedByInput
   }
 
-  export type UserUncheckedCreateWithoutContactClientsInput = {
+  export type UserUncheckedCreateWithoutClientProfileInput = {
     id?: string
     email: string
     username?: string | null
-    name: string
-    role: string
+    name?: string | null
+    role?: string | null
     avatar?: string | null
     image?: string | null
+    emailVerified?: Date | string | null
     created_at?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -18009,11 +31406,61 @@ export namespace Prisma {
     createdBoards?: BoardUncheckedCreateNestedManyWithoutCreatedByInput
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
     projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
+    createdClients?: ClientUncheckedCreateNestedManyWithoutCreatedByInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelUncheckedCreateNestedManyWithoutCreatedByInput
   }
 
-  export type UserCreateOrConnectWithoutContactClientsInput = {
+  export type UserCreateOrConnectWithoutClientProfileInput = {
     where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutContactClientsInput, UserUncheckedCreateWithoutContactClientsInput>
+    create: XOR<UserCreateWithoutClientProfileInput, UserUncheckedCreateWithoutClientProfileInput>
+  }
+
+  export type UserCreateWithoutCreatedClientsInput = {
+    id?: string
+    email: string
+    username?: string | null
+    name?: string | null
+    role?: string | null
+    avatar?: string | null
+    image?: string | null
+    emailVerified?: Date | string | null
+    created_at?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    createdBoards?: BoardCreateNestedManyWithoutCreatedByInput
+    assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
+    projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedClientsInput = {
+    id?: string
+    email: string
+    username?: string | null
+    name?: string | null
+    role?: string | null
+    avatar?: string | null
+    image?: string | null
+    emailVerified?: Date | string | null
+    created_at?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    createdBoards?: BoardUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
+    projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelUncheckedCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedClientsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedClientsInput, UserUncheckedCreateWithoutCreatedClientsInput>
   }
 
   export type ProjectCreateWithoutClientInput = {
@@ -18021,8 +31468,13 @@ export namespace Prisma {
     name: string
     description?: string | null
     created_at?: Date | string
+    updatedAt?: Date | string
+    hiddenForClient?: boolean
     members?: ProjectMemberCreateNestedManyWithoutProjectInput
     boards?: BoardCreateNestedManyWithoutProjectInput
+    labels?: ProjectLabelCreateNestedManyWithoutProjectInput
+    quotes?: QuoteCreateNestedManyWithoutProjectInput
+    invoices?: InvoiceCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutClientInput = {
@@ -18030,8 +31482,13 @@ export namespace Prisma {
     name: string
     description?: string | null
     created_at?: Date | string
+    updatedAt?: Date | string
+    hiddenForClient?: boolean
     members?: ProjectMemberUncheckedCreateNestedManyWithoutProjectInput
     boards?: BoardUncheckedCreateNestedManyWithoutProjectInput
+    labels?: ProjectLabelUncheckedCreateNestedManyWithoutProjectInput
+    quotes?: QuoteUncheckedCreateNestedManyWithoutProjectInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutClientInput = {
@@ -18051,8 +31508,11 @@ export namespace Prisma {
     price?: number | null
     dueDate?: Date | string | null
     order: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     column: ColumnCreateNestedOneWithoutTasksInput
     assignee?: UserCreateNestedOneWithoutAssignedTasksInput
+    createdBy: UserCreateNestedOneWithoutCreatedTasksInput
     tags?: TaskLabelCreateNestedManyWithoutTaskInput
   }
 
@@ -18065,6 +31525,9 @@ export namespace Prisma {
     order: number
     columnId: string
     assigneeId?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     tags?: TaskLabelUncheckedCreateNestedManyWithoutTaskInput
   }
 
@@ -18078,25 +31541,144 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type UserUpsertWithoutContactClientsInput = {
-    update: XOR<UserUpdateWithoutContactClientsInput, UserUncheckedUpdateWithoutContactClientsInput>
-    create: XOR<UserCreateWithoutContactClientsInput, UserUncheckedCreateWithoutContactClientsInput>
+  export type InvoiceCreateWithoutClientInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    status?: $Enums.InvoiceStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    paidAmount?: number
+    currency?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    paidAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project?: ProjectCreateNestedOneWithoutInvoicesInput
+    quote?: QuoteCreateNestedOneWithoutInvoicesInput
+    items?: InvoiceItemCreateNestedManyWithoutInvoiceInput
+    payments?: PaymentCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceUncheckedCreateWithoutClientInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    projectId?: string | null
+    quoteId?: string | null
+    status?: $Enums.InvoiceStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    paidAmount?: number
+    currency?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    paidAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceCreateOrConnectWithoutClientInput = {
+    where: InvoiceWhereUniqueInput
+    create: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput>
+  }
+
+  export type InvoiceCreateManyClientInputEnvelope = {
+    data: InvoiceCreateManyClientInput | InvoiceCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type QuoteCreateWithoutClientInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    status?: $Enums.QuoteStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    currency?: string
+    validUntil?: Date | string | null
+    sentAt?: Date | string | null
+    acceptedAt?: Date | string | null
+    rejectedAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project?: ProjectCreateNestedOneWithoutQuotesInput
+    items?: QuoteItemCreateNestedManyWithoutQuoteInput
+    invoices?: InvoiceCreateNestedManyWithoutQuoteInput
+  }
+
+  export type QuoteUncheckedCreateWithoutClientInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    projectId?: string | null
+    status?: $Enums.QuoteStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    currency?: string
+    validUntil?: Date | string | null
+    sentAt?: Date | string | null
+    acceptedAt?: Date | string | null
+    rejectedAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: QuoteItemUncheckedCreateNestedManyWithoutQuoteInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutQuoteInput
+  }
+
+  export type QuoteCreateOrConnectWithoutClientInput = {
+    where: QuoteWhereUniqueInput
+    create: XOR<QuoteCreateWithoutClientInput, QuoteUncheckedCreateWithoutClientInput>
+  }
+
+  export type QuoteCreateManyClientInputEnvelope = {
+    data: QuoteCreateManyClientInput | QuoteCreateManyClientInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutClientProfileInput = {
+    update: XOR<UserUpdateWithoutClientProfileInput, UserUncheckedUpdateWithoutClientProfileInput>
+    create: XOR<UserCreateWithoutClientProfileInput, UserUncheckedCreateWithoutClientProfileInput>
     where?: UserWhereInput
   }
 
-  export type UserUpdateToOneWithWhereWithoutContactClientsInput = {
+  export type UserUpdateToOneWithWhereWithoutClientProfileInput = {
     where?: UserWhereInput
-    data: XOR<UserUpdateWithoutContactClientsInput, UserUncheckedUpdateWithoutContactClientsInput>
+    data: XOR<UserUpdateWithoutClientProfileInput, UserUncheckedUpdateWithoutClientProfileInput>
   }
 
-  export type UserUpdateWithoutContactClientsInput = {
+  export type UserUpdateWithoutClientProfileInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -18104,16 +31686,20 @@ export namespace Prisma {
     createdBoards?: BoardUpdateManyWithoutCreatedByNestedInput
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
     projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
+    createdClients?: ClientUpdateManyWithoutCreatedByNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUpdateManyWithoutCreatedByNestedInput
   }
 
-  export type UserUncheckedUpdateWithoutContactClientsInput = {
+  export type UserUncheckedUpdateWithoutClientProfileInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -18121,6 +31707,62 @@ export namespace Prisma {
     createdBoards?: BoardUncheckedUpdateManyWithoutCreatedByNestedInput
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
     projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdClients?: ClientUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUncheckedUpdateManyWithoutCreatedByNestedInput
+  }
+
+  export type UserUpsertWithoutCreatedClientsInput = {
+    update: XOR<UserUpdateWithoutCreatedClientsInput, UserUncheckedUpdateWithoutCreatedClientsInput>
+    create: XOR<UserCreateWithoutCreatedClientsInput, UserUncheckedCreateWithoutCreatedClientsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedClientsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedClientsInput, UserUncheckedUpdateWithoutCreatedClientsInput>
+  }
+
+  export type UserUpdateWithoutCreatedClientsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    createdBoards?: BoardUpdateManyWithoutCreatedByNestedInput
+    assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
+    projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedClientsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    createdBoards?: BoardUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
+    projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUncheckedUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type ProjectUpsertWithWhereUniqueWithoutClientInput = {
@@ -18148,6 +31790,8 @@ export namespace Prisma {
     description?: StringNullableFilter<"Project"> | string | null
     client_id?: StringFilter<"Project"> | string
     created_at?: DateTimeFilter<"Project"> | Date | string
+    updatedAt?: DateTimeFilter<"Project"> | Date | string
+    hiddenForClient?: BoolFilter<"Project"> | boolean
   }
 
   export type TaskUpsertWithWhereUniqueWithoutClientInput = {
@@ -18166,20 +31810,145 @@ export namespace Prisma {
     data: XOR<TaskUpdateManyMutationInput, TaskUncheckedUpdateManyWithoutClientInput>
   }
 
+  export type InvoiceUpsertWithWhereUniqueWithoutClientInput = {
+    where: InvoiceWhereUniqueInput
+    update: XOR<InvoiceUpdateWithoutClientInput, InvoiceUncheckedUpdateWithoutClientInput>
+    create: XOR<InvoiceCreateWithoutClientInput, InvoiceUncheckedCreateWithoutClientInput>
+  }
+
+  export type InvoiceUpdateWithWhereUniqueWithoutClientInput = {
+    where: InvoiceWhereUniqueInput
+    data: XOR<InvoiceUpdateWithoutClientInput, InvoiceUncheckedUpdateWithoutClientInput>
+  }
+
+  export type InvoiceUpdateManyWithWhereWithoutClientInput = {
+    where: InvoiceScalarWhereInput
+    data: XOR<InvoiceUpdateManyMutationInput, InvoiceUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type InvoiceScalarWhereInput = {
+    AND?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+    OR?: InvoiceScalarWhereInput[]
+    NOT?: InvoiceScalarWhereInput | InvoiceScalarWhereInput[]
+    id?: StringFilter<"Invoice"> | string
+    number?: StringFilter<"Invoice"> | string
+    title?: StringFilter<"Invoice"> | string
+    description?: StringNullableFilter<"Invoice"> | string | null
+    clientId?: StringFilter<"Invoice"> | string
+    projectId?: StringNullableFilter<"Invoice"> | string | null
+    quoteId?: StringNullableFilter<"Invoice"> | string | null
+    status?: EnumInvoiceStatusFilter<"Invoice"> | $Enums.InvoiceStatus
+    subtotal?: FloatFilter<"Invoice"> | number
+    taxAmount?: FloatFilter<"Invoice"> | number
+    totalAmount?: FloatFilter<"Invoice"> | number
+    paidAmount?: FloatFilter<"Invoice"> | number
+    currency?: StringFilter<"Invoice"> | string
+    issueDate?: DateTimeFilter<"Invoice"> | Date | string
+    dueDate?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    paidAt?: DateTimeNullableFilter<"Invoice"> | Date | string | null
+    notes?: StringNullableFilter<"Invoice"> | string | null
+    terms?: StringNullableFilter<"Invoice"> | string | null
+    createdById?: StringFilter<"Invoice"> | string
+    createdAt?: DateTimeFilter<"Invoice"> | Date | string
+    updatedAt?: DateTimeFilter<"Invoice"> | Date | string
+  }
+
+  export type QuoteUpsertWithWhereUniqueWithoutClientInput = {
+    where: QuoteWhereUniqueInput
+    update: XOR<QuoteUpdateWithoutClientInput, QuoteUncheckedUpdateWithoutClientInput>
+    create: XOR<QuoteCreateWithoutClientInput, QuoteUncheckedCreateWithoutClientInput>
+  }
+
+  export type QuoteUpdateWithWhereUniqueWithoutClientInput = {
+    where: QuoteWhereUniqueInput
+    data: XOR<QuoteUpdateWithoutClientInput, QuoteUncheckedUpdateWithoutClientInput>
+  }
+
+  export type QuoteUpdateManyWithWhereWithoutClientInput = {
+    where: QuoteScalarWhereInput
+    data: XOR<QuoteUpdateManyMutationInput, QuoteUncheckedUpdateManyWithoutClientInput>
+  }
+
+  export type QuoteScalarWhereInput = {
+    AND?: QuoteScalarWhereInput | QuoteScalarWhereInput[]
+    OR?: QuoteScalarWhereInput[]
+    NOT?: QuoteScalarWhereInput | QuoteScalarWhereInput[]
+    id?: StringFilter<"Quote"> | string
+    number?: StringFilter<"Quote"> | string
+    title?: StringFilter<"Quote"> | string
+    description?: StringNullableFilter<"Quote"> | string | null
+    clientId?: StringFilter<"Quote"> | string
+    projectId?: StringNullableFilter<"Quote"> | string | null
+    status?: EnumQuoteStatusFilter<"Quote"> | $Enums.QuoteStatus
+    subtotal?: FloatFilter<"Quote"> | number
+    taxAmount?: FloatFilter<"Quote"> | number
+    totalAmount?: FloatFilter<"Quote"> | number
+    currency?: StringFilter<"Quote"> | string
+    validUntil?: DateTimeNullableFilter<"Quote"> | Date | string | null
+    sentAt?: DateTimeNullableFilter<"Quote"> | Date | string | null
+    acceptedAt?: DateTimeNullableFilter<"Quote"> | Date | string | null
+    rejectedAt?: DateTimeNullableFilter<"Quote"> | Date | string | null
+    notes?: StringNullableFilter<"Quote"> | string | null
+    terms?: StringNullableFilter<"Quote"> | string | null
+    createdById?: StringFilter<"Quote"> | string
+    createdAt?: DateTimeFilter<"Quote"> | Date | string
+    updatedAt?: DateTimeFilter<"Quote"> | Date | string
+  }
+
   export type ClientCreateWithoutProjectsInput = {
     id?: string
-    company: string
-    name: string
-    contact: UserCreateNestedOneWithoutContactClientsInput
-    Task?: TaskCreateNestedManyWithoutClientInput
+    type?: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName?: string | null
+    phone?: string | null
+    companyName?: string | null
+    siret?: string | null
+    vatNumber?: string | null
+    website?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    country?: string | null
+    currency?: string
+    taxRate?: number | null
+    notes?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutClientProfileInput
+    createdBy: UserCreateNestedOneWithoutCreatedClientsInput
+    tasks?: TaskCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    quotes?: QuoteCreateNestedManyWithoutClientInput
   }
 
   export type ClientUncheckedCreateWithoutProjectsInput = {
     id?: string
-    company: string
-    name: string
-    contact_id: string
-    Task?: TaskUncheckedCreateNestedManyWithoutClientInput
+    type?: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName?: string | null
+    phone?: string | null
+    companyName?: string | null
+    siret?: string | null
+    vatNumber?: string | null
+    website?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    country?: string | null
+    currency?: string
+    taxRate?: number | null
+    userId?: string | null
+    notes?: string | null
+    isActive?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tasks?: TaskUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    quotes?: QuoteUncheckedCreateNestedManyWithoutClientInput
   }
 
   export type ClientCreateOrConnectWithoutProjectsInput = {
@@ -18188,11 +31957,19 @@ export namespace Prisma {
   }
 
   export type ProjectMemberCreateWithoutProjectInput = {
+    id?: string
+    role: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     user: UserCreateNestedOneWithoutProjectMembersInput
   }
 
   export type ProjectMemberUncheckedCreateWithoutProjectInput = {
-    user_id: string
+    id?: string
+    userId: string
+    role: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProjectMemberCreateOrConnectWithoutProjectInput = {
@@ -18208,15 +31985,21 @@ export namespace Prisma {
   export type BoardCreateWithoutProjectInput = {
     id?: string
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCreatedBoardsInput
     columns?: ColumnCreateNestedManyWithoutBoardInput
+    labels?: BoardLabelCreateNestedManyWithoutBoardInput
   }
 
   export type BoardUncheckedCreateWithoutProjectInput = {
     id?: string
     name: string
     created_by_id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     columns?: ColumnUncheckedCreateNestedManyWithoutBoardInput
+    labels?: BoardLabelUncheckedCreateNestedManyWithoutBoardInput
   }
 
   export type BoardCreateOrConnectWithoutProjectInput = {
@@ -18226,6 +32009,150 @@ export namespace Prisma {
 
   export type BoardCreateManyProjectInputEnvelope = {
     data: BoardCreateManyProjectInput | BoardCreateManyProjectInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ProjectLabelCreateWithoutProjectInput = {
+    id?: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
+    label: LabelCreateNestedOneWithoutProjectsInput
+  }
+
+  export type ProjectLabelUncheckedCreateWithoutProjectInput = {
+    id?: string
+    labelId: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ProjectLabelCreateOrConnectWithoutProjectInput = {
+    where: ProjectLabelWhereUniqueInput
+    create: XOR<ProjectLabelCreateWithoutProjectInput, ProjectLabelUncheckedCreateWithoutProjectInput>
+  }
+
+  export type ProjectLabelCreateManyProjectInputEnvelope = {
+    data: ProjectLabelCreateManyProjectInput | ProjectLabelCreateManyProjectInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type QuoteCreateWithoutProjectInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    status?: $Enums.QuoteStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    currency?: string
+    validUntil?: Date | string | null
+    sentAt?: Date | string | null
+    acceptedAt?: Date | string | null
+    rejectedAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutQuotesInput
+    items?: QuoteItemCreateNestedManyWithoutQuoteInput
+    invoices?: InvoiceCreateNestedManyWithoutQuoteInput
+  }
+
+  export type QuoteUncheckedCreateWithoutProjectInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    clientId: string
+    status?: $Enums.QuoteStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    currency?: string
+    validUntil?: Date | string | null
+    sentAt?: Date | string | null
+    acceptedAt?: Date | string | null
+    rejectedAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: QuoteItemUncheckedCreateNestedManyWithoutQuoteInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutQuoteInput
+  }
+
+  export type QuoteCreateOrConnectWithoutProjectInput = {
+    where: QuoteWhereUniqueInput
+    create: XOR<QuoteCreateWithoutProjectInput, QuoteUncheckedCreateWithoutProjectInput>
+  }
+
+  export type QuoteCreateManyProjectInputEnvelope = {
+    data: QuoteCreateManyProjectInput | QuoteCreateManyProjectInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InvoiceCreateWithoutProjectInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    status?: $Enums.InvoiceStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    paidAmount?: number
+    currency?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    paidAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutInvoicesInput
+    quote?: QuoteCreateNestedOneWithoutInvoicesInput
+    items?: InvoiceItemCreateNestedManyWithoutInvoiceInput
+    payments?: PaymentCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceUncheckedCreateWithoutProjectInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    clientId: string
+    quoteId?: string | null
+    status?: $Enums.InvoiceStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    paidAmount?: number
+    currency?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    paidAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceCreateOrConnectWithoutProjectInput = {
+    where: InvoiceWhereUniqueInput
+    create: XOR<InvoiceCreateWithoutProjectInput, InvoiceUncheckedCreateWithoutProjectInput>
+  }
+
+  export type InvoiceCreateManyProjectInputEnvelope = {
+    data: InvoiceCreateManyProjectInput | InvoiceCreateManyProjectInput[]
     skipDuplicates?: boolean
   }
 
@@ -18242,18 +32169,58 @@ export namespace Prisma {
 
   export type ClientUpdateWithoutProjectsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contact?: UserUpdateOneRequiredWithoutContactClientsNestedInput
-    Task?: TaskUpdateManyWithoutClientNestedInput
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutClientProfileNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedClientsNestedInput
+    tasks?: TaskUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    quotes?: QuoteUpdateManyWithoutClientNestedInput
   }
 
   export type ClientUncheckedUpdateWithoutProjectsInput = {
     id?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contact_id?: StringFieldUpdateOperationsInput | string
-    Task?: TaskUncheckedUpdateManyWithoutClientNestedInput
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tasks?: TaskUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    quotes?: QuoteUncheckedUpdateManyWithoutClientNestedInput
   }
 
   export type ProjectMemberUpsertWithWhereUniqueWithoutProjectInput = {
@@ -18288,13 +32255,78 @@ export namespace Prisma {
     data: XOR<BoardUpdateManyMutationInput, BoardUncheckedUpdateManyWithoutProjectInput>
   }
 
+  export type ProjectLabelUpsertWithWhereUniqueWithoutProjectInput = {
+    where: ProjectLabelWhereUniqueInput
+    update: XOR<ProjectLabelUpdateWithoutProjectInput, ProjectLabelUncheckedUpdateWithoutProjectInput>
+    create: XOR<ProjectLabelCreateWithoutProjectInput, ProjectLabelUncheckedCreateWithoutProjectInput>
+  }
+
+  export type ProjectLabelUpdateWithWhereUniqueWithoutProjectInput = {
+    where: ProjectLabelWhereUniqueInput
+    data: XOR<ProjectLabelUpdateWithoutProjectInput, ProjectLabelUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type ProjectLabelUpdateManyWithWhereWithoutProjectInput = {
+    where: ProjectLabelScalarWhereInput
+    data: XOR<ProjectLabelUpdateManyMutationInput, ProjectLabelUncheckedUpdateManyWithoutProjectInput>
+  }
+
+  export type ProjectLabelScalarWhereInput = {
+    AND?: ProjectLabelScalarWhereInput | ProjectLabelScalarWhereInput[]
+    OR?: ProjectLabelScalarWhereInput[]
+    NOT?: ProjectLabelScalarWhereInput | ProjectLabelScalarWhereInput[]
+    id?: StringFilter<"ProjectLabel"> | string
+    projectId?: StringFilter<"ProjectLabel"> | string
+    labelId?: StringFilter<"ProjectLabel"> | string
+    addedById?: StringFilter<"ProjectLabel"> | string
+    isFavorite?: BoolFilter<"ProjectLabel"> | boolean
+    createdAt?: DateTimeFilter<"ProjectLabel"> | Date | string
+  }
+
+  export type QuoteUpsertWithWhereUniqueWithoutProjectInput = {
+    where: QuoteWhereUniqueInput
+    update: XOR<QuoteUpdateWithoutProjectInput, QuoteUncheckedUpdateWithoutProjectInput>
+    create: XOR<QuoteCreateWithoutProjectInput, QuoteUncheckedCreateWithoutProjectInput>
+  }
+
+  export type QuoteUpdateWithWhereUniqueWithoutProjectInput = {
+    where: QuoteWhereUniqueInput
+    data: XOR<QuoteUpdateWithoutProjectInput, QuoteUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type QuoteUpdateManyWithWhereWithoutProjectInput = {
+    where: QuoteScalarWhereInput
+    data: XOR<QuoteUpdateManyMutationInput, QuoteUncheckedUpdateManyWithoutProjectInput>
+  }
+
+  export type InvoiceUpsertWithWhereUniqueWithoutProjectInput = {
+    where: InvoiceWhereUniqueInput
+    update: XOR<InvoiceUpdateWithoutProjectInput, InvoiceUncheckedUpdateWithoutProjectInput>
+    create: XOR<InvoiceCreateWithoutProjectInput, InvoiceUncheckedCreateWithoutProjectInput>
+  }
+
+  export type InvoiceUpdateWithWhereUniqueWithoutProjectInput = {
+    where: InvoiceWhereUniqueInput
+    data: XOR<InvoiceUpdateWithoutProjectInput, InvoiceUncheckedUpdateWithoutProjectInput>
+  }
+
+  export type InvoiceUpdateManyWithWhereWithoutProjectInput = {
+    where: InvoiceScalarWhereInput
+    data: XOR<InvoiceUpdateManyMutationInput, InvoiceUncheckedUpdateManyWithoutProjectInput>
+  }
+
   export type ProjectCreateWithoutMembersInput = {
     id?: string
     name: string
     description?: string | null
     created_at?: Date | string
+    updatedAt?: Date | string
+    hiddenForClient?: boolean
     client: ClientCreateNestedOneWithoutProjectsInput
     boards?: BoardCreateNestedManyWithoutProjectInput
+    labels?: ProjectLabelCreateNestedManyWithoutProjectInput
+    quotes?: QuoteCreateNestedManyWithoutProjectInput
+    invoices?: InvoiceCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutMembersInput = {
@@ -18303,7 +32335,12 @@ export namespace Prisma {
     description?: string | null
     client_id: string
     created_at?: Date | string
+    updatedAt?: Date | string
+    hiddenForClient?: boolean
     boards?: BoardUncheckedCreateNestedManyWithoutProjectInput
+    labels?: ProjectLabelUncheckedCreateNestedManyWithoutProjectInput
+    quotes?: QuoteUncheckedCreateNestedManyWithoutProjectInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutMembersInput = {
@@ -18315,34 +32352,42 @@ export namespace Prisma {
     id?: string
     email: string
     username?: string | null
-    name: string
-    role: string
+    name?: string | null
+    role?: string | null
     avatar?: string | null
     image?: string | null
+    emailVerified?: Date | string | null
     created_at?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     createdBoards?: BoardCreateNestedManyWithoutCreatedByInput
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
-    contactClients?: ClientCreateNestedManyWithoutContactInput
+    createdClients?: ClientCreateNestedManyWithoutCreatedByInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutProjectMembersInput = {
     id?: string
     email: string
     username?: string | null
-    name: string
-    role: string
+    name?: string | null
+    role?: string | null
     avatar?: string | null
     image?: string | null
+    emailVerified?: Date | string | null
     created_at?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     createdBoards?: BoardUncheckedCreateNestedManyWithoutCreatedByInput
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
-    contactClients?: ClientUncheckedCreateNestedManyWithoutContactInput
+    createdClients?: ClientUncheckedCreateNestedManyWithoutCreatedByInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelUncheckedCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutProjectMembersInput = {
@@ -18366,8 +32411,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
     client?: ClientUpdateOneRequiredWithoutProjectsNestedInput
     boards?: BoardUpdateManyWithoutProjectNestedInput
+    labels?: ProjectLabelUpdateManyWithoutProjectNestedInput
+    quotes?: QuoteUpdateManyWithoutProjectNestedInput
+    invoices?: InvoiceUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutMembersInput = {
@@ -18376,7 +32426,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     client_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
     boards?: BoardUncheckedUpdateManyWithoutProjectNestedInput
+    labels?: ProjectLabelUncheckedUpdateManyWithoutProjectNestedInput
+    quotes?: QuoteUncheckedUpdateManyWithoutProjectNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type UserUpsertWithoutProjectMembersInput = {
@@ -18394,34 +32449,42 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     createdBoards?: BoardUpdateManyWithoutCreatedByNestedInput
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
-    contactClients?: ClientUpdateManyWithoutContactNestedInput
+    createdClients?: ClientUpdateManyWithoutCreatedByNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProjectMembersInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     createdBoards?: BoardUncheckedUpdateManyWithoutCreatedByNestedInput
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
-    contactClients?: ClientUncheckedUpdateManyWithoutContactNestedInput
+    createdClients?: ClientUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUncheckedUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type ProjectCreateWithoutBoardsInput = {
@@ -18429,8 +32492,13 @@ export namespace Prisma {
     name: string
     description?: string | null
     created_at?: Date | string
+    updatedAt?: Date | string
+    hiddenForClient?: boolean
     client: ClientCreateNestedOneWithoutProjectsInput
     members?: ProjectMemberCreateNestedManyWithoutProjectInput
+    labels?: ProjectLabelCreateNestedManyWithoutProjectInput
+    quotes?: QuoteCreateNestedManyWithoutProjectInput
+    invoices?: InvoiceCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectUncheckedCreateWithoutBoardsInput = {
@@ -18439,7 +32507,12 @@ export namespace Prisma {
     description?: string | null
     client_id: string
     created_at?: Date | string
+    updatedAt?: Date | string
+    hiddenForClient?: boolean
     members?: ProjectMemberUncheckedCreateNestedManyWithoutProjectInput
+    labels?: ProjectLabelUncheckedCreateNestedManyWithoutProjectInput
+    quotes?: QuoteUncheckedCreateNestedManyWithoutProjectInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutProjectInput
   }
 
   export type ProjectCreateOrConnectWithoutBoardsInput = {
@@ -18451,34 +32524,42 @@ export namespace Prisma {
     id?: string
     email: string
     username?: string | null
-    name: string
-    role: string
+    name?: string | null
+    role?: string | null
     avatar?: string | null
     image?: string | null
+    emailVerified?: Date | string | null
     created_at?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
-    contactClients?: ClientCreateNestedManyWithoutContactInput
     projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
+    createdClients?: ClientCreateNestedManyWithoutCreatedByInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutCreatedBoardsInput = {
     id?: string
     email: string
     username?: string | null
-    name: string
-    role: string
+    name?: string | null
+    role?: string | null
     avatar?: string | null
     image?: string | null
+    emailVerified?: Date | string | null
     created_at?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
-    contactClients?: ClientUncheckedCreateNestedManyWithoutContactInput
     projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
+    createdClients?: ClientUncheckedCreateNestedManyWithoutCreatedByInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelUncheckedCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutCreatedBoardsInput = {
@@ -18492,6 +32573,8 @@ export namespace Prisma {
     order: number
     position: number
     color?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     tasks?: TaskCreateNestedManyWithoutColumnInput
   }
 
@@ -18501,6 +32584,8 @@ export namespace Prisma {
     order: number
     position: number
     color?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     tasks?: TaskUncheckedCreateNestedManyWithoutColumnInput
   }
 
@@ -18511,6 +32596,32 @@ export namespace Prisma {
 
   export type ColumnCreateManyBoardInputEnvelope = {
     data: ColumnCreateManyBoardInput | ColumnCreateManyBoardInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BoardLabelCreateWithoutBoardInput = {
+    id?: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
+    label: LabelCreateNestedOneWithoutBoardsInput
+  }
+
+  export type BoardLabelUncheckedCreateWithoutBoardInput = {
+    id?: string
+    labelId: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
+  }
+
+  export type BoardLabelCreateOrConnectWithoutBoardInput = {
+    where: BoardLabelWhereUniqueInput
+    create: XOR<BoardLabelCreateWithoutBoardInput, BoardLabelUncheckedCreateWithoutBoardInput>
+  }
+
+  export type BoardLabelCreateManyBoardInputEnvelope = {
+    data: BoardLabelCreateManyBoardInput | BoardLabelCreateManyBoardInput[]
     skipDuplicates?: boolean
   }
 
@@ -18530,8 +32641,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
     client?: ClientUpdateOneRequiredWithoutProjectsNestedInput
     members?: ProjectMemberUpdateManyWithoutProjectNestedInput
+    labels?: ProjectLabelUpdateManyWithoutProjectNestedInput
+    quotes?: QuoteUpdateManyWithoutProjectNestedInput
+    invoices?: InvoiceUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutBoardsInput = {
@@ -18540,7 +32656,12 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     client_id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
     members?: ProjectMemberUncheckedUpdateManyWithoutProjectNestedInput
+    labels?: ProjectLabelUncheckedUpdateManyWithoutProjectNestedInput
+    quotes?: QuoteUncheckedUpdateManyWithoutProjectNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type UserUpsertWithoutCreatedBoardsInput = {
@@ -18558,34 +32679,42 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
-    contactClients?: ClientUpdateManyWithoutContactNestedInput
     projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
+    createdClients?: ClientUpdateManyWithoutCreatedByNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCreatedBoardsInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
-    contactClients?: ClientUncheckedUpdateManyWithoutContactNestedInput
     projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdClients?: ClientUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUncheckedUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type ColumnUpsertWithWhereUniqueWithoutBoardInput = {
@@ -18614,13 +32743,46 @@ export namespace Prisma {
     position?: IntFilter<"Column"> | number
     color?: StringNullableFilter<"Column"> | string | null
     boardId?: StringFilter<"Column"> | string
+    createdAt?: DateTimeFilter<"Column"> | Date | string
+    updatedAt?: DateTimeFilter<"Column"> | Date | string
+  }
+
+  export type BoardLabelUpsertWithWhereUniqueWithoutBoardInput = {
+    where: BoardLabelWhereUniqueInput
+    update: XOR<BoardLabelUpdateWithoutBoardInput, BoardLabelUncheckedUpdateWithoutBoardInput>
+    create: XOR<BoardLabelCreateWithoutBoardInput, BoardLabelUncheckedCreateWithoutBoardInput>
+  }
+
+  export type BoardLabelUpdateWithWhereUniqueWithoutBoardInput = {
+    where: BoardLabelWhereUniqueInput
+    data: XOR<BoardLabelUpdateWithoutBoardInput, BoardLabelUncheckedUpdateWithoutBoardInput>
+  }
+
+  export type BoardLabelUpdateManyWithWhereWithoutBoardInput = {
+    where: BoardLabelScalarWhereInput
+    data: XOR<BoardLabelUpdateManyMutationInput, BoardLabelUncheckedUpdateManyWithoutBoardInput>
+  }
+
+  export type BoardLabelScalarWhereInput = {
+    AND?: BoardLabelScalarWhereInput | BoardLabelScalarWhereInput[]
+    OR?: BoardLabelScalarWhereInput[]
+    NOT?: BoardLabelScalarWhereInput | BoardLabelScalarWhereInput[]
+    id?: StringFilter<"BoardLabel"> | string
+    boardId?: StringFilter<"BoardLabel"> | string
+    labelId?: StringFilter<"BoardLabel"> | string
+    addedById?: StringFilter<"BoardLabel"> | string
+    isFavorite?: BoolFilter<"BoardLabel"> | boolean
+    createdAt?: DateTimeFilter<"BoardLabel"> | Date | string
   }
 
   export type BoardCreateWithoutColumnsInput = {
     id?: string
     name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutBoardsInput
     createdBy: UserCreateNestedOneWithoutCreatedBoardsInput
+    labels?: BoardLabelCreateNestedManyWithoutBoardInput
   }
 
   export type BoardUncheckedCreateWithoutColumnsInput = {
@@ -18628,6 +32790,9 @@ export namespace Prisma {
     name: string
     projectId: string
     created_by_id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    labels?: BoardLabelUncheckedCreateNestedManyWithoutBoardInput
   }
 
   export type BoardCreateOrConnectWithoutColumnsInput = {
@@ -18642,8 +32807,11 @@ export namespace Prisma {
     price?: number | null
     dueDate?: Date | string | null
     order: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     assignee?: UserCreateNestedOneWithoutAssignedTasksInput
-    client?: ClientCreateNestedOneWithoutTaskInput
+    client?: ClientCreateNestedOneWithoutTasksInput
+    createdBy: UserCreateNestedOneWithoutCreatedTasksInput
     tags?: TaskLabelCreateNestedManyWithoutTaskInput
   }
 
@@ -18656,6 +32824,9 @@ export namespace Prisma {
     order: number
     assigneeId?: string | null
     client_id?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     tags?: TaskLabelUncheckedCreateNestedManyWithoutTaskInput
   }
 
@@ -18683,8 +32854,11 @@ export namespace Prisma {
   export type BoardUpdateWithoutColumnsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutBoardsNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedBoardsNestedInput
+    labels?: BoardLabelUpdateManyWithoutBoardNestedInput
   }
 
   export type BoardUncheckedUpdateWithoutColumnsInput = {
@@ -18692,6 +32866,9 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     created_by_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    labels?: BoardLabelUncheckedUpdateManyWithoutBoardNestedInput
   }
 
   export type TaskUpsertWithWhereUniqueWithoutColumnInput = {
@@ -18716,6 +32893,8 @@ export namespace Prisma {
     order: number
     position: number
     color?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
     board: BoardCreateNestedOneWithoutColumnsInput
   }
 
@@ -18726,6 +32905,8 @@ export namespace Prisma {
     position: number
     color?: string | null
     boardId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ColumnCreateOrConnectWithoutTasksInput = {
@@ -18737,34 +32918,42 @@ export namespace Prisma {
     id?: string
     email: string
     username?: string | null
-    name: string
-    role: string
+    name?: string | null
+    role?: string | null
     avatar?: string | null
     image?: string | null
+    emailVerified?: Date | string | null
     created_at?: Date | string
     updatedAt?: Date | string
     accounts?: AccountCreateNestedManyWithoutUserInput
     sessions?: SessionCreateNestedManyWithoutUserInput
     createdBoards?: BoardCreateNestedManyWithoutCreatedByInput
-    contactClients?: ClientCreateNestedManyWithoutContactInput
     projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
+    createdClients?: ClientCreateNestedManyWithoutCreatedByInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientCreateNestedOneWithoutUserInput
   }
 
   export type UserUncheckedCreateWithoutAssignedTasksInput = {
     id?: string
     email: string
     username?: string | null
-    name: string
-    role: string
+    name?: string | null
+    role?: string | null
     avatar?: string | null
     image?: string | null
+    emailVerified?: Date | string | null
     created_at?: Date | string
     updatedAt?: Date | string
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
     createdBoards?: BoardUncheckedCreateNestedManyWithoutCreatedByInput
-    contactClients?: ClientUncheckedCreateNestedManyWithoutContactInput
     projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
+    createdClients?: ClientUncheckedCreateNestedManyWithoutCreatedByInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelUncheckedCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientUncheckedCreateNestedOneWithoutUserInput
   }
 
   export type UserCreateOrConnectWithoutAssignedTasksInput = {
@@ -18772,33 +32961,122 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutAssignedTasksInput, UserUncheckedCreateWithoutAssignedTasksInput>
   }
 
-  export type ClientCreateWithoutTaskInput = {
+  export type ClientCreateWithoutTasksInput = {
     id?: string
-    company: string
-    name: string
-    contact: UserCreateNestedOneWithoutContactClientsInput
+    type?: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName?: string | null
+    phone?: string | null
+    companyName?: string | null
+    siret?: string | null
+    vatNumber?: string | null
+    website?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    country?: string | null
+    currency?: string
+    taxRate?: number | null
+    notes?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutClientProfileInput
+    createdBy: UserCreateNestedOneWithoutCreatedClientsInput
     projects?: ProjectCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+    quotes?: QuoteCreateNestedManyWithoutClientInput
   }
 
-  export type ClientUncheckedCreateWithoutTaskInput = {
+  export type ClientUncheckedCreateWithoutTasksInput = {
     id?: string
-    company: string
-    name: string
-    contact_id: string
+    type?: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName?: string | null
+    phone?: string | null
+    companyName?: string | null
+    siret?: string | null
+    vatNumber?: string | null
+    website?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    country?: string | null
+    currency?: string
+    taxRate?: number | null
+    userId?: string | null
+    notes?: string | null
+    isActive?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     projects?: ProjectUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+    quotes?: QuoteUncheckedCreateNestedManyWithoutClientInput
   }
 
-  export type ClientCreateOrConnectWithoutTaskInput = {
+  export type ClientCreateOrConnectWithoutTasksInput = {
     where: ClientWhereUniqueInput
-    create: XOR<ClientCreateWithoutTaskInput, ClientUncheckedCreateWithoutTaskInput>
+    create: XOR<ClientCreateWithoutTasksInput, ClientUncheckedCreateWithoutTasksInput>
+  }
+
+  export type UserCreateWithoutCreatedTasksInput = {
+    id?: string
+    email: string
+    username?: string | null
+    name?: string | null
+    role?: string | null
+    avatar?: string | null
+    image?: string | null
+    emailVerified?: Date | string | null
+    created_at?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    createdBoards?: BoardCreateNestedManyWithoutCreatedByInput
+    assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
+    projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
+    createdClients?: ClientCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedTasksInput = {
+    id?: string
+    email: string
+    username?: string | null
+    name?: string | null
+    role?: string | null
+    avatar?: string | null
+    image?: string | null
+    emailVerified?: Date | string | null
+    created_at?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    createdBoards?: BoardUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
+    projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
+    createdClients?: ClientUncheckedCreateNestedManyWithoutCreatedByInput
+    createdLabels?: LabelUncheckedCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedTasksInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedTasksInput, UserUncheckedCreateWithoutCreatedTasksInput>
   }
 
   export type TaskLabelCreateWithoutTaskInput = {
+    createdAt?: Date | string
     label: LabelCreateNestedOneWithoutTasksInput
   }
 
   export type TaskLabelUncheckedCreateWithoutTaskInput = {
     label_id: string
+    createdAt?: Date | string
   }
 
   export type TaskLabelCreateOrConnectWithoutTaskInput = {
@@ -18828,6 +33106,8 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     position?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     board?: BoardUpdateOneRequiredWithoutColumnsNestedInput
   }
 
@@ -18838,6 +33118,8 @@ export namespace Prisma {
     position?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
     boardId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUpsertWithoutAssignedTasksInput = {
@@ -18855,61 +33137,162 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUpdateManyWithoutUserNestedInput
     sessions?: SessionUpdateManyWithoutUserNestedInput
     createdBoards?: BoardUpdateManyWithoutCreatedByNestedInput
-    contactClients?: ClientUpdateManyWithoutContactNestedInput
     projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
+    createdClients?: ClientUpdateManyWithoutCreatedByNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUpdateOneWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAssignedTasksInput = {
     id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     username?: NullableStringFieldUpdateOperationsInput | string | null
-    name?: StringFieldUpdateOperationsInput | string
-    role?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
     avatar?: NullableStringFieldUpdateOperationsInput | string | null
     image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
     createdBoards?: BoardUncheckedUpdateManyWithoutCreatedByNestedInput
-    contactClients?: ClientUncheckedUpdateManyWithoutContactNestedInput
     projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdClients?: ClientUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUncheckedUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUncheckedUpdateOneWithoutUserNestedInput
   }
 
-  export type ClientUpsertWithoutTaskInput = {
-    update: XOR<ClientUpdateWithoutTaskInput, ClientUncheckedUpdateWithoutTaskInput>
-    create: XOR<ClientCreateWithoutTaskInput, ClientUncheckedCreateWithoutTaskInput>
+  export type ClientUpsertWithoutTasksInput = {
+    update: XOR<ClientUpdateWithoutTasksInput, ClientUncheckedUpdateWithoutTasksInput>
+    create: XOR<ClientCreateWithoutTasksInput, ClientUncheckedCreateWithoutTasksInput>
     where?: ClientWhereInput
   }
 
-  export type ClientUpdateToOneWithWhereWithoutTaskInput = {
+  export type ClientUpdateToOneWithWhereWithoutTasksInput = {
     where?: ClientWhereInput
-    data: XOR<ClientUpdateWithoutTaskInput, ClientUncheckedUpdateWithoutTaskInput>
+    data: XOR<ClientUpdateWithoutTasksInput, ClientUncheckedUpdateWithoutTasksInput>
   }
 
-  export type ClientUpdateWithoutTaskInput = {
+  export type ClientUpdateWithoutTasksInput = {
     id?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contact?: UserUpdateOneRequiredWithoutContactClientsNestedInput
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutClientProfileNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedClientsNestedInput
     projects?: ProjectUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    quotes?: QuoteUpdateManyWithoutClientNestedInput
   }
 
-  export type ClientUncheckedUpdateWithoutTaskInput = {
+  export type ClientUncheckedUpdateWithoutTasksInput = {
     id?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    contact_id?: StringFieldUpdateOperationsInput | string
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     projects?: ProjectUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    quotes?: QuoteUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type UserUpsertWithoutCreatedTasksInput = {
+    update: XOR<UserUpdateWithoutCreatedTasksInput, UserUncheckedUpdateWithoutCreatedTasksInput>
+    create: XOR<UserCreateWithoutCreatedTasksInput, UserUncheckedCreateWithoutCreatedTasksInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedTasksInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedTasksInput, UserUncheckedUpdateWithoutCreatedTasksInput>
+  }
+
+  export type UserUpdateWithoutCreatedTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    createdBoards?: BoardUpdateManyWithoutCreatedByNestedInput
+    assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
+    projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
+    createdClients?: ClientUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedTasksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    createdBoards?: BoardUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
+    projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdClients?: ClientUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdLabels?: LabelUncheckedUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUncheckedUpdateOneWithoutUserNestedInput
   }
 
   export type TaskLabelUpsertWithWhereUniqueWithoutTaskInput = {
@@ -18934,14 +33317,116 @@ export namespace Prisma {
     NOT?: TaskLabelScalarWhereInput | TaskLabelScalarWhereInput[]
     task_id?: StringFilter<"TaskLabel"> | string
     label_id?: StringFilter<"TaskLabel"> | string
+    createdAt?: DateTimeFilter<"TaskLabel"> | Date | string
+  }
+
+  export type UserCreateWithoutCreatedLabelsInput = {
+    id?: string
+    email: string
+    username?: string | null
+    name?: string | null
+    role?: string | null
+    avatar?: string | null
+    image?: string | null
+    emailVerified?: Date | string | null
+    created_at?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    createdBoards?: BoardCreateNestedManyWithoutCreatedByInput
+    assignedTasks?: TaskCreateNestedManyWithoutAssigneeInput
+    projectMembers?: ProjectMemberCreateNestedManyWithoutUserInput
+    createdClients?: ClientCreateNestedManyWithoutCreatedByInput
+    createdTasks?: TaskCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientCreateNestedOneWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutCreatedLabelsInput = {
+    id?: string
+    email: string
+    username?: string | null
+    name?: string | null
+    role?: string | null
+    avatar?: string | null
+    image?: string | null
+    emailVerified?: Date | string | null
+    created_at?: Date | string
+    updatedAt?: Date | string
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    createdBoards?: BoardUncheckedCreateNestedManyWithoutCreatedByInput
+    assignedTasks?: TaskUncheckedCreateNestedManyWithoutAssigneeInput
+    projectMembers?: ProjectMemberUncheckedCreateNestedManyWithoutUserInput
+    createdClients?: ClientUncheckedCreateNestedManyWithoutCreatedByInput
+    createdTasks?: TaskUncheckedCreateNestedManyWithoutCreatedByInput
+    clientProfile?: ClientUncheckedCreateNestedOneWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutCreatedLabelsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutCreatedLabelsInput, UserUncheckedCreateWithoutCreatedLabelsInput>
+  }
+
+  export type ProjectLabelCreateWithoutLabelInput = {
+    id?: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
+    project: ProjectCreateNestedOneWithoutLabelsInput
+  }
+
+  export type ProjectLabelUncheckedCreateWithoutLabelInput = {
+    id?: string
+    projectId: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
+  }
+
+  export type ProjectLabelCreateOrConnectWithoutLabelInput = {
+    where: ProjectLabelWhereUniqueInput
+    create: XOR<ProjectLabelCreateWithoutLabelInput, ProjectLabelUncheckedCreateWithoutLabelInput>
+  }
+
+  export type ProjectLabelCreateManyLabelInputEnvelope = {
+    data: ProjectLabelCreateManyLabelInput | ProjectLabelCreateManyLabelInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BoardLabelCreateWithoutLabelInput = {
+    id?: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
+    board: BoardCreateNestedOneWithoutLabelsInput
+  }
+
+  export type BoardLabelUncheckedCreateWithoutLabelInput = {
+    id?: string
+    boardId: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
+  }
+
+  export type BoardLabelCreateOrConnectWithoutLabelInput = {
+    where: BoardLabelWhereUniqueInput
+    create: XOR<BoardLabelCreateWithoutLabelInput, BoardLabelUncheckedCreateWithoutLabelInput>
+  }
+
+  export type BoardLabelCreateManyLabelInputEnvelope = {
+    data: BoardLabelCreateManyLabelInput | BoardLabelCreateManyLabelInput[]
+    skipDuplicates?: boolean
   }
 
   export type TaskLabelCreateWithoutLabelInput = {
+    createdAt?: Date | string
     task: TaskCreateNestedOneWithoutTagsInput
   }
 
   export type TaskLabelUncheckedCreateWithoutLabelInput = {
     task_id: string
+    createdAt?: Date | string
   }
 
   export type TaskLabelCreateOrConnectWithoutLabelInput = {
@@ -18952,6 +33437,91 @@ export namespace Prisma {
   export type TaskLabelCreateManyLabelInputEnvelope = {
     data: TaskLabelCreateManyLabelInput | TaskLabelCreateManyLabelInput[]
     skipDuplicates?: boolean
+  }
+
+  export type UserUpsertWithoutCreatedLabelsInput = {
+    update: XOR<UserUpdateWithoutCreatedLabelsInput, UserUncheckedUpdateWithoutCreatedLabelsInput>
+    create: XOR<UserCreateWithoutCreatedLabelsInput, UserUncheckedCreateWithoutCreatedLabelsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutCreatedLabelsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutCreatedLabelsInput, UserUncheckedUpdateWithoutCreatedLabelsInput>
+  }
+
+  export type UserUpdateWithoutCreatedLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    createdBoards?: BoardUpdateManyWithoutCreatedByNestedInput
+    assignedTasks?: TaskUpdateManyWithoutAssigneeNestedInput
+    projectMembers?: ProjectMemberUpdateManyWithoutUserNestedInput
+    createdClients?: ClientUpdateManyWithoutCreatedByNestedInput
+    createdTasks?: TaskUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUpdateOneWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutCreatedLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    username?: NullableStringFieldUpdateOperationsInput | string | null
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: NullableStringFieldUpdateOperationsInput | string | null
+    avatar?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    createdBoards?: BoardUncheckedUpdateManyWithoutCreatedByNestedInput
+    assignedTasks?: TaskUncheckedUpdateManyWithoutAssigneeNestedInput
+    projectMembers?: ProjectMemberUncheckedUpdateManyWithoutUserNestedInput
+    createdClients?: ClientUncheckedUpdateManyWithoutCreatedByNestedInput
+    createdTasks?: TaskUncheckedUpdateManyWithoutCreatedByNestedInput
+    clientProfile?: ClientUncheckedUpdateOneWithoutUserNestedInput
+  }
+
+  export type ProjectLabelUpsertWithWhereUniqueWithoutLabelInput = {
+    where: ProjectLabelWhereUniqueInput
+    update: XOR<ProjectLabelUpdateWithoutLabelInput, ProjectLabelUncheckedUpdateWithoutLabelInput>
+    create: XOR<ProjectLabelCreateWithoutLabelInput, ProjectLabelUncheckedCreateWithoutLabelInput>
+  }
+
+  export type ProjectLabelUpdateWithWhereUniqueWithoutLabelInput = {
+    where: ProjectLabelWhereUniqueInput
+    data: XOR<ProjectLabelUpdateWithoutLabelInput, ProjectLabelUncheckedUpdateWithoutLabelInput>
+  }
+
+  export type ProjectLabelUpdateManyWithWhereWithoutLabelInput = {
+    where: ProjectLabelScalarWhereInput
+    data: XOR<ProjectLabelUpdateManyMutationInput, ProjectLabelUncheckedUpdateManyWithoutLabelInput>
+  }
+
+  export type BoardLabelUpsertWithWhereUniqueWithoutLabelInput = {
+    where: BoardLabelWhereUniqueInput
+    update: XOR<BoardLabelUpdateWithoutLabelInput, BoardLabelUncheckedUpdateWithoutLabelInput>
+    create: XOR<BoardLabelCreateWithoutLabelInput, BoardLabelUncheckedCreateWithoutLabelInput>
+  }
+
+  export type BoardLabelUpdateWithWhereUniqueWithoutLabelInput = {
+    where: BoardLabelWhereUniqueInput
+    data: XOR<BoardLabelUpdateWithoutLabelInput, BoardLabelUncheckedUpdateWithoutLabelInput>
+  }
+
+  export type BoardLabelUpdateManyWithWhereWithoutLabelInput = {
+    where: BoardLabelScalarWhereInput
+    data: XOR<BoardLabelUpdateManyMutationInput, BoardLabelUncheckedUpdateManyWithoutLabelInput>
   }
 
   export type TaskLabelUpsertWithWhereUniqueWithoutLabelInput = {
@@ -18970,6 +33540,270 @@ export namespace Prisma {
     data: XOR<TaskLabelUpdateManyMutationInput, TaskLabelUncheckedUpdateManyWithoutLabelInput>
   }
 
+  export type ProjectCreateWithoutLabelsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    created_at?: Date | string
+    updatedAt?: Date | string
+    hiddenForClient?: boolean
+    client: ClientCreateNestedOneWithoutProjectsInput
+    members?: ProjectMemberCreateNestedManyWithoutProjectInput
+    boards?: BoardCreateNestedManyWithoutProjectInput
+    quotes?: QuoteCreateNestedManyWithoutProjectInput
+    invoices?: InvoiceCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectUncheckedCreateWithoutLabelsInput = {
+    id?: string
+    name: string
+    description?: string | null
+    client_id: string
+    created_at?: Date | string
+    updatedAt?: Date | string
+    hiddenForClient?: boolean
+    members?: ProjectMemberUncheckedCreateNestedManyWithoutProjectInput
+    boards?: BoardUncheckedCreateNestedManyWithoutProjectInput
+    quotes?: QuoteUncheckedCreateNestedManyWithoutProjectInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectCreateOrConnectWithoutLabelsInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutLabelsInput, ProjectUncheckedCreateWithoutLabelsInput>
+  }
+
+  export type LabelCreateWithoutProjectsInput = {
+    id?: string
+    name: string
+    color?: string | null
+    description?: string | null
+    usageCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedLabelsInput
+    boards?: BoardLabelCreateNestedManyWithoutLabelInput
+    tasks?: TaskLabelCreateNestedManyWithoutLabelInput
+  }
+
+  export type LabelUncheckedCreateWithoutProjectsInput = {
+    id?: string
+    name: string
+    color?: string | null
+    description?: string | null
+    createdById: string
+    usageCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    boards?: BoardLabelUncheckedCreateNestedManyWithoutLabelInput
+    tasks?: TaskLabelUncheckedCreateNestedManyWithoutLabelInput
+  }
+
+  export type LabelCreateOrConnectWithoutProjectsInput = {
+    where: LabelWhereUniqueInput
+    create: XOR<LabelCreateWithoutProjectsInput, LabelUncheckedCreateWithoutProjectsInput>
+  }
+
+  export type ProjectUpsertWithoutLabelsInput = {
+    update: XOR<ProjectUpdateWithoutLabelsInput, ProjectUncheckedUpdateWithoutLabelsInput>
+    create: XOR<ProjectCreateWithoutLabelsInput, ProjectUncheckedCreateWithoutLabelsInput>
+    where?: ProjectWhereInput
+  }
+
+  export type ProjectUpdateToOneWithWhereWithoutLabelsInput = {
+    where?: ProjectWhereInput
+    data: XOR<ProjectUpdateWithoutLabelsInput, ProjectUncheckedUpdateWithoutLabelsInput>
+  }
+
+  export type ProjectUpdateWithoutLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
+    client?: ClientUpdateOneRequiredWithoutProjectsNestedInput
+    members?: ProjectMemberUpdateManyWithoutProjectNestedInput
+    boards?: BoardUpdateManyWithoutProjectNestedInput
+    quotes?: QuoteUpdateManyWithoutProjectNestedInput
+    invoices?: InvoiceUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateWithoutLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    client_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
+    members?: ProjectMemberUncheckedUpdateManyWithoutProjectNestedInput
+    boards?: BoardUncheckedUpdateManyWithoutProjectNestedInput
+    quotes?: QuoteUncheckedUpdateManyWithoutProjectNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutProjectNestedInput
+  }
+
+  export type LabelUpsertWithoutProjectsInput = {
+    update: XOR<LabelUpdateWithoutProjectsInput, LabelUncheckedUpdateWithoutProjectsInput>
+    create: XOR<LabelCreateWithoutProjectsInput, LabelUncheckedCreateWithoutProjectsInput>
+    where?: LabelWhereInput
+  }
+
+  export type LabelUpdateToOneWithWhereWithoutProjectsInput = {
+    where?: LabelWhereInput
+    data: XOR<LabelUpdateWithoutProjectsInput, LabelUncheckedUpdateWithoutProjectsInput>
+  }
+
+  export type LabelUpdateWithoutProjectsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    usageCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedLabelsNestedInput
+    boards?: BoardLabelUpdateManyWithoutLabelNestedInput
+    tasks?: TaskLabelUpdateManyWithoutLabelNestedInput
+  }
+
+  export type LabelUncheckedUpdateWithoutProjectsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    usageCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    boards?: BoardLabelUncheckedUpdateManyWithoutLabelNestedInput
+    tasks?: TaskLabelUncheckedUpdateManyWithoutLabelNestedInput
+  }
+
+  export type BoardCreateWithoutLabelsInput = {
+    id?: string
+    name: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    project: ProjectCreateNestedOneWithoutBoardsInput
+    createdBy: UserCreateNestedOneWithoutCreatedBoardsInput
+    columns?: ColumnCreateNestedManyWithoutBoardInput
+  }
+
+  export type BoardUncheckedCreateWithoutLabelsInput = {
+    id?: string
+    name: string
+    projectId: string
+    created_by_id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    columns?: ColumnUncheckedCreateNestedManyWithoutBoardInput
+  }
+
+  export type BoardCreateOrConnectWithoutLabelsInput = {
+    where: BoardWhereUniqueInput
+    create: XOR<BoardCreateWithoutLabelsInput, BoardUncheckedCreateWithoutLabelsInput>
+  }
+
+  export type LabelCreateWithoutBoardsInput = {
+    id?: string
+    name: string
+    color?: string | null
+    description?: string | null
+    usageCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedLabelsInput
+    projects?: ProjectLabelCreateNestedManyWithoutLabelInput
+    tasks?: TaskLabelCreateNestedManyWithoutLabelInput
+  }
+
+  export type LabelUncheckedCreateWithoutBoardsInput = {
+    id?: string
+    name: string
+    color?: string | null
+    description?: string | null
+    createdById: string
+    usageCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projects?: ProjectLabelUncheckedCreateNestedManyWithoutLabelInput
+    tasks?: TaskLabelUncheckedCreateNestedManyWithoutLabelInput
+  }
+
+  export type LabelCreateOrConnectWithoutBoardsInput = {
+    where: LabelWhereUniqueInput
+    create: XOR<LabelCreateWithoutBoardsInput, LabelUncheckedCreateWithoutBoardsInput>
+  }
+
+  export type BoardUpsertWithoutLabelsInput = {
+    update: XOR<BoardUpdateWithoutLabelsInput, BoardUncheckedUpdateWithoutLabelsInput>
+    create: XOR<BoardCreateWithoutLabelsInput, BoardUncheckedCreateWithoutLabelsInput>
+    where?: BoardWhereInput
+  }
+
+  export type BoardUpdateToOneWithWhereWithoutLabelsInput = {
+    where?: BoardWhereInput
+    data: XOR<BoardUpdateWithoutLabelsInput, BoardUncheckedUpdateWithoutLabelsInput>
+  }
+
+  export type BoardUpdateWithoutLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneRequiredWithoutBoardsNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedBoardsNestedInput
+    columns?: ColumnUpdateManyWithoutBoardNestedInput
+  }
+
+  export type BoardUncheckedUpdateWithoutLabelsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    created_by_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    columns?: ColumnUncheckedUpdateManyWithoutBoardNestedInput
+  }
+
+  export type LabelUpsertWithoutBoardsInput = {
+    update: XOR<LabelUpdateWithoutBoardsInput, LabelUncheckedUpdateWithoutBoardsInput>
+    create: XOR<LabelCreateWithoutBoardsInput, LabelUncheckedCreateWithoutBoardsInput>
+    where?: LabelWhereInput
+  }
+
+  export type LabelUpdateToOneWithWhereWithoutBoardsInput = {
+    where?: LabelWhereInput
+    data: XOR<LabelUpdateWithoutBoardsInput, LabelUncheckedUpdateWithoutBoardsInput>
+  }
+
+  export type LabelUpdateWithoutBoardsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    usageCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedLabelsNestedInput
+    projects?: ProjectLabelUpdateManyWithoutLabelNestedInput
+    tasks?: TaskLabelUpdateManyWithoutLabelNestedInput
+  }
+
+  export type LabelUncheckedUpdateWithoutBoardsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    usageCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectLabelUncheckedUpdateManyWithoutLabelNestedInput
+    tasks?: TaskLabelUncheckedUpdateManyWithoutLabelNestedInput
+  }
+
   export type TaskCreateWithoutTagsInput = {
     id?: string
     title: string
@@ -18977,9 +33811,12 @@ export namespace Prisma {
     price?: number | null
     dueDate?: Date | string | null
     order: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
     column: ColumnCreateNestedOneWithoutTasksInput
     assignee?: UserCreateNestedOneWithoutAssignedTasksInput
-    client?: ClientCreateNestedOneWithoutTaskInput
+    client?: ClientCreateNestedOneWithoutTasksInput
+    createdBy: UserCreateNestedOneWithoutCreatedTasksInput
   }
 
   export type TaskUncheckedCreateWithoutTagsInput = {
@@ -18992,6 +33829,9 @@ export namespace Prisma {
     columnId: string
     assigneeId?: string | null
     client_id?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type TaskCreateOrConnectWithoutTagsInput = {
@@ -19003,12 +33843,26 @@ export namespace Prisma {
     id?: string
     name: string
     color?: string | null
+    description?: string | null
+    usageCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    createdBy: UserCreateNestedOneWithoutCreatedLabelsInput
+    projects?: ProjectLabelCreateNestedManyWithoutLabelInput
+    boards?: BoardLabelCreateNestedManyWithoutLabelInput
   }
 
   export type LabelUncheckedCreateWithoutTasksInput = {
     id?: string
     name: string
     color?: string | null
+    description?: string | null
+    createdById: string
+    usageCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projects?: ProjectLabelUncheckedCreateNestedManyWithoutLabelInput
+    boards?: BoardLabelUncheckedCreateNestedManyWithoutLabelInput
   }
 
   export type LabelCreateOrConnectWithoutTasksInput = {
@@ -19034,9 +33888,12 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     column?: ColumnUpdateOneRequiredWithoutTasksNestedInput
     assignee?: UserUpdateOneWithoutAssignedTasksNestedInput
-    client?: ClientUpdateOneWithoutTaskNestedInput
+    client?: ClientUpdateOneWithoutTasksNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedTasksNestedInput
   }
 
   export type TaskUncheckedUpdateWithoutTagsInput = {
@@ -19049,6 +33906,9 @@ export namespace Prisma {
     columnId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     client_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type LabelUpsertWithoutTasksInput = {
@@ -19066,12 +33926,1153 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    usageCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    createdBy?: UserUpdateOneRequiredWithoutCreatedLabelsNestedInput
+    projects?: ProjectLabelUpdateManyWithoutLabelNestedInput
+    boards?: BoardLabelUpdateManyWithoutLabelNestedInput
   }
 
   export type LabelUncheckedUpdateWithoutTasksInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    usageCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectLabelUncheckedUpdateManyWithoutLabelNestedInput
+    boards?: BoardLabelUncheckedUpdateManyWithoutLabelNestedInput
+  }
+
+  export type ClientCreateWithoutQuotesInput = {
+    id?: string
+    type?: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName?: string | null
+    phone?: string | null
+    companyName?: string | null
+    siret?: string | null
+    vatNumber?: string | null
+    website?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    country?: string | null
+    currency?: string
+    taxRate?: number | null
+    notes?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutClientProfileInput
+    createdBy: UserCreateNestedOneWithoutCreatedClientsInput
+    projects?: ProjectCreateNestedManyWithoutClientInput
+    tasks?: TaskCreateNestedManyWithoutClientInput
+    invoices?: InvoiceCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutQuotesInput = {
+    id?: string
+    type?: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName?: string | null
+    phone?: string | null
+    companyName?: string | null
+    siret?: string | null
+    vatNumber?: string | null
+    website?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    country?: string | null
+    currency?: string
+    taxRate?: number | null
+    userId?: string | null
+    notes?: string | null
+    isActive?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projects?: ProjectUncheckedCreateNestedManyWithoutClientInput
+    tasks?: TaskUncheckedCreateNestedManyWithoutClientInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutQuotesInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutQuotesInput, ClientUncheckedCreateWithoutQuotesInput>
+  }
+
+  export type ProjectCreateWithoutQuotesInput = {
+    id?: string
+    name: string
+    description?: string | null
+    created_at?: Date | string
+    updatedAt?: Date | string
+    hiddenForClient?: boolean
+    client: ClientCreateNestedOneWithoutProjectsInput
+    members?: ProjectMemberCreateNestedManyWithoutProjectInput
+    boards?: BoardCreateNestedManyWithoutProjectInput
+    labels?: ProjectLabelCreateNestedManyWithoutProjectInput
+    invoices?: InvoiceCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectUncheckedCreateWithoutQuotesInput = {
+    id?: string
+    name: string
+    description?: string | null
+    client_id: string
+    created_at?: Date | string
+    updatedAt?: Date | string
+    hiddenForClient?: boolean
+    members?: ProjectMemberUncheckedCreateNestedManyWithoutProjectInput
+    boards?: BoardUncheckedCreateNestedManyWithoutProjectInput
+    labels?: ProjectLabelUncheckedCreateNestedManyWithoutProjectInput
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectCreateOrConnectWithoutQuotesInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutQuotesInput, ProjectUncheckedCreateWithoutQuotesInput>
+  }
+
+  export type QuoteItemCreateWithoutQuoteInput = {
+    id?: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    totalPrice: number
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QuoteItemUncheckedCreateWithoutQuoteInput = {
+    id?: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    totalPrice: number
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QuoteItemCreateOrConnectWithoutQuoteInput = {
+    where: QuoteItemWhereUniqueInput
+    create: XOR<QuoteItemCreateWithoutQuoteInput, QuoteItemUncheckedCreateWithoutQuoteInput>
+  }
+
+  export type QuoteItemCreateManyQuoteInputEnvelope = {
+    data: QuoteItemCreateManyQuoteInput | QuoteItemCreateManyQuoteInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InvoiceCreateWithoutQuoteInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    status?: $Enums.InvoiceStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    paidAmount?: number
+    currency?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    paidAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutInvoicesInput
+    project?: ProjectCreateNestedOneWithoutInvoicesInput
+    items?: InvoiceItemCreateNestedManyWithoutInvoiceInput
+    payments?: PaymentCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceUncheckedCreateWithoutQuoteInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    clientId: string
+    projectId?: string | null
+    status?: $Enums.InvoiceStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    paidAmount?: number
+    currency?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    paidAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
+    payments?: PaymentUncheckedCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceCreateOrConnectWithoutQuoteInput = {
+    where: InvoiceWhereUniqueInput
+    create: XOR<InvoiceCreateWithoutQuoteInput, InvoiceUncheckedCreateWithoutQuoteInput>
+  }
+
+  export type InvoiceCreateManyQuoteInputEnvelope = {
+    data: InvoiceCreateManyQuoteInput | InvoiceCreateManyQuoteInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ClientUpsertWithoutQuotesInput = {
+    update: XOR<ClientUpdateWithoutQuotesInput, ClientUncheckedUpdateWithoutQuotesInput>
+    create: XOR<ClientCreateWithoutQuotesInput, ClientUncheckedCreateWithoutQuotesInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutQuotesInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutQuotesInput, ClientUncheckedUpdateWithoutQuotesInput>
+  }
+
+  export type ClientUpdateWithoutQuotesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutClientProfileNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedClientsNestedInput
+    projects?: ProjectUpdateManyWithoutClientNestedInput
+    tasks?: TaskUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutQuotesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUncheckedUpdateManyWithoutClientNestedInput
+    tasks?: TaskUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ProjectUpsertWithoutQuotesInput = {
+    update: XOR<ProjectUpdateWithoutQuotesInput, ProjectUncheckedUpdateWithoutQuotesInput>
+    create: XOR<ProjectCreateWithoutQuotesInput, ProjectUncheckedCreateWithoutQuotesInput>
+    where?: ProjectWhereInput
+  }
+
+  export type ProjectUpdateToOneWithWhereWithoutQuotesInput = {
+    where?: ProjectWhereInput
+    data: XOR<ProjectUpdateWithoutQuotesInput, ProjectUncheckedUpdateWithoutQuotesInput>
+  }
+
+  export type ProjectUpdateWithoutQuotesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
+    client?: ClientUpdateOneRequiredWithoutProjectsNestedInput
+    members?: ProjectMemberUpdateManyWithoutProjectNestedInput
+    boards?: BoardUpdateManyWithoutProjectNestedInput
+    labels?: ProjectLabelUpdateManyWithoutProjectNestedInput
+    invoices?: InvoiceUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateWithoutQuotesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    client_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
+    members?: ProjectMemberUncheckedUpdateManyWithoutProjectNestedInput
+    boards?: BoardUncheckedUpdateManyWithoutProjectNestedInput
+    labels?: ProjectLabelUncheckedUpdateManyWithoutProjectNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutProjectNestedInput
+  }
+
+  export type QuoteItemUpsertWithWhereUniqueWithoutQuoteInput = {
+    where: QuoteItemWhereUniqueInput
+    update: XOR<QuoteItemUpdateWithoutQuoteInput, QuoteItemUncheckedUpdateWithoutQuoteInput>
+    create: XOR<QuoteItemCreateWithoutQuoteInput, QuoteItemUncheckedCreateWithoutQuoteInput>
+  }
+
+  export type QuoteItemUpdateWithWhereUniqueWithoutQuoteInput = {
+    where: QuoteItemWhereUniqueInput
+    data: XOR<QuoteItemUpdateWithoutQuoteInput, QuoteItemUncheckedUpdateWithoutQuoteInput>
+  }
+
+  export type QuoteItemUpdateManyWithWhereWithoutQuoteInput = {
+    where: QuoteItemScalarWhereInput
+    data: XOR<QuoteItemUpdateManyMutationInput, QuoteItemUncheckedUpdateManyWithoutQuoteInput>
+  }
+
+  export type QuoteItemScalarWhereInput = {
+    AND?: QuoteItemScalarWhereInput | QuoteItemScalarWhereInput[]
+    OR?: QuoteItemScalarWhereInput[]
+    NOT?: QuoteItemScalarWhereInput | QuoteItemScalarWhereInput[]
+    id?: StringFilter<"QuoteItem"> | string
+    quoteId?: StringFilter<"QuoteItem"> | string
+    description?: StringFilter<"QuoteItem"> | string
+    quantity?: FloatFilter<"QuoteItem"> | number
+    unitPrice?: FloatFilter<"QuoteItem"> | number
+    totalPrice?: FloatFilter<"QuoteItem"> | number
+    order?: IntFilter<"QuoteItem"> | number
+    createdAt?: DateTimeFilter<"QuoteItem"> | Date | string
+    updatedAt?: DateTimeFilter<"QuoteItem"> | Date | string
+  }
+
+  export type InvoiceUpsertWithWhereUniqueWithoutQuoteInput = {
+    where: InvoiceWhereUniqueInput
+    update: XOR<InvoiceUpdateWithoutQuoteInput, InvoiceUncheckedUpdateWithoutQuoteInput>
+    create: XOR<InvoiceCreateWithoutQuoteInput, InvoiceUncheckedCreateWithoutQuoteInput>
+  }
+
+  export type InvoiceUpdateWithWhereUniqueWithoutQuoteInput = {
+    where: InvoiceWhereUniqueInput
+    data: XOR<InvoiceUpdateWithoutQuoteInput, InvoiceUncheckedUpdateWithoutQuoteInput>
+  }
+
+  export type InvoiceUpdateManyWithWhereWithoutQuoteInput = {
+    where: InvoiceScalarWhereInput
+    data: XOR<InvoiceUpdateManyMutationInput, InvoiceUncheckedUpdateManyWithoutQuoteInput>
+  }
+
+  export type QuoteCreateWithoutItemsInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    status?: $Enums.QuoteStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    currency?: string
+    validUntil?: Date | string | null
+    sentAt?: Date | string | null
+    acceptedAt?: Date | string | null
+    rejectedAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutQuotesInput
+    project?: ProjectCreateNestedOneWithoutQuotesInput
+    invoices?: InvoiceCreateNestedManyWithoutQuoteInput
+  }
+
+  export type QuoteUncheckedCreateWithoutItemsInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    clientId: string
+    projectId?: string | null
+    status?: $Enums.QuoteStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    currency?: string
+    validUntil?: Date | string | null
+    sentAt?: Date | string | null
+    acceptedAt?: Date | string | null
+    rejectedAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    invoices?: InvoiceUncheckedCreateNestedManyWithoutQuoteInput
+  }
+
+  export type QuoteCreateOrConnectWithoutItemsInput = {
+    where: QuoteWhereUniqueInput
+    create: XOR<QuoteCreateWithoutItemsInput, QuoteUncheckedCreateWithoutItemsInput>
+  }
+
+  export type QuoteUpsertWithoutItemsInput = {
+    update: XOR<QuoteUpdateWithoutItemsInput, QuoteUncheckedUpdateWithoutItemsInput>
+    create: XOR<QuoteCreateWithoutItemsInput, QuoteUncheckedCreateWithoutItemsInput>
+    where?: QuoteWhereInput
+  }
+
+  export type QuoteUpdateToOneWithWhereWithoutItemsInput = {
+    where?: QuoteWhereInput
+    data: XOR<QuoteUpdateWithoutItemsInput, QuoteUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type QuoteUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rejectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutQuotesNestedInput
+    project?: ProjectUpdateOneWithoutQuotesNestedInput
+    invoices?: InvoiceUpdateManyWithoutQuoteNestedInput
+  }
+
+  export type QuoteUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rejectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    invoices?: InvoiceUncheckedUpdateManyWithoutQuoteNestedInput
+  }
+
+  export type ClientCreateWithoutInvoicesInput = {
+    id?: string
+    type?: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName?: string | null
+    phone?: string | null
+    companyName?: string | null
+    siret?: string | null
+    vatNumber?: string | null
+    website?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    country?: string | null
+    currency?: string
+    taxRate?: number | null
+    notes?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    user?: UserCreateNestedOneWithoutClientProfileInput
+    createdBy: UserCreateNestedOneWithoutCreatedClientsInput
+    projects?: ProjectCreateNestedManyWithoutClientInput
+    tasks?: TaskCreateNestedManyWithoutClientInput
+    quotes?: QuoteCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientUncheckedCreateWithoutInvoicesInput = {
+    id?: string
+    type?: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName?: string | null
+    phone?: string | null
+    companyName?: string | null
+    siret?: string | null
+    vatNumber?: string | null
+    website?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    country?: string | null
+    currency?: string
+    taxRate?: number | null
+    userId?: string | null
+    notes?: string | null
+    isActive?: boolean
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    projects?: ProjectUncheckedCreateNestedManyWithoutClientInput
+    tasks?: TaskUncheckedCreateNestedManyWithoutClientInput
+    quotes?: QuoteUncheckedCreateNestedManyWithoutClientInput
+  }
+
+  export type ClientCreateOrConnectWithoutInvoicesInput = {
+    where: ClientWhereUniqueInput
+    create: XOR<ClientCreateWithoutInvoicesInput, ClientUncheckedCreateWithoutInvoicesInput>
+  }
+
+  export type ProjectCreateWithoutInvoicesInput = {
+    id?: string
+    name: string
+    description?: string | null
+    created_at?: Date | string
+    updatedAt?: Date | string
+    hiddenForClient?: boolean
+    client: ClientCreateNestedOneWithoutProjectsInput
+    members?: ProjectMemberCreateNestedManyWithoutProjectInput
+    boards?: BoardCreateNestedManyWithoutProjectInput
+    labels?: ProjectLabelCreateNestedManyWithoutProjectInput
+    quotes?: QuoteCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectUncheckedCreateWithoutInvoicesInput = {
+    id?: string
+    name: string
+    description?: string | null
+    client_id: string
+    created_at?: Date | string
+    updatedAt?: Date | string
+    hiddenForClient?: boolean
+    members?: ProjectMemberUncheckedCreateNestedManyWithoutProjectInput
+    boards?: BoardUncheckedCreateNestedManyWithoutProjectInput
+    labels?: ProjectLabelUncheckedCreateNestedManyWithoutProjectInput
+    quotes?: QuoteUncheckedCreateNestedManyWithoutProjectInput
+  }
+
+  export type ProjectCreateOrConnectWithoutInvoicesInput = {
+    where: ProjectWhereUniqueInput
+    create: XOR<ProjectCreateWithoutInvoicesInput, ProjectUncheckedCreateWithoutInvoicesInput>
+  }
+
+  export type QuoteCreateWithoutInvoicesInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    status?: $Enums.QuoteStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    currency?: string
+    validUntil?: Date | string | null
+    sentAt?: Date | string | null
+    acceptedAt?: Date | string | null
+    rejectedAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutQuotesInput
+    project?: ProjectCreateNestedOneWithoutQuotesInput
+    items?: QuoteItemCreateNestedManyWithoutQuoteInput
+  }
+
+  export type QuoteUncheckedCreateWithoutInvoicesInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    clientId: string
+    projectId?: string | null
+    status?: $Enums.QuoteStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    currency?: string
+    validUntil?: Date | string | null
+    sentAt?: Date | string | null
+    acceptedAt?: Date | string | null
+    rejectedAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: QuoteItemUncheckedCreateNestedManyWithoutQuoteInput
+  }
+
+  export type QuoteCreateOrConnectWithoutInvoicesInput = {
+    where: QuoteWhereUniqueInput
+    create: XOR<QuoteCreateWithoutInvoicesInput, QuoteUncheckedCreateWithoutInvoicesInput>
+  }
+
+  export type InvoiceItemCreateWithoutInvoiceInput = {
+    id?: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    totalPrice: number
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceItemUncheckedCreateWithoutInvoiceInput = {
+    id?: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    totalPrice: number
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceItemCreateOrConnectWithoutInvoiceInput = {
+    where: InvoiceItemWhereUniqueInput
+    create: XOR<InvoiceItemCreateWithoutInvoiceInput, InvoiceItemUncheckedCreateWithoutInvoiceInput>
+  }
+
+  export type InvoiceItemCreateManyInvoiceInputEnvelope = {
+    data: InvoiceItemCreateManyInvoiceInput | InvoiceItemCreateManyInvoiceInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PaymentCreateWithoutInvoiceInput = {
+    id?: string
+    amount: number
+    currency?: string
+    method?: $Enums.PaymentMethod
+    reference?: string | null
+    paidAt?: Date | string
+    notes?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PaymentUncheckedCreateWithoutInvoiceInput = {
+    id?: string
+    amount: number
+    currency?: string
+    method?: $Enums.PaymentMethod
+    reference?: string | null
+    paidAt?: Date | string
+    notes?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PaymentCreateOrConnectWithoutInvoiceInput = {
+    where: PaymentWhereUniqueInput
+    create: XOR<PaymentCreateWithoutInvoiceInput, PaymentUncheckedCreateWithoutInvoiceInput>
+  }
+
+  export type PaymentCreateManyInvoiceInputEnvelope = {
+    data: PaymentCreateManyInvoiceInput | PaymentCreateManyInvoiceInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ClientUpsertWithoutInvoicesInput = {
+    update: XOR<ClientUpdateWithoutInvoicesInput, ClientUncheckedUpdateWithoutInvoicesInput>
+    create: XOR<ClientCreateWithoutInvoicesInput, ClientUncheckedCreateWithoutInvoicesInput>
+    where?: ClientWhereInput
+  }
+
+  export type ClientUpdateToOneWithWhereWithoutInvoicesInput = {
+    where?: ClientWhereInput
+    data: XOR<ClientUpdateWithoutInvoicesInput, ClientUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type ClientUpdateWithoutInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutClientProfileNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedClientsNestedInput
+    projects?: ProjectUpdateManyWithoutClientNestedInput
+    tasks?: TaskUpdateManyWithoutClientNestedInput
+    quotes?: QuoteUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUncheckedUpdateManyWithoutClientNestedInput
+    tasks?: TaskUncheckedUpdateManyWithoutClientNestedInput
+    quotes?: QuoteUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ProjectUpsertWithoutInvoicesInput = {
+    update: XOR<ProjectUpdateWithoutInvoicesInput, ProjectUncheckedUpdateWithoutInvoicesInput>
+    create: XOR<ProjectCreateWithoutInvoicesInput, ProjectUncheckedCreateWithoutInvoicesInput>
+    where?: ProjectWhereInput
+  }
+
+  export type ProjectUpdateToOneWithWhereWithoutInvoicesInput = {
+    where?: ProjectWhereInput
+    data: XOR<ProjectUpdateWithoutInvoicesInput, ProjectUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type ProjectUpdateWithoutInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
+    client?: ClientUpdateOneRequiredWithoutProjectsNestedInput
+    members?: ProjectMemberUpdateManyWithoutProjectNestedInput
+    boards?: BoardUpdateManyWithoutProjectNestedInput
+    labels?: ProjectLabelUpdateManyWithoutProjectNestedInput
+    quotes?: QuoteUpdateManyWithoutProjectNestedInput
+  }
+
+  export type ProjectUncheckedUpdateWithoutInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    client_id?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
+    members?: ProjectMemberUncheckedUpdateManyWithoutProjectNestedInput
+    boards?: BoardUncheckedUpdateManyWithoutProjectNestedInput
+    labels?: ProjectLabelUncheckedUpdateManyWithoutProjectNestedInput
+    quotes?: QuoteUncheckedUpdateManyWithoutProjectNestedInput
+  }
+
+  export type QuoteUpsertWithoutInvoicesInput = {
+    update: XOR<QuoteUpdateWithoutInvoicesInput, QuoteUncheckedUpdateWithoutInvoicesInput>
+    create: XOR<QuoteCreateWithoutInvoicesInput, QuoteUncheckedCreateWithoutInvoicesInput>
+    where?: QuoteWhereInput
+  }
+
+  export type QuoteUpdateToOneWithWhereWithoutInvoicesInput = {
+    where?: QuoteWhereInput
+    data: XOR<QuoteUpdateWithoutInvoicesInput, QuoteUncheckedUpdateWithoutInvoicesInput>
+  }
+
+  export type QuoteUpdateWithoutInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rejectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutQuotesNestedInput
+    project?: ProjectUpdateOneWithoutQuotesNestedInput
+    items?: QuoteItemUpdateManyWithoutQuoteNestedInput
+  }
+
+  export type QuoteUncheckedUpdateWithoutInvoicesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rejectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput
+  }
+
+  export type InvoiceItemUpsertWithWhereUniqueWithoutInvoiceInput = {
+    where: InvoiceItemWhereUniqueInput
+    update: XOR<InvoiceItemUpdateWithoutInvoiceInput, InvoiceItemUncheckedUpdateWithoutInvoiceInput>
+    create: XOR<InvoiceItemCreateWithoutInvoiceInput, InvoiceItemUncheckedCreateWithoutInvoiceInput>
+  }
+
+  export type InvoiceItemUpdateWithWhereUniqueWithoutInvoiceInput = {
+    where: InvoiceItemWhereUniqueInput
+    data: XOR<InvoiceItemUpdateWithoutInvoiceInput, InvoiceItemUncheckedUpdateWithoutInvoiceInput>
+  }
+
+  export type InvoiceItemUpdateManyWithWhereWithoutInvoiceInput = {
+    where: InvoiceItemScalarWhereInput
+    data: XOR<InvoiceItemUpdateManyMutationInput, InvoiceItemUncheckedUpdateManyWithoutInvoiceInput>
+  }
+
+  export type InvoiceItemScalarWhereInput = {
+    AND?: InvoiceItemScalarWhereInput | InvoiceItemScalarWhereInput[]
+    OR?: InvoiceItemScalarWhereInput[]
+    NOT?: InvoiceItemScalarWhereInput | InvoiceItemScalarWhereInput[]
+    id?: StringFilter<"InvoiceItem"> | string
+    invoiceId?: StringFilter<"InvoiceItem"> | string
+    description?: StringFilter<"InvoiceItem"> | string
+    quantity?: FloatFilter<"InvoiceItem"> | number
+    unitPrice?: FloatFilter<"InvoiceItem"> | number
+    totalPrice?: FloatFilter<"InvoiceItem"> | number
+    order?: IntFilter<"InvoiceItem"> | number
+    createdAt?: DateTimeFilter<"InvoiceItem"> | Date | string
+    updatedAt?: DateTimeFilter<"InvoiceItem"> | Date | string
+  }
+
+  export type PaymentUpsertWithWhereUniqueWithoutInvoiceInput = {
+    where: PaymentWhereUniqueInput
+    update: XOR<PaymentUpdateWithoutInvoiceInput, PaymentUncheckedUpdateWithoutInvoiceInput>
+    create: XOR<PaymentCreateWithoutInvoiceInput, PaymentUncheckedCreateWithoutInvoiceInput>
+  }
+
+  export type PaymentUpdateWithWhereUniqueWithoutInvoiceInput = {
+    where: PaymentWhereUniqueInput
+    data: XOR<PaymentUpdateWithoutInvoiceInput, PaymentUncheckedUpdateWithoutInvoiceInput>
+  }
+
+  export type PaymentUpdateManyWithWhereWithoutInvoiceInput = {
+    where: PaymentScalarWhereInput
+    data: XOR<PaymentUpdateManyMutationInput, PaymentUncheckedUpdateManyWithoutInvoiceInput>
+  }
+
+  export type PaymentScalarWhereInput = {
+    AND?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+    OR?: PaymentScalarWhereInput[]
+    NOT?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
+    id?: StringFilter<"Payment"> | string
+    invoiceId?: StringFilter<"Payment"> | string
+    amount?: FloatFilter<"Payment"> | number
+    currency?: StringFilter<"Payment"> | string
+    method?: EnumPaymentMethodFilter<"Payment"> | $Enums.PaymentMethod
+    reference?: StringNullableFilter<"Payment"> | string | null
+    paidAt?: DateTimeFilter<"Payment"> | Date | string
+    notes?: StringNullableFilter<"Payment"> | string | null
+    createdById?: StringFilter<"Payment"> | string
+    createdAt?: DateTimeFilter<"Payment"> | Date | string
+    updatedAt?: DateTimeFilter<"Payment"> | Date | string
+  }
+
+  export type InvoiceCreateWithoutItemsInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    status?: $Enums.InvoiceStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    paidAmount?: number
+    currency?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    paidAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutInvoicesInput
+    project?: ProjectCreateNestedOneWithoutInvoicesInput
+    quote?: QuoteCreateNestedOneWithoutInvoicesInput
+    payments?: PaymentCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceUncheckedCreateWithoutItemsInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    clientId: string
+    projectId?: string | null
+    quoteId?: string | null
+    status?: $Enums.InvoiceStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    paidAmount?: number
+    currency?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    paidAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    payments?: PaymentUncheckedCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceCreateOrConnectWithoutItemsInput = {
+    where: InvoiceWhereUniqueInput
+    create: XOR<InvoiceCreateWithoutItemsInput, InvoiceUncheckedCreateWithoutItemsInput>
+  }
+
+  export type InvoiceUpsertWithoutItemsInput = {
+    update: XOR<InvoiceUpdateWithoutItemsInput, InvoiceUncheckedUpdateWithoutItemsInput>
+    create: XOR<InvoiceCreateWithoutItemsInput, InvoiceUncheckedCreateWithoutItemsInput>
+    where?: InvoiceWhereInput
+  }
+
+  export type InvoiceUpdateToOneWithWhereWithoutItemsInput = {
+    where?: InvoiceWhereInput
+    data: XOR<InvoiceUpdateWithoutItemsInput, InvoiceUncheckedUpdateWithoutItemsInput>
+  }
+
+  export type InvoiceUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutInvoicesNestedInput
+    project?: ProjectUpdateOneWithoutInvoicesNestedInput
+    quote?: QuoteUpdateOneWithoutInvoicesNestedInput
+    payments?: PaymentUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateWithoutItemsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    quoteId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    payments?: PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceCreateWithoutPaymentsInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    status?: $Enums.InvoiceStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    paidAmount?: number
+    currency?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    paidAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    client: ClientCreateNestedOneWithoutInvoicesInput
+    project?: ProjectCreateNestedOneWithoutInvoicesInput
+    quote?: QuoteCreateNestedOneWithoutInvoicesInput
+    items?: InvoiceItemCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceUncheckedCreateWithoutPaymentsInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    clientId: string
+    projectId?: string | null
+    quoteId?: string | null
+    status?: $Enums.InvoiceStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    paidAmount?: number
+    currency?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    paidAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    items?: InvoiceItemUncheckedCreateNestedManyWithoutInvoiceInput
+  }
+
+  export type InvoiceCreateOrConnectWithoutPaymentsInput = {
+    where: InvoiceWhereUniqueInput
+    create: XOR<InvoiceCreateWithoutPaymentsInput, InvoiceUncheckedCreateWithoutPaymentsInput>
+  }
+
+  export type InvoiceUpsertWithoutPaymentsInput = {
+    update: XOR<InvoiceUpdateWithoutPaymentsInput, InvoiceUncheckedUpdateWithoutPaymentsInput>
+    create: XOR<InvoiceCreateWithoutPaymentsInput, InvoiceUncheckedCreateWithoutPaymentsInput>
+    where?: InvoiceWhereInput
+  }
+
+  export type InvoiceUpdateToOneWithWhereWithoutPaymentsInput = {
+    where?: InvoiceWhereInput
+    data: XOR<InvoiceUpdateWithoutPaymentsInput, InvoiceUncheckedUpdateWithoutPaymentsInput>
+  }
+
+  export type InvoiceUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutInvoicesNestedInput
+    project?: ProjectUpdateOneWithoutInvoicesNestedInput
+    quote?: QuoteUpdateOneWithoutInvoicesNestedInput
+    items?: InvoiceItemUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateWithoutPaymentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    quoteId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
   }
 
   export type AccountCreateManyUserInput = {
@@ -19102,6 +35103,8 @@ export namespace Prisma {
     id?: string
     name: string
     projectId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type TaskCreateManyAssigneeInput = {
@@ -19113,16 +35116,65 @@ export namespace Prisma {
     order: number
     columnId: string
     client_id?: string | null
-  }
-
-  export type ClientCreateManyContactInput = {
-    id?: string
-    company: string
-    name: string
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProjectMemberCreateManyUserInput = {
+    id?: string
     projectId: string
+    role: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ClientCreateManyCreatedByInput = {
+    id?: string
+    type?: $Enums.ClientType
+    email: string
+    firstName: string
+    lastName?: string | null
+    phone?: string | null
+    companyName?: string | null
+    siret?: string | null
+    vatNumber?: string | null
+    website?: string | null
+    address?: string | null
+    city?: string | null
+    postalCode?: string | null
+    country?: string | null
+    currency?: string
+    taxRate?: number | null
+    userId?: string | null
+    notes?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TaskCreateManyCreatedByInput = {
+    id?: string
+    title: string
+    description?: string | null
+    price?: number | null
+    dueDate?: Date | string | null
+    order: number
+    columnId: string
+    assigneeId?: string | null
+    client_id?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type LabelCreateManyCreatedByInput = {
+    id?: string
+    name: string
+    color?: string | null
+    description?: string | null
+    usageCount?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -19200,21 +35252,29 @@ export namespace Prisma {
   export type BoardUpdateWithoutCreatedByInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutBoardsNestedInput
     columns?: ColumnUpdateManyWithoutBoardNestedInput
+    labels?: BoardLabelUpdateManyWithoutBoardNestedInput
   }
 
   export type BoardUncheckedUpdateWithoutCreatedByInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     columns?: ColumnUncheckedUpdateManyWithoutBoardNestedInput
+    labels?: BoardLabelUncheckedUpdateManyWithoutBoardNestedInput
   }
 
   export type BoardUncheckedUpdateManyWithoutCreatedByInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TaskUpdateWithoutAssigneeInput = {
@@ -19224,8 +35284,11 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     column?: ColumnUpdateOneRequiredWithoutTasksNestedInput
-    client?: ClientUpdateOneWithoutTaskNestedInput
+    client?: ClientUpdateOneWithoutTasksNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedTasksNestedInput
     tags?: TaskLabelUpdateManyWithoutTaskNestedInput
   }
 
@@ -19238,6 +35301,9 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     columnId?: StringFieldUpdateOperationsInput | string
     client_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TaskLabelUncheckedUpdateManyWithoutTaskNestedInput
   }
 
@@ -19250,40 +35316,193 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     columnId?: StringFieldUpdateOperationsInput | string
     client_id?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type ClientUpdateWithoutContactInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    projects?: ProjectUpdateManyWithoutClientNestedInput
-    Task?: TaskUpdateManyWithoutClientNestedInput
-  }
-
-  export type ClientUncheckedUpdateWithoutContactInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    projects?: ProjectUncheckedUpdateManyWithoutClientNestedInput
-    Task?: TaskUncheckedUpdateManyWithoutClientNestedInput
-  }
-
-  export type ClientUncheckedUpdateManyWithoutContactInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    company?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectMemberUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutMembersNestedInput
   }
 
   export type ProjectMemberUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectMemberUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ClientUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneWithoutClientProfileNestedInput
+    projects?: ProjectUpdateManyWithoutClientNestedInput
+    tasks?: TaskUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUpdateManyWithoutClientNestedInput
+    quotes?: QuoteUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectUncheckedUpdateManyWithoutClientNestedInput
+    tasks?: TaskUncheckedUpdateManyWithoutClientNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutClientNestedInput
+    quotes?: QuoteUncheckedUpdateManyWithoutClientNestedInput
+  }
+
+  export type ClientUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: EnumClientTypeFieldUpdateOperationsInput | $Enums.ClientType
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    phone?: NullableStringFieldUpdateOperationsInput | string | null
+    companyName?: NullableStringFieldUpdateOperationsInput | string | null
+    siret?: NullableStringFieldUpdateOperationsInput | string | null
+    vatNumber?: NullableStringFieldUpdateOperationsInput | string | null
+    website?: NullableStringFieldUpdateOperationsInput | string | null
+    address?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    postalCode?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
+    currency?: StringFieldUpdateOperationsInput | string
+    taxRate?: NullableFloatFieldUpdateOperationsInput | number | null
+    userId?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TaskUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    column?: ColumnUpdateOneRequiredWithoutTasksNestedInput
+    assignee?: UserUpdateOneWithoutAssignedTasksNestedInput
+    client?: ClientUpdateOneWithoutTasksNestedInput
+    tags?: TaskLabelUpdateManyWithoutTaskNestedInput
+  }
+
+  export type TaskUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    columnId?: StringFieldUpdateOperationsInput | string
+    assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
+    client_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tags?: TaskLabelUncheckedUpdateManyWithoutTaskNestedInput
+  }
+
+  export type TaskUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    price?: NullableFloatFieldUpdateOperationsInput | number | null
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    order?: IntFieldUpdateOperationsInput | number
+    columnId?: StringFieldUpdateOperationsInput | string
+    assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
+    client_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type LabelUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    usageCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectLabelUpdateManyWithoutLabelNestedInput
+    boards?: BoardLabelUpdateManyWithoutLabelNestedInput
+    tasks?: TaskLabelUpdateManyWithoutLabelNestedInput
+  }
+
+  export type LabelUncheckedUpdateWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    usageCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    projects?: ProjectLabelUncheckedUpdateManyWithoutLabelNestedInput
+    boards?: BoardLabelUncheckedUpdateManyWithoutLabelNestedInput
+    tasks?: TaskLabelUncheckedUpdateManyWithoutLabelNestedInput
+  }
+
+  export type LabelUncheckedUpdateManyWithoutCreatedByInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    color?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    usageCount?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectCreateManyClientInput = {
@@ -19291,6 +35510,8 @@ export namespace Prisma {
     name: string
     description?: string | null
     created_at?: Date | string
+    updatedAt?: Date | string
+    hiddenForClient?: boolean
   }
 
   export type TaskCreateManyClientInput = {
@@ -19302,6 +35523,54 @@ export namespace Prisma {
     order: number
     columnId: string
     assigneeId?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceCreateManyClientInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    projectId?: string | null
+    quoteId?: string | null
+    status?: $Enums.InvoiceStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    paidAmount?: number
+    currency?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    paidAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QuoteCreateManyClientInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    projectId?: string | null
+    status?: $Enums.QuoteStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    currency?: string
+    validUntil?: Date | string | null
+    sentAt?: Date | string | null
+    acceptedAt?: Date | string | null
+    rejectedAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProjectUpdateWithoutClientInput = {
@@ -19309,8 +35578,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
     members?: ProjectMemberUpdateManyWithoutProjectNestedInput
     boards?: BoardUpdateManyWithoutProjectNestedInput
+    labels?: ProjectLabelUpdateManyWithoutProjectNestedInput
+    quotes?: QuoteUpdateManyWithoutProjectNestedInput
+    invoices?: InvoiceUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateWithoutClientInput = {
@@ -19318,8 +35592,13 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
     members?: ProjectMemberUncheckedUpdateManyWithoutProjectNestedInput
     boards?: BoardUncheckedUpdateManyWithoutProjectNestedInput
+    labels?: ProjectLabelUncheckedUpdateManyWithoutProjectNestedInput
+    quotes?: QuoteUncheckedUpdateManyWithoutProjectNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutProjectNestedInput
   }
 
   export type ProjectUncheckedUpdateManyWithoutClientInput = {
@@ -19327,6 +35606,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    hiddenForClient?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type TaskUpdateWithoutClientInput = {
@@ -19336,8 +35617,11 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     column?: ColumnUpdateOneRequiredWithoutTasksNestedInput
     assignee?: UserUpdateOneWithoutAssignedTasksNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedTasksNestedInput
     tags?: TaskLabelUpdateManyWithoutTaskNestedInput
   }
 
@@ -19350,6 +35634,9 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     columnId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TaskLabelUncheckedUpdateManyWithoutTaskNestedInput
   }
 
@@ -19362,48 +35649,440 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     columnId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneWithoutInvoicesNestedInput
+    quote?: QuoteUpdateOneWithoutInvoicesNestedInput
+    items?: InvoiceItemUpdateManyWithoutInvoiceNestedInput
+    payments?: PaymentUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    quoteId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    quoteId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuoteUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rejectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneWithoutQuotesNestedInput
+    items?: QuoteItemUpdateManyWithoutQuoteNestedInput
+    invoices?: InvoiceUpdateManyWithoutQuoteNestedInput
+  }
+
+  export type QuoteUncheckedUpdateWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rejectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutQuoteNestedInput
+  }
+
+  export type QuoteUncheckedUpdateManyWithoutClientInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rejectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectMemberCreateManyProjectInput = {
-    user_id: string
+    id?: string
+    userId: string
+    role: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type BoardCreateManyProjectInput = {
     id?: string
     name: string
     created_by_id: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ProjectLabelCreateManyProjectInput = {
+    id?: string
+    labelId: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
+  }
+
+  export type QuoteCreateManyProjectInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    clientId: string
+    status?: $Enums.QuoteStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    currency?: string
+    validUntil?: Date | string | null
+    sentAt?: Date | string | null
+    acceptedAt?: Date | string | null
+    rejectedAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceCreateManyProjectInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    clientId: string
+    quoteId?: string | null
+    status?: $Enums.InvoiceStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    paidAmount?: number
+    currency?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    paidAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProjectMemberUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     user?: UserUpdateOneRequiredWithoutProjectMembersNestedInput
   }
 
   export type ProjectMemberUncheckedUpdateWithoutProjectInput = {
-    user_id?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectMemberUncheckedUpdateManyWithoutProjectInput = {
-    user_id?: StringFieldUpdateOperationsInput | string
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    role?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BoardUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCreatedBoardsNestedInput
     columns?: ColumnUpdateManyWithoutBoardNestedInput
+    labels?: BoardLabelUpdateManyWithoutBoardNestedInput
   }
 
   export type BoardUncheckedUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     created_by_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     columns?: ColumnUncheckedUpdateManyWithoutBoardNestedInput
+    labels?: BoardLabelUncheckedUpdateManyWithoutBoardNestedInput
   }
 
   export type BoardUncheckedUpdateManyWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     created_by_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectLabelUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    label?: LabelUpdateOneRequiredWithoutProjectsNestedInput
+  }
+
+  export type ProjectLabelUncheckedUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    labelId?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectLabelUncheckedUpdateManyWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    labelId?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuoteUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rejectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutQuotesNestedInput
+    items?: QuoteItemUpdateManyWithoutQuoteNestedInput
+    invoices?: InvoiceUpdateManyWithoutQuoteNestedInput
+  }
+
+  export type QuoteUncheckedUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: StringFieldUpdateOperationsInput | string
+    status?: EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rejectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: QuoteItemUncheckedUpdateManyWithoutQuoteNestedInput
+    invoices?: InvoiceUncheckedUpdateManyWithoutQuoteNestedInput
+  }
+
+  export type QuoteUncheckedUpdateManyWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: StringFieldUpdateOperationsInput | string
+    status?: EnumQuoteStatusFieldUpdateOperationsInput | $Enums.QuoteStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    validUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sentAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    rejectedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutInvoicesNestedInput
+    quote?: QuoteUpdateOneWithoutInvoicesNestedInput
+    items?: InvoiceItemUpdateManyWithoutInvoiceNestedInput
+    payments?: PaymentUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: StringFieldUpdateOperationsInput | string
+    quoteId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateManyWithoutProjectInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: StringFieldUpdateOperationsInput | string
+    quoteId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ColumnCreateManyBoardInput = {
@@ -19412,6 +36091,16 @@ export namespace Prisma {
     order: number
     position: number
     color?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BoardLabelCreateManyBoardInput = {
+    id?: string
+    labelId: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
   }
 
   export type ColumnUpdateWithoutBoardInput = {
@@ -19420,6 +36109,8 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     position?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tasks?: TaskUpdateManyWithoutColumnNestedInput
   }
 
@@ -19429,6 +36120,8 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     position?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tasks?: TaskUncheckedUpdateManyWithoutColumnNestedInput
   }
 
@@ -19438,6 +36131,32 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     position?: IntFieldUpdateOperationsInput | number
     color?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BoardLabelUpdateWithoutBoardInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    label?: LabelUpdateOneRequiredWithoutBoardsNestedInput
+  }
+
+  export type BoardLabelUncheckedUpdateWithoutBoardInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    labelId?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BoardLabelUncheckedUpdateManyWithoutBoardInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    labelId?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TaskCreateManyColumnInput = {
@@ -19449,6 +36168,9 @@ export namespace Prisma {
     order: number
     assigneeId?: string | null
     client_id?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type TaskUpdateWithoutColumnInput = {
@@ -19458,8 +36180,11 @@ export namespace Prisma {
     price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignee?: UserUpdateOneWithoutAssignedTasksNestedInput
-    client?: ClientUpdateOneWithoutTaskNestedInput
+    client?: ClientUpdateOneWithoutTasksNestedInput
+    createdBy?: UserUpdateOneRequiredWithoutCreatedTasksNestedInput
     tags?: TaskLabelUpdateManyWithoutTaskNestedInput
   }
 
@@ -19472,6 +36197,9 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     client_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TaskLabelUncheckedUpdateManyWithoutTaskNestedInput
   }
 
@@ -19484,38 +36212,349 @@ export namespace Prisma {
     order?: IntFieldUpdateOperationsInput | number
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     client_id?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TaskLabelCreateManyTaskInput = {
     label_id: string
+    createdAt?: Date | string
   }
 
   export type TaskLabelUpdateWithoutTaskInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     label?: LabelUpdateOneRequiredWithoutTasksNestedInput
   }
 
   export type TaskLabelUncheckedUpdateWithoutTaskInput = {
     label_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TaskLabelUncheckedUpdateManyWithoutTaskInput = {
     label_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectLabelCreateManyLabelInput = {
+    id?: string
+    projectId: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
+  }
+
+  export type BoardLabelCreateManyLabelInput = {
+    id?: string
+    boardId: string
+    addedById: string
+    isFavorite?: boolean
+    createdAt?: Date | string
   }
 
   export type TaskLabelCreateManyLabelInput = {
     task_id: string
+    createdAt?: Date | string
+  }
+
+  export type ProjectLabelUpdateWithoutLabelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    project?: ProjectUpdateOneRequiredWithoutLabelsNestedInput
+  }
+
+  export type ProjectLabelUncheckedUpdateWithoutLabelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ProjectLabelUncheckedUpdateManyWithoutLabelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    projectId?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BoardLabelUpdateWithoutLabelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    board?: BoardUpdateOneRequiredWithoutLabelsNestedInput
+  }
+
+  export type BoardLabelUncheckedUpdateWithoutLabelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    boardId?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BoardLabelUncheckedUpdateManyWithoutLabelInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    boardId?: StringFieldUpdateOperationsInput | string
+    addedById?: StringFieldUpdateOperationsInput | string
+    isFavorite?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TaskLabelUpdateWithoutLabelInput = {
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     task?: TaskUpdateOneRequiredWithoutTagsNestedInput
   }
 
   export type TaskLabelUncheckedUpdateWithoutLabelInput = {
     task_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TaskLabelUncheckedUpdateManyWithoutLabelInput = {
     task_id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuoteItemCreateManyQuoteInput = {
+    id?: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    totalPrice: number
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceCreateManyQuoteInput = {
+    id?: string
+    number: string
+    title: string
+    description?: string | null
+    clientId: string
+    projectId?: string | null
+    status?: $Enums.InvoiceStatus
+    subtotal?: number
+    taxAmount?: number
+    totalAmount?: number
+    paidAmount?: number
+    currency?: string
+    issueDate?: Date | string
+    dueDate?: Date | string | null
+    paidAt?: Date | string | null
+    notes?: string | null
+    terms?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type QuoteItemUpdateWithoutQuoteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuoteItemUncheckedUpdateWithoutQuoteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type QuoteItemUncheckedUpdateManyWithoutQuoteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceUpdateWithoutQuoteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    client?: ClientUpdateOneRequiredWithoutInvoicesNestedInput
+    project?: ProjectUpdateOneWithoutInvoicesNestedInput
+    items?: InvoiceItemUpdateManyWithoutInvoiceNestedInput
+    payments?: PaymentUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateWithoutQuoteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    items?: InvoiceItemUncheckedUpdateManyWithoutInvoiceNestedInput
+    payments?: PaymentUncheckedUpdateManyWithoutInvoiceNestedInput
+  }
+
+  export type InvoiceUncheckedUpdateManyWithoutQuoteInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    number?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    clientId?: StringFieldUpdateOperationsInput | string
+    projectId?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: EnumInvoiceStatusFieldUpdateOperationsInput | $Enums.InvoiceStatus
+    subtotal?: FloatFieldUpdateOperationsInput | number
+    taxAmount?: FloatFieldUpdateOperationsInput | number
+    totalAmount?: FloatFieldUpdateOperationsInput | number
+    paidAmount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    issueDate?: DateTimeFieldUpdateOperationsInput | Date | string
+    dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    paidAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    terms?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceItemCreateManyInvoiceInput = {
+    id?: string
+    description: string
+    quantity?: number
+    unitPrice: number
+    totalPrice: number
+    order?: number
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PaymentCreateManyInvoiceInput = {
+    id?: string
+    amount: number
+    currency?: string
+    method?: $Enums.PaymentMethod
+    reference?: string | null
+    paidAt?: Date | string
+    notes?: string | null
+    createdById: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvoiceItemUpdateWithoutInvoiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceItemUncheckedUpdateWithoutInvoiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvoiceItemUncheckedUpdateManyWithoutInvoiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    quantity?: FloatFieldUpdateOperationsInput | number
+    unitPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: FloatFieldUpdateOperationsInput | number
+    order?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentUpdateWithoutInvoiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentUncheckedUpdateWithoutInvoiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PaymentUncheckedUpdateManyWithoutInvoiceInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    amount?: FloatFieldUpdateOperationsInput | number
+    currency?: StringFieldUpdateOperationsInput | string
+    method?: EnumPaymentMethodFieldUpdateOperationsInput | $Enums.PaymentMethod
+    reference?: NullableStringFieldUpdateOperationsInput | string | null
+    paidAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    createdById?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

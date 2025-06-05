@@ -11,9 +11,19 @@ import {
 } from '@/components/ui/table'
 import { Building2, CalendarDays, FileText } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { Project } from '../../../../../../prisma/src/generated/prisma'
-import { ProjectAndClient } from '@/lib/project/queries'
+import { Project } from '@prisma/prisma'
+import { Client } from '@prisma/prisma'
+import { useEffect, useState } from 'react'
+import CreateProject from './CreateProject'
+import { Button } from '@/components/ui/button'
 
+export type ProjectAndClient = Project & { client: Client }
+export type PartialClient = {
+  id: string
+  email: string
+  firstName: string
+  companyName: string | null
+}
 function formatDate(date: Date) {
   return new Date(date).toLocaleDateString('fr-FR', {
     year: 'numeric',
@@ -23,18 +33,35 @@ function formatDate(date: Date) {
 }
 type ProjectBoardProps = {
   projects: ProjectAndClient[]
+  clients?: PartialClient[]
 }
 
-export default function ProjectsBoard({ projects }: ProjectBoardProps) {
+export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) {
   const router = useRouter()
-  console.log(projects, 'PROJECTS')
+  const [isOpen, setIsOpen] = useState(false)
+
+  useEffect(() => {
+    console.log(projects, 'PROJECTS')
+  }, [])
   return (
     <div className="container mx-auto py-8 px-4">
-      <div className="mb-8">
+      <div className="mb-8 flex flex-col space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">Projets</h1>
         <p className="text-muted-foreground mt-2">Gérez et consultez tous vos projets en cours</p>
+        {!isOpen && (
+          <Button type="button" className="w-fit" onClick={() => setIsOpen(true)}>
+            Créer un nouveau projet
+          </Button>
+        )}{' '}
       </div>
 
+      {isOpen && (
+        <section className="absolute w-full h-full left-1/2 -translate-x-1/2 bg-accent-background z-50">
+          <div>
+            <CreateProject clients={clients} closeAsModal={() => setIsOpen(false)} />
+          </div>
+        </section>
+      )}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -82,7 +109,7 @@ export default function ProjectsBoard({ projects }: ProjectBoardProps) {
                     <TableCell>
                       <div className="flex items-center gap-1">
                         <Building2 className="h-3 w-3 text-muted-foreground" />
-                        <span className="font-mono text-xs">{project.client.name}</span>
+                        <span className="font-mono text-xs">{project.client.firstName}</span>
                       </div>
                     </TableCell>
                     <TableCell>

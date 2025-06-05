@@ -31,7 +31,9 @@ export type KanbanBoardProps = {
 
 export async function getKanbanData(projectId: string): Promise<KanbanData | null> {
   const project = await prisma.project.findUnique({
-    where: { id: projectId },
+    where: {
+      id: projectId
+    },
     include: {
       client: true,
       members: {

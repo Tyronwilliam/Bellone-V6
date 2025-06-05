@@ -128,6 +128,7 @@ exports.Prisma.UserScalarFieldEnum = {
   role: 'role',
   avatar: 'avatar',
   image: 'image',
+  emailVerified: 'emailVerified',
   created_at: 'created_at',
   updatedAt: 'updatedAt'
 };
@@ -166,9 +167,27 @@ exports.Prisma.AccountScalarFieldEnum = {
 
 exports.Prisma.ClientScalarFieldEnum = {
   id: 'id',
-  company: 'company',
-  name: 'name',
-  contact_id: 'contact_id'
+  type: 'type',
+  email: 'email',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  phone: 'phone',
+  companyName: 'companyName',
+  siret: 'siret',
+  vatNumber: 'vatNumber',
+  website: 'website',
+  address: 'address',
+  city: 'city',
+  postalCode: 'postalCode',
+  country: 'country',
+  currency: 'currency',
+  taxRate: 'taxRate',
+  userId: 'userId',
+  notes: 'notes',
+  isActive: 'isActive',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ProjectScalarFieldEnum = {
@@ -176,19 +195,27 @@ exports.Prisma.ProjectScalarFieldEnum = {
   name: 'name',
   description: 'description',
   client_id: 'client_id',
-  created_at: 'created_at'
+  created_at: 'created_at',
+  updatedAt: 'updatedAt',
+  hiddenForClient: 'hiddenForClient'
 };
 
 exports.Prisma.ProjectMemberScalarFieldEnum = {
+  id: 'id',
   projectId: 'projectId',
-  user_id: 'user_id'
+  userId: 'userId',
+  role: 'role',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.BoardScalarFieldEnum = {
   id: 'id',
   name: 'name',
   projectId: 'projectId',
-  created_by_id: 'created_by_id'
+  created_by_id: 'created_by_id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.ColumnScalarFieldEnum = {
@@ -197,7 +224,9 @@ exports.Prisma.ColumnScalarFieldEnum = {
   order: 'order',
   position: 'position',
   color: 'color',
-  boardId: 'boardId'
+  boardId: 'boardId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.TaskScalarFieldEnum = {
@@ -209,18 +238,130 @@ exports.Prisma.TaskScalarFieldEnum = {
   order: 'order',
   columnId: 'columnId',
   assigneeId: 'assigneeId',
-  client_id: 'client_id'
+  client_id: 'client_id',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.LabelScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  color: 'color'
+  color: 'color',
+  description: 'description',
+  createdById: 'createdById',
+  usageCount: 'usageCount',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ProjectLabelScalarFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  labelId: 'labelId',
+  addedById: 'addedById',
+  isFavorite: 'isFavorite',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.BoardLabelScalarFieldEnum = {
+  id: 'id',
+  boardId: 'boardId',
+  labelId: 'labelId',
+  addedById: 'addedById',
+  isFavorite: 'isFavorite',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.TaskLabelScalarFieldEnum = {
   task_id: 'task_id',
-  label_id: 'label_id'
+  label_id: 'label_id',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.QuoteScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  title: 'title',
+  description: 'description',
+  clientId: 'clientId',
+  projectId: 'projectId',
+  status: 'status',
+  subtotal: 'subtotal',
+  taxAmount: 'taxAmount',
+  totalAmount: 'totalAmount',
+  currency: 'currency',
+  validUntil: 'validUntil',
+  sentAt: 'sentAt',
+  acceptedAt: 'acceptedAt',
+  rejectedAt: 'rejectedAt',
+  notes: 'notes',
+  terms: 'terms',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.QuoteItemScalarFieldEnum = {
+  id: 'id',
+  quoteId: 'quoteId',
+  description: 'description',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  totalPrice: 'totalPrice',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InvoiceScalarFieldEnum = {
+  id: 'id',
+  number: 'number',
+  title: 'title',
+  description: 'description',
+  clientId: 'clientId',
+  projectId: 'projectId',
+  quoteId: 'quoteId',
+  status: 'status',
+  subtotal: 'subtotal',
+  taxAmount: 'taxAmount',
+  totalAmount: 'totalAmount',
+  paidAmount: 'paidAmount',
+  currency: 'currency',
+  issueDate: 'issueDate',
+  dueDate: 'dueDate',
+  paidAt: 'paidAt',
+  notes: 'notes',
+  terms: 'terms',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.InvoiceItemScalarFieldEnum = {
+  id: 'id',
+  invoiceId: 'invoiceId',
+  description: 'description',
+  quantity: 'quantity',
+  unitPrice: 'unitPrice',
+  totalPrice: 'totalPrice',
+  order: 'order',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.PaymentScalarFieldEnum = {
+  id: 'id',
+  invoiceId: 'invoiceId',
+  amount: 'amount',
+  currency: 'currency',
+  method: 'method',
+  reference: 'reference',
+  paidAt: 'paidAt',
+  notes: 'notes',
+  createdById: 'createdById',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -270,9 +411,22 @@ exports.Prisma.AccountOrderByRelevanceFieldEnum = {
 
 exports.Prisma.ClientOrderByRelevanceFieldEnum = {
   id: 'id',
-  company: 'company',
-  name: 'name',
-  contact_id: 'contact_id'
+  email: 'email',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  phone: 'phone',
+  companyName: 'companyName',
+  siret: 'siret',
+  vatNumber: 'vatNumber',
+  website: 'website',
+  address: 'address',
+  city: 'city',
+  postalCode: 'postalCode',
+  country: 'country',
+  currency: 'currency',
+  userId: 'userId',
+  notes: 'notes',
+  createdById: 'createdById'
 };
 
 exports.Prisma.ProjectOrderByRelevanceFieldEnum = {
@@ -283,8 +437,10 @@ exports.Prisma.ProjectOrderByRelevanceFieldEnum = {
 };
 
 exports.Prisma.ProjectMemberOrderByRelevanceFieldEnum = {
+  id: 'id',
   projectId: 'projectId',
-  user_id: 'user_id'
+  userId: 'userId',
+  role: 'role'
 };
 
 exports.Prisma.BoardOrderByRelevanceFieldEnum = {
@@ -307,13 +463,30 @@ exports.Prisma.TaskOrderByRelevanceFieldEnum = {
   description: 'description',
   columnId: 'columnId',
   assigneeId: 'assigneeId',
-  client_id: 'client_id'
+  client_id: 'client_id',
+  createdById: 'createdById'
 };
 
 exports.Prisma.LabelOrderByRelevanceFieldEnum = {
   id: 'id',
   name: 'name',
-  color: 'color'
+  color: 'color',
+  description: 'description',
+  createdById: 'createdById'
+};
+
+exports.Prisma.ProjectLabelOrderByRelevanceFieldEnum = {
+  id: 'id',
+  projectId: 'projectId',
+  labelId: 'labelId',
+  addedById: 'addedById'
+};
+
+exports.Prisma.BoardLabelOrderByRelevanceFieldEnum = {
+  id: 'id',
+  boardId: 'boardId',
+  labelId: 'labelId',
+  addedById: 'addedById'
 };
 
 exports.Prisma.TaskLabelOrderByRelevanceFieldEnum = {
@@ -321,6 +494,83 @@ exports.Prisma.TaskLabelOrderByRelevanceFieldEnum = {
   label_id: 'label_id'
 };
 
+exports.Prisma.QuoteOrderByRelevanceFieldEnum = {
+  id: 'id',
+  number: 'number',
+  title: 'title',
+  description: 'description',
+  clientId: 'clientId',
+  projectId: 'projectId',
+  currency: 'currency',
+  notes: 'notes',
+  terms: 'terms',
+  createdById: 'createdById'
+};
+
+exports.Prisma.QuoteItemOrderByRelevanceFieldEnum = {
+  id: 'id',
+  quoteId: 'quoteId',
+  description: 'description'
+};
+
+exports.Prisma.InvoiceOrderByRelevanceFieldEnum = {
+  id: 'id',
+  number: 'number',
+  title: 'title',
+  description: 'description',
+  clientId: 'clientId',
+  projectId: 'projectId',
+  quoteId: 'quoteId',
+  currency: 'currency',
+  notes: 'notes',
+  terms: 'terms',
+  createdById: 'createdById'
+};
+
+exports.Prisma.InvoiceItemOrderByRelevanceFieldEnum = {
+  id: 'id',
+  invoiceId: 'invoiceId',
+  description: 'description'
+};
+
+exports.Prisma.PaymentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  invoiceId: 'invoiceId',
+  currency: 'currency',
+  reference: 'reference',
+  notes: 'notes',
+  createdById: 'createdById'
+};
+exports.ClientType = exports.$Enums.ClientType = {
+  INDIVIDUAL: 'INDIVIDUAL',
+  COMPANY: 'COMPANY'
+};
+
+exports.QuoteStatus = exports.$Enums.QuoteStatus = {
+  DRAFT: 'DRAFT',
+  SENT: 'SENT',
+  ACCEPTED: 'ACCEPTED',
+  REJECTED: 'REJECTED',
+  EXPIRED: 'EXPIRED'
+};
+
+exports.InvoiceStatus = exports.$Enums.InvoiceStatus = {
+  DRAFT: 'DRAFT',
+  SENT: 'SENT',
+  PAID: 'PAID',
+  OVERDUE: 'OVERDUE',
+  CANCELLED: 'CANCELLED'
+};
+
+exports.PaymentMethod = exports.$Enums.PaymentMethod = {
+  BANK_TRANSFER: 'BANK_TRANSFER',
+  CHECK: 'CHECK',
+  CASH: 'CASH',
+  CARD: 'CARD',
+  PAYPAL: 'PAYPAL',
+  STRIPE: 'STRIPE',
+  OTHER: 'OTHER'
+};
 
 exports.Prisma.ModelName = {
   User: 'User',
@@ -334,7 +584,14 @@ exports.Prisma.ModelName = {
   Column: 'Column',
   Task: 'Task',
   Label: 'Label',
-  TaskLabel: 'TaskLabel'
+  ProjectLabel: 'ProjectLabel',
+  BoardLabel: 'BoardLabel',
+  TaskLabel: 'TaskLabel',
+  Quote: 'Quote',
+  QuoteItem: 'QuoteItem',
+  Invoice: 'Invoice',
+  InvoiceItem: 'InvoiceItem',
+  Payment: 'Payment'
 };
 
 /**

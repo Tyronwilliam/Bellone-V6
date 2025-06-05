@@ -18,23 +18,30 @@ datasource db {
 // USERS
 /////////////////////////////
 model User {
-  id         String    @id @default(cuid())
-  email      String    @unique
-  username   String?   @unique
-  name       String
-  role       String
-  avatar     String?
+  id            String    @id @default(cuid())
+  email         String    @unique
+  username      String?   @unique
+  name          String?
+  role          String?
+  avatar        String?
   image         String?
-  accounts   Account[]
-  sessions   Session[]
-  created_at DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
+  accounts      Account[]
+  sessions      Session[]
+  emailVerified DateTime?
+
+  created_at DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   // Relations
   createdBoards  Board[]         @relation("BoardsCreatedByUser")
   assignedTasks  Task[]          @relation("TaskAssignee")
-  contactClients Client[]        @relation("ClientContact")
   projectMembers ProjectMember[]
+  createdClients Client[]        @relation("CreatedClients")
+  createdTasks   Task[]          @relation("TaskCreator")
+  createdLabels  Label[]         @relation("LabelCreator")
+
+  // Relation optionnelle avec Client (si l'utilisateur est aussi un client)
+  clientProfile Client? @relation("UserClientProfile")
 }
 
 /////////////////////////////
@@ -94,75 +101,140 @@ model Account {
 }
 
 /////////////////////////////
-// CLIENTS
+// CLIENTS REFACTORISÉ
 /////////////////////////////
 model Client {
-  id         String @id @default(cuid())
-  company    String
-  name       String
-  contact_id String
-  contact    User   @relation("ClientContact", fields: [contact_id], references: [id])
+  id   String     @id @default(cuid())
+  type ClientType @default(INDIVIDUAL) // INDIVIDUAL ou COMPANY
+
+  // Informations de contact obligatoires
+  email     String  @unique
+  firstName String
+  lastName  String?
+  phone     String?
+
+  // Informations entreprise (optionnelles)
+  companyName String?
+  siret       String? @unique // Numéro SIRET français
+  vatNumber   String? @unique // Numéro de TVA
+  website     String?
+
+  // Adresse de facturation
+  address    String?
+  city       String?
+  postalCode String?
+  country    String? @default("France")
+
+  // Informations financières
+  currency String @default("EUR")
+  taxRate  Float? @default(20.0) // Taux de TVA par défaut
+
+  // Relation optionnelle avec un compte utilisateur
+  userId String? @unique
+  user   User?   @relation("UserClientProfile", fields: [userId], references: [id])
+
+  // Métadonnées
+  notes    String? @db.Text
+  isActive Boolean @default(true)
+
+  // Audit
+  createdBy   User     @relation("CreatedClients", fields: [createdById], references: [id])
+  createdById String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   // Relations
   projects Project[]
-  Task     Task[]
+  tasks    Task[]
+  invoices Invoice[]
+  quotes   Quote[]
+
+  @@index([email])
+  @@index([companyName])
+  @@index([createdById])
+}
+
+enum ClientType {
+  INDIVIDUAL // Particulier
+  COMPANY // Entreprise
 }
 
 /////////////////////////////
 // PROJECTS
 /////////////////////////////
 model Project {
-  id          String   @id @default(cuid())
-  name        String
-  description String?
-  client_id   String
-  created_at  DateTime @default(now())
+  id              String   @id @default(cuid())
+  name            String
+  description     String?
+  client_id       String
+  created_at      DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+  hiddenForClient Boolean  @default(false)
 
-  client  Client          @relation(fields: [client_id], references: [id])
-  members ProjectMember[]
-  boards  Board[]
+  client   Client          @relation(fields: [client_id], references: [id])
+  members  ProjectMember[]
+  boards   Board[]
+  labels   ProjectLabel[] // Labels utilisés dans ce projet
+  quotes   Quote[] // Devis liés au projet
+  invoices Invoice[] // Factures liées au projet
 }
 
 /////////////////////////////
 // PROJECT MEMBERS
 /////////////////////////////
 model ProjectMember {
+  id        String @id @default(cuid())
   projectId String
-  user_id   String
+  userId    String
+  role      String
 
-  project Project @relation(fields: [projectId], references: [id])
-  user    User    @relation(fields: [user_id], references: [id])
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id])
 
-  @@id([projectId, user_id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([projectId, userId])
+  @@index([projectId])
+  @@index([userId])
 }
 
 /////////////////////////////
 // BOARDS
 /////////////////////////////
 model Board {
-  id            String @id @default(cuid())
+  id            String   @id @default(cuid())
   name          String
   projectId     String
   created_by_id String
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
 
-  project   Project  @relation(fields: [projectId], references: [id])
-  createdBy User     @relation("BoardsCreatedByUser", fields: [created_by_id], references: [id])
+  project   Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdBy User         @relation("BoardsCreatedByUser", fields: [created_by_id], references: [id])
   columns   Column[]
+  labels    BoardLabel[] // Labels utilisés dans ce board
+
+  @@index([projectId])
 }
 
 /////////////////////////////
 // COLUMNS
 /////////////////////////////
 model Column {
-  id       String  @id @default(cuid())
-  name     String
-  order    Int
-  position Int
-  color    String?
-  boardId  String
+  id        String   @id @default(cuid())
+  name      String
+  order     Int
+  position  Int
+  color     String?
+  boardId   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  board Board  @relation(fields: [boardId], references: [id])
+  board Board  @relation(fields: [boardId], references: [id], onDelete: Cascade)
   tasks Task[]
+
+  @@index([boardId])
 }
 
 /////////////////////////////
@@ -178,33 +250,306 @@ model Task {
   columnId    String
   assigneeId  String?
   client_id   String?
+  createdById String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 
-  column   Column      @relation(fields: [columnId], references: [id])
-  assignee User?       @relation("TaskAssignee", fields: [assigneeId], references: [id])
-  client   Client?     @relation(fields: [client_id], references: [id])
-  tags     TaskLabel[]
+  column    Column      @relation(fields: [columnId], references: [id], onDelete: Cascade)
+  assignee  User?       @relation("TaskAssignee", fields: [assigneeId], references: [id])
+  client    Client?     @relation(fields: [client_id], references: [id])
+  createdBy User        @relation("TaskCreator", fields: [createdById], references: [id])
+  tags      TaskLabel[]
+
+  @@index([columnId])
+  @@index([assigneeId])
+  @@index([client_id])
 }
 
 /////////////////////////////
-// LABELS
+// LABELS GLOBAUX (Persistants)
 /////////////////////////////
 model Label {
-  id    String  @id @default(cuid())
-  name  String
-  color String?
+  id          String  @id @default(cuid())
+  name        String  @unique // Nom unique pour éviter les doublons
+  color       String?
+  description String?
 
-  tasks TaskLabel[]
+  // Créateur du label
+  createdById String
+  createdBy   User   @relation("LabelCreator", fields: [createdById], references: [id])
+
+  // Statistiques d'utilisation
+  usageCount Int @default(0) // Nombre de fois utilisé
+
+  // Relations
+  projects ProjectLabel[] // Projets qui utilisent ce label
+  boards   BoardLabel[] // Boards qui utilisent ce label
+  tasks    TaskLabel[] // Tâches qui utilisent ce label
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([createdById])
+  @@index([usageCount]) // Pour trier par popularité
 }
 
 /////////////////////////////
-// TASK_LABELS (pivot)
+// PROJECT_LABELS (Labels utilisés dans un projet)
+/////////////////////////////
+model ProjectLabel {
+  id        String @id @default(cuid())
+  projectId String
+  labelId   String
+
+  // Métadonnées d'utilisation
+  addedById  String // Qui a ajouté ce label au projet
+  isFavorite Boolean @default(false) // Label favori du projet
+
+  project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  label   Label   @relation(fields: [labelId], references: [id]) // Pas de cascade !
+
+  createdAt DateTime @default(now())
+
+  @@unique([projectId, labelId])
+  @@index([projectId])
+  @@index([labelId])
+}
+
+/////////////////////////////
+// BOARD_LABELS (Labels utilisés dans un board)
+/////////////////////////////
+model BoardLabel {
+  id      String @id @default(cuid())
+  boardId String
+  labelId String
+
+  // Métadonnées d'utilisation
+  addedById  String // Qui a ajouté ce label au board
+  isFavorite Boolean @default(false) // Label favori du board
+
+  board Board @relation(fields: [boardId], references: [id], onDelete: Cascade)
+  label Label @relation(fields: [labelId], references: [id]) // Pas de cascade !
+
+  createdAt DateTime @default(now())
+
+  @@unique([boardId, labelId])
+  @@index([boardId])
+  @@index([labelId])
+}
+
+/////////////////////////////
+// TASK_LABELS (Labels attachés aux tâches)
 /////////////////////////////
 model TaskLabel {
   task_id  String
   label_id String
 
-  task  Task  @relation(fields: [task_id], references: [id])
-  label Label @relation(fields: [label_id], references: [id])
+  task  Task  @relation(fields: [task_id], references: [id], onDelete: Cascade)
+  label Label @relation(fields: [label_id], references: [id]) // Pas de cascade !
+
+  createdAt DateTime @default(now())
 
   @@id([task_id, label_id])
+  @@index([task_id])
+  @@index([label_id])
+}
+
+/////////////////////////////
+// DEVIS (QUOTES)
+/////////////////////////////
+model Quote {
+  id          String  @id @default(cuid())
+  number      String  @unique // QUO-2025-001
+  title       String
+  description String? @db.Text
+
+  // Relations
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id])
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id])
+
+  // Statut
+  status QuoteStatus @default(DRAFT)
+
+  // Montants
+  subtotal    Float  @default(0)
+  taxAmount   Float  @default(0)
+  totalAmount Float  @default(0)
+  currency    String @default("EUR")
+
+  // Dates
+  validUntil DateTime?
+  sentAt     DateTime?
+  acceptedAt DateTime?
+  rejectedAt DateTime?
+
+  // Métadonnées
+  notes String? @db.Text
+  terms String? @db.Text
+
+  // Audit
+  createdById String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  items    QuoteItem[]
+  invoices Invoice[] // Factures générées à partir de ce devis
+
+  @@index([clientId])
+  @@index([projectId])
+  @@index([status])
+  @@index([number])
+}
+
+enum QuoteStatus {
+  DRAFT // Brouillon
+  SENT // Envoyé
+  ACCEPTED // Accepté
+  REJECTED // Refusé
+  EXPIRED // Expiré
+}
+
+/////////////////////////////
+// LIGNES DE DEVIS
+/////////////////////////////
+model QuoteItem {
+  id      String @id @default(cuid())
+  quoteId String
+  quote   Quote  @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+
+  // Détails de la ligne
+  description String
+  quantity    Float  @default(1)
+  unitPrice   Float
+  totalPrice  Float
+
+  // Ordre d'affichage
+  order Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([quoteId])
+}
+
+/////////////////////////////
+// FACTURES (INVOICES)
+/////////////////////////////
+model Invoice {
+  id          String  @id @default(cuid())
+  number      String  @unique // INV-2025-001
+  title       String
+  description String? @db.Text
+
+  // Relations
+  clientId  String
+  client    Client   @relation(fields: [clientId], references: [id])
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id])
+  quoteId   String? // Facture générée à partir d'un devis
+  quote     Quote?   @relation(fields: [quoteId], references: [id])
+
+  // Statut
+  status InvoiceStatus @default(DRAFT)
+
+  // Montants
+  subtotal    Float  @default(0)
+  taxAmount   Float  @default(0)
+  totalAmount Float  @default(0)
+  paidAmount  Float  @default(0)
+  currency    String @default("EUR")
+
+  // Dates
+  issueDate DateTime  @default(now())
+  dueDate   DateTime?
+  paidAt    DateTime?
+
+  // Métadonnées
+  notes String? @db.Text
+  terms String? @db.Text
+
+  // Audit
+  createdById String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relations
+  items    InvoiceItem[]
+  payments Payment[]
+
+  @@index([clientId])
+  @@index([projectId])
+  @@index([status])
+  @@index([number])
+}
+
+enum InvoiceStatus {
+  DRAFT // Brouillon
+  SENT // Envoyée
+  PAID // Payée
+  OVERDUE // En retard
+  CANCELLED // Annulée
+}
+
+/////////////////////////////
+// LIGNES DE FACTURE
+/////////////////////////////
+model InvoiceItem {
+  id        String  @id @default(cuid())
+  invoiceId String
+  invoice   Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  // Détails de la ligne
+  description String
+  quantity    Float  @default(1)
+  unitPrice   Float
+  totalPrice  Float
+
+  // Ordre d'affichage
+  order Int @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([invoiceId])
+}
+
+/////////////////////////////
+// PAIEMENTS
+/////////////////////////////
+model Payment {
+  id        String  @id @default(cuid())
+  invoiceId String
+  invoice   Invoice @relation(fields: [invoiceId], references: [id], onDelete: Cascade)
+
+  // Détails du paiement
+  amount    Float
+  currency  String        @default("EUR")
+  method    PaymentMethod @default(BANK_TRANSFER)
+  reference String? // Référence du paiement
+
+  // Dates
+  paidAt DateTime @default(now())
+
+  // Métadonnées
+  notes String?
+
+  // Audit
+  createdById String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([invoiceId])
+}
+
+enum PaymentMethod {
+  BANK_TRANSFER // Virement bancaire
+  CHECK // Chèque
+  CASH // Espèces
+  CARD // Carte bancaire
+  PAYPAL // PayPal
+  STRIPE // Stripe
+  OTHER // Autre
 }
