@@ -1,5 +1,5 @@
 // app/projects/page.tsx
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/infrastructure/prisma'
 import { requireAuth } from 'auth-utils'
 import { getAllClientsCreatedByUser } from './action'
 import { CreateProject } from './components/CreateProject'
@@ -25,7 +25,8 @@ export default async function ProjectsPage() {
           user: true
         }
       }
-    }
+    },
+    orderBy: { created_at: 'desc' }
   })
   const { clients } = await getAllClientsCreatedByUser()
 

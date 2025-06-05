@@ -1,32 +1,14 @@
-import { prisma } from '@/lib/prisma'
-import type { Board, Client, Column, Label, Project, Task, User } from '@prisma/prisma'
+import { prisma } from '@/infrastructure/prisma'
+import { KanbanData } from './boardInterface'
+import { Board } from '@prisma/prisma'
 
-export async function getBoard(projectId: string) {
+export async function getBoard(projectId: string): Promise<Board[]> {
   const boards = await prisma.board.findMany({
     where: {
       projectId: projectId
     }
   })
   return boards
-}
-export type TaskWithAssigneeAndTags = Task & {
-  assignee: User | null
-  tags: {
-    label: Label
-  }[]
-}
-
-export type KanbanData = {
-  projects: Project
-  clients: Client
-  users: User[]
-  boards: Board[]
-  columns: Column[]
-  tasks: TaskWithAssigneeAndTags[]
-  // tags: Label[]
-}
-export type KanbanBoardProps = {
-  initialData: KanbanData
 }
 
 export async function getKanbanData(projectId: string): Promise<KanbanData | null> {
@@ -51,7 +33,8 @@ export async function getKanbanData(projectId: string): Promise<KanbanData | nul
                   }
                 }
               }
-            }
+            },
+            orderBy: { order: 'asc' }
           }
         }
       }

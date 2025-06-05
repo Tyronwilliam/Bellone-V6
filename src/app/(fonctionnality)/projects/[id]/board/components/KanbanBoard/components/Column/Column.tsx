@@ -1,4 +1,3 @@
-
 'use client'
 
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
@@ -18,7 +17,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { TaskCard } from '../TaskCard/TaskCard'
 import type { Column as ColumnType, Task, User, Client } from '@prisma/prisma'
-import { TaskWithAssigneeAndTags } from '@/lib/board/queries'
+import { TaskWithAssigneeAndTags } from '@/infrastructure/board/queries'
 
 interface ColumnProps {
   column: ColumnType

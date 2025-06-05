@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { DndContext, DragOverlay, closestCorners } from '@dnd-kit/core'
 import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable'
-import type { KanbanData, TaskWithAssigneeAndTags } from '@/lib/board/queries'
+import type { KanbanData, TaskWithAssigneeAndTags } from '@/infrastructure/board/boardInterface'
 import type { Column as ColumnType, Task } from '@prisma/prisma'
 
 // Hooks

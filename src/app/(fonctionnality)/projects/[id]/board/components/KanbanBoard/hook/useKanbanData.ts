@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import axios from 'axios'
 import { toast } from 'sonner'
-import type { KanbanData, TaskWithAssigneeAndTags } from '@/lib/board/queries'
+import type { KanbanData, TaskWithAssigneeAndTags } from '@/infrastructure/board/boardInterface'
 import type { Task } from '@prisma/prisma'
 
 export function useKanbanData(initialData: KanbanData) {

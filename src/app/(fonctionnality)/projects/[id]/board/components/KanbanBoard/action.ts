@@ -1,7 +1,7 @@
 // app/actions/addColumn.ts
 'use server'
 
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/infrastructure/prisma'
 import { z } from 'zod'
 
 const AddColumnSchema = z.object({

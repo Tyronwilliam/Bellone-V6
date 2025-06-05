@@ -1,8 +1,8 @@
 'use server'
 
 import { cleanFalsyFields } from '@/app/utils/request'
-import { prisma } from '@/lib/prisma'
-import { createProjectWithBoard } from '@/lib/project/queries'
+import { prisma } from '@/infrastructure/prisma'
+import { createProjectWithBoard } from '@/infrastructure/project/queries'
 import { ClientType } from '@prisma/prisma'
 import { requireAuth } from 'auth-utils'
 import { revalidatePath } from 'next/cache'

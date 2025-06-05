@@ -327,6 +327,8 @@ model BoardLabel {
   addedById  String // Qui a ajouté ce label au board
   isFavorite Boolean @default(false) // Label favori du board
 
+  colorOverride String?
+
   board Board @relation(fields: [boardId], references: [id], onDelete: Cascade)
   label Label @relation(fields: [labelId], references: [id]) // Pas de cascade !
 

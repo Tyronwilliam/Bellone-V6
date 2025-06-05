@@ -189,13 +189,13 @@ type ModalCreateProjectProps = {
 }
 export const ModalCreateProject = ({ isOpen, toggle, clients }: ModalCreateProjectProps) => {
   return (
-    <Dialog open={isOpen}>
+    <Dialog open={isOpen} onOpenChange={toggle}>
       <DialogTrigger asChild>
         <Button type="button" className="w-fit" onClick={toggle}>
           Créer un nouveau projet
         </Button>
       </DialogTrigger>
-      <DialogContent className="w-full h-full md:min-w-3xl md:max-h-[80%] md:w-[512px] !overflow-y-scroll">
+      <DialogContent className="w-full h-full md:min-w-3xl md:h-fit md:max-h-[80%] md:w-[512px] !overflow-y-scroll">
         <DialogHeader className="sr-only">
           <DialogTitle className="sr-only ">Créer un projet</DialogTitle>
           <DialogDescription className="sr-only"></DialogDescription>{' '}

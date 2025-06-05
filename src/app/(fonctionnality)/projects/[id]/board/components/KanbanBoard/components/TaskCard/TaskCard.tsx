@@ -6,7 +6,7 @@ import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { Calendar, DollarSign } from 'lucide-react'
 import type { Client, Task, User } from '@prisma/prisma'
-import { TaskWithAssigneeAndTags } from '@/lib/board/queries'
+import { TaskWithAssigneeAndTags } from '@/infrastructure/board/queries'
 import { Badge } from '@/components/ui/badge'
 
 interface TaskCardProps {

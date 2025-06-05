@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import { KanbanBoard } from '@/app/(fonctionnality)/projects/[id]/board/components/KanbanBoard/KanbanBoard'
 import { Skeleton } from '@/components/ui/skeleton'
-import type { KanbanData } from '@/lib/board/queries'
+import type { KanbanData } from '@/infrastructure/board/queries'
 
 interface ClientKanbanWrapperProps {
   initialData: KanbanData

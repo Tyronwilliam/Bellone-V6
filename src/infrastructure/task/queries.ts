@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/infrastructure/prisma'
 
 export type AddTaskInput = {
   title: string

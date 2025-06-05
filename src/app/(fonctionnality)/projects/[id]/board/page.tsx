@@ -1,4 +1,4 @@
-import { getKanbanData } from '@/lib/board/queries'
+import { getKanbanData } from '@/infrastructure/board/queries'
 import { ClientKanbanWrapper } from './components/KanbanBoard/components/ClientKanbanBoard'
 import { requireAuth } from 'auth-utils'
 

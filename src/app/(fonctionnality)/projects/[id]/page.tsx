@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/infrastructure/prisma'
 import { requireAuth } from 'auth-utils'
 import { redirect } from 'next/navigation'
 import { ProjectDashboard } from './components/ProjectDashboard'
@@ -12,10 +12,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   const { id: projectId } = await params
 
-//   const hasAccess = await verifyProjectAccess(projectId, session.user!.id)
-//   if (!hasAccess) {
-//     redirect('/projects?error=access-denied')
-//   }
+  //   const hasAccess = await verifyProjectAccess(projectId, session.user!.id)
+  //   if (!hasAccess) {
+  //     redirect('/projects?error=access-denied')
+  //   }
 
   try {
     const project = await prisma.project.findUnique({

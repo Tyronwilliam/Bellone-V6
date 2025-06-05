@@ -1,4 +1,4 @@
-import { AddTaskInput, addTaskToColumn } from '@/lib/task/queries'
+import { AddTaskInput, addTaskToColumn } from '@/infrastructure/task/queries'
 import { verifyApiAuth } from 'auth-utils'
 import { NextRequest, NextResponse } from 'next/server'
 

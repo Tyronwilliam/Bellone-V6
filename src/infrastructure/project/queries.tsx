@@ -1,4 +1,4 @@
-import { prisma } from '@/lib/prisma'
+import { prisma } from '@/infrastructure/prisma'
 import { Project } from '@prisma/prisma'
 
 export type ProjectInput = {

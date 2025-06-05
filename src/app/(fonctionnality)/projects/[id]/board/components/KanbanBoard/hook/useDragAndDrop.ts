@@ -5,7 +5,7 @@ import type React from 'react'
 import { useState } from 'react'
 import { arrayMove } from '@dnd-kit/sortable'
 import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
-import type { KanbanData } from '@/lib/board/queries'
+import type { KanbanData } from '@/infrastructure/board/boardInterface'
 import { Task } from '@prisma/prisma'
 
 export function useDragAndDrop(
@@ -123,7 +123,7 @@ export function useDragAndDrop(
       const overTask = data.tasks.find((t) => t.id === overId)
 
       if (activeTask && overTask && activeTask.columnId === overTask.columnId) {
-        setData((prev) => {
+        setData((prev: ) => {
           const columnTasks = prev.tasks
             .filter((t) => t.columnId === activeTask.columnId)
             .sort((a, b) => a.order - b.order)

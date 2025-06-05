@@ -1,11 +1,4 @@
-
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from '@/components/ui/form'
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import {
   Select,
   SelectContent,
@@ -14,15 +7,14 @@ import {
   SelectValue
 } from '@/components/ui/select'
 
-
 import { Control } from 'react-hook-form'
 import { PartialClient } from './ProjectBoard'
 
 interface SelectComponentProps {
   placeholder?: string
   className?: string
-  content: PartialClient[] // ou un type plus générique avec au moins `email: string`
-  control: Control<any> // ou `Control<YourFormType>` pour typer précisément
+  content: PartialClient[]
+  control: Control<any>
   name: string
 }
 

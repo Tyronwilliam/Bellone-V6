@@ -25,7 +25,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { CalendarIcon, EuroIcon, Tag, Trash2, UserIcon } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { Client, Label as LabelType, Task, User } from '@prisma/prisma'
-import { TaskWithAssigneeAndTags } from '@/lib/board/queries'
+import { TaskWithAssigneeAndTags } from '@/infrastructure/board/queries'
 import { Badge } from '@/components/ui/badge'
 
 interface TaskDetailsModalProps {

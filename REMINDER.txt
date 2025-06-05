@@ -1,5 +1,8 @@
 - Changer la requete api/tasks/addTasks pour config avec  "const session = await requireAuth()"
+AUTHENTIFICATION
+
 - Faire Error page SignIN
+
 - Envoyer un mail de connexion lors création du client 
     - Ajouter si compte existant alors Role = Client pour se projet 
     - Ajouter logique Schema Prisma
@@ -8,10 +11,16 @@
 - Ajouter un bouton pour creer un projet meme lorsqu'il y a des projets OK
 - Modifier logique ajout de task suite au changement de BDD
 
-Testing : 
+TESTING : 
 - Créer Test pour Create Project Page
 Reminder Security Request :
+LABELS
+- Bien verifier la logique de label communautaire 
+- Bien check la possibilité qu'un utilisateur puisse custom un label crée par un autre ( Couleur )
+- Bien Check la logique de recuperation de Label par Project/Board/Creator
+- Bien check la Creation de doublons de Label
 
+SERVER
 - Request in action.ts & API Folder secured by server and const session = await requireAuth(req)
 - No Request in Client 
 
