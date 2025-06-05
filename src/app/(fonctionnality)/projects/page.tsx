@@ -28,7 +28,6 @@ export default async function ProjectsPage() {
     }
   })
   const { clients } = await getAllClientsCreatedByUser()
-  console.log(clients, 'CLIENT ')
 
   if (projects.length === 0 && clients) return <CreateProject clients={clients}  />
 

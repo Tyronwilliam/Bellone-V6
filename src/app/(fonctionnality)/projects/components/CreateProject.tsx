@@ -1,9 +1,7 @@
 'use client'
 import { CardCustom } from '@/components/custom/CardCustom'
 import { Button } from '@/components/ui/button'
-import {
-  CardFooter
-} from '@/components/ui/card'
+import { CardFooter } from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -47,7 +45,6 @@ export default function CreateProject({ clients, closeAsModal }: CreateProjectPr
   const toggle = () => setIsOpen(!isOpen)
   const close = () => {
     if (closeAsModal) return closeAsModal()
-    return setIsOpen1(false)
   }
 
   const form = useForm<ProjectFormValues>({
@@ -164,9 +161,11 @@ export default function CreateProject({ clients, closeAsModal }: CreateProjectPr
       </Form>
       {isOpen && <CreateClientForm onSuccess={toggle} onCancel={toggle} />}{' '}
       <CardFooter className="w-full flex gap-2 justify-end">
-        <Button variant="destructive" className="" type="button" onClick={close}>
-          Annuler
-        </Button>{' '}
+        {closeAsModal && (
+          <Button variant="destructive" className="" type="button" onClick={close}>
+            Annuler
+          </Button>
+        )}
         <Button type="submit" form="project-form">
           Créer un projet
         </Button>

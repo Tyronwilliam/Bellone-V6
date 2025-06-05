@@ -85,7 +85,6 @@ export function CreateClientForm({ projectId, onSuccess, onCancel }: CreateClien
   const [isSubmitting, setIsSubmitting] = useState(false)
   const router = useRouter()
 
-  // Initialiser le formulaire avec des valeurs par défaut
   const form = useForm<ClientFormValues>({
     resolver: zodResolver(clientSchema),
     defaultValues: {
@@ -116,7 +115,6 @@ export function CreateClientForm({ projectId, onSuccess, onCancel }: CreateClien
 
   async function onSubmit(data: ClientFormValues) {
     setIsSubmitting(true)
-
     try {
       const result = await createClientWithOptionalUser(data as NewClientInput)
 
