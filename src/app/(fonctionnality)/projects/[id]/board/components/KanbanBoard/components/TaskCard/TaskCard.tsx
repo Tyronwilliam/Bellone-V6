@@ -5,9 +5,10 @@ import { Card, CardContent } from '@/components/ui/card'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { Calendar, DollarSign } from 'lucide-react'
-import type { Client, Task, User } from '@prisma/prisma'
-import { TaskWithAssigneeAndTags } from '@/infrastructure/board/queries'
+import type { Client, Label, Task, User } from '@prisma/prisma'
 import { Badge } from '@/components/ui/badge'
+import { TaskWithAssigneeAndTags } from '@/infrastructure/board/boardInterface'
+import { cn } from 'lib/utils/classnames'
 
 interface TaskCardProps {
   task: TaskWithAssigneeAndTags
@@ -53,7 +54,6 @@ export function TaskCard({
     new Date(task.dueDate) >= new Date()
 
   const dragging = isDragging || isSortableDragging
-
   return (
     <Card
       ref={setNodeRef}
@@ -69,62 +69,81 @@ export function TaskCard({
         <h4 className="font-medium text-sm mb-2 line-clamp-2">{task.title}</h4>
 
         {/* Tags */}
-        {task.tags && task.tags.length > 0 && (
-          <div className="flex flex-wrap gap-1 mb-2">
-            {task.tags.map((tag) => {
-              if (!tag) return null
-              return (
-                <Badge key={tag.label.name} variant="secondary" className="text-xs">
-                  {tag.label.name}
-                </Badge>
-              )
-            })}
-          </div>
-        )}
+        <BadgePreview tags={task.tags} />
 
-        {/* Metadata */}
-        <div className="space-y-1">
-          {task.price && (
-            <div className="flex items-center gap-1 text-xs text-muted-foreground">
-              <DollarSign className="h-3 w-3" />
-              <span>{task.price}€</span>
-            </div>
-          )}
-
-          {/* {task.duration && (
-            <div className="flex items-center gap-1 text-xs text-muted-foreground">
-              <Clock className="h-3 w-3" />
-              <span>{task.duration}</span>
-            </div>
-          )} */}
-
-          {task.dueDate && (
-            <div
-              className={`flex items-center gap-1 text-xs ${
-                isOverdue ? 'text-red-600' : isDueSoon ? 'text-orange-600' : 'text-muted-foreground'
-              }`}
-            >
-              <Calendar className="h-3 w-3" />
-              <span>{new Date(task.dueDate).toLocaleDateString('fr-FR')}</span>
-            </div>
-          )}
-        </div>
+        {/* Due Date Preview */}
+        <DueDatePreview dueDate={task.dueDate} isDueSoon={isDueSoon} isOverdue={isOverdue} />
 
         {/* Footer */}
         <div className="flex items-center justify-between mt-3">
-          <span className="text-xs text-muted-foreground">{client.name}</span>
-          {assignee && (
-            <Avatar className="h-6 w-6">
-              <AvatarFallback className="text-xs">
-                {assignee.name
-                  .split(' ')
-                  .map((n) => n[0])
-                  .join('')}
-              </AvatarFallback>
-            </Avatar>
-          )}
+          {/* <span className="text-xs text-muted-foreground">{client.firstName}</span> */}
+          <AvatarPreview assignee={assignee} />
         </div>
       </CardContent>
     </Card>
+  )
+}
+type DueDatePreviewProps = {
+  dueDate: Date | null
+  isOverdue: boolean | null
+  isDueSoon: boolean | null
+}
+export const DueDatePreview = ({ dueDate, isDueSoon, isOverdue }: DueDatePreviewProps) => {
+  return (
+    <div className="space-y-1">
+      {dueDate && (
+        <div
+          className={`flex items-center gap-1 text-xs ${
+            isOverdue ? 'text-red-600' : isDueSoon ? 'text-orange-600' : 'text-muted-foreground'
+          }`}
+        >
+          <Calendar className="h-3 w-3" />
+          <span>
+            {new Date(dueDate).toLocaleDateString('fr-FR', {
+              day: '2-digit',
+              month: 'short'
+            })}
+          </span>
+        </div>
+      )}
+    </div>
+  )
+}
+
+export const BadgePreview = ({ tags }: { tags: Label[] }) => {
+  return (
+    tags &&
+    tags.length > 0 && (
+      <div className="flex flex-wrap gap-1 mb-2">
+        {tags.slice(0, 3).map((tag) => {
+          if (!tag) return null
+          return (
+            <Badge
+              key={tag.id}
+              variant="secondary"
+              className={cn('text-xs', tag.color && `bg-[${tag.color}]`)}
+            >
+              {tag.name}
+            </Badge>
+          )
+        })}{' '}
+      </div>
+    )
+  )
+}
+export const AvatarPreview = ({ assignee }: { assignee?: User }) => {
+  return (
+    assignee && (
+      <Avatar className="h-6 w-6">
+        <AvatarFallback className="text-xs">
+          {assignee?.name
+            ? assignee.name
+                .split(' ')
+                .map((n) => n[0])
+                .join('')
+            : '?'}
+        </AvatarFallback>
+      </Avatar>
+    )
   )
 }

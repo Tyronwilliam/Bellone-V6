@@ -33,3 +33,5 @@ FORMULAIRE
 - Infer le ZOD schema pour le form => type FormValues = z.infer<typeof Schéma de validation avec Zod>
         - Utiliser les FormValues  useForm<ClientFormValues>
         - resolver: zodResolver(clientSchema) => Permet de recuperer les erreurs de validation fourni par ZOD
+
+

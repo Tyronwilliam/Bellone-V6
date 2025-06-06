@@ -84,12 +84,6 @@ export type Label = $Result.DefaultSelection<Prisma.$LabelPayload>
  */
 export type ProjectLabel = $Result.DefaultSelection<Prisma.$ProjectLabelPayload>
 /**
- * Model BoardLabel
- * //////////////////////////
- * //////////////////////////
- */
-export type BoardLabel = $Result.DefaultSelection<Prisma.$BoardLabelPayload>
-/**
  * Model TaskLabel
  * //////////////////////////
  * //////////////////////////
@@ -434,16 +428,6 @@ export class PrismaClient<
     * ```
     */
   get projectLabel(): Prisma.ProjectLabelDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.boardLabel`: Exposes CRUD operations for the **BoardLabel** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more BoardLabels
-    * const boardLabels = await prisma.boardLabel.findMany()
-    * ```
-    */
-  get boardLabel(): Prisma.BoardLabelDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.taskLabel`: Exposes CRUD operations for the **TaskLabel** model.
@@ -956,7 +940,6 @@ export namespace Prisma {
     Task: 'Task',
     Label: 'Label',
     ProjectLabel: 'ProjectLabel',
-    BoardLabel: 'BoardLabel',
     TaskLabel: 'TaskLabel',
     Quote: 'Quote',
     QuoteItem: 'QuoteItem',
@@ -981,7 +964,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "session" | "verificationToken" | "account" | "client" | "project" | "projectMember" | "board" | "column" | "task" | "label" | "projectLabel" | "boardLabel" | "taskLabel" | "quote" | "quoteItem" | "invoice" | "invoiceItem" | "payment"
+      modelProps: "user" | "session" | "verificationToken" | "account" | "client" | "project" | "projectMember" | "board" | "column" | "task" | "label" | "projectLabel" | "taskLabel" | "quote" | "quoteItem" | "invoice" | "invoiceItem" | "payment"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1777,72 +1760,6 @@ export namespace Prisma {
           }
         }
       }
-      BoardLabel: {
-        payload: Prisma.$BoardLabelPayload<ExtArgs>
-        fields: Prisma.BoardLabelFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.BoardLabelFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.BoardLabelFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload>
-          }
-          findFirst: {
-            args: Prisma.BoardLabelFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.BoardLabelFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload>
-          }
-          findMany: {
-            args: Prisma.BoardLabelFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload>[]
-          }
-          create: {
-            args: Prisma.BoardLabelCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload>
-          }
-          createMany: {
-            args: Prisma.BoardLabelCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          delete: {
-            args: Prisma.BoardLabelDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload>
-          }
-          update: {
-            args: Prisma.BoardLabelUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload>
-          }
-          deleteMany: {
-            args: Prisma.BoardLabelDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.BoardLabelUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          upsert: {
-            args: Prisma.BoardLabelUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$BoardLabelPayload>
-          }
-          aggregate: {
-            args: Prisma.BoardLabelAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateBoardLabel>
-          }
-          groupBy: {
-            args: Prisma.BoardLabelGroupByArgs<ExtArgs>
-            result: $Utils.Optional<BoardLabelGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.BoardLabelCountArgs<ExtArgs>
-            result: $Utils.Optional<BoardLabelCountAggregateOutputType> | number
-          }
-        }
-      }
       TaskLabel: {
         payload: Prisma.$TaskLabelPayload<ExtArgs>
         fields: Prisma.TaskLabelFieldRefs
@@ -2335,7 +2252,6 @@ export namespace Prisma {
     task?: TaskOmit
     label?: LabelOmit
     projectLabel?: ProjectLabelOmit
-    boardLabel?: BoardLabelOmit
     taskLabel?: TaskLabelOmit
     quote?: QuoteOmit
     quoteItem?: QuoteItemOmit
@@ -2656,12 +2572,10 @@ export namespace Prisma {
 
   export type BoardCountOutputType = {
     columns: number
-    labels: number
   }
 
   export type BoardCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     columns?: boolean | BoardCountOutputTypeCountColumnsArgs
-    labels?: boolean | BoardCountOutputTypeCountLabelsArgs
   }
 
   // Custom InputTypes
@@ -2680,13 +2594,6 @@ export namespace Prisma {
    */
   export type BoardCountOutputTypeCountColumnsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ColumnWhereInput
-  }
-
-  /**
-   * BoardCountOutputType without action
-   */
-  export type BoardCountOutputTypeCountLabelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BoardLabelWhereInput
   }
 
 
@@ -2758,13 +2665,11 @@ export namespace Prisma {
 
   export type LabelCountOutputType = {
     projects: number
-    boards: number
     tasks: number
   }
 
   export type LabelCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     projects?: boolean | LabelCountOutputTypeCountProjectsArgs
-    boards?: boolean | LabelCountOutputTypeCountBoardsArgs
     tasks?: boolean | LabelCountOutputTypeCountTasksArgs
   }
 
@@ -2784,13 +2689,6 @@ export namespace Prisma {
    */
   export type LabelCountOutputTypeCountProjectsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ProjectLabelWhereInput
-  }
-
-  /**
-   * LabelCountOutputType without action
-   */
-  export type LabelCountOutputTypeCountBoardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BoardLabelWhereInput
   }
 
   /**
@@ -10475,7 +10373,6 @@ export namespace Prisma {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     columns?: boolean | Board$columnsArgs<ExtArgs>
-    labels?: boolean | Board$labelsArgs<ExtArgs>
     _count?: boolean | BoardCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["board"]>
 
@@ -10495,7 +10392,6 @@ export namespace Prisma {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     columns?: boolean | Board$columnsArgs<ExtArgs>
-    labels?: boolean | Board$labelsArgs<ExtArgs>
     _count?: boolean | BoardCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -10505,7 +10401,6 @@ export namespace Prisma {
       project: Prisma.$ProjectPayload<ExtArgs>
       createdBy: Prisma.$UserPayload<ExtArgs>
       columns: Prisma.$ColumnPayload<ExtArgs>[]
-      labels: Prisma.$BoardLabelPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -10857,7 +10752,6 @@ export namespace Prisma {
     project<T extends ProjectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ProjectDefaultArgs<ExtArgs>>): Prisma__ProjectClient<$Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     columns<T extends Board$columnsArgs<ExtArgs> = {}>(args?: Subset<T, Board$columnsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ColumnPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    labels<T extends Board$labelsArgs<ExtArgs> = {}>(args?: Subset<T, Board$labelsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -11257,30 +11151,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ColumnScalarFieldEnum | ColumnScalarFieldEnum[]
-  }
-
-  /**
-   * Board.labels
-   */
-  export type Board$labelsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoardLabel
-     */
-    select?: BoardLabelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoardLabel
-     */
-    omit?: BoardLabelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoardLabelInclude<ExtArgs> | null
-    where?: BoardLabelWhereInput
-    orderBy?: BoardLabelOrderByWithRelationInput | BoardLabelOrderByWithRelationInput[]
-    cursor?: BoardLabelWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: BoardLabelScalarFieldEnum | BoardLabelScalarFieldEnum[]
   }
 
   /**
@@ -12345,12 +12215,10 @@ export namespace Prisma {
   }
 
   export type TaskAvgAggregateOutputType = {
-    price: number | null
     order: number | null
   }
 
   export type TaskSumAggregateOutputType = {
-    price: number | null
     order: number | null
   }
 
@@ -12358,13 +12226,13 @@ export namespace Prisma {
     id: string | null
     title: string | null
     description: string | null
-    price: number | null
     dueDate: Date | null
     order: number | null
     columnId: string | null
     assigneeId: string | null
     client_id: string | null
     createdById: string | null
+    done: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -12373,13 +12241,13 @@ export namespace Prisma {
     id: string | null
     title: string | null
     description: string | null
-    price: number | null
     dueDate: Date | null
     order: number | null
     columnId: string | null
     assigneeId: string | null
     client_id: string | null
     createdById: string | null
+    done: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -12388,13 +12256,13 @@ export namespace Prisma {
     id: number
     title: number
     description: number
-    price: number
     dueDate: number
     order: number
     columnId: number
     assigneeId: number
     client_id: number
     createdById: number
+    done: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -12402,12 +12270,10 @@ export namespace Prisma {
 
 
   export type TaskAvgAggregateInputType = {
-    price?: true
     order?: true
   }
 
   export type TaskSumAggregateInputType = {
-    price?: true
     order?: true
   }
 
@@ -12415,13 +12281,13 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
-    price?: true
     dueDate?: true
     order?: true
     columnId?: true
     assigneeId?: true
     client_id?: true
     createdById?: true
+    done?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -12430,13 +12296,13 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
-    price?: true
     dueDate?: true
     order?: true
     columnId?: true
     assigneeId?: true
     client_id?: true
     createdById?: true
+    done?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -12445,13 +12311,13 @@ export namespace Prisma {
     id?: true
     title?: true
     description?: true
-    price?: true
     dueDate?: true
     order?: true
     columnId?: true
     assigneeId?: true
     client_id?: true
     createdById?: true
+    done?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -12547,13 +12413,13 @@ export namespace Prisma {
     id: string
     title: string
     description: string | null
-    price: number | null
     dueDate: Date | null
     order: number
     columnId: string
     assigneeId: string | null
     client_id: string | null
     createdById: string
+    done: boolean
     createdAt: Date
     updatedAt: Date
     _count: TaskCountAggregateOutputType | null
@@ -12581,13 +12447,13 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    price?: boolean
     dueDate?: boolean
     order?: boolean
     columnId?: boolean
     assigneeId?: boolean
     client_id?: boolean
     createdById?: boolean
+    done?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     column?: boolean | ColumnDefaultArgs<ExtArgs>
@@ -12604,18 +12470,18 @@ export namespace Prisma {
     id?: boolean
     title?: boolean
     description?: boolean
-    price?: boolean
     dueDate?: boolean
     order?: boolean
     columnId?: boolean
     assigneeId?: boolean
     client_id?: boolean
     createdById?: boolean
+    done?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "price" | "dueDate" | "order" | "columnId" | "assigneeId" | "client_id" | "createdById" | "createdAt" | "updatedAt", ExtArgs["result"]["task"]>
+  export type TaskOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "dueDate" | "order" | "columnId" | "assigneeId" | "client_id" | "createdById" | "done" | "createdAt" | "updatedAt", ExtArgs["result"]["task"]>
   export type TaskInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     column?: boolean | ColumnDefaultArgs<ExtArgs>
     assignee?: boolean | Task$assigneeArgs<ExtArgs>
@@ -12638,13 +12504,13 @@ export namespace Prisma {
       id: string
       title: string
       description: string | null
-      price: number | null
       dueDate: Date | null
       order: number
       columnId: string
       assigneeId: string | null
       client_id: string | null
       createdById: string
+      done: boolean
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["task"]>
@@ -13024,13 +12890,13 @@ export namespace Prisma {
     readonly id: FieldRef<"Task", 'String'>
     readonly title: FieldRef<"Task", 'String'>
     readonly description: FieldRef<"Task", 'String'>
-    readonly price: FieldRef<"Task", 'Float'>
     readonly dueDate: FieldRef<"Task", 'DateTime'>
     readonly order: FieldRef<"Task", 'Int'>
     readonly columnId: FieldRef<"Task", 'String'>
     readonly assigneeId: FieldRef<"Task", 'String'>
     readonly client_id: FieldRef<"Task", 'String'>
     readonly createdById: FieldRef<"Task", 'String'>
+    readonly done: FieldRef<"Task", 'Boolean'>
     readonly createdAt: FieldRef<"Task", 'DateTime'>
     readonly updatedAt: FieldRef<"Task", 'DateTime'>
   }
@@ -13680,7 +13546,6 @@ export namespace Prisma {
     updatedAt?: boolean
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     projects?: boolean | Label$projectsArgs<ExtArgs>
-    boards?: boolean | Label$boardsArgs<ExtArgs>
     tasks?: boolean | Label$tasksArgs<ExtArgs>
     _count?: boolean | LabelCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["label"]>
@@ -13702,7 +13567,6 @@ export namespace Prisma {
   export type LabelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     createdBy?: boolean | UserDefaultArgs<ExtArgs>
     projects?: boolean | Label$projectsArgs<ExtArgs>
-    boards?: boolean | Label$boardsArgs<ExtArgs>
     tasks?: boolean | Label$tasksArgs<ExtArgs>
     _count?: boolean | LabelCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -13712,7 +13576,6 @@ export namespace Prisma {
     objects: {
       createdBy: Prisma.$UserPayload<ExtArgs>
       projects: Prisma.$ProjectLabelPayload<ExtArgs>[]
-      boards: Prisma.$BoardLabelPayload<ExtArgs>[]
       tasks: Prisma.$TaskLabelPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -14066,7 +13929,6 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     createdBy<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     projects<T extends Label$projectsArgs<ExtArgs> = {}>(args?: Subset<T, Label$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ProjectLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    boards<T extends Label$boardsArgs<ExtArgs> = {}>(args?: Subset<T, Label$boardsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     tasks<T extends Label$tasksArgs<ExtArgs> = {}>(args?: Subset<T, Label$tasksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TaskLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -14472,30 +14334,6 @@ export namespace Prisma {
   }
 
   /**
-   * Label.boards
-   */
-  export type Label$boardsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoardLabel
-     */
-    select?: BoardLabelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoardLabel
-     */
-    omit?: BoardLabelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoardLabelInclude<ExtArgs> | null
-    where?: BoardLabelWhereInput
-    orderBy?: BoardLabelOrderByWithRelationInput | BoardLabelOrderByWithRelationInput[]
-    cursor?: BoardLabelWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: BoardLabelScalarFieldEnum | BoardLabelScalarFieldEnum[]
-  }
-
-  /**
    * Label.tasks
    */
   export type Label$tasksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -14553,8 +14391,10 @@ export namespace Prisma {
     projectId: string | null
     labelId: string | null
     addedById: string | null
+    colorOverride: string | null
     isFavorite: boolean | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ProjectLabelMaxAggregateOutputType = {
@@ -14562,8 +14402,10 @@ export namespace Prisma {
     projectId: string | null
     labelId: string | null
     addedById: string | null
+    colorOverride: string | null
     isFavorite: boolean | null
     createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type ProjectLabelCountAggregateOutputType = {
@@ -14571,8 +14413,10 @@ export namespace Prisma {
     projectId: number
     labelId: number
     addedById: number
+    colorOverride: number
     isFavorite: number
     createdAt: number
+    updatedAt: number
     _all: number
   }
 
@@ -14582,8 +14426,10 @@ export namespace Prisma {
     projectId?: true
     labelId?: true
     addedById?: true
+    colorOverride?: true
     isFavorite?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type ProjectLabelMaxAggregateInputType = {
@@ -14591,8 +14437,10 @@ export namespace Prisma {
     projectId?: true
     labelId?: true
     addedById?: true
+    colorOverride?: true
     isFavorite?: true
     createdAt?: true
+    updatedAt?: true
   }
 
   export type ProjectLabelCountAggregateInputType = {
@@ -14600,8 +14448,10 @@ export namespace Prisma {
     projectId?: true
     labelId?: true
     addedById?: true
+    colorOverride?: true
     isFavorite?: true
     createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -14682,8 +14532,10 @@ export namespace Prisma {
     projectId: string
     labelId: string
     addedById: string
+    colorOverride: string | null
     isFavorite: boolean
     createdAt: Date
+    updatedAt: Date
     _count: ProjectLabelCountAggregateOutputType | null
     _min: ProjectLabelMinAggregateOutputType | null
     _max: ProjectLabelMaxAggregateOutputType | null
@@ -14708,8 +14560,10 @@ export namespace Prisma {
     projectId?: boolean
     labelId?: boolean
     addedById?: boolean
+    colorOverride?: boolean
     isFavorite?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     label?: boolean | LabelDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["projectLabel"]>
@@ -14721,11 +14575,13 @@ export namespace Prisma {
     projectId?: boolean
     labelId?: boolean
     addedById?: boolean
+    colorOverride?: boolean
     isFavorite?: boolean
     createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type ProjectLabelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "labelId" | "addedById" | "isFavorite" | "createdAt", ExtArgs["result"]["projectLabel"]>
+  export type ProjectLabelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projectId" | "labelId" | "addedById" | "colorOverride" | "isFavorite" | "createdAt" | "updatedAt", ExtArgs["result"]["projectLabel"]>
   export type ProjectLabelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     project?: boolean | ProjectDefaultArgs<ExtArgs>
     label?: boolean | LabelDefaultArgs<ExtArgs>
@@ -14742,8 +14598,10 @@ export namespace Prisma {
       projectId: string
       labelId: string
       addedById: string
+      colorOverride: string | null
       isFavorite: boolean
       createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["projectLabel"]>
     composites: {}
   }
@@ -15119,8 +14977,10 @@ export namespace Prisma {
     readonly projectId: FieldRef<"ProjectLabel", 'String'>
     readonly labelId: FieldRef<"ProjectLabel", 'String'>
     readonly addedById: FieldRef<"ProjectLabel", 'String'>
+    readonly colorOverride: FieldRef<"ProjectLabel", 'String'>
     readonly isFavorite: FieldRef<"ProjectLabel", 'Boolean'>
     readonly createdAt: FieldRef<"ProjectLabel", 'DateTime'>
+    readonly updatedAt: FieldRef<"ProjectLabel", 'DateTime'>
   }
     
 
@@ -15479,950 +15339,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: ProjectLabelInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model BoardLabel
-   */
-
-  export type AggregateBoardLabel = {
-    _count: BoardLabelCountAggregateOutputType | null
-    _min: BoardLabelMinAggregateOutputType | null
-    _max: BoardLabelMaxAggregateOutputType | null
-  }
-
-  export type BoardLabelMinAggregateOutputType = {
-    id: string | null
-    boardId: string | null
-    labelId: string | null
-    addedById: string | null
-    isFavorite: boolean | null
-    createdAt: Date | null
-  }
-
-  export type BoardLabelMaxAggregateOutputType = {
-    id: string | null
-    boardId: string | null
-    labelId: string | null
-    addedById: string | null
-    isFavorite: boolean | null
-    createdAt: Date | null
-  }
-
-  export type BoardLabelCountAggregateOutputType = {
-    id: number
-    boardId: number
-    labelId: number
-    addedById: number
-    isFavorite: number
-    createdAt: number
-    _all: number
-  }
-
-
-  export type BoardLabelMinAggregateInputType = {
-    id?: true
-    boardId?: true
-    labelId?: true
-    addedById?: true
-    isFavorite?: true
-    createdAt?: true
-  }
-
-  export type BoardLabelMaxAggregateInputType = {
-    id?: true
-    boardId?: true
-    labelId?: true
-    addedById?: true
-    isFavorite?: true
-    createdAt?: true
-  }
-
-  export type BoardLabelCountAggregateInputType = {
-    id?: true
-    boardId?: true
-    labelId?: true
-    addedById?: true
-    isFavorite?: true
-    createdAt?: true
-    _all?: true
-  }
-
-  export type BoardLabelAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which BoardLabel to aggregate.
-     */
-    where?: BoardLabelWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BoardLabels to fetch.
-     */
-    orderBy?: BoardLabelOrderByWithRelationInput | BoardLabelOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: BoardLabelWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BoardLabels from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BoardLabels.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned BoardLabels
-    **/
-    _count?: true | BoardLabelCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: BoardLabelMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: BoardLabelMaxAggregateInputType
-  }
-
-  export type GetBoardLabelAggregateType<T extends BoardLabelAggregateArgs> = {
-        [P in keyof T & keyof AggregateBoardLabel]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateBoardLabel[P]>
-      : GetScalarType<T[P], AggregateBoardLabel[P]>
-  }
-
-
-
-
-  export type BoardLabelGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BoardLabelWhereInput
-    orderBy?: BoardLabelOrderByWithAggregationInput | BoardLabelOrderByWithAggregationInput[]
-    by: BoardLabelScalarFieldEnum[] | BoardLabelScalarFieldEnum
-    having?: BoardLabelScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: BoardLabelCountAggregateInputType | true
-    _min?: BoardLabelMinAggregateInputType
-    _max?: BoardLabelMaxAggregateInputType
-  }
-
-  export type BoardLabelGroupByOutputType = {
-    id: string
-    boardId: string
-    labelId: string
-    addedById: string
-    isFavorite: boolean
-    createdAt: Date
-    _count: BoardLabelCountAggregateOutputType | null
-    _min: BoardLabelMinAggregateOutputType | null
-    _max: BoardLabelMaxAggregateOutputType | null
-  }
-
-  type GetBoardLabelGroupByPayload<T extends BoardLabelGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<BoardLabelGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof BoardLabelGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], BoardLabelGroupByOutputType[P]>
-            : GetScalarType<T[P], BoardLabelGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type BoardLabelSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    boardId?: boolean
-    labelId?: boolean
-    addedById?: boolean
-    isFavorite?: boolean
-    createdAt?: boolean
-    board?: boolean | BoardDefaultArgs<ExtArgs>
-    label?: boolean | LabelDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["boardLabel"]>
-
-
-
-  export type BoardLabelSelectScalar = {
-    id?: boolean
-    boardId?: boolean
-    labelId?: boolean
-    addedById?: boolean
-    isFavorite?: boolean
-    createdAt?: boolean
-  }
-
-  export type BoardLabelOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "boardId" | "labelId" | "addedById" | "isFavorite" | "createdAt", ExtArgs["result"]["boardLabel"]>
-  export type BoardLabelInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    board?: boolean | BoardDefaultArgs<ExtArgs>
-    label?: boolean | LabelDefaultArgs<ExtArgs>
-  }
-
-  export type $BoardLabelPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "BoardLabel"
-    objects: {
-      board: Prisma.$BoardPayload<ExtArgs>
-      label: Prisma.$LabelPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      boardId: string
-      labelId: string
-      addedById: string
-      isFavorite: boolean
-      createdAt: Date
-    }, ExtArgs["result"]["boardLabel"]>
-    composites: {}
-  }
-
-  type BoardLabelGetPayload<S extends boolean | null | undefined | BoardLabelDefaultArgs> = $Result.GetResult<Prisma.$BoardLabelPayload, S>
-
-  type BoardLabelCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<BoardLabelFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: BoardLabelCountAggregateInputType | true
-    }
-
-  export interface BoardLabelDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['BoardLabel'], meta: { name: 'BoardLabel' } }
-    /**
-     * Find zero or one BoardLabel that matches the filter.
-     * @param {BoardLabelFindUniqueArgs} args - Arguments to find a BoardLabel
-     * @example
-     * // Get one BoardLabel
-     * const boardLabel = await prisma.boardLabel.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends BoardLabelFindUniqueArgs>(args: SelectSubset<T, BoardLabelFindUniqueArgs<ExtArgs>>): Prisma__BoardLabelClient<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one BoardLabel that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {BoardLabelFindUniqueOrThrowArgs} args - Arguments to find a BoardLabel
-     * @example
-     * // Get one BoardLabel
-     * const boardLabel = await prisma.boardLabel.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends BoardLabelFindUniqueOrThrowArgs>(args: SelectSubset<T, BoardLabelFindUniqueOrThrowArgs<ExtArgs>>): Prisma__BoardLabelClient<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first BoardLabel that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoardLabelFindFirstArgs} args - Arguments to find a BoardLabel
-     * @example
-     * // Get one BoardLabel
-     * const boardLabel = await prisma.boardLabel.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends BoardLabelFindFirstArgs>(args?: SelectSubset<T, BoardLabelFindFirstArgs<ExtArgs>>): Prisma__BoardLabelClient<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first BoardLabel that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoardLabelFindFirstOrThrowArgs} args - Arguments to find a BoardLabel
-     * @example
-     * // Get one BoardLabel
-     * const boardLabel = await prisma.boardLabel.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends BoardLabelFindFirstOrThrowArgs>(args?: SelectSubset<T, BoardLabelFindFirstOrThrowArgs<ExtArgs>>): Prisma__BoardLabelClient<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more BoardLabels that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoardLabelFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all BoardLabels
-     * const boardLabels = await prisma.boardLabel.findMany()
-     * 
-     * // Get first 10 BoardLabels
-     * const boardLabels = await prisma.boardLabel.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const boardLabelWithIdOnly = await prisma.boardLabel.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends BoardLabelFindManyArgs>(args?: SelectSubset<T, BoardLabelFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a BoardLabel.
-     * @param {BoardLabelCreateArgs} args - Arguments to create a BoardLabel.
-     * @example
-     * // Create one BoardLabel
-     * const BoardLabel = await prisma.boardLabel.create({
-     *   data: {
-     *     // ... data to create a BoardLabel
-     *   }
-     * })
-     * 
-     */
-    create<T extends BoardLabelCreateArgs>(args: SelectSubset<T, BoardLabelCreateArgs<ExtArgs>>): Prisma__BoardLabelClient<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many BoardLabels.
-     * @param {BoardLabelCreateManyArgs} args - Arguments to create many BoardLabels.
-     * @example
-     * // Create many BoardLabels
-     * const boardLabel = await prisma.boardLabel.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends BoardLabelCreateManyArgs>(args?: SelectSubset<T, BoardLabelCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a BoardLabel.
-     * @param {BoardLabelDeleteArgs} args - Arguments to delete one BoardLabel.
-     * @example
-     * // Delete one BoardLabel
-     * const BoardLabel = await prisma.boardLabel.delete({
-     *   where: {
-     *     // ... filter to delete one BoardLabel
-     *   }
-     * })
-     * 
-     */
-    delete<T extends BoardLabelDeleteArgs>(args: SelectSubset<T, BoardLabelDeleteArgs<ExtArgs>>): Prisma__BoardLabelClient<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one BoardLabel.
-     * @param {BoardLabelUpdateArgs} args - Arguments to update one BoardLabel.
-     * @example
-     * // Update one BoardLabel
-     * const boardLabel = await prisma.boardLabel.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends BoardLabelUpdateArgs>(args: SelectSubset<T, BoardLabelUpdateArgs<ExtArgs>>): Prisma__BoardLabelClient<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more BoardLabels.
-     * @param {BoardLabelDeleteManyArgs} args - Arguments to filter BoardLabels to delete.
-     * @example
-     * // Delete a few BoardLabels
-     * const { count } = await prisma.boardLabel.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends BoardLabelDeleteManyArgs>(args?: SelectSubset<T, BoardLabelDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more BoardLabels.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoardLabelUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many BoardLabels
-     * const boardLabel = await prisma.boardLabel.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends BoardLabelUpdateManyArgs>(args: SelectSubset<T, BoardLabelUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one BoardLabel.
-     * @param {BoardLabelUpsertArgs} args - Arguments to update or create a BoardLabel.
-     * @example
-     * // Update or create a BoardLabel
-     * const boardLabel = await prisma.boardLabel.upsert({
-     *   create: {
-     *     // ... data to create a BoardLabel
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the BoardLabel we want to update
-     *   }
-     * })
-     */
-    upsert<T extends BoardLabelUpsertArgs>(args: SelectSubset<T, BoardLabelUpsertArgs<ExtArgs>>): Prisma__BoardLabelClient<$Result.GetResult<Prisma.$BoardLabelPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of BoardLabels.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoardLabelCountArgs} args - Arguments to filter BoardLabels to count.
-     * @example
-     * // Count the number of BoardLabels
-     * const count = await prisma.boardLabel.count({
-     *   where: {
-     *     // ... the filter for the BoardLabels we want to count
-     *   }
-     * })
-    **/
-    count<T extends BoardLabelCountArgs>(
-      args?: Subset<T, BoardLabelCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], BoardLabelCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a BoardLabel.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoardLabelAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends BoardLabelAggregateArgs>(args: Subset<T, BoardLabelAggregateArgs>): Prisma.PrismaPromise<GetBoardLabelAggregateType<T>>
-
-    /**
-     * Group by BoardLabel.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {BoardLabelGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends BoardLabelGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: BoardLabelGroupByArgs['orderBy'] }
-        : { orderBy?: BoardLabelGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, BoardLabelGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetBoardLabelGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the BoardLabel model
-   */
-  readonly fields: BoardLabelFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for BoardLabel.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__BoardLabelClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    board<T extends BoardDefaultArgs<ExtArgs> = {}>(args?: Subset<T, BoardDefaultArgs<ExtArgs>>): Prisma__BoardClient<$Result.GetResult<Prisma.$BoardPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    label<T extends LabelDefaultArgs<ExtArgs> = {}>(args?: Subset<T, LabelDefaultArgs<ExtArgs>>): Prisma__LabelClient<$Result.GetResult<Prisma.$LabelPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the BoardLabel model
-   */
-  interface BoardLabelFieldRefs {
-    readonly id: FieldRef<"BoardLabel", 'String'>
-    readonly boardId: FieldRef<"BoardLabel", 'String'>
-    readonly labelId: FieldRef<"BoardLabel", 'String'>
-    readonly addedById: FieldRef<"BoardLabel", 'String'>
-    readonly isFavorite: FieldRef<"BoardLabel", 'Boolean'>
-    readonly createdAt: FieldRef<"BoardLabel", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * BoardLabel findUnique
-   */
-  export type BoardLabelFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoardLabel
-     */
-    select?: BoardLabelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoardLabel
-     */
-    omit?: BoardLabelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoardLabelInclude<ExtArgs> | null
-    /**
-     * Filter, which BoardLabel to fetch.
-     */
-    where: BoardLabelWhereUniqueInput
-  }
-
-  /**
-   * BoardLabel findUniqueOrThrow
-   */
-  export type BoardLabelFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoardLabel
-     */
-    select?: BoardLabelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoardLabel
-     */
-    omit?: BoardLabelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoardLabelInclude<ExtArgs> | null
-    /**
-     * Filter, which BoardLabel to fetch.
-     */
-    where: BoardLabelWhereUniqueInput
-  }
-
-  /**
-   * BoardLabel findFirst
-   */
-  export type BoardLabelFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoardLabel
-     */
-    select?: BoardLabelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoardLabel
-     */
-    omit?: BoardLabelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoardLabelInclude<ExtArgs> | null
-    /**
-     * Filter, which BoardLabel to fetch.
-     */
-    where?: BoardLabelWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BoardLabels to fetch.
-     */
-    orderBy?: BoardLabelOrderByWithRelationInput | BoardLabelOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for BoardLabels.
-     */
-    cursor?: BoardLabelWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BoardLabels from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BoardLabels.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of BoardLabels.
-     */
-    distinct?: BoardLabelScalarFieldEnum | BoardLabelScalarFieldEnum[]
-  }
-
-  /**
-   * BoardLabel findFirstOrThrow
-   */
-  export type BoardLabelFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoardLabel
-     */
-    select?: BoardLabelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoardLabel
-     */
-    omit?: BoardLabelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoardLabelInclude<ExtArgs> | null
-    /**
-     * Filter, which BoardLabel to fetch.
-     */
-    where?: BoardLabelWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BoardLabels to fetch.
-     */
-    orderBy?: BoardLabelOrderByWithRelationInput | BoardLabelOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for BoardLabels.
-     */
-    cursor?: BoardLabelWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BoardLabels from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BoardLabels.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of BoardLabels.
-     */
-    distinct?: BoardLabelScalarFieldEnum | BoardLabelScalarFieldEnum[]
-  }
-
-  /**
-   * BoardLabel findMany
-   */
-  export type BoardLabelFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoardLabel
-     */
-    select?: BoardLabelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoardLabel
-     */
-    omit?: BoardLabelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoardLabelInclude<ExtArgs> | null
-    /**
-     * Filter, which BoardLabels to fetch.
-     */
-    where?: BoardLabelWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of BoardLabels to fetch.
-     */
-    orderBy?: BoardLabelOrderByWithRelationInput | BoardLabelOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing BoardLabels.
-     */
-    cursor?: BoardLabelWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` BoardLabels from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` BoardLabels.
-     */
-    skip?: number
-    distinct?: BoardLabelScalarFieldEnum | BoardLabelScalarFieldEnum[]
-  }
-
-  /**
-   * BoardLabel create
-   */
-  export type BoardLabelCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoardLabel
-     */
-    select?: BoardLabelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoardLabel
-     */
-    omit?: BoardLabelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoardLabelInclude<ExtArgs> | null
-    /**
-     * The data needed to create a BoardLabel.
-     */
-    data: XOR<BoardLabelCreateInput, BoardLabelUncheckedCreateInput>
-  }
-
-  /**
-   * BoardLabel createMany
-   */
-  export type BoardLabelCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many BoardLabels.
-     */
-    data: BoardLabelCreateManyInput | BoardLabelCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * BoardLabel update
-   */
-  export type BoardLabelUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoardLabel
-     */
-    select?: BoardLabelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoardLabel
-     */
-    omit?: BoardLabelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoardLabelInclude<ExtArgs> | null
-    /**
-     * The data needed to update a BoardLabel.
-     */
-    data: XOR<BoardLabelUpdateInput, BoardLabelUncheckedUpdateInput>
-    /**
-     * Choose, which BoardLabel to update.
-     */
-    where: BoardLabelWhereUniqueInput
-  }
-
-  /**
-   * BoardLabel updateMany
-   */
-  export type BoardLabelUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update BoardLabels.
-     */
-    data: XOR<BoardLabelUpdateManyMutationInput, BoardLabelUncheckedUpdateManyInput>
-    /**
-     * Filter which BoardLabels to update
-     */
-    where?: BoardLabelWhereInput
-    /**
-     * Limit how many BoardLabels to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * BoardLabel upsert
-   */
-  export type BoardLabelUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoardLabel
-     */
-    select?: BoardLabelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoardLabel
-     */
-    omit?: BoardLabelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoardLabelInclude<ExtArgs> | null
-    /**
-     * The filter to search for the BoardLabel to update in case it exists.
-     */
-    where: BoardLabelWhereUniqueInput
-    /**
-     * In case the BoardLabel found by the `where` argument doesn't exist, create a new BoardLabel with this data.
-     */
-    create: XOR<BoardLabelCreateInput, BoardLabelUncheckedCreateInput>
-    /**
-     * In case the BoardLabel was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<BoardLabelUpdateInput, BoardLabelUncheckedUpdateInput>
-  }
-
-  /**
-   * BoardLabel delete
-   */
-  export type BoardLabelDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoardLabel
-     */
-    select?: BoardLabelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoardLabel
-     */
-    omit?: BoardLabelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoardLabelInclude<ExtArgs> | null
-    /**
-     * Filter which BoardLabel to delete.
-     */
-    where: BoardLabelWhereUniqueInput
-  }
-
-  /**
-   * BoardLabel deleteMany
-   */
-  export type BoardLabelDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which BoardLabels to delete
-     */
-    where?: BoardLabelWhereInput
-    /**
-     * Limit how many BoardLabels to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * BoardLabel without action
-   */
-  export type BoardLabelDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BoardLabel
-     */
-    select?: BoardLabelSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the BoardLabel
-     */
-    omit?: BoardLabelOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: BoardLabelInclude<ExtArgs> | null
   }
 
 
@@ -23030,13 +21946,13 @@ export namespace Prisma {
     id: 'id',
     title: 'title',
     description: 'description',
-    price: 'price',
     dueDate: 'dueDate',
     order: 'order',
     columnId: 'columnId',
     assigneeId: 'assigneeId',
     client_id: 'client_id',
     createdById: 'createdById',
+    done: 'done',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -23063,23 +21979,13 @@ export namespace Prisma {
     projectId: 'projectId',
     labelId: 'labelId',
     addedById: 'addedById',
+    colorOverride: 'colorOverride',
     isFavorite: 'isFavorite',
-    createdAt: 'createdAt'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type ProjectLabelScalarFieldEnum = (typeof ProjectLabelScalarFieldEnum)[keyof typeof ProjectLabelScalarFieldEnum]
-
-
-  export const BoardLabelScalarFieldEnum: {
-    id: 'id',
-    boardId: 'boardId',
-    labelId: 'labelId',
-    addedById: 'addedById',
-    isFavorite: 'isFavorite',
-    createdAt: 'createdAt'
-  };
-
-  export type BoardLabelScalarFieldEnum = (typeof BoardLabelScalarFieldEnum)[keyof typeof BoardLabelScalarFieldEnum]
 
 
   export const TaskLabelScalarFieldEnum: {
@@ -23345,20 +22251,11 @@ export namespace Prisma {
     id: 'id',
     projectId: 'projectId',
     labelId: 'labelId',
-    addedById: 'addedById'
+    addedById: 'addedById',
+    colorOverride: 'colorOverride'
   };
 
   export type ProjectLabelOrderByRelevanceFieldEnum = (typeof ProjectLabelOrderByRelevanceFieldEnum)[keyof typeof ProjectLabelOrderByRelevanceFieldEnum]
-
-
-  export const BoardLabelOrderByRelevanceFieldEnum: {
-    id: 'id',
-    boardId: 'boardId',
-    labelId: 'labelId',
-    addedById: 'addedById'
-  };
-
-  export type BoardLabelOrderByRelevanceFieldEnum = (typeof BoardLabelOrderByRelevanceFieldEnum)[keyof typeof BoardLabelOrderByRelevanceFieldEnum]
 
 
   export const TaskLabelOrderByRelevanceFieldEnum: {
@@ -24134,7 +23031,6 @@ export namespace Prisma {
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     columns?: ColumnListRelationFilter
-    labels?: BoardLabelListRelationFilter
   }
 
   export type BoardOrderByWithRelationInput = {
@@ -24147,7 +23043,6 @@ export namespace Prisma {
     project?: ProjectOrderByWithRelationInput
     createdBy?: UserOrderByWithRelationInput
     columns?: ColumnOrderByRelationAggregateInput
-    labels?: BoardLabelOrderByRelationAggregateInput
     _relevance?: BoardOrderByRelevanceInput
   }
 
@@ -24164,7 +23059,6 @@ export namespace Prisma {
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     columns?: ColumnListRelationFilter
-    labels?: BoardLabelListRelationFilter
   }, "id">
 
   export type BoardOrderByWithAggregationInput = {
@@ -24274,13 +23168,13 @@ export namespace Prisma {
     id?: StringFilter<"Task"> | string
     title?: StringFilter<"Task"> | string
     description?: StringNullableFilter<"Task"> | string | null
-    price?: FloatNullableFilter<"Task"> | number | null
     dueDate?: DateTimeNullableFilter<"Task"> | Date | string | null
     order?: IntFilter<"Task"> | number
     columnId?: StringFilter<"Task"> | string
     assigneeId?: StringNullableFilter<"Task"> | string | null
     client_id?: StringNullableFilter<"Task"> | string | null
     createdById?: StringFilter<"Task"> | string
+    done?: BoolFilter<"Task"> | boolean
     createdAt?: DateTimeFilter<"Task"> | Date | string
     updatedAt?: DateTimeFilter<"Task"> | Date | string
     column?: XOR<ColumnScalarRelationFilter, ColumnWhereInput>
@@ -24294,13 +23188,13 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
-    price?: SortOrderInput | SortOrder
     dueDate?: SortOrderInput | SortOrder
     order?: SortOrder
     columnId?: SortOrder
     assigneeId?: SortOrderInput | SortOrder
     client_id?: SortOrderInput | SortOrder
     createdById?: SortOrder
+    done?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     column?: ColumnOrderByWithRelationInput
@@ -24318,13 +23212,13 @@ export namespace Prisma {
     NOT?: TaskWhereInput | TaskWhereInput[]
     title?: StringFilter<"Task"> | string
     description?: StringNullableFilter<"Task"> | string | null
-    price?: FloatNullableFilter<"Task"> | number | null
     dueDate?: DateTimeNullableFilter<"Task"> | Date | string | null
     order?: IntFilter<"Task"> | number
     columnId?: StringFilter<"Task"> | string
     assigneeId?: StringNullableFilter<"Task"> | string | null
     client_id?: StringNullableFilter<"Task"> | string | null
     createdById?: StringFilter<"Task"> | string
+    done?: BoolFilter<"Task"> | boolean
     createdAt?: DateTimeFilter<"Task"> | Date | string
     updatedAt?: DateTimeFilter<"Task"> | Date | string
     column?: XOR<ColumnScalarRelationFilter, ColumnWhereInput>
@@ -24338,13 +23232,13 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrderInput | SortOrder
-    price?: SortOrderInput | SortOrder
     dueDate?: SortOrderInput | SortOrder
     order?: SortOrder
     columnId?: SortOrder
     assigneeId?: SortOrderInput | SortOrder
     client_id?: SortOrderInput | SortOrder
     createdById?: SortOrder
+    done?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: TaskCountOrderByAggregateInput
@@ -24361,13 +23255,13 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Task"> | string
     title?: StringWithAggregatesFilter<"Task"> | string
     description?: StringNullableWithAggregatesFilter<"Task"> | string | null
-    price?: FloatNullableWithAggregatesFilter<"Task"> | number | null
     dueDate?: DateTimeNullableWithAggregatesFilter<"Task"> | Date | string | null
     order?: IntWithAggregatesFilter<"Task"> | number
     columnId?: StringWithAggregatesFilter<"Task"> | string
     assigneeId?: StringNullableWithAggregatesFilter<"Task"> | string | null
     client_id?: StringNullableWithAggregatesFilter<"Task"> | string | null
     createdById?: StringWithAggregatesFilter<"Task"> | string
+    done?: BoolWithAggregatesFilter<"Task"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Task"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Task"> | Date | string
   }
@@ -24386,7 +23280,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Label"> | Date | string
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     projects?: ProjectLabelListRelationFilter
-    boards?: BoardLabelListRelationFilter
     tasks?: TaskLabelListRelationFilter
   }
 
@@ -24401,7 +23294,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     createdBy?: UserOrderByWithRelationInput
     projects?: ProjectLabelOrderByRelationAggregateInput
-    boards?: BoardLabelOrderByRelationAggregateInput
     tasks?: TaskLabelOrderByRelationAggregateInput
     _relevance?: LabelOrderByRelevanceInput
   }
@@ -24420,7 +23312,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Label"> | Date | string
     createdBy?: XOR<UserScalarRelationFilter, UserWhereInput>
     projects?: ProjectLabelListRelationFilter
-    boards?: BoardLabelListRelationFilter
     tasks?: TaskLabelListRelationFilter
   }, "id" | "name">
 
@@ -24462,8 +23353,10 @@ export namespace Prisma {
     projectId?: StringFilter<"ProjectLabel"> | string
     labelId?: StringFilter<"ProjectLabel"> | string
     addedById?: StringFilter<"ProjectLabel"> | string
+    colorOverride?: StringNullableFilter<"ProjectLabel"> | string | null
     isFavorite?: BoolFilter<"ProjectLabel"> | boolean
     createdAt?: DateTimeFilter<"ProjectLabel"> | Date | string
+    updatedAt?: DateTimeFilter<"ProjectLabel"> | Date | string
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     label?: XOR<LabelScalarRelationFilter, LabelWhereInput>
   }
@@ -24473,8 +23366,10 @@ export namespace Prisma {
     projectId?: SortOrder
     labelId?: SortOrder
     addedById?: SortOrder
+    colorOverride?: SortOrderInput | SortOrder
     isFavorite?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     project?: ProjectOrderByWithRelationInput
     label?: LabelOrderByWithRelationInput
     _relevance?: ProjectLabelOrderByRelevanceInput
@@ -24489,8 +23384,10 @@ export namespace Prisma {
     projectId?: StringFilter<"ProjectLabel"> | string
     labelId?: StringFilter<"ProjectLabel"> | string
     addedById?: StringFilter<"ProjectLabel"> | string
+    colorOverride?: StringNullableFilter<"ProjectLabel"> | string | null
     isFavorite?: BoolFilter<"ProjectLabel"> | boolean
     createdAt?: DateTimeFilter<"ProjectLabel"> | Date | string
+    updatedAt?: DateTimeFilter<"ProjectLabel"> | Date | string
     project?: XOR<ProjectScalarRelationFilter, ProjectWhereInput>
     label?: XOR<LabelScalarRelationFilter, LabelWhereInput>
   }, "id" | "projectId_labelId">
@@ -24500,8 +23397,10 @@ export namespace Prisma {
     projectId?: SortOrder
     labelId?: SortOrder
     addedById?: SortOrder
+    colorOverride?: SortOrderInput | SortOrder
     isFavorite?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: ProjectLabelCountOrderByAggregateInput
     _max?: ProjectLabelMaxOrderByAggregateInput
     _min?: ProjectLabelMinOrderByAggregateInput
@@ -24515,73 +23414,10 @@ export namespace Prisma {
     projectId?: StringWithAggregatesFilter<"ProjectLabel"> | string
     labelId?: StringWithAggregatesFilter<"ProjectLabel"> | string
     addedById?: StringWithAggregatesFilter<"ProjectLabel"> | string
+    colorOverride?: StringNullableWithAggregatesFilter<"ProjectLabel"> | string | null
     isFavorite?: BoolWithAggregatesFilter<"ProjectLabel"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"ProjectLabel"> | Date | string
-  }
-
-  export type BoardLabelWhereInput = {
-    AND?: BoardLabelWhereInput | BoardLabelWhereInput[]
-    OR?: BoardLabelWhereInput[]
-    NOT?: BoardLabelWhereInput | BoardLabelWhereInput[]
-    id?: StringFilter<"BoardLabel"> | string
-    boardId?: StringFilter<"BoardLabel"> | string
-    labelId?: StringFilter<"BoardLabel"> | string
-    addedById?: StringFilter<"BoardLabel"> | string
-    isFavorite?: BoolFilter<"BoardLabel"> | boolean
-    createdAt?: DateTimeFilter<"BoardLabel"> | Date | string
-    board?: XOR<BoardScalarRelationFilter, BoardWhereInput>
-    label?: XOR<LabelScalarRelationFilter, LabelWhereInput>
-  }
-
-  export type BoardLabelOrderByWithRelationInput = {
-    id?: SortOrder
-    boardId?: SortOrder
-    labelId?: SortOrder
-    addedById?: SortOrder
-    isFavorite?: SortOrder
-    createdAt?: SortOrder
-    board?: BoardOrderByWithRelationInput
-    label?: LabelOrderByWithRelationInput
-    _relevance?: BoardLabelOrderByRelevanceInput
-  }
-
-  export type BoardLabelWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    boardId_labelId?: BoardLabelBoardIdLabelIdCompoundUniqueInput
-    AND?: BoardLabelWhereInput | BoardLabelWhereInput[]
-    OR?: BoardLabelWhereInput[]
-    NOT?: BoardLabelWhereInput | BoardLabelWhereInput[]
-    boardId?: StringFilter<"BoardLabel"> | string
-    labelId?: StringFilter<"BoardLabel"> | string
-    addedById?: StringFilter<"BoardLabel"> | string
-    isFavorite?: BoolFilter<"BoardLabel"> | boolean
-    createdAt?: DateTimeFilter<"BoardLabel"> | Date | string
-    board?: XOR<BoardScalarRelationFilter, BoardWhereInput>
-    label?: XOR<LabelScalarRelationFilter, LabelWhereInput>
-  }, "id" | "boardId_labelId">
-
-  export type BoardLabelOrderByWithAggregationInput = {
-    id?: SortOrder
-    boardId?: SortOrder
-    labelId?: SortOrder
-    addedById?: SortOrder
-    isFavorite?: SortOrder
-    createdAt?: SortOrder
-    _count?: BoardLabelCountOrderByAggregateInput
-    _max?: BoardLabelMaxOrderByAggregateInput
-    _min?: BoardLabelMinOrderByAggregateInput
-  }
-
-  export type BoardLabelScalarWhereWithAggregatesInput = {
-    AND?: BoardLabelScalarWhereWithAggregatesInput | BoardLabelScalarWhereWithAggregatesInput[]
-    OR?: BoardLabelScalarWhereWithAggregatesInput[]
-    NOT?: BoardLabelScalarWhereWithAggregatesInput | BoardLabelScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"BoardLabel"> | string
-    boardId?: StringWithAggregatesFilter<"BoardLabel"> | string
-    labelId?: StringWithAggregatesFilter<"BoardLabel"> | string
-    addedById?: StringWithAggregatesFilter<"BoardLabel"> | string
-    isFavorite?: BoolWithAggregatesFilter<"BoardLabel"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"BoardLabel"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"ProjectLabel"> | Date | string
   }
 
   export type TaskLabelWhereInput = {
@@ -25866,7 +24702,6 @@ export namespace Prisma {
     project: ProjectCreateNestedOneWithoutBoardsInput
     createdBy: UserCreateNestedOneWithoutCreatedBoardsInput
     columns?: ColumnCreateNestedManyWithoutBoardInput
-    labels?: BoardLabelCreateNestedManyWithoutBoardInput
   }
 
   export type BoardUncheckedCreateInput = {
@@ -25877,7 +24712,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     columns?: ColumnUncheckedCreateNestedManyWithoutBoardInput
-    labels?: BoardLabelUncheckedCreateNestedManyWithoutBoardInput
   }
 
   export type BoardUpdateInput = {
@@ -25888,7 +24722,6 @@ export namespace Prisma {
     project?: ProjectUpdateOneRequiredWithoutBoardsNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedBoardsNestedInput
     columns?: ColumnUpdateManyWithoutBoardNestedInput
-    labels?: BoardLabelUpdateManyWithoutBoardNestedInput
   }
 
   export type BoardUncheckedUpdateInput = {
@@ -25899,7 +24732,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     columns?: ColumnUncheckedUpdateManyWithoutBoardNestedInput
-    labels?: BoardLabelUncheckedUpdateManyWithoutBoardNestedInput
   }
 
   export type BoardCreateManyInput = {
@@ -26011,9 +24843,9 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     column: ColumnCreateNestedOneWithoutTasksInput
@@ -26027,13 +24859,13 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
     columnId: string
     assigneeId?: string | null
     client_id?: string | null
     createdById: string
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: TaskLabelUncheckedCreateNestedManyWithoutTaskInput
@@ -26043,9 +24875,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     column?: ColumnUpdateOneRequiredWithoutTasksNestedInput
@@ -26059,13 +24891,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
     columnId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     client_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TaskLabelUncheckedUpdateManyWithoutTaskNestedInput
@@ -26075,13 +24907,13 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
     columnId: string
     assigneeId?: string | null
     client_id?: string | null
     createdById: string
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -26090,9 +24922,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -26101,13 +24933,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
     columnId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     client_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -26122,7 +24954,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCreatedLabelsInput
     projects?: ProjectLabelCreateNestedManyWithoutLabelInput
-    boards?: BoardLabelCreateNestedManyWithoutLabelInput
     tasks?: TaskLabelCreateNestedManyWithoutLabelInput
   }
 
@@ -26136,7 +24967,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     projects?: ProjectLabelUncheckedCreateNestedManyWithoutLabelInput
-    boards?: BoardLabelUncheckedCreateNestedManyWithoutLabelInput
     tasks?: TaskLabelUncheckedCreateNestedManyWithoutLabelInput
   }
 
@@ -26150,7 +24980,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCreatedLabelsNestedInput
     projects?: ProjectLabelUpdateManyWithoutLabelNestedInput
-    boards?: BoardLabelUpdateManyWithoutLabelNestedInput
     tasks?: TaskLabelUpdateManyWithoutLabelNestedInput
   }
 
@@ -26164,7 +24993,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     projects?: ProjectLabelUncheckedUpdateManyWithoutLabelNestedInput
-    boards?: BoardLabelUncheckedUpdateManyWithoutLabelNestedInput
     tasks?: TaskLabelUncheckedUpdateManyWithoutLabelNestedInput
   }
 
@@ -26203,8 +25031,10 @@ export namespace Prisma {
   export type ProjectLabelCreateInput = {
     id?: string
     addedById: string
+    colorOverride?: string | null
     isFavorite?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutLabelsInput
     label: LabelCreateNestedOneWithoutProjectsInput
   }
@@ -26214,15 +25044,19 @@ export namespace Prisma {
     projectId: string
     labelId: string
     addedById: string
+    colorOverride?: string | null
     isFavorite?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProjectLabelUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     addedById?: StringFieldUpdateOperationsInput | string
+    colorOverride?: NullableStringFieldUpdateOperationsInput | string | null
     isFavorite?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutLabelsNestedInput
     label?: LabelUpdateOneRequiredWithoutProjectsNestedInput
   }
@@ -26232,8 +25066,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     labelId?: StringFieldUpdateOperationsInput | string
     addedById?: StringFieldUpdateOperationsInput | string
+    colorOverride?: NullableStringFieldUpdateOperationsInput | string | null
     isFavorite?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectLabelCreateManyInput = {
@@ -26241,15 +25077,19 @@ export namespace Prisma {
     projectId: string
     labelId: string
     addedById: string
+    colorOverride?: string | null
     isFavorite?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProjectLabelUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     addedById?: StringFieldUpdateOperationsInput | string
+    colorOverride?: NullableStringFieldUpdateOperationsInput | string | null
     isFavorite?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectLabelUncheckedUpdateManyInput = {
@@ -26257,69 +25097,10 @@ export namespace Prisma {
     projectId?: StringFieldUpdateOperationsInput | string
     labelId?: StringFieldUpdateOperationsInput | string
     addedById?: StringFieldUpdateOperationsInput | string
+    colorOverride?: NullableStringFieldUpdateOperationsInput | string | null
     isFavorite?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BoardLabelCreateInput = {
-    id?: string
-    addedById: string
-    isFavorite?: boolean
-    createdAt?: Date | string
-    board: BoardCreateNestedOneWithoutLabelsInput
-    label: LabelCreateNestedOneWithoutBoardsInput
-  }
-
-  export type BoardLabelUncheckedCreateInput = {
-    id?: string
-    boardId: string
-    labelId: string
-    addedById: string
-    isFavorite?: boolean
-    createdAt?: Date | string
-  }
-
-  export type BoardLabelUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    addedById?: StringFieldUpdateOperationsInput | string
-    isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    board?: BoardUpdateOneRequiredWithoutLabelsNestedInput
-    label?: LabelUpdateOneRequiredWithoutBoardsNestedInput
-  }
-
-  export type BoardLabelUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    boardId?: StringFieldUpdateOperationsInput | string
-    labelId?: StringFieldUpdateOperationsInput | string
-    addedById?: StringFieldUpdateOperationsInput | string
-    isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BoardLabelCreateManyInput = {
-    id?: string
-    boardId: string
-    labelId: string
-    addedById: string
-    isFavorite?: boolean
-    createdAt?: Date | string
-  }
-
-  export type BoardLabelUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    addedById?: StringFieldUpdateOperationsInput | string
-    isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BoardLabelUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    boardId?: StringFieldUpdateOperationsInput | string
-    labelId?: StringFieldUpdateOperationsInput | string
-    addedById?: StringFieldUpdateOperationsInput | string
-    isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TaskLabelCreateInput = {
@@ -27651,17 +26432,7 @@ export namespace Prisma {
     none?: ColumnWhereInput
   }
 
-  export type BoardLabelListRelationFilter = {
-    every?: BoardLabelWhereInput
-    some?: BoardLabelWhereInput
-    none?: BoardLabelWhereInput
-  }
-
   export type ColumnOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
-  export type BoardLabelOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -27804,19 +26575,18 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    price?: SortOrder
     dueDate?: SortOrder
     order?: SortOrder
     columnId?: SortOrder
     assigneeId?: SortOrder
     client_id?: SortOrder
     createdById?: SortOrder
+    done?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type TaskAvgOrderByAggregateInput = {
-    price?: SortOrder
     order?: SortOrder
   }
 
@@ -27824,13 +26594,13 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    price?: SortOrder
     dueDate?: SortOrder
     order?: SortOrder
     columnId?: SortOrder
     assigneeId?: SortOrder
     client_id?: SortOrder
     createdById?: SortOrder
+    done?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -27839,19 +26609,18 @@ export namespace Prisma {
     id?: SortOrder
     title?: SortOrder
     description?: SortOrder
-    price?: SortOrder
     dueDate?: SortOrder
     order?: SortOrder
     columnId?: SortOrder
     assigneeId?: SortOrder
     client_id?: SortOrder
     createdById?: SortOrder
+    done?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
   export type TaskSumOrderByAggregateInput = {
-    price?: SortOrder
     order?: SortOrder
   }
 
@@ -27923,8 +26692,10 @@ export namespace Prisma {
     projectId?: SortOrder
     labelId?: SortOrder
     addedById?: SortOrder
+    colorOverride?: SortOrder
     isFavorite?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ProjectLabelMaxOrderByAggregateInput = {
@@ -27932,8 +26703,10 @@ export namespace Prisma {
     projectId?: SortOrder
     labelId?: SortOrder
     addedById?: SortOrder
+    colorOverride?: SortOrder
     isFavorite?: SortOrder
     createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ProjectLabelMinOrderByAggregateInput = {
@@ -27941,46 +26714,10 @@ export namespace Prisma {
     projectId?: SortOrder
     labelId?: SortOrder
     addedById?: SortOrder
+    colorOverride?: SortOrder
     isFavorite?: SortOrder
     createdAt?: SortOrder
-  }
-
-  export type BoardLabelOrderByRelevanceInput = {
-    fields: BoardLabelOrderByRelevanceFieldEnum | BoardLabelOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
-  export type BoardLabelBoardIdLabelIdCompoundUniqueInput = {
-    boardId: string
-    labelId: string
-  }
-
-  export type BoardLabelCountOrderByAggregateInput = {
-    id?: SortOrder
-    boardId?: SortOrder
-    labelId?: SortOrder
-    addedById?: SortOrder
-    isFavorite?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type BoardLabelMaxOrderByAggregateInput = {
-    id?: SortOrder
-    boardId?: SortOrder
-    labelId?: SortOrder
-    addedById?: SortOrder
-    isFavorite?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type BoardLabelMinOrderByAggregateInput = {
-    id?: SortOrder
-    boardId?: SortOrder
-    labelId?: SortOrder
-    addedById?: SortOrder
-    isFavorite?: SortOrder
-    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type TaskScalarRelationFilter = {
@@ -29397,25 +28134,11 @@ export namespace Prisma {
     connect?: ColumnWhereUniqueInput | ColumnWhereUniqueInput[]
   }
 
-  export type BoardLabelCreateNestedManyWithoutBoardInput = {
-    create?: XOR<BoardLabelCreateWithoutBoardInput, BoardLabelUncheckedCreateWithoutBoardInput> | BoardLabelCreateWithoutBoardInput[] | BoardLabelUncheckedCreateWithoutBoardInput[]
-    connectOrCreate?: BoardLabelCreateOrConnectWithoutBoardInput | BoardLabelCreateOrConnectWithoutBoardInput[]
-    createMany?: BoardLabelCreateManyBoardInputEnvelope
-    connect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-  }
-
   export type ColumnUncheckedCreateNestedManyWithoutBoardInput = {
     create?: XOR<ColumnCreateWithoutBoardInput, ColumnUncheckedCreateWithoutBoardInput> | ColumnCreateWithoutBoardInput[] | ColumnUncheckedCreateWithoutBoardInput[]
     connectOrCreate?: ColumnCreateOrConnectWithoutBoardInput | ColumnCreateOrConnectWithoutBoardInput[]
     createMany?: ColumnCreateManyBoardInputEnvelope
     connect?: ColumnWhereUniqueInput | ColumnWhereUniqueInput[]
-  }
-
-  export type BoardLabelUncheckedCreateNestedManyWithoutBoardInput = {
-    create?: XOR<BoardLabelCreateWithoutBoardInput, BoardLabelUncheckedCreateWithoutBoardInput> | BoardLabelCreateWithoutBoardInput[] | BoardLabelUncheckedCreateWithoutBoardInput[]
-    connectOrCreate?: BoardLabelCreateOrConnectWithoutBoardInput | BoardLabelCreateOrConnectWithoutBoardInput[]
-    createMany?: BoardLabelCreateManyBoardInputEnvelope
-    connect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
   }
 
   export type ProjectUpdateOneRequiredWithoutBoardsNestedInput = {
@@ -29448,20 +28171,6 @@ export namespace Prisma {
     deleteMany?: ColumnScalarWhereInput | ColumnScalarWhereInput[]
   }
 
-  export type BoardLabelUpdateManyWithoutBoardNestedInput = {
-    create?: XOR<BoardLabelCreateWithoutBoardInput, BoardLabelUncheckedCreateWithoutBoardInput> | BoardLabelCreateWithoutBoardInput[] | BoardLabelUncheckedCreateWithoutBoardInput[]
-    connectOrCreate?: BoardLabelCreateOrConnectWithoutBoardInput | BoardLabelCreateOrConnectWithoutBoardInput[]
-    upsert?: BoardLabelUpsertWithWhereUniqueWithoutBoardInput | BoardLabelUpsertWithWhereUniqueWithoutBoardInput[]
-    createMany?: BoardLabelCreateManyBoardInputEnvelope
-    set?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-    disconnect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-    delete?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-    connect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-    update?: BoardLabelUpdateWithWhereUniqueWithoutBoardInput | BoardLabelUpdateWithWhereUniqueWithoutBoardInput[]
-    updateMany?: BoardLabelUpdateManyWithWhereWithoutBoardInput | BoardLabelUpdateManyWithWhereWithoutBoardInput[]
-    deleteMany?: BoardLabelScalarWhereInput | BoardLabelScalarWhereInput[]
-  }
-
   export type ColumnUncheckedUpdateManyWithoutBoardNestedInput = {
     create?: XOR<ColumnCreateWithoutBoardInput, ColumnUncheckedCreateWithoutBoardInput> | ColumnCreateWithoutBoardInput[] | ColumnUncheckedCreateWithoutBoardInput[]
     connectOrCreate?: ColumnCreateOrConnectWithoutBoardInput | ColumnCreateOrConnectWithoutBoardInput[]
@@ -29474,20 +28183,6 @@ export namespace Prisma {
     update?: ColumnUpdateWithWhereUniqueWithoutBoardInput | ColumnUpdateWithWhereUniqueWithoutBoardInput[]
     updateMany?: ColumnUpdateManyWithWhereWithoutBoardInput | ColumnUpdateManyWithWhereWithoutBoardInput[]
     deleteMany?: ColumnScalarWhereInput | ColumnScalarWhereInput[]
-  }
-
-  export type BoardLabelUncheckedUpdateManyWithoutBoardNestedInput = {
-    create?: XOR<BoardLabelCreateWithoutBoardInput, BoardLabelUncheckedCreateWithoutBoardInput> | BoardLabelCreateWithoutBoardInput[] | BoardLabelUncheckedCreateWithoutBoardInput[]
-    connectOrCreate?: BoardLabelCreateOrConnectWithoutBoardInput | BoardLabelCreateOrConnectWithoutBoardInput[]
-    upsert?: BoardLabelUpsertWithWhereUniqueWithoutBoardInput | BoardLabelUpsertWithWhereUniqueWithoutBoardInput[]
-    createMany?: BoardLabelCreateManyBoardInputEnvelope
-    set?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-    disconnect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-    delete?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-    connect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-    update?: BoardLabelUpdateWithWhereUniqueWithoutBoardInput | BoardLabelUpdateWithWhereUniqueWithoutBoardInput[]
-    updateMany?: BoardLabelUpdateManyWithWhereWithoutBoardInput | BoardLabelUpdateManyWithWhereWithoutBoardInput[]
-    deleteMany?: BoardLabelScalarWhereInput | BoardLabelScalarWhereInput[]
   }
 
   export type BoardCreateNestedOneWithoutColumnsInput = {
@@ -29669,13 +28364,6 @@ export namespace Prisma {
     connect?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
   }
 
-  export type BoardLabelCreateNestedManyWithoutLabelInput = {
-    create?: XOR<BoardLabelCreateWithoutLabelInput, BoardLabelUncheckedCreateWithoutLabelInput> | BoardLabelCreateWithoutLabelInput[] | BoardLabelUncheckedCreateWithoutLabelInput[]
-    connectOrCreate?: BoardLabelCreateOrConnectWithoutLabelInput | BoardLabelCreateOrConnectWithoutLabelInput[]
-    createMany?: BoardLabelCreateManyLabelInputEnvelope
-    connect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-  }
-
   export type TaskLabelCreateNestedManyWithoutLabelInput = {
     create?: XOR<TaskLabelCreateWithoutLabelInput, TaskLabelUncheckedCreateWithoutLabelInput> | TaskLabelCreateWithoutLabelInput[] | TaskLabelUncheckedCreateWithoutLabelInput[]
     connectOrCreate?: TaskLabelCreateOrConnectWithoutLabelInput | TaskLabelCreateOrConnectWithoutLabelInput[]
@@ -29688,13 +28376,6 @@ export namespace Prisma {
     connectOrCreate?: ProjectLabelCreateOrConnectWithoutLabelInput | ProjectLabelCreateOrConnectWithoutLabelInput[]
     createMany?: ProjectLabelCreateManyLabelInputEnvelope
     connect?: ProjectLabelWhereUniqueInput | ProjectLabelWhereUniqueInput[]
-  }
-
-  export type BoardLabelUncheckedCreateNestedManyWithoutLabelInput = {
-    create?: XOR<BoardLabelCreateWithoutLabelInput, BoardLabelUncheckedCreateWithoutLabelInput> | BoardLabelCreateWithoutLabelInput[] | BoardLabelUncheckedCreateWithoutLabelInput[]
-    connectOrCreate?: BoardLabelCreateOrConnectWithoutLabelInput | BoardLabelCreateOrConnectWithoutLabelInput[]
-    createMany?: BoardLabelCreateManyLabelInputEnvelope
-    connect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
   }
 
   export type TaskLabelUncheckedCreateNestedManyWithoutLabelInput = {
@@ -29726,20 +28407,6 @@ export namespace Prisma {
     deleteMany?: ProjectLabelScalarWhereInput | ProjectLabelScalarWhereInput[]
   }
 
-  export type BoardLabelUpdateManyWithoutLabelNestedInput = {
-    create?: XOR<BoardLabelCreateWithoutLabelInput, BoardLabelUncheckedCreateWithoutLabelInput> | BoardLabelCreateWithoutLabelInput[] | BoardLabelUncheckedCreateWithoutLabelInput[]
-    connectOrCreate?: BoardLabelCreateOrConnectWithoutLabelInput | BoardLabelCreateOrConnectWithoutLabelInput[]
-    upsert?: BoardLabelUpsertWithWhereUniqueWithoutLabelInput | BoardLabelUpsertWithWhereUniqueWithoutLabelInput[]
-    createMany?: BoardLabelCreateManyLabelInputEnvelope
-    set?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-    disconnect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-    delete?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-    connect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-    update?: BoardLabelUpdateWithWhereUniqueWithoutLabelInput | BoardLabelUpdateWithWhereUniqueWithoutLabelInput[]
-    updateMany?: BoardLabelUpdateManyWithWhereWithoutLabelInput | BoardLabelUpdateManyWithWhereWithoutLabelInput[]
-    deleteMany?: BoardLabelScalarWhereInput | BoardLabelScalarWhereInput[]
-  }
-
   export type TaskLabelUpdateManyWithoutLabelNestedInput = {
     create?: XOR<TaskLabelCreateWithoutLabelInput, TaskLabelUncheckedCreateWithoutLabelInput> | TaskLabelCreateWithoutLabelInput[] | TaskLabelUncheckedCreateWithoutLabelInput[]
     connectOrCreate?: TaskLabelCreateOrConnectWithoutLabelInput | TaskLabelCreateOrConnectWithoutLabelInput[]
@@ -29766,20 +28433,6 @@ export namespace Prisma {
     update?: ProjectLabelUpdateWithWhereUniqueWithoutLabelInput | ProjectLabelUpdateWithWhereUniqueWithoutLabelInput[]
     updateMany?: ProjectLabelUpdateManyWithWhereWithoutLabelInput | ProjectLabelUpdateManyWithWhereWithoutLabelInput[]
     deleteMany?: ProjectLabelScalarWhereInput | ProjectLabelScalarWhereInput[]
-  }
-
-  export type BoardLabelUncheckedUpdateManyWithoutLabelNestedInput = {
-    create?: XOR<BoardLabelCreateWithoutLabelInput, BoardLabelUncheckedCreateWithoutLabelInput> | BoardLabelCreateWithoutLabelInput[] | BoardLabelUncheckedCreateWithoutLabelInput[]
-    connectOrCreate?: BoardLabelCreateOrConnectWithoutLabelInput | BoardLabelCreateOrConnectWithoutLabelInput[]
-    upsert?: BoardLabelUpsertWithWhereUniqueWithoutLabelInput | BoardLabelUpsertWithWhereUniqueWithoutLabelInput[]
-    createMany?: BoardLabelCreateManyLabelInputEnvelope
-    set?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-    disconnect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-    delete?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-    connect?: BoardLabelWhereUniqueInput | BoardLabelWhereUniqueInput[]
-    update?: BoardLabelUpdateWithWhereUniqueWithoutLabelInput | BoardLabelUpdateWithWhereUniqueWithoutLabelInput[]
-    updateMany?: BoardLabelUpdateManyWithWhereWithoutLabelInput | BoardLabelUpdateManyWithWhereWithoutLabelInput[]
-    deleteMany?: BoardLabelScalarWhereInput | BoardLabelScalarWhereInput[]
   }
 
   export type TaskLabelUncheckedUpdateManyWithoutLabelNestedInput = {
@@ -29822,34 +28475,6 @@ export namespace Prisma {
     upsert?: LabelUpsertWithoutProjectsInput
     connect?: LabelWhereUniqueInput
     update?: XOR<XOR<LabelUpdateToOneWithWhereWithoutProjectsInput, LabelUpdateWithoutProjectsInput>, LabelUncheckedUpdateWithoutProjectsInput>
-  }
-
-  export type BoardCreateNestedOneWithoutLabelsInput = {
-    create?: XOR<BoardCreateWithoutLabelsInput, BoardUncheckedCreateWithoutLabelsInput>
-    connectOrCreate?: BoardCreateOrConnectWithoutLabelsInput
-    connect?: BoardWhereUniqueInput
-  }
-
-  export type LabelCreateNestedOneWithoutBoardsInput = {
-    create?: XOR<LabelCreateWithoutBoardsInput, LabelUncheckedCreateWithoutBoardsInput>
-    connectOrCreate?: LabelCreateOrConnectWithoutBoardsInput
-    connect?: LabelWhereUniqueInput
-  }
-
-  export type BoardUpdateOneRequiredWithoutLabelsNestedInput = {
-    create?: XOR<BoardCreateWithoutLabelsInput, BoardUncheckedCreateWithoutLabelsInput>
-    connectOrCreate?: BoardCreateOrConnectWithoutLabelsInput
-    upsert?: BoardUpsertWithoutLabelsInput
-    connect?: BoardWhereUniqueInput
-    update?: XOR<XOR<BoardUpdateToOneWithWhereWithoutLabelsInput, BoardUpdateWithoutLabelsInput>, BoardUncheckedUpdateWithoutLabelsInput>
-  }
-
-  export type LabelUpdateOneRequiredWithoutBoardsNestedInput = {
-    create?: XOR<LabelCreateWithoutBoardsInput, LabelUncheckedCreateWithoutBoardsInput>
-    connectOrCreate?: LabelCreateOrConnectWithoutBoardsInput
-    upsert?: LabelUpsertWithoutBoardsInput
-    connect?: LabelWhereUniqueInput
-    update?: XOR<XOR<LabelUpdateToOneWithWhereWithoutBoardsInput, LabelUpdateWithoutBoardsInput>, LabelUncheckedUpdateWithoutBoardsInput>
   }
 
   export type TaskCreateNestedOneWithoutTagsInput = {
@@ -30566,7 +29191,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutBoardsInput
     columns?: ColumnCreateNestedManyWithoutBoardInput
-    labels?: BoardLabelCreateNestedManyWithoutBoardInput
   }
 
   export type BoardUncheckedCreateWithoutCreatedByInput = {
@@ -30576,7 +29200,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     columns?: ColumnUncheckedCreateNestedManyWithoutBoardInput
-    labels?: BoardLabelUncheckedCreateNestedManyWithoutBoardInput
   }
 
   export type BoardCreateOrConnectWithoutCreatedByInput = {
@@ -30593,9 +29216,9 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     column: ColumnCreateNestedOneWithoutTasksInput
@@ -30608,12 +29231,12 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
     columnId: string
     client_id?: string | null
     createdById: string
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: TaskLabelUncheckedCreateNestedManyWithoutTaskInput
@@ -30725,9 +29348,9 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     column: ColumnCreateNestedOneWithoutTasksInput
@@ -30740,12 +29363,12 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
     columnId: string
     assigneeId?: string | null
     client_id?: string | null
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: TaskLabelUncheckedCreateNestedManyWithoutTaskInput
@@ -30770,7 +29393,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     projects?: ProjectLabelCreateNestedManyWithoutLabelInput
-    boards?: BoardLabelCreateNestedManyWithoutLabelInput
     tasks?: TaskLabelCreateNestedManyWithoutLabelInput
   }
 
@@ -30783,7 +29405,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     projects?: ProjectLabelUncheckedCreateNestedManyWithoutLabelInput
-    boards?: BoardLabelUncheckedCreateNestedManyWithoutLabelInput
     tasks?: TaskLabelUncheckedCreateNestedManyWithoutLabelInput
   }
 
@@ -30973,13 +29594,13 @@ export namespace Prisma {
     id?: StringFilter<"Task"> | string
     title?: StringFilter<"Task"> | string
     description?: StringNullableFilter<"Task"> | string | null
-    price?: FloatNullableFilter<"Task"> | number | null
     dueDate?: DateTimeNullableFilter<"Task"> | Date | string | null
     order?: IntFilter<"Task"> | number
     columnId?: StringFilter<"Task"> | string
     assigneeId?: StringNullableFilter<"Task"> | string | null
     client_id?: StringNullableFilter<"Task"> | string | null
     createdById?: StringFilter<"Task"> | string
+    done?: BoolFilter<"Task"> | boolean
     createdAt?: DateTimeFilter<"Task"> | Date | string
     updatedAt?: DateTimeFilter<"Task"> | Date | string
   }
@@ -31505,9 +30126,9 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     column: ColumnCreateNestedOneWithoutTasksInput
@@ -31520,12 +30141,12 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
     columnId: string
     assigneeId?: string | null
     createdById: string
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: TaskLabelUncheckedCreateNestedManyWithoutTaskInput
@@ -31989,7 +30610,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCreatedBoardsInput
     columns?: ColumnCreateNestedManyWithoutBoardInput
-    labels?: BoardLabelCreateNestedManyWithoutBoardInput
   }
 
   export type BoardUncheckedCreateWithoutProjectInput = {
@@ -31999,7 +30619,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     columns?: ColumnUncheckedCreateNestedManyWithoutBoardInput
-    labels?: BoardLabelUncheckedCreateNestedManyWithoutBoardInput
   }
 
   export type BoardCreateOrConnectWithoutProjectInput = {
@@ -32015,8 +30634,10 @@ export namespace Prisma {
   export type ProjectLabelCreateWithoutProjectInput = {
     id?: string
     addedById: string
+    colorOverride?: string | null
     isFavorite?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     label: LabelCreateNestedOneWithoutProjectsInput
   }
 
@@ -32024,8 +30645,10 @@ export namespace Prisma {
     id?: string
     labelId: string
     addedById: string
+    colorOverride?: string | null
     isFavorite?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProjectLabelCreateOrConnectWithoutProjectInput = {
@@ -32279,8 +30902,10 @@ export namespace Prisma {
     projectId?: StringFilter<"ProjectLabel"> | string
     labelId?: StringFilter<"ProjectLabel"> | string
     addedById?: StringFilter<"ProjectLabel"> | string
+    colorOverride?: StringNullableFilter<"ProjectLabel"> | string | null
     isFavorite?: BoolFilter<"ProjectLabel"> | boolean
     createdAt?: DateTimeFilter<"ProjectLabel"> | Date | string
+    updatedAt?: DateTimeFilter<"ProjectLabel"> | Date | string
   }
 
   export type QuoteUpsertWithWhereUniqueWithoutProjectInput = {
@@ -32599,32 +31224,6 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type BoardLabelCreateWithoutBoardInput = {
-    id?: string
-    addedById: string
-    isFavorite?: boolean
-    createdAt?: Date | string
-    label: LabelCreateNestedOneWithoutBoardsInput
-  }
-
-  export type BoardLabelUncheckedCreateWithoutBoardInput = {
-    id?: string
-    labelId: string
-    addedById: string
-    isFavorite?: boolean
-    createdAt?: Date | string
-  }
-
-  export type BoardLabelCreateOrConnectWithoutBoardInput = {
-    where: BoardLabelWhereUniqueInput
-    create: XOR<BoardLabelCreateWithoutBoardInput, BoardLabelUncheckedCreateWithoutBoardInput>
-  }
-
-  export type BoardLabelCreateManyBoardInputEnvelope = {
-    data: BoardLabelCreateManyBoardInput | BoardLabelCreateManyBoardInput[]
-    skipDuplicates?: boolean
-  }
-
   export type ProjectUpsertWithoutBoardsInput = {
     update: XOR<ProjectUpdateWithoutBoardsInput, ProjectUncheckedUpdateWithoutBoardsInput>
     create: XOR<ProjectCreateWithoutBoardsInput, ProjectUncheckedCreateWithoutBoardsInput>
@@ -32747,34 +31346,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Column"> | Date | string
   }
 
-  export type BoardLabelUpsertWithWhereUniqueWithoutBoardInput = {
-    where: BoardLabelWhereUniqueInput
-    update: XOR<BoardLabelUpdateWithoutBoardInput, BoardLabelUncheckedUpdateWithoutBoardInput>
-    create: XOR<BoardLabelCreateWithoutBoardInput, BoardLabelUncheckedCreateWithoutBoardInput>
-  }
-
-  export type BoardLabelUpdateWithWhereUniqueWithoutBoardInput = {
-    where: BoardLabelWhereUniqueInput
-    data: XOR<BoardLabelUpdateWithoutBoardInput, BoardLabelUncheckedUpdateWithoutBoardInput>
-  }
-
-  export type BoardLabelUpdateManyWithWhereWithoutBoardInput = {
-    where: BoardLabelScalarWhereInput
-    data: XOR<BoardLabelUpdateManyMutationInput, BoardLabelUncheckedUpdateManyWithoutBoardInput>
-  }
-
-  export type BoardLabelScalarWhereInput = {
-    AND?: BoardLabelScalarWhereInput | BoardLabelScalarWhereInput[]
-    OR?: BoardLabelScalarWhereInput[]
-    NOT?: BoardLabelScalarWhereInput | BoardLabelScalarWhereInput[]
-    id?: StringFilter<"BoardLabel"> | string
-    boardId?: StringFilter<"BoardLabel"> | string
-    labelId?: StringFilter<"BoardLabel"> | string
-    addedById?: StringFilter<"BoardLabel"> | string
-    isFavorite?: BoolFilter<"BoardLabel"> | boolean
-    createdAt?: DateTimeFilter<"BoardLabel"> | Date | string
-  }
-
   export type BoardCreateWithoutColumnsInput = {
     id?: string
     name: string
@@ -32782,7 +31353,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutBoardsInput
     createdBy: UserCreateNestedOneWithoutCreatedBoardsInput
-    labels?: BoardLabelCreateNestedManyWithoutBoardInput
   }
 
   export type BoardUncheckedCreateWithoutColumnsInput = {
@@ -32792,7 +31362,6 @@ export namespace Prisma {
     created_by_id: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    labels?: BoardLabelUncheckedCreateNestedManyWithoutBoardInput
   }
 
   export type BoardCreateOrConnectWithoutColumnsInput = {
@@ -32804,9 +31373,9 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     assignee?: UserCreateNestedOneWithoutAssignedTasksInput
@@ -32819,12 +31388,12 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
     assigneeId?: string | null
     client_id?: string | null
     createdById: string
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     tags?: TaskLabelUncheckedCreateNestedManyWithoutTaskInput
@@ -32858,7 +31427,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutBoardsNestedInput
     createdBy?: UserUpdateOneRequiredWithoutCreatedBoardsNestedInput
-    labels?: BoardLabelUpdateManyWithoutBoardNestedInput
   }
 
   export type BoardUncheckedUpdateWithoutColumnsInput = {
@@ -32868,7 +31436,6 @@ export namespace Prisma {
     created_by_id?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    labels?: BoardLabelUncheckedUpdateManyWithoutBoardNestedInput
   }
 
   export type TaskUpsertWithWhereUniqueWithoutColumnInput = {
@@ -33370,8 +31937,10 @@ export namespace Prisma {
   export type ProjectLabelCreateWithoutLabelInput = {
     id?: string
     addedById: string
+    colorOverride?: string | null
     isFavorite?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
     project: ProjectCreateNestedOneWithoutLabelsInput
   }
 
@@ -33379,8 +31948,10 @@ export namespace Prisma {
     id?: string
     projectId: string
     addedById: string
+    colorOverride?: string | null
     isFavorite?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type ProjectLabelCreateOrConnectWithoutLabelInput = {
@@ -33390,32 +31961,6 @@ export namespace Prisma {
 
   export type ProjectLabelCreateManyLabelInputEnvelope = {
     data: ProjectLabelCreateManyLabelInput | ProjectLabelCreateManyLabelInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type BoardLabelCreateWithoutLabelInput = {
-    id?: string
-    addedById: string
-    isFavorite?: boolean
-    createdAt?: Date | string
-    board: BoardCreateNestedOneWithoutLabelsInput
-  }
-
-  export type BoardLabelUncheckedCreateWithoutLabelInput = {
-    id?: string
-    boardId: string
-    addedById: string
-    isFavorite?: boolean
-    createdAt?: Date | string
-  }
-
-  export type BoardLabelCreateOrConnectWithoutLabelInput = {
-    where: BoardLabelWhereUniqueInput
-    create: XOR<BoardLabelCreateWithoutLabelInput, BoardLabelUncheckedCreateWithoutLabelInput>
-  }
-
-  export type BoardLabelCreateManyLabelInputEnvelope = {
-    data: BoardLabelCreateManyLabelInput | BoardLabelCreateManyLabelInput[]
     skipDuplicates?: boolean
   }
 
@@ -33508,22 +32053,6 @@ export namespace Prisma {
     data: XOR<ProjectLabelUpdateManyMutationInput, ProjectLabelUncheckedUpdateManyWithoutLabelInput>
   }
 
-  export type BoardLabelUpsertWithWhereUniqueWithoutLabelInput = {
-    where: BoardLabelWhereUniqueInput
-    update: XOR<BoardLabelUpdateWithoutLabelInput, BoardLabelUncheckedUpdateWithoutLabelInput>
-    create: XOR<BoardLabelCreateWithoutLabelInput, BoardLabelUncheckedCreateWithoutLabelInput>
-  }
-
-  export type BoardLabelUpdateWithWhereUniqueWithoutLabelInput = {
-    where: BoardLabelWhereUniqueInput
-    data: XOR<BoardLabelUpdateWithoutLabelInput, BoardLabelUncheckedUpdateWithoutLabelInput>
-  }
-
-  export type BoardLabelUpdateManyWithWhereWithoutLabelInput = {
-    where: BoardLabelScalarWhereInput
-    data: XOR<BoardLabelUpdateManyMutationInput, BoardLabelUncheckedUpdateManyWithoutLabelInput>
-  }
-
   export type TaskLabelUpsertWithWhereUniqueWithoutLabelInput = {
     where: TaskLabelWhereUniqueInput
     update: XOR<TaskLabelUpdateWithoutLabelInput, TaskLabelUncheckedUpdateWithoutLabelInput>
@@ -33582,7 +32111,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCreatedLabelsInput
-    boards?: BoardLabelCreateNestedManyWithoutLabelInput
     tasks?: TaskLabelCreateNestedManyWithoutLabelInput
   }
 
@@ -33595,7 +32123,6 @@ export namespace Prisma {
     usageCount?: number
     createdAt?: Date | string
     updatedAt?: Date | string
-    boards?: BoardLabelUncheckedCreateNestedManyWithoutLabelInput
     tasks?: TaskLabelUncheckedCreateNestedManyWithoutLabelInput
   }
 
@@ -33663,7 +32190,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCreatedLabelsNestedInput
-    boards?: BoardLabelUpdateManyWithoutLabelNestedInput
     tasks?: TaskLabelUpdateManyWithoutLabelNestedInput
   }
 
@@ -33676,131 +32202,6 @@ export namespace Prisma {
     usageCount?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    boards?: BoardLabelUncheckedUpdateManyWithoutLabelNestedInput
-    tasks?: TaskLabelUncheckedUpdateManyWithoutLabelNestedInput
-  }
-
-  export type BoardCreateWithoutLabelsInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    project: ProjectCreateNestedOneWithoutBoardsInput
-    createdBy: UserCreateNestedOneWithoutCreatedBoardsInput
-    columns?: ColumnCreateNestedManyWithoutBoardInput
-  }
-
-  export type BoardUncheckedCreateWithoutLabelsInput = {
-    id?: string
-    name: string
-    projectId: string
-    created_by_id: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    columns?: ColumnUncheckedCreateNestedManyWithoutBoardInput
-  }
-
-  export type BoardCreateOrConnectWithoutLabelsInput = {
-    where: BoardWhereUniqueInput
-    create: XOR<BoardCreateWithoutLabelsInput, BoardUncheckedCreateWithoutLabelsInput>
-  }
-
-  export type LabelCreateWithoutBoardsInput = {
-    id?: string
-    name: string
-    color?: string | null
-    description?: string | null
-    usageCount?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    createdBy: UserCreateNestedOneWithoutCreatedLabelsInput
-    projects?: ProjectLabelCreateNestedManyWithoutLabelInput
-    tasks?: TaskLabelCreateNestedManyWithoutLabelInput
-  }
-
-  export type LabelUncheckedCreateWithoutBoardsInput = {
-    id?: string
-    name: string
-    color?: string | null
-    description?: string | null
-    createdById: string
-    usageCount?: number
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    projects?: ProjectLabelUncheckedCreateNestedManyWithoutLabelInput
-    tasks?: TaskLabelUncheckedCreateNestedManyWithoutLabelInput
-  }
-
-  export type LabelCreateOrConnectWithoutBoardsInput = {
-    where: LabelWhereUniqueInput
-    create: XOR<LabelCreateWithoutBoardsInput, LabelUncheckedCreateWithoutBoardsInput>
-  }
-
-  export type BoardUpsertWithoutLabelsInput = {
-    update: XOR<BoardUpdateWithoutLabelsInput, BoardUncheckedUpdateWithoutLabelsInput>
-    create: XOR<BoardCreateWithoutLabelsInput, BoardUncheckedCreateWithoutLabelsInput>
-    where?: BoardWhereInput
-  }
-
-  export type BoardUpdateToOneWithWhereWithoutLabelsInput = {
-    where?: BoardWhereInput
-    data: XOR<BoardUpdateWithoutLabelsInput, BoardUncheckedUpdateWithoutLabelsInput>
-  }
-
-  export type BoardUpdateWithoutLabelsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    project?: ProjectUpdateOneRequiredWithoutBoardsNestedInput
-    createdBy?: UserUpdateOneRequiredWithoutCreatedBoardsNestedInput
-    columns?: ColumnUpdateManyWithoutBoardNestedInput
-  }
-
-  export type BoardUncheckedUpdateWithoutLabelsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    projectId?: StringFieldUpdateOperationsInput | string
-    created_by_id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    columns?: ColumnUncheckedUpdateManyWithoutBoardNestedInput
-  }
-
-  export type LabelUpsertWithoutBoardsInput = {
-    update: XOR<LabelUpdateWithoutBoardsInput, LabelUncheckedUpdateWithoutBoardsInput>
-    create: XOR<LabelCreateWithoutBoardsInput, LabelUncheckedCreateWithoutBoardsInput>
-    where?: LabelWhereInput
-  }
-
-  export type LabelUpdateToOneWithWhereWithoutBoardsInput = {
-    where?: LabelWhereInput
-    data: XOR<LabelUpdateWithoutBoardsInput, LabelUncheckedUpdateWithoutBoardsInput>
-  }
-
-  export type LabelUpdateWithoutBoardsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    color?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    usageCount?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    createdBy?: UserUpdateOneRequiredWithoutCreatedLabelsNestedInput
-    projects?: ProjectLabelUpdateManyWithoutLabelNestedInput
-    tasks?: TaskLabelUpdateManyWithoutLabelNestedInput
-  }
-
-  export type LabelUncheckedUpdateWithoutBoardsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    color?: NullableStringFieldUpdateOperationsInput | string | null
-    description?: NullableStringFieldUpdateOperationsInput | string | null
-    createdById?: StringFieldUpdateOperationsInput | string
-    usageCount?: IntFieldUpdateOperationsInput | number
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    projects?: ProjectLabelUncheckedUpdateManyWithoutLabelNestedInput
     tasks?: TaskLabelUncheckedUpdateManyWithoutLabelNestedInput
   }
 
@@ -33808,9 +32209,9 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     column: ColumnCreateNestedOneWithoutTasksInput
@@ -33823,13 +32224,13 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
     columnId: string
     assigneeId?: string | null
     client_id?: string | null
     createdById: string
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -33849,7 +32250,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     createdBy: UserCreateNestedOneWithoutCreatedLabelsInput
     projects?: ProjectLabelCreateNestedManyWithoutLabelInput
-    boards?: BoardLabelCreateNestedManyWithoutLabelInput
   }
 
   export type LabelUncheckedCreateWithoutTasksInput = {
@@ -33862,7 +32262,6 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     projects?: ProjectLabelUncheckedCreateNestedManyWithoutLabelInput
-    boards?: BoardLabelUncheckedCreateNestedManyWithoutLabelInput
   }
 
   export type LabelCreateOrConnectWithoutTasksInput = {
@@ -33885,9 +32284,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     column?: ColumnUpdateOneRequiredWithoutTasksNestedInput
@@ -33900,13 +32299,13 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
     columnId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     client_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -33932,7 +32331,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCreatedLabelsNestedInput
     projects?: ProjectLabelUpdateManyWithoutLabelNestedInput
-    boards?: BoardLabelUpdateManyWithoutLabelNestedInput
   }
 
   export type LabelUncheckedUpdateWithoutTasksInput = {
@@ -33945,7 +32343,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     projects?: ProjectLabelUncheckedUpdateManyWithoutLabelNestedInput
-    boards?: BoardLabelUncheckedUpdateManyWithoutLabelNestedInput
   }
 
   export type ClientCreateWithoutQuotesInput = {
@@ -35111,12 +33508,12 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
     columnId: string
     client_id?: string | null
     createdById: string
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -35157,12 +33554,12 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
     columnId: string
     assigneeId?: string | null
     client_id?: string | null
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -35256,7 +33653,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutBoardsNestedInput
     columns?: ColumnUpdateManyWithoutBoardNestedInput
-    labels?: BoardLabelUpdateManyWithoutBoardNestedInput
   }
 
   export type BoardUncheckedUpdateWithoutCreatedByInput = {
@@ -35266,7 +33662,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     columns?: ColumnUncheckedUpdateManyWithoutBoardNestedInput
-    labels?: BoardLabelUncheckedUpdateManyWithoutBoardNestedInput
   }
 
   export type BoardUncheckedUpdateManyWithoutCreatedByInput = {
@@ -35281,9 +33676,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     column?: ColumnUpdateOneRequiredWithoutTasksNestedInput
@@ -35296,12 +33691,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
     columnId?: StringFieldUpdateOperationsInput | string
     client_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TaskLabelUncheckedUpdateManyWithoutTaskNestedInput
@@ -35311,12 +33706,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
     columnId?: StringFieldUpdateOperationsInput | string
     client_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -35429,9 +33824,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     column?: ColumnUpdateOneRequiredWithoutTasksNestedInput
@@ -35444,12 +33839,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
     columnId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     client_id?: NullableStringFieldUpdateOperationsInput | string | null
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TaskLabelUncheckedUpdateManyWithoutTaskNestedInput
@@ -35459,12 +33854,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
     columnId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     client_id?: NullableStringFieldUpdateOperationsInput | string | null
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -35478,7 +33873,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     projects?: ProjectLabelUpdateManyWithoutLabelNestedInput
-    boards?: BoardLabelUpdateManyWithoutLabelNestedInput
     tasks?: TaskLabelUpdateManyWithoutLabelNestedInput
   }
 
@@ -35491,7 +33885,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     projects?: ProjectLabelUncheckedUpdateManyWithoutLabelNestedInput
-    boards?: BoardLabelUncheckedUpdateManyWithoutLabelNestedInput
     tasks?: TaskLabelUncheckedUpdateManyWithoutLabelNestedInput
   }
 
@@ -35518,12 +33911,12 @@ export namespace Prisma {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
     columnId: string
     assigneeId?: string | null
     createdById: string
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -35614,9 +34007,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     column?: ColumnUpdateOneRequiredWithoutTasksNestedInput
@@ -35629,12 +34022,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
     columnId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TaskLabelUncheckedUpdateManyWithoutTaskNestedInput
@@ -35644,12 +34037,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
     columnId?: StringFieldUpdateOperationsInput | string
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -35817,8 +34210,10 @@ export namespace Prisma {
     id?: string
     labelId: string
     addedById: string
+    colorOverride?: string | null
     isFavorite?: boolean
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type QuoteCreateManyProjectInput = {
@@ -35897,7 +34292,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     createdBy?: UserUpdateOneRequiredWithoutCreatedBoardsNestedInput
     columns?: ColumnUpdateManyWithoutBoardNestedInput
-    labels?: BoardLabelUpdateManyWithoutBoardNestedInput
   }
 
   export type BoardUncheckedUpdateWithoutProjectInput = {
@@ -35907,7 +34301,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     columns?: ColumnUncheckedUpdateManyWithoutBoardNestedInput
-    labels?: BoardLabelUncheckedUpdateManyWithoutBoardNestedInput
   }
 
   export type BoardUncheckedUpdateManyWithoutProjectInput = {
@@ -35921,8 +34314,10 @@ export namespace Prisma {
   export type ProjectLabelUpdateWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     addedById?: StringFieldUpdateOperationsInput | string
+    colorOverride?: NullableStringFieldUpdateOperationsInput | string | null
     isFavorite?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     label?: LabelUpdateOneRequiredWithoutProjectsNestedInput
   }
 
@@ -35930,16 +34325,20 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     labelId?: StringFieldUpdateOperationsInput | string
     addedById?: StringFieldUpdateOperationsInput | string
+    colorOverride?: NullableStringFieldUpdateOperationsInput | string | null
     isFavorite?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectLabelUncheckedUpdateManyWithoutProjectInput = {
     id?: StringFieldUpdateOperationsInput | string
     labelId?: StringFieldUpdateOperationsInput | string
     addedById?: StringFieldUpdateOperationsInput | string
+    colorOverride?: NullableStringFieldUpdateOperationsInput | string | null
     isFavorite?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type QuoteUpdateWithoutProjectInput = {
@@ -36095,14 +34494,6 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type BoardLabelCreateManyBoardInput = {
-    id?: string
-    labelId: string
-    addedById: string
-    isFavorite?: boolean
-    createdAt?: Date | string
-  }
-
   export type ColumnUpdateWithoutBoardInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
@@ -36135,40 +34526,16 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type BoardLabelUpdateWithoutBoardInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    addedById?: StringFieldUpdateOperationsInput | string
-    isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    label?: LabelUpdateOneRequiredWithoutBoardsNestedInput
-  }
-
-  export type BoardLabelUncheckedUpdateWithoutBoardInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    labelId?: StringFieldUpdateOperationsInput | string
-    addedById?: StringFieldUpdateOperationsInput | string
-    isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BoardLabelUncheckedUpdateManyWithoutBoardInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    labelId?: StringFieldUpdateOperationsInput | string
-    addedById?: StringFieldUpdateOperationsInput | string
-    isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
   export type TaskCreateManyColumnInput = {
     id?: string
     title: string
     description?: string | null
-    price?: number | null
     dueDate?: Date | string | null
     order: number
     assigneeId?: string | null
     client_id?: string | null
     createdById: string
+    done?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -36177,9 +34544,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     assignee?: UserUpdateOneWithoutAssignedTasksNestedInput
@@ -36192,12 +34559,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     client_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tags?: TaskLabelUncheckedUpdateManyWithoutTaskNestedInput
@@ -36207,12 +34574,12 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     title?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    price?: NullableFloatFieldUpdateOperationsInput | number | null
     dueDate?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     order?: IntFieldUpdateOperationsInput | number
     assigneeId?: NullableStringFieldUpdateOperationsInput | string | null
     client_id?: NullableStringFieldUpdateOperationsInput | string | null
     createdById?: StringFieldUpdateOperationsInput | string
+    done?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -36241,16 +34608,10 @@ export namespace Prisma {
     id?: string
     projectId: string
     addedById: string
+    colorOverride?: string | null
     isFavorite?: boolean
     createdAt?: Date | string
-  }
-
-  export type BoardLabelCreateManyLabelInput = {
-    id?: string
-    boardId: string
-    addedById: string
-    isFavorite?: boolean
-    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type TaskLabelCreateManyLabelInput = {
@@ -36261,8 +34622,10 @@ export namespace Prisma {
   export type ProjectLabelUpdateWithoutLabelInput = {
     id?: StringFieldUpdateOperationsInput | string
     addedById?: StringFieldUpdateOperationsInput | string
+    colorOverride?: NullableStringFieldUpdateOperationsInput | string | null
     isFavorite?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     project?: ProjectUpdateOneRequiredWithoutLabelsNestedInput
   }
 
@@ -36270,40 +34633,20 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     addedById?: StringFieldUpdateOperationsInput | string
+    colorOverride?: NullableStringFieldUpdateOperationsInput | string | null
     isFavorite?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ProjectLabelUncheckedUpdateManyWithoutLabelInput = {
     id?: StringFieldUpdateOperationsInput | string
     projectId?: StringFieldUpdateOperationsInput | string
     addedById?: StringFieldUpdateOperationsInput | string
+    colorOverride?: NullableStringFieldUpdateOperationsInput | string | null
     isFavorite?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BoardLabelUpdateWithoutLabelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    addedById?: StringFieldUpdateOperationsInput | string
-    isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    board?: BoardUpdateOneRequiredWithoutLabelsNestedInput
-  }
-
-  export type BoardLabelUncheckedUpdateWithoutLabelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    boardId?: StringFieldUpdateOperationsInput | string
-    addedById?: StringFieldUpdateOperationsInput | string
-    isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BoardLabelUncheckedUpdateManyWithoutLabelInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    boardId?: StringFieldUpdateOperationsInput | string
-    addedById?: StringFieldUpdateOperationsInput | string
-    isFavorite?: BoolFieldUpdateOperationsInput | boolean
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TaskLabelUpdateWithoutLabelInput = {

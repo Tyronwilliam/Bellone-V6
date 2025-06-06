@@ -2,9 +2,7 @@ import type { Board, Client, Column, Label, Project, Task, User } from '@prisma/
 
 export type TaskWithAssigneeAndTags = Task & {
   assignee: User | null
-  tags: {
-    label: Label
-  }[]
+  tags: Label[]
 }
 
 export type KanbanData = {

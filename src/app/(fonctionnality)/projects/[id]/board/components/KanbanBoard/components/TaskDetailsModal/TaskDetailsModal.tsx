@@ -1,5 +1,6 @@
 'use client'
 
+import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Calendar } from '@/components/ui/calendar'
 import {
@@ -22,30 +23,30 @@ import {
   SelectValue
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
+import { TaskWithAssigneeAndTags } from '@/infrastructure/board/boardInterface'
+import { UpdateTaskInput } from '@/infrastructure/task/taskInterface'
+import { Label as LabelType, User } from '@prisma/prisma'
 import { CalendarIcon, EuroIcon, Tag, Trash2, UserIcon } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
-import { Client, Label as LabelType, Task, User } from '@prisma/prisma'
-import { TaskWithAssigneeAndTags } from '@/infrastructure/board/queries'
-import { Badge } from '@/components/ui/badge'
-
+import { User as UserAuth } from 'next-auth'
 interface TaskDetailsModalProps {
   task: TaskWithAssigneeAndTags | null
   users: User[]
-  clients: Client
   isOpen: boolean
   onClose: () => void
-  onSave: (task: TaskWithAssigneeAndTags) => void
+  onSave: (task: UpdateTaskInput) => void
   onDelete: (taskId: string) => void
+  userConnected: UserAuth
 }
 
 export function TaskDetailsModal({
   task,
   users,
-  clients,
   isOpen,
   onClose,
   onSave,
-  onDelete
+  onDelete,
+  userConnected
 }: TaskDetailsModalProps) {
   const [editedTask, setEditedTask] = useState<TaskWithAssigneeAndTags | null>(null)
   const textareaRef = useRef<HTMLTextAreaElement>(null)
@@ -60,7 +61,7 @@ export function TaskDetailsModal({
   if (!task || !editedTask) return null
 
   const handleSave = () => {
-    onSave(editedTask)
+    onSave(editedTask as UpdateTaskInput)
     onClose()
   }
 
@@ -71,23 +72,21 @@ export function TaskDetailsModal({
 
   const addTag = () => {
     const trimmed = newTag.trim()
-
     // Empêche les doublons par nom
     const alreadyExists = editedTask.tags.some(
-      (tag) => tag.label.name.toLowerCase() === trimmed.toLowerCase()
+      (tag) => tag.name.toLowerCase() === trimmed.toLowerCase()
     )
-
     if (trimmed && !alreadyExists) {
-      const newLabel: LabelType = {
-        id: crypto.randomUUID(), // ou autre générateur si nécessaire
+      const newLabel = {
         name: trimmed,
-        color: null // ou une couleur par défaut
+        color: null,
+        createdById: userConnected.id
       }
 
-      setEditedTask({
-        ...editedTask,
-        tags: [...editedTask.tags, { label: newLabel }]
-      })
+      // setEditedTask({
+      //   ...editedTask,
+      //   tags: [...editedTask.tags, { label: newLabel }]
+      // })
 
       setNewTag('')
     }
@@ -97,12 +96,12 @@ export function TaskDetailsModal({
     setEditedTask({
       ...editedTask,
       tags: editedTask.tags.filter(
-        (tag) => tag.label.name.toLowerCase() !== tagNameToRemove.toLowerCase()
+        (tag) => tag.name.toLowerCase() !== tagNameToRemove.toLowerCase()
       )
     })
   }
 
-  const assignee = users.find((u) => u.id === editedTask.assigneeId)
+  // const assignee = users.find((u) => u.id === editedTask.assigneeId)
   // const client = clients.find((c) => c.id === editedTask.client_id)
 
   return (
@@ -158,8 +157,6 @@ export function TaskDetailsModal({
             <SelectUser editedTask={editedTask} setEditedTask={setEditedTask} users={users} />
             {/* Date Due */}
             <DateComponent editedTask={editedTask} setEditedTask={setEditedTask} />
-
-            <Price editedTask={editedTask} setEditedTask={setEditedTask} />
           </aside>
         </section>{' '}
         {/* Actions */}
@@ -201,7 +198,7 @@ export function Etiquettes({ editedTask, removeTag, newTag, setNewTag, addTag }:
     <div className="space-y-2">
       <div className="flex flex-wrap gap-2 mb-2">
         {editedTask.tags.map((tag) => {
-          const label: LabelType = tag.label
+          const label: LabelType = tag
 
           if (!label) return null
 
@@ -265,50 +262,12 @@ export function Etiquettes({ editedTask, removeTag, newTag, setNewTag, addTag }:
   )
 }
 
-type PriceProps = {
+type StateTaskProps = {
   editedTask: TaskWithAssigneeAndTags
   setEditedTask: (taks: TaskWithAssigneeAndTags) => void
 }
-const Price = ({ editedTask, setEditedTask }: PriceProps) => {
-  return (
-    <div className="space-y-2">
-      <Label className="w-fit text-right ml-auto" htmlFor="Price">
-        Prix (€)
-      </Label>
-      <div className="relative  w-40">
-        <EuroIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-        <Input
-          id="price"
-          type="number"
-          value={editedTask.price || ''}
-          onChange={(e) => {
-            const value = e.target.value
-            const numericValue = Number(value)
 
-            if (value === '' || (!isNaN(numericValue) && numericValue <= 99999)) {
-              setEditedTask({
-                ...editedTask,
-                price: value ? numericValue : null
-              })
-            }
-          }}
-          onWheel={(e) => e.currentTarget.blur()} // empêche la molette
-          onKeyDown={(e) => {
-            const invalidKeys = ['e', 'E', '+', '-', '.']
-            if (invalidKeys.includes(e.key)) {
-              e.preventDefault()
-            }
-          }}
-          className="pl-10"
-          min={0}
-          max={99999}
-          step={1}
-        />
-      </div>
-    </div>
-  )
-}
-const DateComponent = ({ editedTask, setEditedTask }: PriceProps) => {
+const DateComponent = ({ editedTask, setEditedTask }: StateTaskProps) => {
   const formatted = editedTask.dueDate
     ? new Date(editedTask.dueDate).toLocaleDateString('fr-FR')
     : ''
@@ -347,7 +306,7 @@ const DateComponent = ({ editedTask, setEditedTask }: PriceProps) => {
   )
 }
 
-type SelectUserProps = PriceProps & {
+type SelectUserProps = StateTaskProps & {
   users: User[]
 }
 const SelectUser = ({ editedTask, setEditedTask, users }: SelectUserProps) => {

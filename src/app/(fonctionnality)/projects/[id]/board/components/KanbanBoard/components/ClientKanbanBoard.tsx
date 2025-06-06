@@ -3,13 +3,15 @@
 import { useEffect, useState } from 'react'
 import { KanbanBoard } from '@/app/(fonctionnality)/projects/[id]/board/components/KanbanBoard/KanbanBoard'
 import { Skeleton } from '@/components/ui/skeleton'
-import type { KanbanData } from '@/infrastructure/board/queries'
+import { User } from 'next-auth'
+import { KanbanData } from '@/infrastructure/board/boardInterface'
 
 interface ClientKanbanWrapperProps {
   initialData: KanbanData
+  userConnected: User
 }
 
-export function ClientKanbanWrapper({ initialData }: ClientKanbanWrapperProps) {
+export function ClientKanbanWrapper({ initialData, userConnected }: ClientKanbanWrapperProps) {
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
@@ -36,5 +38,5 @@ export function ClientKanbanWrapper({ initialData }: ClientKanbanWrapperProps) {
     )
   }
 
-  return <KanbanBoard initialData={initialData} />
+  return <KanbanBoard initialData={initialData} userConnected={userConnected} />
 }

@@ -1,6 +1,7 @@
 import { auth } from '@/auth'
 import type { NextRequest } from 'next/server'
 import { redirect } from 'next/navigation'
+import { Session } from 'next-auth'
 
 // Middleware pour vérifier l'authentification côté serveur
 export async function requireAuth() {
@@ -27,13 +28,5 @@ export function getTokenFromRequest(request: NextRequest): string | null {
 // Vérifier l'authentification pour les API routes
 export async function verifyApiAuth(request: NextRequest) {
   const session = await auth()
-
-  if (!session?.user) {
-    return new Response(JSON.stringify({ error: 'Non autorisé' }), {
-      status: 401,
-      headers: { 'Content-Type': 'application/json' }
-    })
-  }
-
-  return session
+  return session ?? null
 }

@@ -233,13 +233,13 @@ exports.Prisma.TaskScalarFieldEnum = {
   id: 'id',
   title: 'title',
   description: 'description',
-  price: 'price',
   dueDate: 'dueDate',
   order: 'order',
   columnId: 'columnId',
   assigneeId: 'assigneeId',
   client_id: 'client_id',
   createdById: 'createdById',
+  done: 'done',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -260,17 +260,10 @@ exports.Prisma.ProjectLabelScalarFieldEnum = {
   projectId: 'projectId',
   labelId: 'labelId',
   addedById: 'addedById',
+  colorOverride: 'colorOverride',
   isFavorite: 'isFavorite',
-  createdAt: 'createdAt'
-};
-
-exports.Prisma.BoardLabelScalarFieldEnum = {
-  id: 'id',
-  boardId: 'boardId',
-  labelId: 'labelId',
-  addedById: 'addedById',
-  isFavorite: 'isFavorite',
-  createdAt: 'createdAt'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.TaskLabelScalarFieldEnum = {
@@ -479,14 +472,8 @@ exports.Prisma.ProjectLabelOrderByRelevanceFieldEnum = {
   id: 'id',
   projectId: 'projectId',
   labelId: 'labelId',
-  addedById: 'addedById'
-};
-
-exports.Prisma.BoardLabelOrderByRelevanceFieldEnum = {
-  id: 'id',
-  boardId: 'boardId',
-  labelId: 'labelId',
-  addedById: 'addedById'
+  addedById: 'addedById',
+  colorOverride: 'colorOverride'
 };
 
 exports.Prisma.TaskLabelOrderByRelevanceFieldEnum = {
@@ -585,7 +572,6 @@ exports.Prisma.ModelName = {
   Task: 'Task',
   Label: 'Label',
   ProjectLabel: 'ProjectLabel',
-  BoardLabel: 'BoardLabel',
   TaskLabel: 'TaskLabel',
   Quote: 'Quote',
   QuoteItem: 'QuoteItem',

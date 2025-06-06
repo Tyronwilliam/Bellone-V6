@@ -1,14 +1,3 @@
-// export interface Label {
-//   id: string
-//   name: string
-//   color?: string
-//   usageCount: number
-//   source?: 'project' | 'board' | 'global'
-//   isFavorite?: boolean
-// }
-
-import { Label } from '@prisma/prisma'
-
 export interface LabelLibraryProps {
   projectLabels: Label[]
   boardLabels: Label[]
@@ -27,4 +16,54 @@ export interface GetAllLabelsOptions {
   scope?: LabelScope
   page?: number
   pageSize?: number
+}
+
+export interface LabelInput {
+  name: string
+  createdById: string
+  color: string | null
+}
+////////////////////// V0
+
+export interface Label {
+  id: string
+  name: string
+  color: string | null
+  description: string | null
+  usageCount: number
+  createdAt: string
+  createdBy: {
+    name: string | null
+    email: string
+  }
+}
+
+export interface ProjectLabel {
+  id: string
+  projectId: string
+  labelId: string
+  isFavorite: boolean
+  label: Label
+}
+
+export interface BoardLabel {
+  id: string
+  boardId: string
+  labelId: string
+  isFavorite: boolean
+  colorOverride: string | null
+  label: Label
+}
+
+export interface LabelWithSource extends Label {
+  source?: 'global' | 'project' | 'board'
+  isFavorite?: boolean
+  colorOverride?: string | null
+}
+
+export interface LabelBrowserProps {
+  projectId?: string
+  boardId?: string
+  onLabelSelect?: (label: Label) => void
+  onClose?: () => void
 }

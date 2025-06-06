@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
-import axios from 'axios'
-import { toast } from 'sonner'
 import type { KanbanData, TaskWithAssigneeAndTags } from '@/infrastructure/board/boardInterface'
-import type { Task } from '@prisma/prisma'
+import { UpdateTaskInput } from '@/infrastructure/task/taskInterface'
+import axios from 'axios'
+import { useState } from 'react'
+import { toast } from 'sonner'
 
 export function useKanbanData(initialData: KanbanData) {
   const [data, setData] = useState<KanbanData>(initialData)
@@ -13,30 +13,54 @@ export function useKanbanData(initialData: KanbanData) {
     data.tasks.filter((task) => task.columnId === columnId)
 
   const handleAddTask = async (columnId: string, title: string) => {
-    const columnTasks = getTasksForColumn(columnId)
-    const taskData = {
-      title,
-      columnId,
-      client_id: initialData.clients.id,
-      order: columnTasks.length
+    if (!columnId || !title.trim()) {
+      return toast.error('Le titre ou la colonne est manquant.')
     }
+
     try {
-      const newTask: TaskWithAssigneeAndTags = await axios.post('/api/tasks/addTask', taskData)
+      const response = await axios.post<TaskWithAssigneeAndTags>('/api/tasks/addTask', {
+        title,
+        columnId,
+        client_id: initialData.clients.id // vérifie ici que c’est bien défini
+      })
+
+      const newTask = response.data
+
       setData((prev) => ({
         ...prev,
         tasks: [...prev.tasks, newTask]
       }))
+
       toast.success('Tâche ajoutée avec succès')
-    } catch (error) {
-      toast.error('Erreur lors de la création')
+    } catch (error: any) {
+      console.error('Erreur lors de la création de tâche :', error)
+      toast.error(error?.response?.data?.message || 'Erreur lors de la création')
     }
   }
 
-  const handleSaveTask = (updatedTask: TaskWithAssigneeAndTags) => {
-    setData((prev) => ({
-      ...prev,
-      tasks: prev.tasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
-    }))
+  const handleSaveTask = async (taskInput: UpdateTaskInput) => {
+    try {
+      const { data: updatedTaskResponse, status } = await axios.patch(
+        '/api/tasks/addTask',
+        taskInput
+      )
+
+      if (status === 200) {
+        toast.success('Tâche modifiée avec succès')
+
+        setData((prev) => ({
+          ...prev,
+          tasks: prev.tasks.map((task) =>
+            task.id === updatedTaskResponse.id ? updatedTaskResponse : task
+          )
+        }))
+      } else {
+        toast.error('Une erreur est survenue')
+      }
+    } catch (error: any) {
+      console.error('Update task error:', error)
+      toast.error(error?.response?.data?.message || 'Erreur lors de la modification')
+    }
   }
 
   const handleDeleteTask = (taskId: string) => {

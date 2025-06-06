@@ -19,14 +19,15 @@ import { useDragAndDrop } from './hook/useDragAndDrop'
 import { TaskDetailsModal } from './components/TaskDetailsModal/TaskDetailsModal'
 import { addColumnAction } from './action'
 import { toast } from 'sonner'
+import { User } from 'next-auth'
 
 interface KanbanBoardProps {
   initialData: KanbanData
+  userConnected: User
 }
 
-const KanbanBoard = ({ initialData }: KanbanBoardProps) => {
+const KanbanBoard = ({ initialData, userConnected }: KanbanBoardProps) => {
   const [selectedTask, setSelectedTask] = useState<TaskWithAssigneeAndTags | null>(null)
-  console.log(initialData, 'initialData')
 
   // Custom hooks
   const sensors = useKanbanSensors()
@@ -123,11 +124,11 @@ const KanbanBoard = ({ initialData }: KanbanBoardProps) => {
       <TaskDetailsModal
         task={selectedTask}
         users={data.users}
-        clients={data.clients}
         isOpen={!!selectedTask}
         onClose={() => setSelectedTask(null)}
         onSave={handleSaveTask}
         onDelete={handleDeleteTask}
+        userConnected={userConnected}
       />
     </>
   )

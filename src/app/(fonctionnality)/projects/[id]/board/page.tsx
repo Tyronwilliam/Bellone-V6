@@ -1,10 +1,11 @@
-import { getKanbanData } from '@/infrastructure/board/queries'
+import { getKanbanData } from '@/infrastructure/board/boardQueries'
 import { ClientKanbanWrapper } from './components/KanbanBoard/components/ClientKanbanBoard'
 import { requireAuth } from 'auth-utils'
 
 export default async function BoardPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const session = await requireAuth()
+  const user = session.user
   const projectId = id
   try {
     const board = await getKanbanData(projectId)
@@ -16,7 +17,7 @@ export default async function BoardPage({ params }: { params: Promise<{ id: stri
         </div>
       )
     }
-    return <ClientKanbanWrapper initialData={board} />
+    return <ClientKanbanWrapper initialData={board} userConnected={user!} />
   } catch (error) {
     console.error('Erreur lors du chargement du board:', error)
     return (

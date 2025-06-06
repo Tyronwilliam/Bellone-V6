@@ -28,25 +28,24 @@ async function main() {
   // Nettoyer la base de données dans l'ordre des dépendances
   console.log('🧹 Nettoyage de la base de données...')
 
-  // await safeDeleteMany('Payment', () => prisma.payment.deleteMany())
-  // await safeDeleteMany('InvoiceItem', () => prisma.invoiceItem.deleteMany())
-  // await safeDeleteMany('Invoice', () => prisma.invoice.deleteMany())
-  // await safeDeleteMany('QuoteItem', () => prisma.quoteItem.deleteMany())
-  // await safeDeleteMany('Quote', () => prisma.quote.deleteMany())
-  // await safeDeleteMany('TaskLabel', () => prisma.taskLabel.deleteMany())
-  // await safeDeleteMany('Task', () => prisma.task.deleteMany())
-  // await safeDeleteMany('Column', () => prisma.column.deleteMany())
-  // await safeDeleteMany('BoardLabel', () => prisma.boardLabel.deleteMany())
-  // await safeDeleteMany('ProjectLabel', () => prisma.projectLabel.deleteMany())
-  // await safeDeleteMany('Board', () => prisma.board.deleteMany())
-  // await safeDeleteMany('ProjectMember', () => prisma.projectMember.deleteMany())
-  // await safeDeleteMany('Project', () => prisma.project.deleteMany())
-  // await safeDeleteMany('Client', () => prisma.client.deleteMany())
-  // await safeDeleteMany('Label', () => prisma.label.deleteMany())
-  // await safeDeleteMany('Session', () => prisma.session.deleteMany())
-  // await safeDeleteMany('Account', () => prisma.account.deleteMany())
-  // await safeDeleteMany('VerificationToken', () => prisma.verificationToken.deleteMany())
-  // await safeDeleteMany('User', () => prisma.user.deleteMany())
+  await safeDeleteMany('Payment', () => prisma.payment.deleteMany())
+  await safeDeleteMany('InvoiceItem', () => prisma.invoiceItem.deleteMany())
+  await safeDeleteMany('Invoice', () => prisma.invoice.deleteMany())
+  await safeDeleteMany('QuoteItem', () => prisma.quoteItem.deleteMany())
+  await safeDeleteMany('Quote', () => prisma.quote.deleteMany())
+  await safeDeleteMany('TaskLabel', () => prisma.taskLabel.deleteMany())
+  await safeDeleteMany('Task', () => prisma.task.deleteMany())
+  await safeDeleteMany('Column', () => prisma.column.deleteMany())
+  await safeDeleteMany('ProjectLabel', () => prisma.projectLabel.deleteMany())
+  await safeDeleteMany('Board', () => prisma.board.deleteMany())
+  await safeDeleteMany('ProjectMember', () => prisma.projectMember.deleteMany())
+  await safeDeleteMany('Project', () => prisma.project.deleteMany())
+  await safeDeleteMany('Client', () => prisma.client.deleteMany())
+  await safeDeleteMany('Label', () => prisma.label.deleteMany())
+  await safeDeleteMany('Session', () => prisma.session.deleteMany())
+  await safeDeleteMany('Account', () => prisma.account.deleteMany())
+  await safeDeleteMany('VerificationToken', () => prisma.verificationToken.deleteMany())
+  await safeDeleteMany('User', () => prisma.user.deleteMany())
 
   console.log('🧹 Base de données nettoyée')
 
@@ -421,7 +420,160 @@ async function main() {
 
   console.log('👥 Membres de projet créés')
 
-  // 6. Créer des devis
+  // 6. Associer des labels aux projets avec personnalisations
+  const projectLabels = await Promise.all([
+    // Projet 1 - Site E-commerce
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[0].id,
+        labelId: labels[0].id, // Urgent
+        addedById: users[0].id,
+        isFavorite: true,
+        colorOverride: '#ff0000' // Rouge plus vif
+      }
+    }),
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[0].id,
+        labelId: labels[1].id, // Bug
+        addedById: users[1].id,
+        isFavorite: false
+      }
+    }),
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[0].id,
+        labelId: labels[2].id, // Feature
+        addedById: users[1].id,
+        isFavorite: true,
+        colorOverride: '#00aa00' // Vert personnalisé
+      }
+    }),
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[0].id,
+        labelId: labels[3].id, // Design
+        addedById: users[2].id,
+        isFavorite: true
+      }
+    }),
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[0].id,
+        labelId: labels[4].id, // Backend
+        addedById: users[1].id,
+        isFavorite: false
+      }
+    }),
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[0].id,
+        labelId: labels[5].id, // Frontend
+        addedById: users[1].id,
+        isFavorite: false
+      }
+    }),
+
+    // Projet 2 - App Mobile
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[1].id,
+        labelId: labels[0].id, // Urgent
+        addedById: users[0].id,
+        isFavorite: true
+      }
+    }),
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[1].id,
+        labelId: labels[2].id, // Feature
+        addedById: users[1].id,
+        isFavorite: true
+      }
+    }),
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[1].id,
+        labelId: labels[6].id, // Testing
+        addedById: users[3].id,
+        isFavorite: false,
+        colorOverride: '#ffa500' // Orange personnalisé
+      }
+    }),
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[1].id,
+        labelId: labels[8].id, // Review
+        addedById: users[3].id,
+        isFavorite: true
+      }
+    }),
+
+    // Projet 3 - Site Vitrine
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[2].id,
+        labelId: labels[3].id, // Design
+        addedById: users[2].id,
+        isFavorite: true
+      }
+    }),
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[2].id,
+        labelId: labels[5].id, // Frontend
+        addedById: users[2].id,
+        isFavorite: false
+      }
+    }),
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[2].id,
+        labelId: labels[8].id, // Review
+        addedById: users[0].id,
+        isFavorite: false
+      }
+    }),
+
+    // Projet 4 - API REST
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[3].id,
+        labelId: labels[4].id, // Backend
+        addedById: users[1].id,
+        isFavorite: true
+      }
+    }),
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[3].id,
+        labelId: labels[6].id, // Testing
+        addedById: users[1].id,
+        isFavorite: true
+      }
+    }),
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[3].id,
+        labelId: labels[7].id, // Documentation
+        addedById: users[1].id,
+        isFavorite: false,
+        colorOverride: '#888888' // Gris personnalisé
+      }
+    }),
+    prisma.projectLabel.create({
+      data: {
+        projectId: projects[3].id,
+        labelId: labels[9].id, // Deployment
+        addedById: users[1].id,
+        isFavorite: false
+      }
+    })
+  ])
+
+  console.log('🏷️ Labels associés aux projets avec personnalisations')
+
+  // 7. Créer des devis
   const quotes = await Promise.all([
     prisma.quote.create({
       data: {
@@ -484,7 +636,7 @@ async function main() {
 
   console.log('📋 Devis créés')
 
-  // 7. Créer des lignes de devis
+  // 8. Créer des lignes de devis
   const quoteItems = await Promise.all([
     // Devis 1 - E-commerce
     prisma.quoteItem.create({
@@ -575,7 +727,7 @@ async function main() {
 
   console.log('📝 Lignes de devis créées')
 
-  // 8. Créer des factures
+  // 9. Créer des factures
   const invoices = await Promise.all([
     // Facture basée sur le devis accepté
     prisma.invoice.create({
@@ -624,7 +776,7 @@ async function main() {
 
   console.log('🧾 Factures créées')
 
-  // 9. Créer des lignes de facture
+  // 10. Créer des lignes de facture
   const invoiceItems = await Promise.all([
     // Facture 1 - Acompte E-commerce
     prisma.invoiceItem.create({
@@ -663,7 +815,7 @@ async function main() {
 
   console.log('📄 Lignes de facture créées')
 
-  // 10. Créer des paiements
+  // 11. Créer des paiements
   const payments = await Promise.all([
     prisma.payment.create({
       data: {
@@ -681,7 +833,7 @@ async function main() {
 
   console.log('💰 Paiements créés')
 
-  // 11. Créer des boards (simplifié pour l'exemple)
+  // 12. Créer des boards
   const boards = await Promise.all([
     prisma.board.create({
       data: {
@@ -696,13 +848,21 @@ async function main() {
         projectId: projects[1].id,
         created_by_id: users[3].id
       }
+    }),
+    prisma.board.create({
+      data: {
+        name: 'Design Site Vitrine',
+        projectId: projects[2].id,
+        created_by_id: users[2].id
+      }
     })
   ])
 
   console.log('📋 Boards créés')
 
-  // 12. Créer quelques colonnes et tâches (simplifié)
+  // 13. Créer quelques colonnes et tâches
   const columns = await Promise.all([
+    // Board 1 - E-commerce
     prisma.column.create({
       data: {
         name: 'À faire',
@@ -729,12 +889,42 @@ async function main() {
         color: '#10b981',
         boardId: boards[0].id
       }
+    }),
+
+    // Board 2 - Mobile App
+    prisma.column.create({
+      data: {
+        name: 'Backlog',
+        order: 0,
+        position: 0,
+        color: '#6b7280',
+        boardId: boards[1].id
+      }
+    }),
+    prisma.column.create({
+      data: {
+        name: 'Sprint',
+        order: 1,
+        position: 1,
+        color: '#3b82f6',
+        boardId: boards[1].id
+      }
+    }),
+    prisma.column.create({
+      data: {
+        name: 'Review',
+        order: 2,
+        position: 2,
+        color: '#ec4899',
+        boardId: boards[1].id
+      }
     })
   ])
 
   console.log('📊 Colonnes créées')
 
   const tasks = await Promise.all([
+    // Tâches Board 1 - E-commerce
     prisma.task.create({
       data: {
         title: "Développer l'authentification utilisateur",
@@ -760,10 +950,120 @@ async function main() {
         client_id: clients[0].id,
         createdById: users[0].id
       }
+    }),
+    prisma.task.create({
+      data: {
+        title: "Design de l'interface utilisateur",
+        description: "Créer les maquettes et prototypes de l'interface",
+        price: 800,
+        dueDate: new Date('2025-07-15'),
+        order: 0,
+        columnId: columns[2].id, // Terminé
+        assigneeId: users[2].id, // Marie Martin
+        client_id: clients[0].id,
+        createdById: users[0].id
+      }
+    }),
+
+    // Tâches Board 2 - Mobile App
+    prisma.task.create({
+      data: {
+        title: "Architecture de l'application mobile",
+        description: "Définir l'architecture technique et les technologies",
+        price: 2000,
+        dueDate: new Date('2025-07-30'),
+        order: 0,
+        columnId: columns[4].id, // Sprint
+        assigneeId: users[1].id, // John Doe
+        client_id: clients[1].id,
+        createdById: users[3].id
+      }
+    }),
+    prisma.task.create({
+      data: {
+        title: 'Tests utilisateurs',
+        description: 'Organiser et analyser les tests utilisateurs',
+        price: 600,
+        dueDate: new Date('2025-08-15'),
+        order: 0,
+        columnId: columns[3].id, // Backlog
+        assigneeId: users[3].id, // Paul Durand
+        client_id: clients[1].id,
+        createdById: users[3].id
+      }
     })
   ])
 
   console.log('✅ Tâches créées')
+
+  // 14. Associer des labels aux tâches
+  const taskLabels = await Promise.all([
+    // Tâche 1 - Authentification (Urgent + Backend)
+    prisma.taskLabel.create({
+      data: {
+        task_id: tasks[0].id,
+        label_id: labels[0].id // Urgent
+      }
+    }),
+    prisma.taskLabel.create({
+      data: {
+        task_id: tasks[0].id,
+        label_id: labels[4].id // Backend
+      }
+    }),
+
+    // Tâche 2 - Stripe (Feature + Backend)
+    prisma.taskLabel.create({
+      data: {
+        task_id: tasks[1].id,
+        label_id: labels[2].id // Feature
+      }
+    }),
+    prisma.taskLabel.create({
+      data: {
+        task_id: tasks[1].id,
+        label_id: labels[4].id // Backend
+      }
+    }),
+
+    // Tâche 3 - Design UI (Design)
+    prisma.taskLabel.create({
+      data: {
+        task_id: tasks[2].id,
+        label_id: labels[3].id // Design
+      }
+    }),
+
+    // Tâche 4 - Architecture (Feature + Backend)
+    prisma.taskLabel.create({
+      data: {
+        task_id: tasks[3].id,
+        label_id: labels[2].id // Feature
+      }
+    }),
+    prisma.taskLabel.create({
+      data: {
+        task_id: tasks[3].id,
+        label_id: labels[4].id // Backend
+      }
+    }),
+
+    // Tâche 5 - Tests (Testing + Review)
+    prisma.taskLabel.create({
+      data: {
+        task_id: tasks[4].id,
+        label_id: labels[6].id // Testing
+      }
+    }),
+    prisma.taskLabel.create({
+      data: {
+        task_id: tasks[4].id,
+        label_id: labels[8].id // Review
+      }
+    })
+  ])
+
+  console.log('🏷️ Labels associés aux tâches')
 
   console.log('🎉 Seeding terminé avec succès!')
   console.log(`
@@ -772,12 +1072,22 @@ async function main() {
 - ${clients.length} clients créés (entreprises et particuliers)
 - ${labels.length} labels globaux créés
 - ${projects.length} projets créés
+- ${projectLabels.length} associations projet-label avec personnalisations
 - ${quotes.length} devis créés avec ${quoteItems.length} lignes
 - ${invoices.length} factures créées avec ${invoiceItems.length} lignes
 - ${payments.length} paiements enregistrés
 - ${boards.length} boards créés
 - ${columns.length} colonnes créées
 - ${tasks.length} tâches créées
+- ${taskLabels.length} associations tâche-label
+
+🏷️ Système de labels simplifié:
+- Labels globaux communautaires
+- Association uniquement aux projets (avec personnalisations)
+- Héritage automatique pour tous les boards du projet
+- Association directe aux tâches
+- Couleurs personnalisées et favoris par projet
+- Compteur d'utilisation global
 
 💼 Types de clients:
 - Entreprises avec compte utilisateur

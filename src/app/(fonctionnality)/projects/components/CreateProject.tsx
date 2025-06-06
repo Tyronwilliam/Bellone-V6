@@ -22,7 +22,6 @@ import { toast } from 'sonner'
 import { z } from 'zod'
 import { addProject, ProjectPost } from '../action'
 import { CreateClientForm } from './CreateClientForm'
-import { PartialClient } from './ProjectBoard'
 import { SelectComponent } from './SelectComponent'
 import {
   Dialog,
@@ -32,6 +31,7 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
+import { PartialClient } from '@/infrastructure/client/clientInterface'
 
 const createProjectSchema = z.object({
   name: z.string().min(2, 'Nom requis'),

@@ -10,19 +10,12 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
-import { Client, Project } from '@prisma/prisma'
+import { PartialClient, ProjectAndClient } from '@/infrastructure/client/clientInterface'
 import { Building2, CalendarDays, FileText } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { ModalCreateProject } from './CreateProject'
 
-export type ProjectAndClient = Project & { client: Client }
-export type PartialClient = {
-  id: string
-  email: string
-  firstName: string
-  companyName: string | null
-}
 function formatDate(date: Date) {
   return new Date(date).toLocaleDateString('fr-FR', {
     year: 'numeric',
@@ -40,9 +33,7 @@ export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) 
   const [isOpen, setIsOpen] = useState(false)
 
   const toggle: () => void = () => setIsOpen(!isOpen)
-  useEffect(() => {
-    console.log(projects, 'PROJECTS')
-  }, [])
+
   return (
     <div className="container mx-auto py-8 px-4">
       <div className="mb-8 flex flex-col space-y-2">
@@ -50,7 +41,6 @@ export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) 
         <p className="text-muted-foreground mt-2">Gérez et consultez tous vos projets en cours</p>
         <ModalCreateProject isOpen={isOpen} toggle={toggle} clients={clients} />
       </div>
-      {/* ICI */}
       <CardCustom
         header={
           <CardHeader>

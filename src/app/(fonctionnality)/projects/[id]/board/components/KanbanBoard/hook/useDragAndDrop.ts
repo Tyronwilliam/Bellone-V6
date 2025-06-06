@@ -5,7 +5,7 @@ import type React from 'react'
 import { useState } from 'react'
 import { arrayMove } from '@dnd-kit/sortable'
 import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
-import type { KanbanData } from '@/infrastructure/board/boardInterface'
+import type { KanbanData, TaskWithAssigneeAndTags } from '@/infrastructure/board/boardInterface'
 import { Task } from '@prisma/prisma'
 
 export function useDragAndDrop(
@@ -123,7 +123,7 @@ export function useDragAndDrop(
       const overTask = data.tasks.find((t) => t.id === overId)
 
       if (activeTask && overTask && activeTask.columnId === overTask.columnId) {
-        setData((prev: ) => {
+        setData((prev: KanbanData) => {
           const columnTasks = prev.tasks
             .filter((t) => t.columnId === activeTask.columnId)
             .sort((a, b) => a.order - b.order)
@@ -132,14 +132,14 @@ export function useDragAndDrop(
           const overIndex = columnTasks.findIndex((t) => t.id === overId)
 
           const reorderedTasks = arrayMove(columnTasks, activeIndex, overIndex)
-          const updatedTasks = reorderedTasks.map((task: Task, index: number) => ({
+          const updatedTasks = reorderedTasks.map((task, index: number) => ({
             ...task,
             order: index
           }))
 
           return {
             ...prev,
-            tasks: prev.tasks.map((task) => {
+            tasks: prev.tasks.map((task: TaskWithAssigneeAndTags) => {
               const updatedTask = updatedTasks.find((t: Task) => t.id === task.id)
               return updatedTask || task
             })
