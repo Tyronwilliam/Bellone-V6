@@ -114,12 +114,14 @@ export async function createGlobalLabel({
   name,
   color,
   description,
-  userId
+  userId,
+  taskId
 }: {
   name: string
   color?: string
   description?: string
   userId: string
+  taskId?: string
 }) {
   // Vérifier si un label avec ce nom existe déjà
   const existingLabel = await prisma.label.findUnique({

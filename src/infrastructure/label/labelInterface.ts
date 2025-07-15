@@ -18,11 +18,15 @@ export interface GetAllLabelsOptions {
   pageSize?: number
 }
 
-export interface LabelInput {
+export interface AddLabelInput {
   name: string
-  createdById: string
-  color: string | null
+  color?: string
+  taskId?: string
 }
+// name,
+// color,
+// description,
+// userId
 ////////////////////// V0
 
 export interface Label {

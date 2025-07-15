@@ -29,6 +29,8 @@ import { Label as LabelType, User } from '@prisma/prisma'
 import { CalendarIcon, EuroIcon, Tag, Trash2, UserIcon } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { User as UserAuth } from 'next-auth'
+import { toast } from 'sonner'
+import axios from 'axios'
 interface TaskDetailsModalProps {
   task: TaskWithAssigneeAndTags | null
   users: User[]
@@ -70,23 +72,38 @@ export function TaskDetailsModal({
     onClose()
   }
 
-  const addTag = () => {
+  const addTag = async () => {
     const trimmed = newTag.trim()
     // Empêche les doublons par nom
-    const alreadyExists = editedTask.tags.some(
-      (tag) => tag.name.toLowerCase() === trimmed.toLowerCase()
-    )
+    const alreadyExists =
+      editedTask.tags.length > 0
+        ? editedTask.tags.some((tag: any) => tag.label.name.toLowerCase() === trimmed.toLowerCase())
+        : false
     if (trimmed && !alreadyExists) {
       const newLabel = {
         name: trimmed,
         color: null,
-        createdById: userConnected.id
+        createdById: userConnected.id,
+        taskId: editedTask.id
       }
+      try {
+        const { data: label, status } = await axios.post('/api/label', newLabel)
 
-      // setEditedTask({
-      //   ...editedTask,
-      //   tags: [...editedTask.tags, { label: newLabel }]
-      // })
+        if (status === 200 || status === 201) {
+          toast.success('Tâche modifiée avec succès')
+          console.log(label, 'label')
+          console.log(editedTask, 'editedTask')
+          setEditedTask({
+            ...editedTask,
+            tags: [...editedTask.tags, label.label]
+          })
+        } else {
+          toast.error('Une erreur est survenue')
+        }
+      } catch (error: any) {
+        console.error('Update task error:', error)
+        toast.error(error?.response?.data?.message || 'Erreur lors de la modification')
+      }
 
       setNewTag('')
     }
@@ -186,7 +203,6 @@ type EtiquettesProps = {
 
 export function Etiquettes({ editedTask, removeTag, newTag, setNewTag, addTag }: EtiquettesProps) {
   const [isOpen, setIsOpen] = useState(false)
-
   const handleAdd = () => {
     if (newTag.trim()) {
       addTag()
@@ -197,19 +213,17 @@ export function Etiquettes({ editedTask, removeTag, newTag, setNewTag, addTag }:
   return (
     <div className="space-y-2">
       <div className="flex flex-wrap gap-2 mb-2">
-        {editedTask.tags.map((tag) => {
-          const label: LabelType = tag
-
-          if (!label) return null
-
+        {editedTask.tags.map((tag: any) => {
+          // tag return object label + label_id +task_id + created_at
+          if (!tag.label) return null
           return (
             <Badge
-              key={label.name}
+              key={tag.label.id}
               variant="secondary"
               className="cursor-pointer text-sm rounded-none p-2 capitalize"
             >
-              {label.name}
-              <button onClick={() => removeTag(label.name)} className="ml-1 hover:text-red-600">
+              {tag.label.name}
+              <button onClick={() => removeTag(tag.label.name)} className="ml-1 hover:text-red-600">
                 x
               </button>
             </Badge>

@@ -19,7 +19,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
   try {
     const project: FullProject = await findUniqueProject(projectId)
-
     if (!project) {
       redirect('/projects?error=not-found')
     }

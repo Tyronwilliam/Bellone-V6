@@ -13,9 +13,7 @@ export async function getBoard(projectId: string): Promise<Board[]> {
 
 export async function getKanbanData(projectId: string): Promise<KanbanData | null> {
   const project = await prisma.project.findUnique({
-    where: {
-      id: projectId
-    },
+    where: { id: projectId },
     include: {
       client: true,
       members: {
@@ -43,12 +41,25 @@ export async function getKanbanData(projectId: string): Promise<KanbanData | nul
 
   if (!project) return null
 
+  // Extraire les tâches
+  const tasks = project.boards.flatMap((board) => board.columns).flatMap((column) => column.tasks)
+
+  // Extraire tous les labels des tâches (via tags)
+  const labels = tasks
+    .flatMap((task) => task.tags)
+    .map((tag) => tag.label)
+    .filter((label): label is NonNullable<typeof label> => !!label)
+
+  // Supprimer les doublons de labels (basé sur l'id)
+  const uniqueLabels = Array.from(new Map(labels.map((label) => [label.id, label])).values())
+
   return {
     projects: project,
-    clients: project.client,
+    client: project.client,
     users: project.members.map((m) => m.user),
     boards: project.boards,
     columns: project.boards.flatMap((b) => b.columns),
-    tasks: project.boards.flatMap((b) => b.columns.flatMap((c) => c.tasks))
+    tasks,
+    labels: uniqueLabels
   }
 }

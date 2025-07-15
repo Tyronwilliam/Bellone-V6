@@ -115,15 +115,15 @@ export const BadgePreview = ({ tags }: { tags: Label[] }) => {
     tags &&
     tags.length > 0 && (
       <div className="flex flex-wrap gap-1 mb-2">
-        {tags.slice(0, 3).map((tag) => {
+        {tags.slice(0, 3).map((tag: any) => {
           if (!tag) return null
           return (
             <Badge
-              key={tag.id}
+              key={tag.label.id}
               variant="secondary"
-              className={cn('text-xs', tag.color && `bg-[${tag.color}]`)}
+              className={cn('text-xs', tag.label.color && `bg-[${tag.label.color}]`)}
             >
-              {tag.name}
+              {tag.label.name}
             </Badge>
           )
         })}{' '}

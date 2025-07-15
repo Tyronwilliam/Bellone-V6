@@ -152,7 +152,7 @@ export function CreateProject({ clients, closeAsModal }: CreateProjectProps) {
               render={({ field }) => (
                 <FormItem className="col-span-2 w-full flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
                   <div className="space-y-0.5">
-                    <FormLabel>Client actif</FormLabel>
+                    <FormLabel>Cacher le Kanban au client</FormLabel>
                     <FormDescription>Activer pour masquer le Kanban au client</FormDescription>
                   </div>
                   <FormControl>
