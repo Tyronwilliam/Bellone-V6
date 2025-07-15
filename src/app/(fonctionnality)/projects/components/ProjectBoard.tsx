@@ -15,14 +15,8 @@ import { Building2, CalendarDays, FileText } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { ModalCreateProject } from './CreateProject'
+import { formatDate } from '@/app/utils/format'
 
-function formatDate(date: Date) {
-  return new Date(date).toLocaleDateString('fr-FR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
-}
 type ProjectBoardProps = {
   projects: ProjectAndClient[]
   clients?: PartialClient[]

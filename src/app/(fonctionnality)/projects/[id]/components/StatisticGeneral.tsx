@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
 import { FullProject } from '@/infrastructure/project/projectQueries'
 import { AlertTriangle, CheckCircle, Clock, Euro } from 'lucide-react'
-import { FinancialStatTask, StatsTask } from './ProjectDashboard'
+import { FinancialStatTask, StatsTask } from '../ProjectDashboard'
 import { formatCurrency } from '@/app/utils/format'
 export default function StatisticGeneral({
   taskStats,

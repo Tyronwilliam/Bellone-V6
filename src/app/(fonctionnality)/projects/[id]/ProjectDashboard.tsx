@@ -1,39 +1,16 @@
 'use client'
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { Progress } from '@/components/ui/progress'
-import { Separator } from '@/components/ui/separator'
-import {
-  Building2,
-  User,
-  Calendar,
-  CheckCircle,
-  Clock,
-  AlertTriangle,
-  Euro,
-  FileText,
-  Receipt,
-  CreditCard,
-  Users,
-  Kanban,
-  Plus,
-  ExternalLink,
-  Mail,
-  Phone,
-  Globe,
-  MapPin
-} from 'lucide-react'
-import { useRouter } from 'next/navigation'
-import type { Session } from 'next-auth'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { FullProject } from '@/infrastructure/project/projectQueries'
-import Entete from './Entete'
-import StatisticGeneral from './StatisticGeneral'
-import ClientInformation from './ClientInformation'
-import MembersInformation from './MembersInformation'
-import { FinancialOverview } from './FinancialOverview'
+import { Kanban, Plus } from 'lucide-react'
+import type { Session } from 'next-auth'
+import { useRouter } from 'next/navigation'
+import ClientInformation from './components/ClientInformation'
+import Entete from './components/Entete'
+import { FinancialOverview } from './components/FinancialOverview'
+import MembersInformation from './components/MembersInformation'
+import StatisticGeneral from './components/StatisticGeneral'
 
 export interface StatsTask {
   total: number
@@ -66,6 +43,9 @@ export function ProjectDashboard({
 
   if (!project) return
 
+  const isProjectAdmin = project.members?.some(
+    (member) => member.role === 'admin' && member.userId === session.user!.id
+  )
   return (
     <div className="space-y-6">
       {/* En-tête du projet */}
@@ -75,7 +55,7 @@ export function ProjectDashboard({
       <StatisticGeneral taskStats={taskStats} financialStats={financialStats} project={project} />
       <div className="grid gap-6 md:grid-cols-2">
         {/* Informations client */}
-        <ClientInformation project={project} />
+        <ClientInformation project={project} isProjectAdmin={isProjectAdmin} />
         {/* Équipe du projet */}
         <MembersInformation project={project} />
       </div>

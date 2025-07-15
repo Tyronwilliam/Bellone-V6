@@ -4,21 +4,20 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { FullProject } from '@/infrastructure/project/projectQueries'
-import {
-    Building2,
-    ExternalLink,
-    Globe,
-    Mail,
-    MapPin,
-    Phone,
-    User
-} from 'lucide-react'
+import { Session, User } from 'next-auth'
+import { Building2, ExternalLink, Globe, Mail, MapPin, Phone, User as UserIcon } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { cn } from 'lib/utils/classnames'
 
-export default function ClientInformation({ project }: { project: FullProject }) {
+export default function ClientInformation({
+  project,
+  isProjectAdmin
+}: {
+  project: FullProject
+  isProjectAdmin: boolean
+}) {
   if (!project) return
   const router = useRouter()
-
   return (
     <Card>
       <CardHeader>
@@ -26,7 +25,7 @@ export default function ClientInformation({ project }: { project: FullProject })
           {project.client.type === 'COMPANY' ? (
             <Building2 className="h-5 w-5" />
           ) : (
-            <User className="h-5 w-5" />
+            <UserIcon className="h-5 w-5" />
           )}
           Informations client
         </CardTitle>
@@ -34,7 +33,9 @@ export default function ClientInformation({ project }: { project: FullProject })
       <CardContent className="space-y-4">
         <div>
           <h3 className="font-semibold">
-            {project.client.firstName} {project.client.lastName}
+            {project.client.firstName}
+
+            {isProjectAdmin && project.client.lastName}
           </h3>
           {project.client.companyName && (
             <p className="text-sm text-muted-foreground">{project.client.companyName}</p>
@@ -42,11 +43,13 @@ export default function ClientInformation({ project }: { project: FullProject })
         </div>
 
         <div className="space-y-2">
-          <div className="flex items-center gap-2 text-sm">
-            <Mail className="h-4 w-4 text-muted-foreground" />
-            <span>{project.client.email}</span>
-          </div>
-          {project.client.phone && (
+          {isProjectAdmin && (
+            <div className="flex items-center gap-2 text-sm">
+              <Mail className="h-4 w-4 text-muted-foreground" />
+              <span>{project.client.email}</span>
+            </div>
+          )}
+          {project.client.phone && isProjectAdmin && (
             <div className="flex items-center gap-2 text-sm">
               <Phone className="h-4 w-4 text-muted-foreground" />
               <span>{project.client.phone}</span>
@@ -66,7 +69,12 @@ export default function ClientInformation({ project }: { project: FullProject })
             </div>
           )}
           {project.client.address && (
-            <div className="flex items-center gap-2 text-sm">
+            <div
+              className={cn(
+                'flex items-center gap-2 text-sm',
+                !isProjectAdmin ? 'blur-sm pointer-events-none select-none' : ''
+              )}
+            >
               <MapPin className="h-4 w-4 text-muted-foreground" />
               <span>
                 {project.client.address}, {project.client.city} {project.client.postalCode}
@@ -89,15 +97,16 @@ export default function ClientInformation({ project }: { project: FullProject })
             {project.client.type === 'COMPANY' ? 'Entreprise' : 'Particulier'}
           </Badge>
         </div>
-
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => router.push(`/clients/${project.client.id}`)}
-        >
-          <ExternalLink className="mr-2 h-4 w-4" />
-          Voir le profil client
-        </Button>
+        {isProjectAdmin && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => router.push(`/clients/${project.client.id}`)}
+          >
+            <ExternalLink className="mr-2 h-4 w-4" />
+            Voir le profil client
+          </Button>
+        )}
       </CardContent>
     </Card>
   )

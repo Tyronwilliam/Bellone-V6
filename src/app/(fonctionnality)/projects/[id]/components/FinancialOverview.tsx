@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Plus, FileText, Receipt, CreditCard } from 'lucide-react'
 import { formatCurrency } from '@/app/utils/format'
 import { FullProject } from '@/infrastructure/project/projectQueries'
-import { FinancialStatTask } from './ProjectDashboard'
+import { FinancialStatTask } from '../ProjectDashboard'
 
 type FinancialOverviewProps = {
   project: FullProject

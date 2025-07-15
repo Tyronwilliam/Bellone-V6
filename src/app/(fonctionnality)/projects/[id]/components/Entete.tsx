@@ -1,5 +1,6 @@
 'use client'
 
+import { formatDate } from '@/app/utils/format'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { FullProject } from '@/infrastructure/project/projectQueries'
@@ -8,13 +9,7 @@ import { useRouter } from 'next/navigation'
 
 export default function Entete({ project }: { project: FullProject }) {
   const router = useRouter()
-  const formatDate = (date: string | Date) => {
-    return new Date(date).toLocaleDateString('fr-FR', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
-  }
+
   if (!project) return
 
   return (

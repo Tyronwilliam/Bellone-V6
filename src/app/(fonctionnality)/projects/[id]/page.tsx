@@ -1,7 +1,7 @@
 import { findUniqueProject, FullProject } from '@/infrastructure/project/projectQueries'
 import { requireAuth } from 'auth-utils'
 import { redirect } from 'next/navigation'
-import { ProjectDashboard } from './components/ProjectDashboard'
+import { ProjectDashboard } from './ProjectDashboard'
 
 interface ProjectPageProps {
   params: Promise<{ id: string }>
