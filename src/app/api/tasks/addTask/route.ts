@@ -46,7 +46,7 @@ export async function PATCH(req: NextRequest) {
 
     // Optionnel : autorisation
     const task = await prisma.task.findUnique({
-      where: { id: input.taskId },
+      where: { id: input.id },
       select: { createdById: true }
     })
 

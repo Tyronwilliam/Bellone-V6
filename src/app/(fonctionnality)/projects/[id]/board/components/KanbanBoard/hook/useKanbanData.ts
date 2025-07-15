@@ -8,6 +8,7 @@ import { toast } from 'sonner'
 
 export function useKanbanData(initialData: KanbanData) {
   const [data, setData] = useState<KanbanData>(initialData)
+  console.log(initialData, 'INITIAL DATA')
 
   const getTasksForColumn = (columnId: string) =>
     data.tasks.filter((task) => task.columnId === columnId)
@@ -23,6 +24,7 @@ export function useKanbanData(initialData: KanbanData) {
         columnId,
         client_id: initialData.clients.id // vérifie ici que c’est bien défini
       })
+      console.log(response, 'ADD TASK')
 
       const newTask = response.data
 
@@ -39,6 +41,7 @@ export function useKanbanData(initialData: KanbanData) {
   }
 
   const handleSaveTask = async (taskInput: UpdateTaskInput) => {
+    console.log(taskInput, 'TASK INPUT')
     try {
       const { data: updatedTaskResponse, status } = await axios.patch(
         '/api/tasks/addTask',

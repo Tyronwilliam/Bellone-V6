@@ -55,11 +55,11 @@ export async function getKanbanData(projectId: string): Promise<KanbanData | nul
 
   return {
     projects: project,
-    client: project.client,
+    clients: project.client,
     users: project.members.map((m) => m.user),
     boards: project.boards,
     columns: project.boards.flatMap((b) => b.columns),
-    tasks,
+    tasks: tasks,
     labels: uniqueLabels
   }
 }
