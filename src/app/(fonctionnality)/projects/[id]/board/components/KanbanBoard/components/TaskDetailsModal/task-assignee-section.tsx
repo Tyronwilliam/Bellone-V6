@@ -8,41 +8,56 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
+import { TaskWithAssigneeAndTags } from '@/infrastructure/board/boardInterface'
 import { User } from '@prisma/prisma'
-import { UserIcon } from 'lucide-react'
+import { Delete, UserIcon } from 'lucide-react'
 
 interface TaskAssigneeSectionProps {
-  assigneeId: string | null
+  assignee: TaskWithAssigneeAndTags
   users: User[]
   onAssigneeChange: (assigneeId: string | null) => void
+  isLoading: boolean
 }
 
 export function TaskAssigneeSection({
-  assigneeId,
+  assignee,
   users,
-  onAssigneeChange
+  onAssigneeChange,
+  isLoading
 }: TaskAssigneeSectionProps) {
+  const currentAssignee = users.find((u) => u.id === assignee.assigneeId)
+
   return (
-    <div className="space-y-2">
-      <Label className="w-fit text-right ml-auto text-sm" htmlFor="assignee">
-        Assigné à
+    <div className="space-y-2 w-full">
+      <Label className="mx-auto w-fit text-sm" htmlFor="assignee">
+        Members
       </Label>
       <div className="relative">
         <UserIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
         <Select
-          value={assigneeId || 'none'}
+          disabled={isLoading}
           onValueChange={(value) => onAssigneeChange(value === 'none' ? null : value)}
         >
-          <SelectTrigger className="pl-10">
-            <SelectValue placeholder="Sélectionner un utilisateur" />
+          <SelectTrigger className="pl-10 w-full min-h-[40px]">
+            {' '}
+            {/* Fix taille ici */}
+            <SelectValue placeholder={currentAssignee?.email ?? 'Add members'} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="none">Aucun</SelectItem>
-            {users.map((user) => (
-              <SelectItem key={user.id} value={user.id}>
-                {user.name}
+            {assignee.assignee !== null && (
+              <SelectItem value="none">
+                {assignee.assignee?.email} <Delete className="inline ml-1 w-4 h-4" />
               </SelectItem>
-            ))}
+            )}
+            {users?.length > 0 &&
+              users?.map(
+                (user) =>
+                  user.id !== assignee.assigneeId && (
+                    <SelectItem key={user.id} value={user.id}>
+                      {user.email}
+                    </SelectItem>
+                  )
+              )}
           </SelectContent>
         </Select>
       </div>

@@ -43,7 +43,7 @@ export function TaskTitleEditor({
       value={title}
       onChange={handleChange}
       rows={1}
-      className="w-full h-auto resize-none overflow-hidden  !text-2xl font-bold border-none shadow-none pt-4 px-4 focus-visible:ring-0 focus-visible:outline-none leading-tight"
+      className="w-[95%] h-auto resize-none overflow-hidden  !text-2xl font-bold border-none shadow-none pt-4 px-4 focus-visible:ring-0 focus-visible:outline-none leading-tight"
       placeholder={placeholder}
     />
   )

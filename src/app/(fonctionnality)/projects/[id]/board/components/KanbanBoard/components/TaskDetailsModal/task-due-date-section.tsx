@@ -15,8 +15,8 @@ export function TaskDueDateSection({ dueDate, onDueDateChange }: TaskDueDateSect
   const formatted = dueDate ? new Date(dueDate).toLocaleDateString('fr-FR') : ''
 
   return (
-    <div className="space-y-2 flex flex-col w-40">
-      <Label className="w-fit text-right ml-auto text-sm">Date d'échéance</Label>
+    <div className="space-y-2 flex flex-col w-full">
+      <Label className="mx-auto w-fit text-sm">Due date</Label>
       <Popover>
         <PopoverTrigger asChild>
           <Button variant="outline" className="w-full justify-start text-left pl-10 bg-transparent">

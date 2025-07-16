@@ -42,7 +42,7 @@ export async function updatedTask(input: UpdateTaskInput) {
     dueDate: input.dueDate,
     order: input.order,
     columnId: input.columnId,
-    assigneeId: input.assigneeId,
+    assigneeId: input.assigneeId ?? null,
     client_id: input.client_id,
     done: input.done
   })
@@ -50,5 +50,29 @@ export async function updatedTask(input: UpdateTaskInput) {
   return prisma.task.update({
     where: { id: input.id },
     data: updateData
+  })
+}
+export async function updatedMembers(input: UpdateTaskInput) {
+  const updateData = cleanFalsyFields({
+    title: input.title && input.title.toLowerCase().trim(),
+    description: input.description,
+    price: input.price,
+    dueDate: input.dueDate,
+    order: input.order,
+    columnId: input.columnId,
+    assigneeId: input.assigneeId ?? null,
+    client_id: input.client_id,
+    done: input.done
+  })
+
+  return prisma.task.update({
+    where: { id: input.id },
+    data: updateData,
+    include: {
+      assignee: true,
+      tags: {
+        include: { label: true }
+      }
+    }
   })
 }

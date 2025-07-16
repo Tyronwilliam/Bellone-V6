@@ -8,7 +8,6 @@ import { toast } from 'sonner'
 
 export function useKanbanData(initialData: KanbanData) {
   const [data, setData] = useState<KanbanData>(initialData)
-  console.log(initialData, 'INITIAL DATA')
 
   const getTasksForColumn = (columnId: string) =>
     data.tasks.filter((task) => task.columnId === columnId)

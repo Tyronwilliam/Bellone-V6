@@ -54,6 +54,7 @@ export function TaskCard({
     new Date(task.dueDate) >= new Date()
 
   const dragging = isDragging || isSortableDragging
+
   return (
     <Card
       ref={setNodeRef}
@@ -132,17 +133,23 @@ export const BadgePreview = ({ tags }: { tags: Label[] }) => {
   )
 }
 export const AvatarPreview = ({ assignee }: { assignee?: User }) => {
+  const getInitials = () => {
+    if (assignee?.name && assignee.name.trim() !== '') {
+      return assignee.name
+        .split(' ')
+        .map((n) => n[0]?.toUpperCase())
+        .join('')
+    } else if (assignee?.email) {
+      return assignee.email[0]?.toUpperCase() || '?'
+    } else {
+      return '?'
+    }
+  }
+
   return (
     assignee && (
       <Avatar className="h-6 w-6">
-        <AvatarFallback className="text-xs">
-          {assignee?.name
-            ? assignee.name
-                .split(' ')
-                .map((n) => n[0])
-                .join('')
-            : '?'}
-        </AvatarFallback>
+        <AvatarFallback className="text-xs">{getInitials()}</AvatarFallback>
       </Avatar>
     )
   )

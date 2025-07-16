@@ -14,14 +14,14 @@ import type { UpdateTaskInput } from '@/infrastructure/task/taskInterface'
 import { Trash2 } from 'lucide-react'
 import type { User as UserAuth } from 'next-auth'
 
-import { TaskTagsSection } from './task-tags-section'
-import { TaskDescriptionSection } from './task-description-section'
-import { TaskAssigneeSection } from './task-assignee-section'
-import { TaskDueDateSection } from './task-due-date-section'
 import { User } from '@prisma/prisma'
-import { useTaskTags } from '../../hook/useTaskTags'
-import { TaskTitleEditor } from './task-title-editor-section'
 import { useTaskEditor } from '../../hook/useTaskEditor'
+import { useTaskTags } from '../../hook/useTaskTags'
+import { TaskAssigneeSection } from './task-assignee-section'
+import { TaskDescriptionSection } from './task-description-section'
+import { TaskDueDateSection } from './task-due-date-section'
+import { TaskTagsSection } from './task-tags-section'
+import { TaskTitleEditor } from './task-title-editor-section'
 
 interface TaskDetailsModalProps {
   task: TaskWithAssigneeAndTags | null
@@ -42,7 +42,7 @@ export function TaskDetailsModal({
   onDelete,
   userConnected
 }: TaskDetailsModalProps) {
-  const { editedTask, updateTask, resetTask, hasChanges } = useTaskEditor(task)
+  const { editedTask, updateTask, resetTask, hasChanges, isLoading } = useTaskEditor(task)
 
   const taskTags = useTaskTags({
     task: editedTask!,
@@ -69,7 +69,7 @@ export function TaskDetailsModal({
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="lg:min-w-[60%] max-h-[90vh] p-8">
+      <DialogContent className="min-w-[600px] max-h-[90vh] p-4">
         <DialogHeader>
           <DialogTitle>
             <TaskTitleEditor
@@ -80,8 +80,8 @@ export function TaskDetailsModal({
           <DialogDescription className="sr-only">Modifier le nom de la task</DialogDescription>
         </DialogHeader>
 
-        <section className="flex gap-4 w-full">
-          <div className="space-y-6 flex-1 min-w-[70%]">
+        <section className="w-full gap-4 grid grid-cols-6">
+          <div className="space-y-6 col-span-4">
             <TaskTagsSection
               tags={editedTask.tags}
               newTagName={taskTags.newTagName}
@@ -97,18 +97,19 @@ export function TaskDetailsModal({
             />
           </div>
 
-          <aside className="flex-1 flex flex-col gap-4 items-end">
+          <div className="w-full  flex flex-col gap-4 col-span-2">
             <TaskAssigneeSection
-              assigneeId={editedTask.assigneeId}
+              assignee={editedTask}
               users={users}
               onAssigneeChange={(assigneeId) => updateTask({ assigneeId })}
+              isLoading={isLoading}
             />
 
             <TaskDueDateSection
               dueDate={editedTask.dueDate}
               onDueDateChange={(dueDate) => updateTask({ dueDate })}
             />
-          </aside>
+          </div>
         </section>
 
         <DialogFooter className="flex gap-4 justify-between pt-4">
