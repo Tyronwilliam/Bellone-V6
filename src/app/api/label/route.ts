@@ -1,9 +1,7 @@
-import { AddLabelInput, DeleteLabelInput } from '@/infrastructure/label/labelInterface'
-import {
-  addLabelToTask,
-  createGlobalLabel,
-  removeLabelFromTask
-} from '@/infrastructure/label/labelQueries'
+import { addLabelToProject, addLabelToTask, createGlobalLabel } from '@/infrastructure/label/create'
+import { removeLabelFromTask } from '@/infrastructure/label/delete'
+import { AddLabelInput, DeleteLabelInput } from '@/infrastructure/label/label-Interface'
+
 import { verifyApiAuth } from 'auth-utils'
 import { User } from 'next-auth'
 import { NextRequest, NextResponse } from 'next/server'
@@ -44,17 +42,27 @@ export async function POST(req: NextRequest) {
         labelId: newLabel.label!.id,
         taskId: input.taskId
       })
-      console.log(linkToTask, 'LINK TO TASK')
+      const linkToProject = await addLabelToProject({
+        labelId: newLabel.label!.id,
+        projectId: input.projectId,
+        userId: user.id!,
+        isFavorite: false,
+        colorOverride: input.color
+      })
+
       if (!linkToTask.success) {
         return NextResponse.json(
           { message: 'Ce label est déjà associé à cette tâche' },
           { status: 422 }
         )
       }
+      if (!linkToProject.success) {
+        return NextResponse.json({ message: 'Fail to link label to project' }, { status: 400 })
+      }
       return NextResponse.json({ success: true, label: linkToTask.taskLabel }, { status: 201 })
     } else {
       return NextResponse.json(
-        { message: 'Global label create fail to link it to the task' },
+        { message: 'Global label create, Fail to link it to the task' },
         { status: 400 }
       )
     }

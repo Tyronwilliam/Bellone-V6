@@ -1,6 +1,4 @@
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import {
   Dialog,
   DialogContent,
@@ -10,12 +8,15 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
 import { Tag } from 'lucide-react'
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useState } from 'react'
+import TagColorPicker from './tag-color-picker'
 interface TaskTagsSectionProps {
   newTagName: string
   onNewTagNameChange: (name: string) => void
   onAddTag: () => void
+  setNewColor: Dispatch<SetStateAction<string>>
   isLoading?: boolean
 }
 
@@ -23,6 +24,7 @@ export default function NewTag({
   newTagName,
   onNewTagNameChange,
   onAddTag,
+  setNewColor,
   isLoading
 }: TaskTagsSectionProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
@@ -38,20 +40,20 @@ export default function NewTag({
       <DialogTrigger asChild>
         <Button
           variant="outline"
-          className="w-fit h-full self-end rounded-none shadow-none bg-transparent"
+          className="w-fit h-full self-end rounded-none shadow-none bg-transparent mb-2"
           disabled={isLoading}
         >
           +
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md h-fit">
         <DialogHeader>
-          <DialogTitle>Nouvelle étiquette</DialogTitle>
+          <DialogTitle>Add a New label :</DialogTitle>
           <DialogDescription className="sr-only">
-            Donnez un nom à la nouvelle étiquette à ajouter.
+            Give a name to the new label to add.
           </DialogDescription>
         </DialogHeader>
-        <div className="relative mt-2">
+        <div className="relative mt-2 w-full h-full">
           <Tag className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
           <Input
             value={newTagName}
@@ -62,14 +64,15 @@ export default function NewTag({
                 handleAddTag()
               }
             }}
-            placeholder="Nouvelle étiquette"
+            placeholder="Ex : Waiting"
             className="pl-10"
             disabled={isLoading}
           />
+          <TagColorPicker setNewColor={setNewColor} />
         </div>
         <DialogFooter className="mt-4">
           <Button onClick={handleAddTag} disabled={!newTagName.trim() || isLoading}>
-            {isLoading ? 'Ajout...' : 'Ajouter'}
+            {isLoading ? 'Adding...' : 'Add'}
           </Button>
         </DialogFooter>
       </DialogContent>

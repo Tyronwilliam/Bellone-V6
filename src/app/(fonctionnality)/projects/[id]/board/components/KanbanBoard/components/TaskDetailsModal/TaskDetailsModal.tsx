@@ -22,6 +22,8 @@ import { TaskDescriptionSection } from './task-description-section'
 import { TaskDueDateSection } from './task-due-date-section'
 import { TaskTagsSection } from './task-tags-section'
 import { TaskTitleEditor } from './task-title-editor-section'
+import NewTag from './NewTag'
+import { Label } from '@/components/ui/label'
 
 interface TaskDetailsModalProps {
   task: TaskWithAssigneeAndTags | null
@@ -48,7 +50,6 @@ export function TaskDetailsModal({
   const taskTags = useTaskTags({
     task: editedTask!,
     setEditedTask: setEditedTask,
-    onTaskUpdate: updateTask,
     currentUserId: currentUser.id!
   })
 
@@ -84,14 +85,23 @@ export function TaskDetailsModal({
 
         <section className="w-full gap-4 grid grid-cols-6">
           <div className="space-y-6 col-span-4">
-            <TaskTagsSection
-              tags={editedTask.tags}
-              newTagName={taskTags.newTagName}
-              onNewTagNameChange={taskTags.setNewTagName}
-              onAddTag={taskTags.addTag}
-              onRemoveTag={taskTags.removeTag}
-              isLoading={taskTags.isLoading}
-            />
+            <div className="space-y-2">
+              <Label>Labels</Label>
+              <div className="flex gap-2">
+                <TaskTagsSection
+                  tags={editedTask.tags}
+                  onRemoveTag={taskTags.removeTag}
+                  isLoading={taskTags.isLoading}
+                />
+                <NewTag
+                  newTagName={taskTags.newTagName}
+                  onNewTagNameChange={taskTags.setNewTagName}
+                  onAddTag={taskTags.addTag}
+                  isLoading={isLoading}
+                  setNewColor={taskTags.setNewColor}
+                />
+              </div>
+            </div>
 
             <TaskDescriptionSection
               description={editedTask.description}

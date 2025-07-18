@@ -4,24 +4,21 @@ import { Dispatch, SetStateAction, useState } from 'react'
 import { toast } from 'sonner'
 import axios from 'axios'
 import type { TaskWithAssigneeAndTags } from '@/infrastructure/board/boardInterface'
-import { DeleteLabelInput } from '@/infrastructure/label/labelInterface'
+import { AddLabelInput, DeleteLabelInput } from '@/infrastructure/label/label-Interface'
+import { useParams, useSearchParams } from 'next/navigation'
 
 interface UseTaskTagsProps {
   task: TaskWithAssigneeAndTags
   setEditedTask: Dispatch<SetStateAction<TaskWithAssigneeAndTags | null>>
-  onTaskUpdate: (updates: Partial<TaskWithAssigneeAndTags>) => void
   currentUserId: string
 }
 
-export function useTaskTags({
-  task,
-  setEditedTask,
-  onTaskUpdate,
-  currentUserId
-}: UseTaskTagsProps) {
+export function useTaskTags({ task, setEditedTask, currentUserId }: UseTaskTagsProps) {
   const [newTagName, setNewTagName] = useState('')
+  const [newColor, setNewColor] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-
+  const { id: projectId } = useParams<{ id: string }>()
+  // const projectId = params.get('id')
   const addTag = async () => {
     const trimmed = newTagName.trim()
 
@@ -39,18 +36,17 @@ export function useTaskTags({
     setIsLoading(true)
 
     try {
-      const newLabel = {
+      const newLabel: AddLabelInput = {
         name: trimmed,
-        color: null,
+        color: newColor ?? '#3b82f6',
         createdById: currentUserId,
-        taskId: task.id
+        taskId: task.id,
+        projectId: projectId
       }
 
       const { data: label, status } = await axios.post('/api/label', newLabel)
 
       if (status === 200 || status === 201) {
-        console.log(label, 'Label')
-        console.log('TAGS ARRAY', [...task.tags, label.label])
         setEditedTask((prev) => {
           if (!prev) return prev
           return {
@@ -105,6 +101,7 @@ export function useTaskTags({
   return {
     newTagName,
     setNewTagName,
+    setNewColor,
     addTag,
     removeTag,
     isLoading

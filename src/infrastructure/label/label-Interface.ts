@@ -1,11 +1,11 @@
-export interface LabelLibraryProps {
-  projectLabels: Label[]
-  boardLabels: Label[]
-  popularLabels: Label[]
-  onCreateLabel: (data: { name: string; color?: string; scope: 'project' | 'board' }) => void
-  onAddExistingLabel: (labelId: string, scope: 'project' | 'board') => void
-  onToggleFavorite: (labelId: string, scope: 'project' | 'board') => void
-}
+// export interface LabelLibraryProps {
+//   projectLabels: Label[]
+//   boardLabels: Label[]
+//   popularLabels: Label[]
+//   onCreateLabel: (data: { name: string; color?: string; scope: 'project' | 'board' }) => void
+//   onAddExistingLabel: (labelId: string, scope: 'project' | 'board') => void
+//   onToggleFavorite: (labelId: string, scope: 'project' | 'board') => void
+// }
 // Récupérer tous les labels globaux (bibliothèque)
 export type LabelScope = 'all' | 'user' | 'board'
 
@@ -22,6 +22,8 @@ export interface AddLabelInput {
   name: string
   color?: string
   taskId?: string
+  projectId: string
+  createdById?: string
 }
 export interface DeleteLabelInput {
   taskId: string
