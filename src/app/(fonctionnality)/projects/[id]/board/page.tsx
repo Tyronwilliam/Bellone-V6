@@ -17,7 +17,7 @@ export default async function BoardPage({ params }: { params: Promise<{ id: stri
         </div>
       )
     }
-    return <ClientKanbanWrapper initialData={board} userConnected={user!} />
+    return <ClientKanbanWrapper initialData={board} currentUser={user!} />
   } catch (error) {
     console.error('Erreur lors du chargement du board:', error)
     return (

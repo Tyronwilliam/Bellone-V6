@@ -5,42 +5,48 @@ import { UpdateTaskInput } from '@/infrastructure/task/taskInterface'
 import axios from 'axios'
 import { useState } from 'react'
 import { toast } from 'sonner'
+import { addColumnAction } from '../action'
+import type { Column as ColumnType } from '@prisma/prisma'
 
 export function useKanbanData(initialData: KanbanData) {
   const [data, setData] = useState<KanbanData>(initialData)
+
+  // Data processing
+  const columns = data.columns
+    .filter((col: ColumnType) => col.boardId === initialData.boards[0]?.id)
+    .sort((a, b) => a.order - b.order)
 
   const getTasksForColumn = (columnId: string) =>
     data.tasks.filter((task) => task.columnId === columnId)
 
   const handleAddTask = async (columnId: string, title: string) => {
     if (!columnId || !title.trim()) {
-      return toast.error('Le titre ou la colonne est manquant.')
+      return toast.error('Title or Column id is missing')
     }
 
     try {
       const response = await axios.post<TaskWithAssigneeAndTags>('/api/tasks/addTask', {
         title,
         columnId,
-        client_id: initialData.clients.id // vérifie ici que c’est bien défini
+        client_id: initialData.clients.id
       })
-      console.log(response, 'ADD TASK')
+      if (response?.status === 200) {
+        const newTask = response.data
 
-      const newTask = response.data
+        setData((prev) => ({
+          ...prev,
+          tasks: [...prev.tasks, newTask]
+        }))
 
-      setData((prev) => ({
-        ...prev,
-        tasks: [...prev.tasks, newTask]
-      }))
-
-      toast.success('Tâche ajoutée avec succès')
+        toast.success('Task added')
+      }
     } catch (error: any) {
-      console.error('Erreur lors de la création de tâche :', error)
-      toast.error(error?.response?.data?.message || 'Erreur lors de la création')
+      console.error('Error while adding task :', error)
+      toast.error(error?.response?.data?.message || 'Creation error')
     }
   }
 
   const handleSaveTask = async (taskInput: UpdateTaskInput) => {
-    console.log(taskInput, 'TASK INPUT')
     try {
       const { data: updatedTaskResponse, status } = await axios.patch(
         '/api/tasks/addTask',
@@ -49,6 +55,7 @@ export function useKanbanData(initialData: KanbanData) {
 
       if (status === 200) {
         toast.success('Tâche modifiée avec succès')
+        console.log(updatedTaskResponse, '/api/tasks/addTask')
 
         setData((prev) => ({
           ...prev,
@@ -71,7 +78,26 @@ export function useKanbanData(initialData: KanbanData) {
       tasks: prev.tasks.filter((task) => task.id !== taskId)
     }))
   }
+  const handleAddColumn = async (name: string, color?: string) => {
+    const body = {
+      name: name,
+      boardId: initialData.boards[0]?.id,
+      order: columns.length,
+      position: columns.length,
+      color: color
+    }
+    const res = await addColumnAction(body)
 
+    if (!res.success || !res.column) {
+      toast.error(res.error)
+    } else {
+      toast.success('Column added')
+      setData((prev) => ({
+        ...prev,
+        columns: [...prev.columns, res.column]
+      }))
+    }
+  }
   const handleDeleteColumn = (columnId: string) => {
     setData((prev) => ({
       ...prev,
@@ -90,11 +116,13 @@ export function useKanbanData(initialData: KanbanData) {
   return {
     data,
     setData,
+    columns,
     getTasksForColumn,
     handleAddTask,
     handleSaveTask,
     handleDeleteTask,
     handleDeleteColumn,
-    handleRenameColumn
+    handleRenameColumn,
+    handleAddColumn
   }
 }

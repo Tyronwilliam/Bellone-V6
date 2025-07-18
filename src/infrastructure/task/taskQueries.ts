@@ -49,7 +49,13 @@ export async function updatedTask(input: UpdateTaskInput) {
 
   return prisma.task.update({
     where: { id: input.id },
-    data: updateData
+    data: updateData,
+    include: {
+      assignee: true,
+      tags: {
+        include: { label: true }
+      }
+    }
   })
 }
 export async function updatedMembers(input: UpdateTaskInput) {

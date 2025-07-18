@@ -108,52 +108,6 @@ export async function getTaskLabels(taskId: string) {
 }
 
 /**
- * Crée un nouveau label global avec vérification d'unicité du nom
- */
-export async function createGlobalLabel({
-  name,
-  color,
-  description,
-  userId,
-  taskId
-}: {
-  name: string
-  color?: string
-  description?: string
-  userId: string
-  taskId?: string
-}) {
-  // Vérifier si un label avec ce nom existe déjà
-  const existingLabel = await prisma.label.findUnique({
-    where: { name }
-  })
-
-  if (existingLabel) {
-    return {
-      success: false,
-      error: 'Un label avec ce nom existe déjà',
-      existingLabel
-    }
-  }
-
-  // Créer le nouveau label
-  const newLabel = await prisma.label.create({
-    data: {
-      name,
-      color: color || '#3b82f6', // Couleur par défaut (bleu)
-      description,
-      createdById: userId,
-      usageCount: 0
-    }
-  })
-
-  return {
-    success: true,
-    label: newLabel
-  }
-}
-
-/**
  * Ajoute un label global existant à un projet
  */
 export async function addLabelToProject({
@@ -213,6 +167,51 @@ export async function addLabelToProject({
     projectLabel
   }
 }
+/**
+ * Crée un nouveau label global avec vérification d'unicité du nom
+ */
+export async function createGlobalLabel({
+  name,
+  color,
+  description,
+  userId,
+  taskId
+}: {
+  name: string
+  color?: string
+  description?: string
+  userId: string
+  taskId?: string
+}) {
+  // Vérifier si un label avec ce nom existe déjà
+  const existingLabel = await prisma.label.findUnique({
+    where: { name }
+  })
+
+  if (existingLabel) {
+    return {
+      success: false,
+      error: 'Un label avec ce nom existe déjà',
+      existingLabel
+    }
+  }
+
+  // Créer le nouveau label
+  const newLabel = await prisma.label.create({
+    data: {
+      name,
+      color: color || '#3b82f6', // Couleur par défaut (bleu)
+      description,
+      createdById: userId,
+      usageCount: 0
+    }
+  })
+
+  return {
+    success: true,
+    label: newLabel
+  }
+}
 
 /**
  * Ajoute un label à une tâche
@@ -241,17 +240,19 @@ export async function addLabelToTask({ labelId, taskId }: { labelId: string; tas
       data: {
         task_id: taskId,
         label_id: labelId
-      }
+      },
+      include: { label: true }
     })
-    // prisma.label.update({
-    //   where: { id: labelId },
-    //   data: {
-    //     usageCount: {
-    //       increment: 1
-    //     }
-    //   }
-    // })
   ])
+
+  // prisma.label.update({
+  //   where: { id: labelId },
+  //   data: {
+  //     usageCount: {
+  //       increment: 1
+  //     }
+  //   }
+  // })
 
   return {
     success: true,
@@ -397,18 +398,12 @@ export async function removeLabelFromProject({
 /**
  * Retire un label d'une tâche
  */
-export async function removeLabelFromTask({
-  taskId,
-  labelId
-}: {
-  taskId: string
-  labelId: string
-}) {
+export async function removeLabelFromTask({ taskId, tagId }: { taskId: string; tagId: string }) {
   const taskLabel = await prisma.taskLabel.findUnique({
     where: {
       task_id_label_id: {
         task_id: taskId,
-        label_id: labelId
+        label_id: tagId
       }
     }
   })
@@ -416,7 +411,8 @@ export async function removeLabelFromTask({
   if (!taskLabel) {
     return {
       success: false,
-      error: "Ce label n'est pas associé à cette tâche"
+      // error: "Ce label n'est pas associé à cette tâche"
+      error: 'This label is not associated to this task'
     }
   }
 
@@ -426,7 +422,7 @@ export async function removeLabelFromTask({
       where: {
         task_id_label_id: {
           task_id: taskId,
-          label_id: labelId
+          label_id: tagId
         }
       }
     })

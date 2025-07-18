@@ -11,6 +11,7 @@ import {
 import { TaskWithAssigneeAndTags } from '@/infrastructure/board/boardInterface'
 import { User } from '@prisma/prisma'
 import { Delete, UserIcon } from 'lucide-react'
+import { useState, useEffect } from 'react'
 
 interface TaskAssigneeSectionProps {
   assignee: TaskWithAssigneeAndTags
@@ -25,7 +26,13 @@ export function TaskAssigneeSection({
   onAssigneeChange,
   isLoading
 }: TaskAssigneeSectionProps) {
-  const currentAssignee = users.find((u) => u.id === assignee.assigneeId)
+  const [selectedAssignee, setSelectedAssignee] = useState<string>('none')
+
+  useEffect(() => {
+    setSelectedAssignee(assignee.assigneeId ?? 'none')
+  }, [assignee.assigneeId])
+
+  const selectedUser = users.find((user) => user.id === selectedAssignee)
 
   return (
     <div className="space-y-2 w-full">
@@ -36,28 +43,39 @@ export function TaskAssigneeSection({
         <UserIcon className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
         <Select
           disabled={isLoading}
-          onValueChange={(value) => onAssigneeChange(value === 'none' ? null : value)}
+          value={selectedAssignee}
+          onValueChange={(value) => {
+            setSelectedAssignee(value)
+            onAssigneeChange(value === 'none' ? null : value)
+          }}
         >
           <SelectTrigger className="pl-10 w-full min-h-[40px]">
-            {' '}
-            {/* Fix taille ici */}
-            <SelectValue placeholder={currentAssignee?.email ?? 'Add members'} />
+            <SelectValue
+              placeholder="Add members"
+              children={
+                selectedAssignee === 'none' ? 'Add members' : (selectedUser?.email ?? 'Unknown')
+              }
+            />
           </SelectTrigger>
           <SelectContent>
-            {assignee.assignee !== null && (
-              <SelectItem value="none">
-                {assignee.assignee?.email} <Delete className="inline ml-1 w-4 h-4" />
-              </SelectItem>
+            {users.map((user) =>
+              user.id === selectedAssignee ? (
+                <SelectItem value="none" key={selectedAssignee ?? 'none'}>
+                  {assignee.assignee?.email ? (
+                    <>
+                      {assignee.assignee.email}
+                      <Delete className="inline ml-1 w-4 h-4" />
+                    </>
+                  ) : (
+                    'Add members'
+                  )}
+                </SelectItem>
+              ) : (
+                <SelectItem key={user.id} value={user.id}>
+                  {user.email}
+                </SelectItem>
+              )
             )}
-            {users?.length > 0 &&
-              users?.map(
-                (user) =>
-                  user.id !== assignee.assigneeId && (
-                    <SelectItem key={user.id} value={user.id}>
-                      {user.email}
-                    </SelectItem>
-                  )
-              )}
           </SelectContent>
         </Select>
       </div>

@@ -23,11 +23,10 @@ export interface AddLabelInput {
   color?: string
   taskId?: string
 }
-// name,
-// color,
-// description,
-// userId
-////////////////////// V0
+export interface DeleteLabelInput {
+  taskId: string
+  tagId: string
+}
 
 export interface Label {
   id: string

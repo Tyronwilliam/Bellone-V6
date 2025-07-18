@@ -8,10 +8,10 @@ import { KanbanData } from '@/infrastructure/board/boardInterface'
 
 interface ClientKanbanWrapperProps {
   initialData: KanbanData
-  userConnected: User
+  currentUser: User
 }
 
-export function ClientKanbanWrapper({ initialData, userConnected }: ClientKanbanWrapperProps) {
+export function ClientKanbanWrapper({ initialData, currentUser }: ClientKanbanWrapperProps) {
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
@@ -38,5 +38,5 @@ export function ClientKanbanWrapper({ initialData, userConnected }: ClientKanban
     )
   }
 
-  return <KanbanBoard initialData={initialData} userConnected={userConnected} />
+  return <KanbanBoard initialData={initialData} currentUser={currentUser} />
 }

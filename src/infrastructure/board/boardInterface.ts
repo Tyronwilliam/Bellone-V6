@@ -1,8 +1,14 @@
 import type { Board, Client, Column, Label, Project, Task, User } from '@prisma/prisma'
 
+export type TaskTag = {
+  task_id: string
+  label_id: string
+  createdAt: Date
+  label: Label
+}
 export type TaskWithAssigneeAndTags = Task & {
   assignee: User | null
-  tags: Label[]
+  tags: TaskTag[] 
 }
 
 export type KanbanData = {
@@ -12,7 +18,7 @@ export type KanbanData = {
   boards: Board[]
   columns: Column[]
   tasks: TaskWithAssigneeAndTags[]
-  // tags: Label[]
+  labels: Label[]
 }
 export type KanbanBoardProps = {
   initialData: KanbanData

@@ -1,5 +1,5 @@
 import { prisma } from '@/infrastructure/prisma'
-import { KanbanData } from './boardInterface'
+import { KanbanData, TaskWithAssigneeAndTags } from './boardInterface'
 import { Board } from '@prisma/prisma'
 
 export async function getBoard(projectId: string): Promise<Board[]> {
@@ -40,14 +40,15 @@ export async function getKanbanData(projectId: string): Promise<KanbanData | nul
   })
 
   if (!project) return null
-
   // Extraire les tâches
-  const tasks = project.boards.flatMap((board) => board.columns).flatMap((column) => column.tasks)
+  const tasks: TaskWithAssigneeAndTags[] = project.boards
+    .flatMap((board) => board.columns)
+    .flatMap((column) => column.tasks)
 
   // Extraire tous les labels des tâches (via tags)
   const labels = tasks
     .flatMap((task) => task.tags)
-    .map((tag) => tag.label)
+    .map((tag) => tag?.label)
     .filter((label): label is NonNullable<typeof label> => !!label)
 
   // Supprimer les doublons de labels (basé sur l'id)

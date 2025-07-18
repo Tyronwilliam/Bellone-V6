@@ -30,7 +30,7 @@ interface TaskDetailsModalProps {
   onClose: () => void
   onSave: (task: UpdateTaskInput) => void
   onDelete: (taskId: string) => void
-  userConnected: UserAuth
+  currentUser: UserAuth
 }
 
 export function TaskDetailsModal({
@@ -40,14 +40,16 @@ export function TaskDetailsModal({
   onClose,
   onSave,
   onDelete,
-  userConnected
+  currentUser
 }: TaskDetailsModalProps) {
-  const { editedTask, updateTask, resetTask, hasChanges, isLoading } = useTaskEditor(task)
+  const { editedTask, setEditedTask, updateTask, resetTask, hasChanges, isLoading } =
+    useTaskEditor(task)
 
   const taskTags = useTaskTags({
     task: editedTask!,
+    setEditedTask: setEditedTask,
     onTaskUpdate: updateTask,
-    userConnectedId: userConnected.id!
+    currentUserId: currentUser.id!
   })
 
   if (!task || !editedTask) return null
@@ -77,7 +79,7 @@ export function TaskDetailsModal({
               onTitleChange={(title) => updateTask({ title })}
             />
           </DialogTitle>
-          <DialogDescription className="sr-only">Modifier le nom de la task</DialogDescription>
+          <DialogDescription className="sr-only">Change task title</DialogDescription>
         </DialogHeader>
 
         <section className="w-full gap-4 grid grid-cols-6">
@@ -124,7 +126,6 @@ export function TaskDetailsModal({
 
           <Button variant="destructive" onClick={handleDelete} className="w-fit">
             <Trash2 className="h-4 w-4" />
-            Supprimer
           </Button>
         </DialogFooter>
       </DialogContent>

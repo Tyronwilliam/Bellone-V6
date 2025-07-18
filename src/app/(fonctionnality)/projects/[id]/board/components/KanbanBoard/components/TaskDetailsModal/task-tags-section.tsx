@@ -27,12 +27,12 @@ export function TaskTagsSection({
     <div className="space-y-2">
       <Label>Labels</Label>
       <div className="flex flex-wrap gap-2 mb-2 overflow-scroll">
-        {tags.map((tag: any) => {
+        {tags?.map((tag: any) => {
           if (!tag.label) return null
 
-          const tagColor = tag.label.color
-          const tagName = tag.label.name
-          const tagId = tag.label.id
+          const tagColor = tag?.label.color
+          const tagName = tag?.label.name
+          const tagId = tag?.label.id
 
           return (
             <Badge
