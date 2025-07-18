@@ -2,13 +2,13 @@
 
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Card, CardContent } from '@/components/ui/card'
+import { TaskWithAssigneeAndTags } from '@/infrastructure/board/boardInterface'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
-import { Calendar, DollarSign } from 'lucide-react'
-import type { Client, Label, Task, User } from '@prisma/prisma'
-import { Badge } from '@/components/ui/badge'
-import { TaskWithAssigneeAndTags } from '@/infrastructure/board/boardInterface'
+import type { Client, User } from '@prisma/prisma'
 import { cn } from 'lib/utils/classnames'
+import { Calendar } from 'lucide-react'
+import { TaskTagsSection } from '../TaskDetailsModal/task-tags-section'
 
 interface TaskCardProps {
   task: TaskWithAssigneeAndTags
@@ -54,7 +54,7 @@ export function TaskCard({
     new Date(task.dueDate) >= new Date()
 
   const dragging = isDragging || isSortableDragging
-
+  console.log(task?.tags)
   return (
     <Card
       ref={setNodeRef}
@@ -70,8 +70,12 @@ export function TaskCard({
         <h4 className="font-medium text-sm mb-2 line-clamp-2">{task.title}</h4>
 
         {/* Tags */}
-        <BadgePreview tags={task.tags} />
-
+        <TaskTagsSection
+          tags={task.tags}
+          onRemoveTag={() => {}}
+          isModal={false}
+          badgeClassName={cn('text-xs')}
+        />
         {/* Due Date Preview */}
         <DueDatePreview dueDate={task.dueDate} isDueSoon={isDueSoon} isOverdue={isOverdue} />
 
@@ -111,27 +115,6 @@ export const DueDatePreview = ({ dueDate, isDueSoon, isOverdue }: DueDatePreview
   )
 }
 
-export const BadgePreview = ({ tags }: { tags: Label[] }) => {
-  return (
-    tags &&
-    tags.length > 0 && (
-      <div className="flex flex-wrap gap-1 mb-2">
-        {tags.slice(0, 3).map((tag: any) => {
-          if (!tag) return null
-          return (
-            <Badge
-              key={tag.label.id}
-              variant="secondary"
-              className={cn('text-xs', tag.label.color && `bg-[${tag.label.color}]`)}
-            >
-              {tag.label.name}
-            </Badge>
-          )
-        })}{' '}
-      </div>
-    )
-  )
-}
 export const AvatarPreview = ({ assignee }: { assignee?: User }) => {
   const getInitials = () => {
     if (assignee?.name && assignee.name.trim() !== '') {

@@ -91,6 +91,8 @@ export function TaskDetailsModal({
                 <TaskTagsSection
                   tags={editedTask.tags}
                   onRemoveTag={taskTags.removeTag}
+                  isModal={true}
+                  badgeClassName={'p-2'}
                   isLoading={taskTags.isLoading}
                 />
                 <NewTag
@@ -106,7 +108,7 @@ export function TaskDetailsModal({
 
             <TaskDescriptionSection
               description={editedTask.description}
-              onDescriptionChange={(description) => updateTask({ description })}
+              onDescriptionChange={setEditedTask}
             />
           </div>
 

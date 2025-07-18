@@ -14,7 +14,6 @@ export function useTaskEditor(initialTask: TaskWithAssigneeAndTags | null) {
       setEditedTask({ ...initialTask })
     }
   }, [initialTask])
-
   const updateTask = async (updates: Partial<TaskWithAssigneeAndTags>) => {
     if (editedTask) {
       setIsLoading(true)

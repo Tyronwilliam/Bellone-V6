@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import CustomBadge from './CustomBadge'
 import { cn } from '@/lib/utils'
+import PreviewLabel from './preview-badge'
 
 export const LABEL_COLORS = [
   { name: 'Bleu', hex: '#3b82f6' },
@@ -30,22 +31,7 @@ export default function TagColorPicker({
 }) {
   return (
     <>
-      {(newTagName !== '' || newColor !== '') && (
-        <CustomBadge tagColor={newColor} variant="outline" className={cn('mt-2 p-0')}>
-          <Button
-            className={`w-full h-full shrink-0  capitalize border-none py-2 rounded-none`}
-            style={{
-              ...(newColor ? { backgroundColor: newColor } : { backgroundColor: 'transparent' })
-              //   color: 'var(--foreground)'
-            }}
-            onClick={() => {
-              setNewColor('')
-            }}
-          >
-            {newTagName}
-          </Button>{' '}
-        </CustomBadge>
-      )}
+      <PreviewLabel newTagName={newTagName} newColor={newColor} setNewColor={setNewColor} />
       <div className="flex flex-wrap w-full h-fit justify-center gap-6 mt-6">
         {LABEL_COLORS?.map((color) => {
           return (
