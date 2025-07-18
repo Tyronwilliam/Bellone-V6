@@ -50,7 +50,7 @@ export default function NewTag({
       </DialogTrigger>
       <DialogContent className="sm:max-w-md h-fit">
         <DialogHeader>
-          <DialogTitle>Add a New label :</DialogTitle>
+          <DialogTitle>Add a Label :</DialogTitle>
           <DialogDescription className="sr-only">
             Give a name to the new label to add.
           </DialogDescription>

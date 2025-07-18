@@ -14,6 +14,7 @@ export function useTaskEditor(initialTask: TaskWithAssigneeAndTags | null) {
       setEditedTask({ ...initialTask })
     }
   }, [initialTask])
+
   const updateTask = async (updates: Partial<TaskWithAssigneeAndTags>) => {
     if (editedTask) {
       setIsLoading(true)
@@ -21,7 +22,8 @@ export function useTaskEditor(initialTask: TaskWithAssigneeAndTags | null) {
       try {
         const { data: updatedTaskResponse, status } = await axios.patch('/api/tasks/members', data)
         if (status === 200) {
-          setEditedTask(updatedTaskResponse)
+          console.log(updatedTaskResponse.result, 'LA ICI')
+          setEditedTask(updatedTaskResponse.result)
           toast.success(`Members updated`)
         }
       } catch (error) {

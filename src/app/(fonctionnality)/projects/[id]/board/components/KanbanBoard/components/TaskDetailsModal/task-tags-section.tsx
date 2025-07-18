@@ -20,6 +20,7 @@ export function TaskTagsSection({
   badgeClassName,
   isLoading = false
 }: TaskTagsSectionProps) {
+  
   return (
     <div className="flex flex-wrap gap-2 mb-2 ">
       {tags?.map((tag: any) => {

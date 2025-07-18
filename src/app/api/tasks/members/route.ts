@@ -28,11 +28,17 @@ export async function PATCH(req: NextRequest) {
     })
 
     if (!task) {
-      return NextResponse.json({ message: 'Task Not found' }, { status: 403 })
+      return NextResponse.json({ message: 'Task Not found' }, { status: 404 })
     }
 
     const updatedTaskResponse = await updatedMembers(input)
-    return NextResponse.json(updatedTaskResponse, { status: 200 })
+
+    if (updatedTaskResponse.success) {
+      console.log(updatedTaskResponse.result, 'HELLO WORLD')
+      return NextResponse.json(updatedTaskResponse, { status: 200 })
+    } else {
+      return NextResponse.json({ message: 'Update failed' }, { status: 400 })
+    }
   } catch (error: any) {
     console.error('PATCH /api/tasks error:', error)
     return NextResponse.json({ message: 'Erreur serveur' }, { status: 500 })

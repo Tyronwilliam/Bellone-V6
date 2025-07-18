@@ -31,7 +31,17 @@ const KanbanBoard = ({ initialData, currentUser }: KanbanBoardProps) => {
   }
 
   const [selectedTask, setSelectedTask] = useState<TaskWithAssigneeAndTags | null>(null)
+  const handleCloseTaskModal = (editedTask: TaskWithAssigneeAndTags) => {
+    const updatedTasks = data.tasks.map((t) => (t.id === editedTask?.id ? editedTask : t))
 
+    const newData: KanbanData = {
+      ...data,
+      tasks: updatedTasks
+    }
+
+    setData(newData)
+    setSelectedTask(null)
+  }
   // Custom hooks
   const sensors = useKanbanSensors()
   const {
@@ -98,7 +108,7 @@ const KanbanBoard = ({ initialData, currentUser }: KanbanBoardProps) => {
         task={selectedTask}
         users={data.users}
         isOpen={!!selectedTask}
-        onClose={() => setSelectedTask(null)}
+        onClose={handleCloseTaskModal}
         onSave={handleSaveTask}
         onDelete={handleDeleteTask}
         currentUser={currentUser}

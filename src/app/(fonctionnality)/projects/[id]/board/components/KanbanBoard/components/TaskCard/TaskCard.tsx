@@ -54,7 +54,6 @@ export function TaskCard({
     new Date(task.dueDate) >= new Date()
 
   const dragging = isDragging || isSortableDragging
-  console.log(task?.tags)
   return (
     <Card
       ref={setNodeRef}
@@ -66,7 +65,7 @@ export function TaskCard({
       }`}
       onClick={onClick}
     >
-      <CardContent className="p-3">
+      <CardContent>
         <h4 className="font-medium text-sm mb-2 line-clamp-2">{task.title}</h4>
 
         {/* Tags */}
@@ -80,7 +79,7 @@ export function TaskCard({
         <DueDatePreview dueDate={task.dueDate} isDueSoon={isDueSoon} isOverdue={isOverdue} />
 
         {/* Footer */}
-        <div className="flex items-center justify-between mt-3">
+        <div className="flex items-center justify-end mt-3">
           {/* <span className="text-xs text-muted-foreground">{client.firstName}</span> */}
           <AvatarPreview assignee={assignee} />
         </div>

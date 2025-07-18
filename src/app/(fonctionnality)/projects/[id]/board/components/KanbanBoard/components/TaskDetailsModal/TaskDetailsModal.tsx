@@ -9,27 +9,26 @@ import {
   DialogHeader,
   DialogTitle
 } from '@/components/ui/dialog'
+import { Trash2 } from 'lucide-react'
+import { Label } from '@/components/ui/label'
 import type { TaskWithAssigneeAndTags } from '@/infrastructure/board/boardInterface'
 import type { UpdateTaskInput } from '@/infrastructure/task/taskInterface'
-import { Trash2 } from 'lucide-react'
 import type { User as UserAuth } from 'next-auth'
-
 import { User } from '@prisma/prisma'
-import { useTaskEditor } from '../../hook/useTaskEditor'
-import { useTaskTags } from '../../hook/useTaskTags'
+
 import { TaskAssigneeSection } from './task-assignee-section'
 import { TaskDescriptionSection } from './task-description-section'
 import { TaskDueDateSection } from './task-due-date-section'
 import { TaskTagsSection } from './task-tags-section'
 import { TaskTitleEditor } from './task-title-editor-section'
 import NewTag from './NewTag'
-import { Label } from '@/components/ui/label'
+import { useTaskDetailsModalLogic } from '../../hook/useTaskDetailModal'
 
 interface TaskDetailsModalProps {
   task: TaskWithAssigneeAndTags | null
   users: User[]
   isOpen: boolean
-  onClose: () => void
+  onClose: (editedTask: TaskWithAssigneeAndTags) => void
   onSave: (task: UpdateTaskInput) => void
   onDelete: (taskId: string) => void
   currentUser: UserAuth
@@ -44,31 +43,19 @@ export function TaskDetailsModal({
   onDelete,
   currentUser
 }: TaskDetailsModalProps) {
-  const { editedTask, setEditedTask, updateTask, resetTask, hasChanges, isLoading } =
-    useTaskEditor(task)
-
-  const taskTags = useTaskTags({
-    task: editedTask!,
-    setEditedTask: setEditedTask,
-    currentUserId: currentUser.id!
-  })
+  const {
+    editedTask,
+    setEditedTask,
+    updateTask,
+    taskTags,
+    isLoading,
+    handleSave,
+    handleDelete,
+    handleClose,
+    hasChanges
+  } = useTaskDetailsModalLogic({ task, onSave, onDelete, onClose, currentUser })
 
   if (!task || !editedTask) return null
-
-  const handleSave = () => {
-    onSave(editedTask as UpdateTaskInput)
-    onClose()
-  }
-
-  const handleDelete = () => {
-    onDelete(task.id)
-    onClose()
-  }
-
-  const handleClose = () => {
-    resetTask()
-    onClose()
-  }
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
@@ -77,6 +64,7 @@ export function TaskDetailsModal({
           <DialogTitle>
             <TaskTitleEditor
               title={editedTask.title}
+              setEditedTask={setEditedTask}
               onTitleChange={(title) => updateTask({ title })}
             />
           </DialogTitle>
@@ -91,8 +79,8 @@ export function TaskDetailsModal({
                 <TaskTagsSection
                   tags={editedTask.tags}
                   onRemoveTag={taskTags.removeTag}
-                  isModal={true}
-                  badgeClassName={'p-2'}
+                  isModal
+                  badgeClassName="p-2"
                   isLoading={taskTags.isLoading}
                 />
                 <NewTag
@@ -112,7 +100,7 @@ export function TaskDetailsModal({
             />
           </div>
 
-          <div className="w-full  flex flex-col gap-4 col-span-2">
+          <div className="w-full flex flex-col gap-4 col-span-2">
             <TaskAssigneeSection
               assignee={editedTask}
               users={users}

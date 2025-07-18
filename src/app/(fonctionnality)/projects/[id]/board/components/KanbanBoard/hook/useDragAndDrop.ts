@@ -13,7 +13,7 @@ export function useDragAndDrop(
   setData: React.Dispatch<React.SetStateAction<KanbanData>>
 ) {
   const [activeId, setActiveId] = useState<string | null>(null)
-  const [activeTask, setActiveTask] = useState<Task | null>(null)
+  const [activeTask, setActiveTask] = useState<TaskWithAssigneeAndTags | null>(null)
 
   const handleDragStart = (event: DragStartEvent) => {
     const { active } = event

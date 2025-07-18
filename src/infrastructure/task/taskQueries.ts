@@ -47,7 +47,7 @@ export async function updatedTask(input: UpdateTaskInput) {
     done: input.done
   })
 
-  return prisma.task.update({
+  return await prisma.task.update({
     where: { id: input.id },
     data: updateData,
     include: {
@@ -71,7 +71,7 @@ export async function updatedMembers(input: UpdateTaskInput) {
     done: input.done
   })
 
-  return prisma.task.update({
+  const result = await prisma.task.update({
     where: { id: input.id },
     data: updateData,
     include: {
@@ -81,4 +81,8 @@ export async function updatedMembers(input: UpdateTaskInput) {
       }
     }
   })
+  return {
+    success: true,
+    result
+  }
 }

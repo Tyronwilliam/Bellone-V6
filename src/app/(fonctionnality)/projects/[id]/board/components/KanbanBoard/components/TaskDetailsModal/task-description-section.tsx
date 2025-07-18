@@ -14,7 +14,6 @@ export function TaskDescriptionSection({
   description,
   onDescriptionChange
 }: TaskDescriptionSectionProps) {
-  console.log(description, 'DESC')
   return (
     <div className="space-y-2 flex-1">
       <Label htmlFor="description">Description</Label>

@@ -1,10 +1,11 @@
 'use client'
 
-import { Client, Task, User } from '@prisma/prisma'
+import { TaskWithAssigneeAndTags } from '@/infrastructure/board/boardInterface'
+import { Client, User } from '@prisma/prisma'
 import { TaskCard } from './TaskCard/TaskCard'
 
 interface DragOverlayContentProps {
-  activeTask: Task | null
+  activeTask: TaskWithAssigneeAndTags | null
   users: User[]
   client: Client
 }

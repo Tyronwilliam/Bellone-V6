@@ -2,12 +2,14 @@
 
 import type React from 'react'
 
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useEffect, useState, SetStateAction, Dispatch } from 'react'
 import { Textarea } from '@/components/ui/textarea'
 import { useDebouncedCallback } from 'use-debounce'
+import { TaskWithAssigneeAndTags } from '@/infrastructure/board/boardInterface'
 
 interface TaskTitleEditorProps {
   title: string
+  setEditedTask: Dispatch<SetStateAction<TaskWithAssigneeAndTags | null>>
   onTitleChange: (title: string) => void
   placeholder?: string
 }
@@ -15,7 +17,8 @@ interface TaskTitleEditorProps {
 export function TaskTitleEditor({
   title,
   onTitleChange,
-  placeholder = 'Titre de la tâche'
+  setEditedTask,
+  placeholder = 'Create invoice'
 }: TaskTitleEditorProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null)
   const [localTitle, setLocalTitle] = useState(title)
@@ -28,6 +31,10 @@ export function TaskTitleEditor({
     const value = e.target.value
     setLocalTitle(value)
     debouncedUpdate(value)
+    setEditedTask((prev) => {
+      if (!prev) return null
+      return { ...prev, title: e.target.value }
+    })
 
     const textarea = textareaRef.current
     if (textarea) {
