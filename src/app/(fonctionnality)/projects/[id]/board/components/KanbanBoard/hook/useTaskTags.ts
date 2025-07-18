@@ -101,6 +101,7 @@ export function useTaskTags({ task, setEditedTask, currentUserId }: UseTaskTagsP
   return {
     newTagName,
     setNewTagName,
+    newColor,
     setNewColor,
     addTag,
     removeTag,

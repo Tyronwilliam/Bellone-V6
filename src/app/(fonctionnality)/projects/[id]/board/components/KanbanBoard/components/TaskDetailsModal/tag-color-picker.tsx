@@ -1,6 +1,8 @@
 import React, { Dispatch, SetStateAction } from 'react'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
+import CustomBadge from './CustomBadge'
+import { cn } from '@/lib/utils'
 
 export const LABEL_COLORS = [
   { name: 'Bleu', hex: '#3b82f6' },
@@ -18,30 +20,52 @@ export const LABEL_COLORS = [
 ]
 
 export default function TagColorPicker({
+  newTagName,
+  newColor,
   setNewColor
 }: {
+  newTagName: string
+  newColor: string
   setNewColor: Dispatch<SetStateAction<string>>
 }) {
   return (
-    <div className="flex flex-wrap w-full h-fit justify-center gap-6 mt-6">
-      {LABEL_COLORS?.map((color) => {
-        return (
-          <Tooltip key={color.name}>
-            <TooltipTrigger asChild className="">
-              <Button
-                className={`w-26 h-6 shrink-0`}
-                style={{ backgroundColor: color.hex }}
-                onClick={() => {
-                  setNewColor(color.hex)
-                }}
-              ></Button>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>{color.name}</p>
-            </TooltipContent>
-          </Tooltip>
-        )
-      })}
-    </div>
+    <>
+      {(newTagName !== '' || newColor !== '') && (
+        <CustomBadge tagColor={newColor} variant="outline" className={cn('mt-2 p-0')}>
+          <Button
+            className={`w-full h-full shrink-0  capitalize border-none py-2 rounded-none`}
+            style={{
+              ...(newColor ? { backgroundColor: newColor } : { backgroundColor: 'transparent' })
+              //   color: 'var(--foreground)'
+            }}
+            onClick={() => {
+              setNewColor('')
+            }}
+          >
+            {newTagName}
+          </Button>{' '}
+        </CustomBadge>
+      )}
+      <div className="flex flex-wrap w-full h-fit justify-center gap-6 mt-6">
+        {LABEL_COLORS?.map((color) => {
+          return (
+            <Tooltip key={color.name}>
+              <TooltipTrigger asChild className="">
+                <Button
+                  className={`w-26 h-6 shrink-0`}
+                  style={{ backgroundColor: color.hex }}
+                  onClick={() => {
+                    setNewColor(color.hex)
+                  }}
+                ></Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{color.name}</p>
+              </TooltipContent>
+            </Tooltip>
+          )
+        })}
+      </div>
+    </>
   )
 }

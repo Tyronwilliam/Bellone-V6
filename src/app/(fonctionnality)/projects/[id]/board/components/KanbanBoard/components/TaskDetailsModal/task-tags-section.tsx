@@ -2,6 +2,7 @@
 
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
+import CustomBadge from './CustomBadge'
 
 interface TaskTagsSectionProps {
   tags: any[]
@@ -20,12 +21,7 @@ export function TaskTagsSection({ tags, onRemoveTag, isLoading = false }: TaskTa
         const tagId = tag?.label.id
 
         return (
-          <Badge
-            key={tagId}
-            variant="secondary"
-            className={cn('cursor-pointer text-sm rounded-none p-2 capitalize')}
-            style={tagColor ? { backgroundColor: tagColor } : undefined}
-          >
+          <CustomBadge tagColor={tagColor ? tagColor : ''} key={tagId} className={'p-2'}>
             {tagName}
             <button
               onClick={() => onRemoveTag(tagId)}
@@ -34,7 +30,7 @@ export function TaskTagsSection({ tags, onRemoveTag, isLoading = false }: TaskTa
             >
               ×
             </button>
-          </Badge>
+          </CustomBadge>
         )
       })}
     </div>

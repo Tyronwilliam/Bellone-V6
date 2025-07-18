@@ -16,6 +16,7 @@ interface TaskTagsSectionProps {
   newTagName: string
   onNewTagNameChange: (name: string) => void
   onAddTag: () => void
+  newColor: string
   setNewColor: Dispatch<SetStateAction<string>>
   isLoading?: boolean
 }
@@ -24,6 +25,7 @@ export default function NewTag({
   newTagName,
   onNewTagNameChange,
   onAddTag,
+  newColor,
   setNewColor,
   isLoading
 }: TaskTagsSectionProps) {
@@ -68,7 +70,7 @@ export default function NewTag({
             className="pl-10"
             disabled={isLoading}
           />
-          <TagColorPicker setNewColor={setNewColor} />
+          <TagColorPicker newTagName={newTagName} newColor={newColor} setNewColor={setNewColor} />
         </div>
         <DialogFooter className="mt-4">
           <Button onClick={handleAddTag} disabled={!newTagName.trim() || isLoading}>

@@ -99,6 +99,7 @@ export function TaskDetailsModal({
                   onAddTag={taskTags.addTag}
                   isLoading={isLoading}
                   setNewColor={taskTags.setNewColor}
+                  newColor={taskTags.newColor}
                 />
               </div>
             </div>
