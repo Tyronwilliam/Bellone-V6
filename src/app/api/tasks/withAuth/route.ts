@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
     const input: AddTaskInput = await req.json()
 
     if (!input.title || !input.columnId) {
-      return NextResponse.json({ message: 'Champs requis manquants.' }, { status: 400 })
+      return NextResponse.json({ message: 'Title or Column id is missing.' }, { status: 400 })
     }
 
     const task = await addTaskToColumn({
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(task, { status: 200 })
   } catch (error: any) {
-    console.error('POST /api/tasks/addTask error:', error)
+    console.error('POST /api/tasks/withAuth error:', error)
     return NextResponse.json({ message: 'Erreur serveur' }, { status: 500 })
   }
 }

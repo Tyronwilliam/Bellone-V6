@@ -1,6 +1,5 @@
 import { prisma } from '@/infrastructure/prisma'
-import { AddTaskInput, UpdateTaskInput } from '@/infrastructure/task/taskInterface'
-import { addTaskToColumn, updatedMembers, updatedTask } from '@/infrastructure/task/taskQueries'
+import { updatedMembers } from '@/infrastructure/task/taskQueries'
 import { verifyApiAuth } from 'auth-utils'
 import { User } from 'next-auth'
 import { NextRequest, NextResponse } from 'next/server'
@@ -22,25 +21,24 @@ export async function PATCH(req: NextRequest) {
     const user = await getVerifyAuth(req)
     const input = await req.json()
 
-    // Optionnel : autorisation
-    const task = await prisma.task.findUnique({
-      where: { id: input.id }
-    })
+    if (!input.id) {
+      return NextResponse.json({ message: 'ID de tâche requis.' }, { status: 400 })
+    }
 
+    const task = await prisma.task.findUnique({ where: { id: input.id } })
     if (!task) {
-      return NextResponse.json({ message: 'Task Not found' }, { status: 404 })
+      return NextResponse.json({ message: 'Tâche non trouvée.' }, { status: 404 })
     }
 
     const updatedTaskResponse = await updatedMembers(input)
 
     if (updatedTaskResponse.success) {
-      console.log(updatedTaskResponse.result, 'HELLO WORLD')
       return NextResponse.json(updatedTaskResponse, { status: 200 })
     } else {
-      return NextResponse.json({ message: 'Update failed' }, { status: 400 })
+      return NextResponse.json({ message: updatedTaskResponse.error }, { status: 400 })
     }
-  } catch (error: any) {
+  } catch (error) {
     console.error('PATCH /api/tasks error:', error)
-    return NextResponse.json({ message: 'Erreur serveur' }, { status: 500 })
+    return NextResponse.json({ message: 'Erreur serveur interne' }, { status: 500 })
   }
 }

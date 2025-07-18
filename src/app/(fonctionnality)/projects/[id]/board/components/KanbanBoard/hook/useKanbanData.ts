@@ -25,14 +25,13 @@ export function useKanbanData(initialData: KanbanData) {
     }
 
     try {
-      const response = await axios.post<TaskWithAssigneeAndTags>('/api/tasks/addTask', {
+      const response = await axios.post<TaskWithAssigneeAndTags>('/api/tasks/withAuth', {
         title,
         columnId,
         client_id: initialData.clients.id
       })
       if (response?.status === 200) {
         const newTask = response.data
-
         setData((prev) => ({
           ...prev,
           tasks: [...prev.tasks, newTask]
@@ -49,13 +48,13 @@ export function useKanbanData(initialData: KanbanData) {
   const handleSaveTask = async (taskInput: UpdateTaskInput) => {
     try {
       const { data: updatedTaskResponse, status } = await axios.patch(
-        '/api/tasks/addTask',
+        '/api/tasks/withAuth',
         taskInput
       )
 
       if (status === 200) {
-        toast.success('Tâche modifiée avec succès')
-        console.log(updatedTaskResponse, '/api/tasks/addTask')
+        toast.success('Task updated')
+        console.log(updatedTaskResponse, '/api/tasks/withAuth')
 
         setData((prev) => ({
           ...prev,

@@ -1,6 +1,7 @@
 import { prisma } from '@/infrastructure/prisma'
 import { AddTaskInput, UpdateTaskInput } from './taskInterface'
 import { cleanFalsyFields } from '@/app/utils/request'
+import { Prisma } from '@prisma/prisma'
 
 export async function addTaskToColumn({
   title,
@@ -58,31 +59,38 @@ export async function updatedTask(input: UpdateTaskInput) {
     }
   })
 }
-export async function updatedMembers(input: UpdateTaskInput) {
-  const updateData = cleanFalsyFields({
-    title: input.title && input.title.toLowerCase().trim(),
-    description: input.description,
-    price: input.price,
-    dueDate: input.dueDate,
-    order: input.order,
-    columnId: input.columnId,
-    assigneeId: input.assigneeId ?? null,
-    client_id: input.client_id,
-    done: input.done
-  })
+export async function updatedMembers(input: any) {
+  try {
+    const updateData = cleanFalsyFields({
+      title: input.title?.toLowerCase().trim(),
+      description: input.description,
+      price: input.price,
+      dueDate: input.dueDate,
+      order: input.order,
+      columnId: input.columnId,
+      assigneeId: input.assigneeId ?? null,
+      client_id: input.client_id,
+      done: input.done
+    })
 
-  const result = await prisma.task.update({
-    where: { id: input.id },
-    data: updateData,
-    include: {
-      assignee: true,
-      tags: {
-        include: { label: true }
+    const result = await prisma.task.update({
+      where: { id: input.id },
+      data: updateData,
+      include: {
+        assignee: true,
+        tags: { include: { label: true } }
+      }
+    })
+
+    return { success: true, result }
+  } catch (error: any) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === 'P2025') {
+        return { success: false, error: 'Task not found for update' }
       }
     }
-  })
-  return {
-    success: true,
-    result
+
+    console.error('Erreur Prisma:', error)
+    return { success: false, error: 'Servor error while updating' }
   }
 }

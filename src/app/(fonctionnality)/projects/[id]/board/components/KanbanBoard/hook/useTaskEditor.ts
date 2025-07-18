@@ -16,22 +16,25 @@ export function useTaskEditor(initialTask: TaskWithAssigneeAndTags | null) {
   }, [initialTask])
 
   const updateTask = async (updates: Partial<TaskWithAssigneeAndTags>) => {
-    if (editedTask) {
-      setIsLoading(true)
-      const data = { ...editedTask, ...updates }
-      try {
-        const { data: updatedTaskResponse, status } = await axios.patch('/api/tasks/members', data)
-        if (status === 200) {
-          console.log(updatedTaskResponse.result, 'LA ICI')
-          setEditedTask(updatedTaskResponse.result)
-          toast.success(`Members updated`)
-        }
-      } catch (error) {
-        toast.error(`Unexpected error : ${error}`)
-        console.warn(error, 'Une erreur est survenue')
-      } finally {
-        setIsLoading(false)
+    if (!editedTask) return
+
+    setIsLoading(true)
+    const data = { ...editedTask, ...updates }
+
+    try {
+      const response = await axios.patch('/api/tasks/noAuth', data)
+      const updatedTaskResponse = response.data
+
+      if (response.status === 200 && updatedTaskResponse.result) {
+        setEditedTask(updatedTaskResponse.result)
+        toast.success('Task updated successfully')
       }
+    } catch (error: any) {
+      const message = error?.response?.data?.message || 'Une erreur inattendue est survenue'
+      toast.error(message)
+      console.warn('Update task error:', error)
+    } finally {
+      setIsLoading(false)
     }
   }
 

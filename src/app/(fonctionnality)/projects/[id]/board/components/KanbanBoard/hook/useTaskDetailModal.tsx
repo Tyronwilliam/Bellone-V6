@@ -27,7 +27,6 @@ export function useTaskDetailsModalLogic({
   })
 
   const handleSave = () => {
-    console.log(editedTask, 'FROM CHILD HANDLE CLOSE')
     onSave(editedTask as UpdateTaskInput)
     onClose(editedTask!)
   }
