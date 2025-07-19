@@ -1,6 +1,7 @@
 'use client'
+import { CardCustom } from '@/components/custom/CardCustom'
 import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import {
   Table,
   TableBody,
@@ -9,28 +10,13 @@ import {
   TableHeader,
   TableRow
 } from '@/components/ui/table'
+import { PartialClient, ProjectAndClient } from '@/infrastructure/client/clientInterface'
 import { Building2, CalendarDays, FileText } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { Project } from '@prisma/prisma'
-import { Client } from '@prisma/prisma'
 import { useEffect, useState } from 'react'
-import CreateProject from './CreateProject'
-import { Button } from '@/components/ui/button'
+import { ModalCreateProject } from './CreateProject'
+import { formatDate } from '@/app/utils/format'
 
-export type ProjectAndClient = Project & { client: Client }
-export type PartialClient = {
-  id: string
-  email: string
-  firstName: string
-  companyName: string | null
-}
-function formatDate(date: Date) {
-  return new Date(date).toLocaleDateString('fr-FR', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  })
-}
 type ProjectBoardProps = {
   projects: ProjectAndClient[]
   clients?: PartialClient[]
@@ -40,38 +26,28 @@ export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) 
   const router = useRouter()
   const [isOpen, setIsOpen] = useState(false)
 
-  useEffect(() => {
-    console.log(projects, 'PROJECTS')
-  }, [])
+  const toggle: () => void = () => setIsOpen(!isOpen)
+
   return (
     <div className="container mx-auto py-8 px-4">
       <div className="mb-8 flex flex-col space-y-2">
         <h1 className="text-3xl font-bold tracking-tight">Projets</h1>
         <p className="text-muted-foreground mt-2">Gérez et consultez tous vos projets en cours</p>
-        {!isOpen && (
-          <Button type="button" className="w-fit" onClick={() => setIsOpen(true)}>
-            Créer un nouveau projet
-          </Button>
-        )}{' '}
+        <ModalCreateProject isOpen={isOpen} toggle={toggle} clients={clients} />
       </div>
-
-      {isOpen && (
-        <section className="absolute w-full h-full left-1/2 -translate-x-1/2 bg-accent-background z-50">
-          <div>
-            <CreateProject clients={clients} closeAsModal={() => setIsOpen(false)} />
-          </div>
-        </section>
-      )}
-      <Card>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <FileText className="h-5 w-5" />
-            Liste des Projets
-          </CardTitle>
-          <CardDescription>
-            {projects.length} projet{projects.length > 1 ? 's' : ''} au total
-          </CardDescription>
-        </CardHeader>
+      <CardCustom
+        header={
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <FileText className="h-5 w-5" />
+              Liste des Projets
+            </CardTitle>
+            <CardDescription>
+              {projects.length} projet{projects.length > 1 ? 's' : ''} au total
+            </CardDescription>
+          </CardHeader>
+        }
+      >
         <CardContent>
           <div className="rounded-md border">
             <Table>
@@ -89,7 +65,7 @@ export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) 
                   <TableRow
                     key={project.id}
                     className="hover:bg-muted/50 cursor-pointer transition-colors"
-                    onClick={() => router.push(`/projects/${project.id}/board`)}
+                    onClick={() => router.push(`/projects/${project.id}`)}
                   >
                     <TableCell className="font-mono text-sm">{index + 1}</TableCell>
                     <TableCell className="font-medium">{project.name}</TableCell>
@@ -124,11 +100,11 @@ export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) 
             </Table>
           </div>
         </CardContent>
-      </Card>
+      </CardCustom>
 
       {/* Statistiques rapides */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-        <Card>
+        <CardCustom>
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -138,9 +114,9 @@ export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) 
               <FileText className="h-8 w-8 text-muted-foreground" />
             </div>
           </CardContent>
-        </Card>
+        </CardCustom>
 
-        <Card>
+        <CardCustom>
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -152,9 +128,9 @@ export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) 
               <Building2 className="h-8 w-8 text-muted-foreground" />
             </div>
           </CardContent>
-        </Card>
+        </CardCustom>
 
-        <Card>
+        <CardCustom>
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
@@ -170,7 +146,7 @@ export default function ProjectsBoard({ projects, clients }: ProjectBoardProps) 
               <CalendarDays className="h-8 w-8 text-muted-foreground" />
             </div>
           </CardContent>
-        </Card>
+        </CardCustom>
       </div>
     </div>
   )

@@ -31,7 +31,7 @@ export function CardCustom({
       {(title || description || header) && (
         <CardHeader>
           {header}
-          {title && <CardTitle>{title}</CardTitle>}
+          {title && <CardTitle className="text-xl">{title}</CardTitle>}
           {description && <CardDescription>{description}</CardDescription>}
         </CardHeader>
       )}

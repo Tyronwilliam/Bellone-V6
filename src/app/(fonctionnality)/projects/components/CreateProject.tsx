@@ -1,9 +1,7 @@
 'use client'
 import { CardCustom } from '@/components/custom/CardCustom'
 import { Button } from '@/components/ui/button'
-import {
-  CardFooter
-} from '@/components/ui/card'
+import { CardFooter } from '@/components/ui/card'
 import {
   Form,
   FormControl,
@@ -17,14 +15,23 @@ import { Input } from '@/components/ui/input'
 import { Switch } from '@/components/ui/switch'
 import { Textarea } from '@/components/ui/textarea'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { toast } from 'sonner'
 import { z } from 'zod'
 import { addProject, ProjectPost } from '../action'
 import { CreateClientForm } from './CreateClientForm'
-import { PartialClient } from './ProjectBoard'
 import { SelectComponent } from './SelectComponent'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog'
+import { PartialClient } from '@/infrastructure/client/clientInterface'
 
 const createProjectSchema = z.object({
   name: z.string().min(2, 'Nom requis'),
@@ -39,15 +46,14 @@ type CreateProjectProps = {
   closeAsModal?: () => void
 }
 
-export default function CreateProject({ clients, closeAsModal }: CreateProjectProps) {
+export function CreateProject({ clients, closeAsModal }: CreateProjectProps) {
   const [isOpen, setIsOpen] = useState(false)
-  const [isOpen1, setIsOpen1] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const router = useRouter()
 
   const toggle = () => setIsOpen(!isOpen)
   const close = () => {
     if (closeAsModal) return closeAsModal()
-    return setIsOpen1(false)
   }
 
   const form = useForm<ProjectFormValues>({
@@ -62,18 +68,17 @@ export default function CreateProject({ clients, closeAsModal }: CreateProjectPr
   })
   async function onSubmit(data: ProjectFormValues) {
     setIsSubmitting(true)
-    console.log(' DATA ProjectFormValues : ', data)
     try {
       const result = await addProject(data as ProjectPost)
 
       if (result.success) {
         toast.success('Project créé avec succès')
-        console.log(result, 'addProject')
+        if (result.newProject) router.push(`/projects/${result.newProject.id}`)
       } else {
-        toast.error(result.error || 'Erreur lors de la création du client')
+        toast.error(result.error || 'Erreur lors de la création du Project')
       }
     } catch (error) {
-      console.error('Erreur lors de la création du client:', error)
+      console.error('Erreur lors de la création du Project:', error)
       toast.error('Une erreur est survenue')
     } finally {
       setIsSubmitting(false)
@@ -84,6 +89,7 @@ export default function CreateProject({ clients, closeAsModal }: CreateProjectPr
       <Form {...form}>
         <form id="project-form" onSubmit={form.handleSubmit(onSubmit)} className="mb-4">
           <div className="grid grid-cols-1 gap-4 ">
+            {/* Nom */}
             <FormField
               control={form.control}
               name="name"
@@ -97,6 +103,7 @@ export default function CreateProject({ clients, closeAsModal }: CreateProjectPr
                 </FormItem>
               )}
             />
+            {/* Description */}
             <FormField
               control={form.control}
               name="description"
@@ -115,7 +122,7 @@ export default function CreateProject({ clients, closeAsModal }: CreateProjectPr
                 </FormItem>
               )}
             />
-            {/* */}
+            {/* Select Client*/}
             {clients && clients?.length > 0 && (
               <div className="max-w-[250px]">
                 <SelectComponent
@@ -138,15 +145,14 @@ export default function CreateProject({ clients, closeAsModal }: CreateProjectPr
                   Ajouter un client
                 </Button>
               </div>
-            )}{' '}
-            {/*  */}
+            )}
             <FormField
               control={form.control}
               name="hiddenForClient"
               render={({ field }) => (
                 <FormItem className="col-span-2 w-full flex flex-row items-center justify-between rounded-lg border p-3 shadow-sm">
                   <div className="space-y-0.5">
-                    <FormLabel>Client actif</FormLabel>
+                    <FormLabel>Cacher le Kanban au client</FormLabel>
                     <FormDescription>Activer pour masquer le Kanban au client</FormDescription>
                   </div>
                   <FormControl>
@@ -164,13 +170,39 @@ export default function CreateProject({ clients, closeAsModal }: CreateProjectPr
       </Form>
       {isOpen && <CreateClientForm onSuccess={toggle} onCancel={toggle} />}{' '}
       <CardFooter className="w-full flex gap-2 justify-end">
-        <Button variant="destructive" className="" type="button" onClick={close}>
-          Annuler
-        </Button>{' '}
+        {closeAsModal && (
+          <Button variant="destructive" className="" type="button" onClick={close}>
+            Annuler
+          </Button>
+        )}
         <Button type="submit" form="project-form">
           Créer un projet
         </Button>
       </CardFooter>
     </CardCustom>
+  )
+}
+type ModalCreateProjectProps = {
+  isOpen: boolean
+  toggle: () => void
+  clients?: PartialClient[]
+}
+export const ModalCreateProject = ({ isOpen, toggle, clients }: ModalCreateProjectProps) => {
+  return (
+    <Dialog open={isOpen} onOpenChange={toggle}>
+      <DialogTrigger asChild>
+        <Button type="button" className="w-fit" onClick={toggle}>
+          Créer un nouveau projet
+        </Button>
+      </DialogTrigger>
+      <DialogContent className="w-full h-full md:min-w-3xl md:h-fit md:max-h-[80%] md:w-[512px] !overflow-y-scroll">
+        <DialogHeader className="sr-only">
+          <DialogTitle className="sr-only ">Créer un projet</DialogTitle>
+          <DialogDescription className="sr-only"></DialogDescription>{' '}
+        </DialogHeader>
+
+        <CreateProject clients={clients} closeAsModal={toggle} />
+      </DialogContent>
+    </Dialog>
   )
 }

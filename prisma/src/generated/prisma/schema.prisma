@@ -210,10 +210,9 @@ model Board {
   createdAt     DateTime @default(now())
   updatedAt     DateTime @updatedAt
 
-  project   Project      @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  createdBy User         @relation("BoardsCreatedByUser", fields: [created_by_id], references: [id])
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdBy User     @relation("BoardsCreatedByUser", fields: [created_by_id], references: [id])
   columns   Column[]
-  labels    BoardLabel[] // Labels utilisés dans ce board
 
   @@index([projectId])
 }
@@ -244,13 +243,13 @@ model Task {
   id          String    @id @default(cuid())
   title       String
   description String?
-  price       Float?
   dueDate     DateTime?
   order       Int
   columnId    String
   assigneeId  String?
   client_id   String?
   createdById String
+  done        Boolean   @default(false)
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
@@ -283,7 +282,6 @@ model Label {
 
   // Relations
   projects ProjectLabel[] // Projets qui utilisent ce label
-  boards   BoardLabel[] // Boards qui utilisent ce label
   tasks    TaskLabel[] // Tâches qui utilisent ce label
 
   createdAt DateTime @default(now())
@@ -294,7 +292,7 @@ model Label {
 }
 
 /////////////////////////////
-// PROJECT_LABELS (Labels utilisés dans un projet)
+// PROJECT_LABELS (Labels utilisés dans un projet avec personnalisations)
 /////////////////////////////
 model ProjectLabel {
   id        String @id @default(cuid())
@@ -302,38 +300,20 @@ model ProjectLabel {
   labelId   String
 
   // Métadonnées d'utilisation
-  addedById  String // Qui a ajouté ce label au projet
-  isFavorite Boolean @default(false) // Label favori du projet
+  addedById String // Qui a ajouté ce label au projet
+
+  // Personnalisations locales
+  colorOverride String? // Couleur personnalisée pour ce projet
+  isFavorite    Boolean @default(false) // Label favori du projet
 
   project Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
   label   Label   @relation(fields: [labelId], references: [id]) // Pas de cascade !
 
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([projectId, labelId])
   @@index([projectId])
-  @@index([labelId])
-}
-
-/////////////////////////////
-// BOARD_LABELS (Labels utilisés dans un board)
-/////////////////////////////
-model BoardLabel {
-  id      String @id @default(cuid())
-  boardId String
-  labelId String
-
-  // Métadonnées d'utilisation
-  addedById  String // Qui a ajouté ce label au board
-  isFavorite Boolean @default(false) // Label favori du board
-
-  board Board @relation(fields: [boardId], references: [id], onDelete: Cascade)
-  label Label @relation(fields: [labelId], references: [id]) // Pas de cascade !
-
-  createdAt DateTime @default(now())
-
-  @@unique([boardId, labelId])
-  @@index([boardId])
   @@index([labelId])
 }
 

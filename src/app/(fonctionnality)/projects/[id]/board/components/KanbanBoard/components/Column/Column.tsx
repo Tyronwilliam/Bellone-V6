@@ -1,24 +1,22 @@
-
 'use client'
 
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Plus, MoreHorizontal, Trash2, Edit2 } from 'lucide-react'
-import { useSortable } from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import { useDroppable } from '@dnd-kit/core'
-import { useState } from 'react'
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { Input } from '@/components/ui/input'
+import { TaskWithAssigneeAndTags } from '@/infrastructure/board/boardInterface'
+import { useDroppable } from '@dnd-kit/core'
+import { SortableContext, useSortable, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+import type { Client, Column as ColumnType, User } from '@prisma/prisma'
+import { Edit2, MoreHorizontal, Plus, Trash2 } from 'lucide-react'
+import { useState } from 'react'
 import { TaskCard } from '../TaskCard/TaskCard'
-import type { Column as ColumnType, Task, User, Client } from '@prisma/prisma'
-import { TaskWithAssigneeAndTags } from '@/lib/board/queries'
 
 interface ColumnProps {
   column: ColumnType
