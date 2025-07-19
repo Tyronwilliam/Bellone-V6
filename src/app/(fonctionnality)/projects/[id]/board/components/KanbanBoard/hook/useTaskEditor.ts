@@ -43,6 +43,7 @@ export function useTaskEditor(initialTask: TaskWithAssigneeAndTags | null) {
       setEditedTask({ ...initialTask })
     }
   }
+  
   const hasChanges = useMemo(() => {
     if (!initialTask || !editedTask) return false
     return editedTask.description !== initialTask.description

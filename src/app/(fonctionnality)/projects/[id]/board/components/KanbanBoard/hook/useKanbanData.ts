@@ -48,13 +48,13 @@ export function useKanbanData(initialData: KanbanData) {
   const handleSaveTask = async (taskInput: UpdateTaskInput) => {
     try {
       const { data: updatedTaskResponse, status } = await axios.patch(
-        '/api/tasks/withAuth',
+        '/api/tasks/noAuth',
         taskInput
       )
 
       if (status === 200) {
         toast.success('Task updated')
-        console.log(updatedTaskResponse, '/api/tasks/withAuth')
+        console.log(updatedTaskResponse, '/api/tasks/noAuth')
 
         setData((prev) => ({
           ...prev,
@@ -63,40 +63,59 @@ export function useKanbanData(initialData: KanbanData) {
           )
         }))
       } else {
-        toast.error('Une erreur est survenue')
+        toast.error('Error')
       }
     } catch (error: any) {
       console.error('Update task error:', error)
-      toast.error(error?.response?.data?.message || 'Erreur lors de la modification')
+      toast.error(error?.response?.data?.message || 'Error while updating task')
     }
   }
 
-  const handleDeleteTask = (taskId: string) => {
-    setData((prev) => ({
-      ...prev,
-      tasks: prev.tasks.filter((task) => task.id !== taskId)
-    }))
+  const handleDeleteTask = async (taskId: string) => {
+    try {
+      let data = { id: taskId }
+
+      const response = await axios.delete('/api/tasks/noAuth', { data })
+
+      if (response.status === 200) {
+        toast.success('Task Deleted')
+
+        setData((prev) => ({
+          ...prev,
+          tasks: prev.tasks.filter((task) => task.id !== taskId)
+        }))
+      } else {
+        toast.error('Error')
+      }
+    } catch (error: any) {
+      console.error('Delete task error:', error)
+      toast.error(error?.response?.data?.message || 'Error while deleting task')
+    }
   }
+
   const handleAddColumn = async (name: string, color?: string) => {
     const body = {
-      name: name,
+      name,
       boardId: initialData.boards[0]?.id,
       order: columns.length,
       position: columns.length,
-      color: color
+      color
     }
+
     const res = await addColumnAction(body)
 
     if (!res.success || !res.column) {
-      toast.error(res.error)
-    } else {
-      toast.success('Column added')
-      setData((prev) => ({
-        ...prev,
-        columns: [...prev.columns, res.column]
-      }))
+      toast.error(res.error || 'Error while adding column')
+      return
     }
+
+    toast.success('Column added')
+    setData((prev) => ({
+      ...prev,
+      columns: [...prev.columns, res.column]
+    }))
   }
+
   const handleDeleteColumn = (columnId: string) => {
     setData((prev) => ({
       ...prev,

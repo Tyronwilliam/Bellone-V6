@@ -16,10 +16,17 @@ const AddColumnSchema = z.object({
 
 export async function addColumnAction(body: z.infer<typeof AddColumnSchema>) {
   try {
-    const parsed = AddColumnSchema.parse(body)
+    const parsed = AddColumnSchema.safeParse(body)
+
+    if (!parsed.success) {
+      return {
+        success: false,
+        error: 'Invalid input'
+      }
+    }
 
     const column = await prisma.column.create({
-      data: parsed
+      data: parsed.data
     })
 
     return { success: true, column }
@@ -33,18 +40,22 @@ export async function addColumnAction(body: z.infer<typeof AddColumnSchema>) {
 }
 //
 
-export async function updateTaskAction(body: z.infer<typeof UpdateTaskSchema>) {
-  try {
-    const parsed = UpdateTaskSchema.parse(body)
+// export async function updateTaskAction(body: z.infer<typeof UpdateTaskSchema>) {
+//   try {
+//     const parsed = UpdateTaskSchema.parse(body)
 
-    const taskUpdated = updatedTask(parsed)
+//     const { success, result, error } = await updatedTask(parsed)
 
-    return { success: true, taskUpdated }
-  } catch (error) {
-    console.error('Erreur update Task:', error)
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : "Erreur lors de l'update"
-    }
-  }
-}
+//     if (!success) {
+//       return { success: false, error }
+//     }
+
+//     return { success: true, task: result }
+//   } catch (error) {
+//     console.error('Erreur update Task:', error)
+//     return {
+//       success: false,
+//       error: error instanceof Error ? error.message : "Erreur lors de l'update"
+//     }
+//   }
+// }

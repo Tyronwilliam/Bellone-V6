@@ -1,5 +1,5 @@
 import { prisma } from '@/infrastructure/prisma'
-import { AddTaskInput, UpdateTaskInput } from '@/infrastructure/task/taskInterface'
+import { AddTaskInput } from '@/infrastructure/task/taskInterface'
 import { addTaskToColumn, updatedTask } from '@/infrastructure/task/taskQueries'
 import { verifyApiAuth } from 'auth-utils'
 import { User } from 'next-auth'
@@ -9,7 +9,7 @@ export async function getVerifyAuth(req: NextRequest): Promise<User> {
   const session = await verifyApiAuth(req)
 
   if (!session || !session.user) {
-    throw new Error('Non authentifié')
+    throw new Error('Unidentified')
   }
 
   return session.user as User
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(task, { status: 200 })
   } catch (error: any) {
     console.error('POST /api/tasks/withAuth error:', error)
-    return NextResponse.json({ message: 'Erreur serveur' }, { status: 500 })
+    return NextResponse.json({ message: 'Servor error' }, { status: 500 })
   }
 }
 
@@ -51,13 +51,13 @@ export async function PATCH(req: NextRequest) {
     })
 
     if (!task || task.createdById !== user.id) {
-      return NextResponse.json({ message: 'Accès interdit' }, { status: 403 })
+      return NextResponse.json({ message: 'Access Restricted' }, { status: 403 })
     }
 
     const updatedTaskResponse = await updatedTask(input)
     return NextResponse.json(updatedTaskResponse, { status: 200 })
   } catch (error: any) {
     console.error('PATCH /api/tasks error:', error)
-    return NextResponse.json({ message: 'Erreur serveur' }, { status: 500 })
+    return NextResponse.json({ message: 'Servor error' }, { status: 500 })
   }
 }

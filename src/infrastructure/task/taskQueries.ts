@@ -34,32 +34,8 @@ export async function addTaskToColumn({
 
   return task
 }
-
+// UPDATE TASK
 export async function updatedTask(input: UpdateTaskInput) {
-  const updateData = cleanFalsyFields({
-    title: input.title && input.title.toLowerCase().trim(),
-    description: input.description,
-    price: input.price,
-    dueDate: input.dueDate,
-    order: input.order,
-    columnId: input.columnId,
-    assigneeId: input.assigneeId ?? null,
-    client_id: input.client_id,
-    done: input.done
-  })
-
-  return await prisma.task.update({
-    where: { id: input.id },
-    data: updateData,
-    include: {
-      assignee: true,
-      tags: {
-        include: { label: true }
-      }
-    }
-  })
-}
-export async function updatedMembers(input: any) {
   try {
     const updateData = cleanFalsyFields({
       title: input.title?.toLowerCase().trim(),
@@ -92,5 +68,24 @@ export async function updatedMembers(input: any) {
 
     console.error('Erreur Prisma:', error)
     return { success: false, error: 'Servor error while updating' }
+  }
+}
+// DELETE TASK
+
+export async function deleteTask(taskId: string) {
+  try {
+    const result = await prisma.task.delete({
+      where: { id: taskId }
+    })
+
+    return { success: true, result }
+  } catch (error: any) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === 'P2025') {
+        return { success: false, error: 'Task not found for deletion' }
+      }
+    }
+    console.error('Erreur Prisma (deleteTask):', error)
+    return { success: false, error: error.message || 'Server error while deleting task' }
   }
 }
