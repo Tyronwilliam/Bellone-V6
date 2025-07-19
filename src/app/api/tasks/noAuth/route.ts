@@ -8,7 +8,7 @@ export async function getVerifyAuth(req: NextRequest): Promise<User> {
   const session = await verifyApiAuth(req)
 
   if (!session || !session.user) {
-    throw new Error('Non authentifié')
+    throw new Error('Not authenticated')
   }
 
   return session.user as User

@@ -18,7 +18,7 @@ export function useTaskTags({ task, setEditedTask, currentUserId }: UseTaskTagsP
   const [newColor, setNewColor] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const { id: projectId } = useParams<{ id: string }>()
-  // const projectId = params.get('id')
+
   const addTag = async () => {
     const trimmed = newTagName.trim()
 
@@ -54,10 +54,6 @@ export function useTaskTags({ task, setEditedTask, currentUserId }: UseTaskTagsP
             tags: [...task.tags, label.label]
           }
         })
-        task?.tags?.map((tag) => console.log(tag))
-        // onTaskUpdate({
-        //   tags: [...task.tags, label.label]
-        // })
         setNewTagName('')
         toast.success('Label added')
       }

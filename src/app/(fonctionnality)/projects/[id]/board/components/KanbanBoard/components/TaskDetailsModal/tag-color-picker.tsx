@@ -21,18 +21,20 @@ export const LABEL_COLORS = [
 ]
 
 export default function TagColorPicker({
-  newTagName,
+  tagName,
   newColor,
-  setNewColor
+  setNewColor,
+  className
 }: {
-  newTagName: string
+  tagName: string
   newColor: string
   setNewColor: Dispatch<SetStateAction<string>>
+  className?: string
 }) {
   return (
     <>
-      <PreviewLabel newTagName={newTagName} newColor={newColor} setNewColor={setNewColor} />
-      <div className="flex flex-wrap w-full h-fit justify-center gap-6 mt-6">
+      <PreviewLabel newTagName={tagName} newColor={newColor} setNewColor={setNewColor} />
+      <div className={cn('flex flex-wrap w-full h-fit justify-center gap-6 mt-6', className)}>
         {LABEL_COLORS?.map((color) => {
           return (
             <Tooltip key={color.name}>

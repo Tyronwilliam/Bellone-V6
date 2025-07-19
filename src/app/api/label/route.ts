@@ -100,3 +100,31 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ message: 'Erreur serveur' }, { status: 500 })
   }
 }
+export async function PATCH(req: NextRequest) {
+  try {
+    const user = await getVerifyAuth(req)
+    const input: DeleteLabelInput = await req.json()
+
+    if (!input.tagId) {
+      return NextResponse.json({ message: 'Missing requiered label ID.' }, { status: 400 })
+    }
+
+    if (!input.taskId) {
+      return NextResponse.json({ message: 'Missing requiered task ID.' }, { status: 400 })
+    }
+
+    const deleteLabel = await removeLabelFromTask(input)
+
+    if (!deleteLabel.success) {
+      return NextResponse.json(
+        { message: deleteLabel.error ?? 'Erreur lors de la suppression du label' },
+        { status: 409 }
+      )
+    }
+
+    return NextResponse.json({ success: true }, { status: 200 })
+  } catch (error: any) {
+    console.error('DELETE /api/label error:', error)
+    return NextResponse.json({ message: 'Erreur serveur' }, { status: 500 })
+  }
+}

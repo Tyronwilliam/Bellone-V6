@@ -14,7 +14,6 @@ import { Label } from '@/components/ui/label'
 import type { TaskWithAssigneeAndTags } from '@/infrastructure/board/boardInterface'
 import type { UpdateTaskInput } from '@/infrastructure/task/taskInterface'
 import type { User as UserAuth } from 'next-auth'
-import { User } from '@prisma/prisma'
 
 import { TaskAssigneeSection } from './task-assignee-section'
 import { TaskDescriptionSection } from './task-description-section'
@@ -23,6 +22,9 @@ import { TaskTagsSection } from './task-tags-section'
 import { TaskTitleEditor } from './task-title-editor-section'
 import NewTag from './NewTag'
 import { useTaskDetailsModalLogic } from '../../hook/useTaskDetailModal'
+import { useState } from 'react'
+import TagColorPicker from './tag-color-picker'
+import { Label as LabelType, User } from '@prisma/prisma'
 
 interface TaskDetailsModalProps {
   task: TaskWithAssigneeAndTags | null
@@ -54,7 +56,13 @@ export function TaskDetailsModal({
     handleClose,
     hasChanges
   } = useTaskDetailsModalLogic({ task, onSave, onDelete, onClose, currentUser })
+  const [isOpenColor, setIsOpenColor] = useState(false)
 
+  const onClickBadge = (tag: LabelType) => {
+    taskTags.setNewTagName(tag.name)
+    taskTags.setNewColor(taskTags.newColor)
+    setIsOpenColor(!isOpenColor)
+  }
   if (!task || !editedTask) return null
 
   return (
@@ -82,7 +90,25 @@ export function TaskDetailsModal({
                   isModal
                   badgeClassName="p-2"
                   isLoading={taskTags.isLoading}
-                />
+                  onClickBadge={onClickBadge}
+                >
+                  {isOpenColor && (
+                    <div className="absolute flex flex-col gap-4 top-full left-0 bg-[var(--background)] w-[450px] px-4 py-6">
+                      <TagColorPicker
+                        tagName={taskTags.newTagName}
+                        newColor={taskTags.newColor}
+                        setNewColor={taskTags.setNewColor}
+                      />
+                      <Button
+                        onClick={taskTags.addTag}
+                        disabled={!taskTags.newTagName.trim() || isLoading}
+                        className="w-fit self-end"
+                      >
+                        {isLoading ? 'Updating...' : 'Update'}
+                      </Button>
+                    </div>
+                  )}
+                </TaskTagsSection>
                 <NewTag
                   newTagName={taskTags.newTagName}
                   onNewTagNameChange={taskTags.setNewTagName}

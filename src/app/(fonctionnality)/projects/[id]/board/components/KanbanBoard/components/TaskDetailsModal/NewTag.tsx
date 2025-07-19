@@ -70,7 +70,7 @@ export default function NewTag({
             className="pl-10"
             disabled={isLoading}
           />
-          <TagColorPicker newTagName={newTagName} newColor={newColor} setNewColor={setNewColor} />
+          <TagColorPicker tagName={newTagName} newColor={newColor} setNewColor={setNewColor} />
         </div>
         <DialogFooter className="mt-4">
           <Button onClick={handleAddTag} disabled={!newTagName.trim() || isLoading}>

@@ -1,15 +1,16 @@
 'use client'
 
-import { Badge } from '@/components/ui/badge'
-import { cn } from '@/lib/utils'
-import CustomBadge from './CustomBadge'
 import { TaskTag } from '@/infrastructure/board/boardInterface'
+import { Label } from '@prisma/prisma'
+import CustomBadge from './CustomBadge'
 
 interface TaskTagsSectionProps {
   tags: TaskTag[]
   onRemoveTag: (tagId: string) => void
   isModal: boolean
   badgeClassName: string
+  children: React.ReactNode
+  onClickBadge?: (tag: Label) => void
   isLoading?: boolean
 }
 
@@ -18,11 +19,13 @@ export function TaskTagsSection({
   onRemoveTag,
   isModal,
   badgeClassName,
-  isLoading = false
+  isLoading = false,
+  onClickBadge,
+  children,
+  ...props
 }: TaskTagsSectionProps) {
-  
   return (
-    <div className="flex flex-wrap gap-2 mb-2 ">
+    <div className="relative flex flex-wrap gap-2 mb-2 ">
       {tags?.map((tag: any) => {
         if (!tag.label) return null
 
@@ -31,7 +34,13 @@ export function TaskTagsSection({
         const tagId = tag?.label.id
 
         return (
-          <CustomBadge tagColor={tagColor ? tagColor : ''} key={tagId} className={badgeClassName}>
+          <CustomBadge
+            tagColor={tagColor ? tagColor : ''}
+            key={tagId}
+            className={badgeClassName}
+            onClick={() => onClickBadge && onClickBadge(tag.label)}
+            {...props}
+          >
             {tagName}
             {isModal && (
               <button
@@ -45,6 +54,7 @@ export function TaskTagsSection({
           </CustomBadge>
         )
       })}
+      {children}
     </div>
   )
 }
